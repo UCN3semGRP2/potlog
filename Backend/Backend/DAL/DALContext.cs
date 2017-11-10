@@ -8,7 +8,7 @@ namespace DAL
     public class DALContext : DbContext
     {
         public DALContext()
-            : base("name=DALContext.cs")
+            : base("name=DALContext")
         {
 
         }
