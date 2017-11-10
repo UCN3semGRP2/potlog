@@ -10,7 +10,7 @@ namespace Model
     {
         public int Id { get; set; }
         public Guid GUID { get;  }
-        public DateTime ExpireDate { get;  }
+        public DateTime ExpireDate { get; set; }
 
         public Session()
         {
