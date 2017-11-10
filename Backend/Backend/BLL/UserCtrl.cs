@@ -19,6 +19,7 @@ namespace BLL
             var ses = u1.LogInSession;
             if (ses == null) return false;
 
+            // TODO: Move this into a session ctrl
             var diff = ses.ExpireDate.Subtract(DateTime.Now);
 
             if (diff.TotalSeconds < 0)
