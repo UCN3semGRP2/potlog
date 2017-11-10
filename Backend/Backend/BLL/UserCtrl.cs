@@ -21,18 +21,7 @@ namespace BLL
 
             var diff = ses.ExpireDate.Subtract(DateTime.Now);
 
-            Console.WriteLine("ses:");
-            Console.WriteLine(ses.ExpireDate);
-
-            Console.WriteLine("diff:");
-            Console.WriteLine(diff);
-
-            Console.WriteLine("total hours:");
-            Console.WriteLine(diff.TotalHours);
-
-            Console.WriteLine("total seconds:");
-            Console.WriteLine(diff.TotalSeconds);
-            if (diff.TotalSeconds > 0)
+            if (diff.TotalSeconds < 0)
             {
                 return false;
             }
