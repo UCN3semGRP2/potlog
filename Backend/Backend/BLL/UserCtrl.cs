@@ -19,9 +19,20 @@ namespace BLL
             var ses = u1.LogInSession;
             if (ses == null) return false;
 
-            var diff = DateTime.Now.Subtract(ses.ExpireDate);
+            var diff = ses.ExpireDate.Subtract(DateTime.Now);
 
-            if (diff.TotalHours < 4 * 60)
+            Console.WriteLine("ses:");
+            Console.WriteLine(ses.ExpireDate);
+
+            Console.WriteLine("diff:");
+            Console.WriteLine(diff);
+
+            Console.WriteLine("total hours:");
+            Console.WriteLine(diff.TotalHours);
+
+            Console.WriteLine("total seconds:");
+            Console.WriteLine(diff.TotalSeconds);
+            if (diff.TotalSeconds > 0)
             {
                 return false;
             }
