@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotLogService", "PotLogService\PotLogService.csproj", "{9CFFE1C7-BE5A-4B8E-AC03-57F10A4ED6D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLLTest", "BLLTest\BLLTest.csproj", "{CE9925A4-2073-43D0-B509-7AEDB6D0458A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9CFFE1C7-BE5A-4B8E-AC03-57F10A4ED6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CFFE1C7-BE5A-4B8E-AC03-57F10A4ED6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CFFE1C7-BE5A-4B8E-AC03-57F10A4ED6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE9925A4-2073-43D0-B509-7AEDB6D0458A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9925A4-2073-43D0-B509-7AEDB6D0458A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE9925A4-2073-43D0-B509-7AEDB6D0458A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9925A4-2073-43D0-B509-7AEDB6D0458A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
