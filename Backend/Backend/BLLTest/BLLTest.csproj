@@ -55,6 +55,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserCtrlTest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{50099776-cae8-4e18-90c8-e5ac7acfd029}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{b09b5ee6-34cf-4e5f-b7de-b1d8b0ad2a35}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

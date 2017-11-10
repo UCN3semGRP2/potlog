@@ -11,8 +11,7 @@ namespace BLL
     {
         public bool ValidatePassword(User u, string clearTextPw)
         {
-            return HashingHelper.CheckPassword(clearTextPw, u.Salt, u.Password); 
-             
+            return HashingHelper.CheckPassword(clearTextPw, u.Salt, u.Password);
         }
     }
 }
