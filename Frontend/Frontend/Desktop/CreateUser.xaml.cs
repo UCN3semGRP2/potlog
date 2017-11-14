@@ -20,6 +20,7 @@ namespace Desktop
     /// </summary>
     public partial class CreateUser : Page
     {
+        ServiceReference.IService service = new ServiceReference.ServiceClient();
         public CreateUser()
         {
             InitializeComponent();
@@ -27,7 +28,20 @@ namespace Desktop
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
+            if (tb_Password.Text.Equals(tb_RepeatPassword.Text) 
+                && tb_Email.Text.Length != 0 
+                && tb_Firstname.Text.Length != 0 
+                && tb_Lastname.Text.Length != 0)
+            {
+                service.CreateUser(tb_Firstname.Text, tb_Lastname.Text, tb_Email.Text, tb_Password.Text);
+                MessageBox.Show("Bruger er oprettet.");
+            }
+            else
+            {
+                MessageBox.Show("Vær sød at indtaste alle de nødvendige oplysninger.");
+            }
 
+            //this.NavigationService.Navigate(/*LOGIN SIDE */);
         }
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
@@ -51,6 +65,42 @@ namespace Desktop
             else
             {
                 tb_RepeatPassword.BorderBrush = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void tb_Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!tb_Email.Text.Contains("@"))
+            {
+                tb_Email.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                tb_Email.BorderBrush = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void tb_Firstname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tb_Firstname.Text.Length < 6)
+            {
+                tb_Firstname.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                tb_Firstname.BorderBrush = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void tb_Lastname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tb_Lastname.Text.Length < 6)
+            {
+                tb_Lastname.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                tb_Lastname.BorderBrush = System.Windows.Media.Brushes.Black;
             }
         }
     }
