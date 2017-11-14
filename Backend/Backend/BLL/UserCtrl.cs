@@ -9,6 +9,8 @@ namespace BLL
 {
     public class UserCtrl
     {
+        private SessionCtrl SesCtrl = new SessionCtrl();
+
         public bool ValidatePassword(User u, string clearTextPw)
         {
             return HashingHelper.CheckPassword(clearTextPw, u.Salt, u.Password);
@@ -16,18 +18,8 @@ namespace BLL
 
         public bool IsValidated(User u1)
         {
-            var ses = u1.LogInSession;
-            if (ses == null) return false;
-
-            // TODO: Move this into a session ctrl
-            var diff = ses.ExpireDate.Subtract(DateTime.Now);
-
-            if (diff.TotalSeconds < 0)
-            {
-                return false;
-            }
-
-            return true;
+            return SesCtrl.IsValidated(u1.LogInSession);
+            
         }
     }
 }
