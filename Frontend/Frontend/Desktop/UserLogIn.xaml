@@ -10,9 +10,9 @@
 
     <Grid>
         <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,88,0,0"/>
-        <TextBox x:Name="Txt_Email" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="113,91,0,0"/>
+        <TextBox x:Name="Txt_Email" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="113,91,0,0"/>
+        <PasswordBox x:Name="Pw_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113,119,0,0" Width="120" Height="23"/>
         <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,119,0,0"/>
-        <TextBox x:Name="Txt_Password" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="113,123,0,0"/>
         <Button x:Name="Btn_LogIn" Content="Log Ind" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="158,160,0,0" Click="BtnLogIn_Click"/>
         <Button x:Name="Btn_CreateUser" Content="Opret Bruger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="78,160,0,0" Click="Button_Click"/>
 
