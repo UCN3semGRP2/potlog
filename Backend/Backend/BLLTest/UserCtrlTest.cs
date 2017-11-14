@@ -19,7 +19,7 @@ namespace BLLTest
             {
                 Firstname = "Niklas",
                 Lastname = "Jørgensen",
-                Email = "n@n.dk",
+                Email = "n@n.dk" + Guid.NewGuid(), // To avoid creating the same user when rerunning the test
                 Password = "1234"
             };
 
