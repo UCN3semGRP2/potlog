@@ -16,10 +16,10 @@
         <Label Name="lbl_Lastname" Content="Efternavn :" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tb_Lastname" HorizontalAlignment="Left" Height="23" Margin="10,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Name="lbl_Password" Content="Password :" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb_Password" HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tb_Password" HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tb_Password_TextChanged"/>
         <Label Name="lbl_RepeatPassword" Content="Gentag Password :" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb_RepeatPassword" HorizontalAlignment="Left" Height="23" Margin="10,252,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Name="btn_CreatUser" Content="Opret" HorizontalAlignment="Left" Margin="215,270,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox Name="tb_RepeatPassword" HorizontalAlignment="Left" Height="23" Margin="10,252,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tb_RepeatPassword_TextChanged"/>
+        <Button Name="btn_CreatUser" Content="Opret" HorizontalAlignment="Left" Margin="215,270,0,0" VerticalAlignment="Top" Width="75" Click="btn_CreatUser_Click"/>
 
     </Grid>
 </Page>

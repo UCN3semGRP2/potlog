@@ -24,5 +24,34 @@ namespace Desktop
         {
             InitializeComponent();
         }
+
+        private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tb_Password.Text.Length < 6)
+            {
+                tb_Password.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                tb_Password.BorderBrush = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void tb_RepeatPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tb_Password.Text.Equals(tb_RepeatPassword.Text))
+            {
+                tb_RepeatPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                tb_RepeatPassword.BorderBrush = System.Windows.Media.Brushes.Black;
+            }
+        }
     }
 }
