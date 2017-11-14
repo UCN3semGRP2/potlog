@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dc613738-e072-4cff-9aef-7c4587bbe98a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="fb3aa804-4ca6-431d-9e9a-f9986f538304" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="67eff901-d23e-4d93-ad49-e1b34a12eddc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
+    <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="20f92ba1-beb3-4cdc-8ab0-99bca2c7072f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

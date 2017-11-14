@@ -37,16 +37,15 @@ namespace Desktop
             {
                 MessageBox.Show("Email or Password is incorrect");
                 return;
-                //throw new Exception();
             }
 
-            //MessageBox.Show("Success");
-            // TODO: Send user to the next window view
+            var nextPage = new Page(); // TODO: use the correct page
+            this.NavigationService.Navigate(nextPage, user);
         }
 
         private void Btn_CreateUser_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new CreateUser());
         }
     }
 }
