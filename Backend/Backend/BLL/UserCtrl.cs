@@ -34,6 +34,21 @@ namespace BLL
                 db.SaveChanges();
             }
         }
+
+        public User LogIn(string email, string clearTextPw)
+        {
+            using (DALContext db = new DALContext())
+            {
+                User u = db.Users.First(x => x.Email == email);
+                if (ValidatePassword(u, clearTextPw))
+                {
+                    u.LogInSession = new Session();
+                    return u;
+                }
+                return null;
+            }
+        }
+
         public bool ValidatePassword(User u, string clearTextPw)
         {
             return HashingHelper.CheckPassword(clearTextPw, u.Salt, u.Password);
