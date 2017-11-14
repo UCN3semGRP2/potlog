@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using BLL;
+using Model;
 
 namespace PotLogService
 {
@@ -19,6 +20,11 @@ namespace PotLogService
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
+        }
+
+        public User LogIn(string email, string clearTextPw)
+        {
+            return uCtrl.LogIn(email, clearTextPw);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -15,5 +16,8 @@ namespace PotLogService
 
         [OperationContract]
         void CreateUser(string Firstname, string Lastname, string Email, string Password);
+
+        [OperationContract]
+        User LogIn(string email, string clearTextPw);
     }
 }
