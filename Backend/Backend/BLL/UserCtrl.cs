@@ -39,13 +39,17 @@ namespace BLL
         {
             using (DALContext db = new DALContext())
             {
-                User u = db.Users.First(x => x.Email == email);
+                User u = db.Users.FirstOrDefault(x => x.Email == email);
+                if (u == null) return null;
+
                 if (ValidatePassword(u, clearTextPw))
                 {
                     u.LogInSession = new Session();
                     return u;
+                } else
+                {
+                    return null;
                 }
-                return null;
             }
         }
 

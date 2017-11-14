@@ -31,6 +31,16 @@ namespace Desktop
         {
             string email = this.Txt_Email.Text;
             string pw = this.Pw_Password.Password;
+
+            var user = service.LogIn(email, pw);
+            if (user == null)
+            {
+                MessageBox.Show("Email or Password is incorrect");
+                return;
+                //throw new Exception();
+            }
+
+            MessageBox.Show("Success");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
