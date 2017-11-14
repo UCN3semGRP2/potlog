@@ -23,6 +23,13 @@ namespace Desktop
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += Load_Window;
+           
         }
+         private void Load_Window(object sender, RoutedEventArgs e)
+        {
+           // MainFrame.NavigationService.Navigate(The first page to load);
+        }
+         
     }
 }
