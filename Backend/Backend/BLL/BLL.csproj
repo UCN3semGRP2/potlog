@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="HashingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionCtrl.cs" />
     <Compile Include="UserCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
