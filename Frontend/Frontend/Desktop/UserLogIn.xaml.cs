@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserLogIn.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserLogIn : Page
     {
-        public MainWindow()
+        public UserLogIn()
         {
             InitializeComponent();
-            Loaded += Load_Window;
-           
         }
-         private void Load_Window(object sender, RoutedEventArgs e)
-        {
-           MainFrame.NavigationService.Navigate(new UserLogIn());
-        }
-         
     }
 }
