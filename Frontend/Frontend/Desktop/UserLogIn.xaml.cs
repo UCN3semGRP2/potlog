@@ -40,12 +40,13 @@ namespace Desktop
                 //throw new Exception();
             }
 
-            MessageBox.Show("Success");
+            //MessageBox.Show("Success");
+            // TODO: Send user to the next window view
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_CreateUser_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
