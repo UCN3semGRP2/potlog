@@ -20,6 +20,7 @@ namespace Desktop
     /// </summary>
     public partial class UserLogIn : Page
     {
+
         public UserLogIn()
         {
             InitializeComponent();
@@ -27,12 +28,13 @@ namespace Desktop
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-
+            string email = this.Txt_Email.Text;
+            string pw = this.Pw_Password.Password;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
