@@ -12,6 +12,13 @@ namespace PotLogService
     public class Service : IService
     {
         UserCtrl uCtrl = new UserCtrl();
+        EventCtrl eCtrl = new EventCtrl();
+
+        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        {
+            return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        }
+
         public void CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
             uCtrl.CreateUser(Firstname, Lastname, Email, Password);
