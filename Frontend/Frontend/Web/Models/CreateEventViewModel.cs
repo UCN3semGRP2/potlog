@@ -26,11 +26,16 @@ namespace Web.Models
         [Display(Name = "Tid")]
         [Required(ErrorMessage = "Tid skal udfyldes.")]
         [DataType(DataType.Time)]
-        public DateTime Time { get; set; }
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")] // 24 hour time picker
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH\\:mm}")]
+        public TimeSpan Time { get; set; }
 
         [Display(Name = "Max Antal Deltagere")]
         [Required(ErrorMessage = "Max Antal Deltagere udfyldes.")]
         public int NumOfParticipants { get; set; }
+
+        [Display(Name = "Offentlig Event")]
+        [Required(ErrorMessage = "Event skal enten være offentlig eller privat.")]
         public bool IsPublic { get; set; }
 
         [Display(Name = "Beskrivelse")]
