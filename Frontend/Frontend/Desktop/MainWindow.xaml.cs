@@ -28,7 +28,7 @@ namespace Desktop
         }
          private void Load_Window(object sender, RoutedEventArgs e)
         {
-           MainFrame.NavigationService.Navigate(new UserLogIn());
+           MainFrame.NavigationService.Navigate(new CreateEvent());
         }
          
     }
