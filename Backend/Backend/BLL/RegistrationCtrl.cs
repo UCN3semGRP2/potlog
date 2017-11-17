@@ -10,20 +10,16 @@ namespace BLL
 {
     public class RegistrationCtrl
     {
-        //EventCtrl eCtrl = new EventCtrl();
-        //UserCtrl uCtrl = new UserCtrl();
-        //RegistrationDB rDB = new RegistrationDB();
+        RegistrationDB rDB = new RegistrationDB();
         public Registration CreateRegistration(User user, Event eve)
         {
-            //Registration reg = new Registration
-            //{
-            //    DateOfCreation = DateTime.Now
-            //};
-            //reg = rDB.Create(reg);
-            //eCtrl.AddRegistration(reg, eve);
-            //uCtrl.AddRegistration(reg, user);
-            //return reg;
-            throw new NotImplementedException();
+            var reg = new Registration
+            {
+                DateOfCreation = DateTime.Now,
+                Event = eve,
+                User = user
+            };
+            return rDB.Create(reg);
         }
     }
 }

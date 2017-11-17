@@ -48,9 +48,10 @@ namespace BLL
             }
         }
 
-        internal void AddRegistration(User user, Registration reg)
+        public void AddRegistration(User user, Registration reg)
         {
-            throw new NotImplementedException();
+            user.Registrations.Add(reg);
+            // uDB.Update(user); if entity isnt smart add this line
         }
 
         public bool ValidatePassword(User u, string clearTextPw)
