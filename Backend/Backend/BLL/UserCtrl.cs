@@ -15,7 +15,7 @@ namespace BLL
 
         private UserDB uDB = new UserDB();
 
-        public void CreateUser(string Firstname, string Lastname, string Email, string Password)
+        public User CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
 
             string salt = HashingHelper.GenerateSalt();
@@ -30,7 +30,7 @@ namespace BLL
                 Salt = salt
             };
 
-            uDB.Create(user);
+            return uDB.Create(user);
         }
 
         public User LogIn(string email, string clearTextPw)
