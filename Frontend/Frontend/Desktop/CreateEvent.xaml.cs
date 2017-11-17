@@ -38,11 +38,7 @@ namespace Desktop
                 )
             {
                 DateTime datetime = dtpEventDatetime.Value.Value;
-                bool isPublic = false;
-                if (rbEventPublic.IsChecked == true)
-                {
-                    isPublic = true;
-                }
+                bool isPublic = rbEventPublic.IsChecked.Value;
 
                 int numOfParticipants;
                 Int32.TryParse(tbEventNumOfParticipants.Text, out numOfParticipants);
