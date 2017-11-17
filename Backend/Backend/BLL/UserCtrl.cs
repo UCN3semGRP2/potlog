@@ -29,8 +29,9 @@ namespace BLL
                 Password = hashedPassword,
                 Salt = salt
             };
-
-            return uDB.Create(user);
+            var enduser = uDB.Create(user);
+            uDB.Commit();
+            return enduser;
         }
 
         public User LogIn(string email, string clearTextPw)

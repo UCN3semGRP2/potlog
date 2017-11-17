@@ -19,7 +19,9 @@ namespace BLL
                 Event = eve,
                 User = user
             };
-            return rDB.Create(reg);
+            var finalReg = rDB.Create(reg);
+            rDB.Commit();
+            return finalReg;
         }
     }
 }

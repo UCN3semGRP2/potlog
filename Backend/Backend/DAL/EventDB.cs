@@ -14,8 +14,6 @@ namespace DAL
         public Event Create(Event entity)
         {
             var e = ctx.Events.Add(entity);
-
-            ctx.SaveChanges();
             return e;
         }
 
@@ -38,6 +36,11 @@ namespace DAL
         public void Update(Event entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            ctx.SaveChanges();
         }
     }
 }

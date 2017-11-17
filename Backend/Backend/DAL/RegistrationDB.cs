@@ -13,7 +13,6 @@ namespace DAL
         public Registration Create(Registration entity)
         {
             var reg =context.Registrations.Add(entity);
-            //context.SaveChanges();
             return reg;
         }
 
@@ -35,6 +34,11 @@ namespace DAL
         public void Update(Registration entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            context.SaveChanges();
         }
     }
 }

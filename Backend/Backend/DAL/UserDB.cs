@@ -14,7 +14,6 @@ namespace DAL
         public User Create(User user)
         {
                 var u = ctx.Users.Add(user);
-                ctx.SaveChanges();
                 return u;
         }
 
@@ -41,6 +40,11 @@ namespace DAL
         public void Update(User entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            ctx.SaveChanges();
         }
 
     }
