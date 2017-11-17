@@ -39,5 +39,10 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+        public void Commit()
+        {
+            ctx.SaveChanges();
+        }
     }
 }
