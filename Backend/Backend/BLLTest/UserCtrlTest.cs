@@ -4,7 +4,6 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DAL;
 using System.Linq;
-using Model;
 
 namespace BLLTest
 {

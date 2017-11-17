@@ -27,5 +27,10 @@ namespace BLL
             };
             return db.Create(e);
         }
+
+        public Registration RegisterToEvent(Event newEvent, User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
