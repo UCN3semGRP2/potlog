@@ -9,9 +9,12 @@ namespace DAL
 {
     public class RegistrationDB : ICRUD<Registration>
     {
+        DALContext context = new DALContext();
         public Registration Create(Registration entity)
         {
-            throw new NotImplementedException();
+            var reg =context.Registrations.Add(entity);
+            //context.SaveChanges();
+            return reg;
         }
 
         public void Delete(Registration entity)
