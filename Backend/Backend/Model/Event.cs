@@ -15,7 +15,7 @@ namespace Model
         public double PriceFrom { get; set; }
         public double PriceTo { get; set; }
         public string Location { get; set; }
-        public DateTime datetime { get; set; }
+        public DateTime Datetime { get; set; }
         public bool IsPublic { get; set; }
     }
 }
