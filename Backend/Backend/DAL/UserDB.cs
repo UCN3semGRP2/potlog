@@ -7,23 +7,41 @@ using Model;
 
 namespace DAL
 {
-    public class UserDB
+    public class UserDB : ICRUD<User>
     {
-        public void Create(User user)
+        private DALContext ctx = new DALContext();
+
+        public User Create(User user)
         {
-            using (DALContext db = new DALContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+                var u = ctx.Users.Add(user);
+                ctx.SaveChanges();
+                return u;
+        }
+
+        public void Delete(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> FindAll()
+        {
+            throw new NotImplementedException();
         }
 
         public User FindByEmail(string email)
         {
-            using (DALContext db = new DALContext())
-            {
-                return db.Users.FirstOrDefault(x => x.Email == email);
-            }
+            return ctx.Users.FirstOrDefault(x => x.Email == email);
         }
+
+        public User FindByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

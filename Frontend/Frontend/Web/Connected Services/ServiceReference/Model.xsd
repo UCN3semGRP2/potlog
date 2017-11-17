@@ -21,4 +21,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Session" nillable="true" type="tns:Session" />
+  <xs:complexType name="Event">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Datetime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsPublic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumOfParticipants" type="xs:int" />
+      <xs:element minOccurs="0" name="PriceFrom" type="xs:double" />
+      <xs:element minOccurs="0" name="PriceTo" type="xs:double" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Event" nillable="true" type="tns:Event" />
 </xs:schema>

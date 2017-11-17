@@ -45,4 +45,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CreateEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="numOfParticipants" type="xs:int" />
+        <xs:element minOccurs="0" name="priceFrom" type="xs:double" />
+        <xs:element minOccurs="0" name="priceTo" type="xs:double" />
+        <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="datetime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="isPublic" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="CreateEventResult" nillable="true" type="q2:Event" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
