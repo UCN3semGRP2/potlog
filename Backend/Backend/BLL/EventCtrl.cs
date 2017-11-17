@@ -11,6 +11,8 @@ namespace BLL
     public class EventCtrl
     {
         private EventDB db = new EventDB();
+        private RegistrationCtrl rCtrl = new RegistrationCtrl();
+        private UserCtrl uCtrl = new UserCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
@@ -28,9 +30,13 @@ namespace BLL
             return db.Create(e);
         }
 
-        public Registration RegisterToEvent(Event newEvent, User user)
+        public Registration RegisterToEvent(Event e, User user)
         {
-            throw new NotImplementedException();
+            Registration reg = rCtrl.CreateRegistration(user, e);
+            e.Registrations.Add(reg);
+            uCtrl.AddRegistration(user, reg);
+            //TODO Save the changes to event and user in db;
+            return reg;
         }
     }
 }

@@ -48,6 +48,11 @@ namespace BLL
             }
         }
 
+        internal void AddRegistration(User user, Registration reg)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool ValidatePassword(User u, string clearTextPw)
         {
             return HashingHelper.CheckPassword(clearTextPw, u.Salt, u.Password);
