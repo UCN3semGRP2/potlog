@@ -14,7 +14,6 @@ namespace DAL
         public User Create(User user)
         {
                 var u = ctx.Users.Add(user);
-                ctx.SaveChanges();
                 return u;
         }
 

@@ -14,8 +14,6 @@ namespace DAL
         public Event Create(Event entity)
         {
             var e = ctx.Events.Add(entity);
-
-            ctx.SaveChanges();
             return e;
         }
 
