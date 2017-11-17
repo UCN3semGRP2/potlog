@@ -25,6 +25,12 @@
   <wsdl:message name="IService_LogIn_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogInResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_CreateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEventResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetData" message="tns:IService_GetData_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/LogIn" message="tns:IService_LogIn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/LogInResponse" message="tns:IService_LogIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateEvent" message="tns:IService_CreateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateEventResponse" message="tns:IService_CreateEvent_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -61,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="LogIn">
       <soap:operation soapAction="http://tempuri.org/IService/LogIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEvent">
+      <soap:operation soapAction="http://tempuri.org/IService/CreateEvent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

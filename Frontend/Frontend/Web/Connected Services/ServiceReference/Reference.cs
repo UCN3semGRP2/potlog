@@ -231,6 +231,179 @@ namespace Web.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Event", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Event : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DatetimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPublicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumOfParticipantsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PriceFromField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PriceToField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Datetime {
+            get {
+                return this.DatetimeField;
+            }
+            set {
+                if ((this.DatetimeField.Equals(value) != true)) {
+                    this.DatetimeField = value;
+                    this.RaisePropertyChanged("Datetime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPublic {
+            get {
+                return this.IsPublicField;
+            }
+            set {
+                if ((this.IsPublicField.Equals(value) != true)) {
+                    this.IsPublicField = value;
+                    this.RaisePropertyChanged("IsPublic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Location {
+            get {
+                return this.LocationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocationField, value) != true)) {
+                    this.LocationField = value;
+                    this.RaisePropertyChanged("Location");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumOfParticipants {
+            get {
+                return this.NumOfParticipantsField;
+            }
+            set {
+                if ((this.NumOfParticipantsField.Equals(value) != true)) {
+                    this.NumOfParticipantsField = value;
+                    this.RaisePropertyChanged("NumOfParticipants");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PriceFrom {
+            get {
+                return this.PriceFromField;
+            }
+            set {
+                if ((this.PriceFromField.Equals(value) != true)) {
+                    this.PriceFromField = value;
+                    this.RaisePropertyChanged("PriceFrom");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PriceTo {
+            get {
+                return this.PriceToField;
+            }
+            set {
+                if ((this.PriceToField.Equals(value) != true)) {
+                    this.PriceToField = value;
+                    this.RaisePropertyChanged("PriceTo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -252,6 +425,12 @@ namespace Web.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LogIn", ReplyAction="http://tempuri.org/IService/LogInResponse")]
         System.Threading.Tasks.Task<Web.ServiceReference.User> LogInAsync(string email, string clearTextPw);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
+        Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
+        System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -303,6 +482,14 @@ namespace Web.ServiceReference {
         
         public System.Threading.Tasks.Task<Web.ServiceReference.User> LogInAsync(string email, string clearTextPw) {
             return base.Channel.LogInAsync(email, clearTextPw);
+        }
+        
+        public Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
+            return base.Channel.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        }
+        
+        public System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
+            return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
         }
     }
 }
