@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICRUD.cs" />
     <Compile Include="DALContext.cs" />
     <Compile Include="EventDB.cs" />
     <Compile Include="Migrations\Configuration.cs" />

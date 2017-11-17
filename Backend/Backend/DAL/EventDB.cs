@@ -7,15 +7,37 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class EventDB
+    public class EventDB : ICRUD<Event>
     {
         private DALContext ctx = new DALContext();
 
-        public void CreateEvent(Event e)
+        public Event Create(Event entity)
         {
-            ctx.Events.Add(e);
+            var e = ctx.Events.Add(entity);
 
             ctx.SaveChanges();
+            return e;
+        }
+
+
+        public void Delete(Event entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Event> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Event FindByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Event entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
