@@ -27,7 +27,9 @@ namespace BLL
                 Datetime = datetime,
                 IsPublic = isPublic
             };
-            return db.Create(e);
+            var finalEvent = db.Create(e);
+            db.Commit();
+            return finalEvent;
         }
 
         public Registration RegisterToEvent(Event e, User user)
@@ -35,7 +37,7 @@ namespace BLL
             Registration reg = rCtrl.CreateRegistration(user, e);
             e.Registrations.Add(reg);
             uCtrl.AddRegistration(user, reg);
-            //TODO Save the changes to event and user in db;
+            db.Commit();
             return reg;
         }
     }
