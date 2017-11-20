@@ -48,10 +48,5 @@ namespace DAL
             ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public void Commit()
-        {
-            ctx.SaveChanges();
-        }
-
     }
 }
