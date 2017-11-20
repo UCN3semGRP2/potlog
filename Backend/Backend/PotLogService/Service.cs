@@ -11,25 +11,21 @@ namespace PotLogService
 {
     public class Service : IService
     {
-        UserCtrl uCtrl = new UserCtrl();
-        EventCtrl eCtrl = new EventCtrl();
+        private UnitOfWork UoW = new UnitOfWork();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
-            throw new NotImplementedException();
-            //return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+            return UoW.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
         }
 
-        public void CreateUser(string Firstname, string Lastname, string Email, string Password)
+        public void CreateUser(string firstName, string lastName, string email, string password)
         {
-            throw new NotImplementedException();
-            //uCtrl.CreateUser(Firstname, Lastname, Email, Password);
+            UoW.CreateUser(firstName, lastName, email, password);
         }
 
         public User LogIn(string email, string clearTextPw)
         {
-            throw new NotImplementedException();
-            //return uCtrl.LogIn(email, clearTextPw);
+            return UoW.LogIn(email, clearTextPw);
         }
     }
 }
