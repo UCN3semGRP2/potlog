@@ -13,9 +13,9 @@ namespace BLL
         
         private SessionCtrl SesCtrl = new SessionCtrl();
 
-        private UserDB uDB = new UserDB();
+        //private UserDB uDB = new UserDB();
 
-        public User CreateUser(string Firstname, string Lastname, string Email, string Password)
+        public User CreateUser(DALContext ctx, string Firstname, string Lastname, string Email, string Password)
         {
 
             string salt = HashingHelper.GenerateSalt();
@@ -29,14 +29,14 @@ namespace BLL
                 Password = hashedPassword,
                 Salt = salt
             };
-            var enduser = uDB.Create(user);
-            uDB.Commit();
+            var enduser = new UserDB(ctx).Create(user);
+            //uDB.Commit();
             return enduser;
         }
 
-        public User LogIn(string email, string clearTextPw)
+        public User LogIn(DALContext ctx, string email, string clearTextPw)
         {
-            User u = uDB.FindByEmail(email);
+            User u = new UserDB(ctx).FindByEmail(email);
             if (u == null) return null;
 
             if (ValidatePassword(u, clearTextPw))

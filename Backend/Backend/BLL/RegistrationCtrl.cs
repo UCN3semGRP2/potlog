@@ -10,8 +10,8 @@ namespace BLL
 {
     public class RegistrationCtrl
     {
-        RegistrationDB rDB = new RegistrationDB();
-        public Registration CreateRegistration(User user, Event eve)
+        //RegistrationDB rDB = new RegistrationDB();
+        public Registration CreateRegistration(DALContext ctx, User user, Event eve)
         {
             var reg = new Registration
             {
@@ -19,8 +19,8 @@ namespace BLL
                 Event = eve,
                 User = user
             };
-            var finalReg = rDB.Create(reg);
-            rDB.Commit();
+            var finalReg = new RegistrationDB(ctx).Create(reg);
+            //rDB.Commit();
             return finalReg;
         }
     }
