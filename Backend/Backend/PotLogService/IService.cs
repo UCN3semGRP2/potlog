@@ -12,9 +12,6 @@ namespace PotLogService
     public interface IService
     {
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
         void CreateUser(string Firstname, string Lastname, string Email, string Password);
 
         [OperationContract]

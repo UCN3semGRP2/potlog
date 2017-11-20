@@ -14,7 +14,7 @@ namespace BLL
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
 
-        public Event CreateEvent(DALContext ctx,string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        public Event CreateEvent(DALContext ctx, string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
             var e = new Event
             {
@@ -36,7 +36,7 @@ namespace BLL
         {
             Registration reg = rCtrl.CreateRegistration(ctx, user, e);
             e.Registrations.Add(reg);
-            uCtrl.AddRegistration(ctx, user, reg);
+            uCtrl.AddRegistration(user, reg);
             //db.Commit();
             return reg;
         }

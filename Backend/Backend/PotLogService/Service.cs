@@ -16,22 +16,20 @@ namespace PotLogService
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
-            return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+            throw new NotImplementedException();
+            //return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
         }
 
         public void CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
-            uCtrl.CreateUser(Firstname, Lastname, Email, Password);
-        }
-
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
+            throw new NotImplementedException();
+            //uCtrl.CreateUser(Firstname, Lastname, Email, Password);
         }
 
         public User LogIn(string email, string clearTextPw)
         {
-            return uCtrl.LogIn(email, clearTextPw);
+            throw new NotImplementedException();
+            //return uCtrl.LogIn(email, clearTextPw);
         }
     }
 }
