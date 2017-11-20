@@ -9,10 +9,16 @@ namespace DAL
 {
     public class RegistrationDB : ICRUD<Registration>
     {
-        DALContext context = new DALContext();
+        private DALContext ctx;
+
+        public RegistrationDB(DALContext ctx)
+        {
+            this.ctx = ctx;
+        }
+
         public Registration Create(Registration entity)
         {
-            var reg =context.Registrations.Add(entity);
+            var reg = ctx.Registrations.Add(entity);
             return reg;
         }
 
@@ -38,7 +44,7 @@ namespace DAL
 
         public void Commit()
         {
-            context.SaveChanges();
+            ctx.SaveChanges();
         }
     }
 }

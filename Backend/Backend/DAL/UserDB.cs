@@ -9,7 +9,12 @@ namespace DAL
 {
     public class UserDB : ICRUD<User>
     {
-        private DALContext ctx = new DALContext();
+        private DALContext ctx;
+
+        public UserDB(DALContext ctx)
+        {
+            this.ctx = ctx;
+        }
 
         public User Create(User user)
         {

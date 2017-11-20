@@ -9,7 +9,12 @@ namespace DAL
 {
     public class EventDB : ICRUD<Event>
     {
-        private DALContext ctx = new DALContext();
+        private DALContext ctx;
+
+        public EventDB(DALContext ctx)
+        {
+            this.ctx = ctx;
+        }
 
         public Event Create(Event entity)
         {
