@@ -27,8 +27,8 @@ namespace BLL
         {
             using (var ctx = new DALContext())
             {
-                Event e = eCtrl.FindById(eventId);
-                User u = uCtrl.FindByEmail(userEmail);
+                Event e = eCtrl.FindById(ctx, eventId);
+                User u = uCtrl.FindByEmail(ctx, userEmail);
                 var reg = new EventCtrl().RegisterToEvent(ctx, e, u);
                 ctx.SaveChanges();
                 return reg;

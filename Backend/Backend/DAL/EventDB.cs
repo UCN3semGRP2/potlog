@@ -35,7 +35,7 @@ namespace DAL
 
         public Event FindByID(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Events.Find(id);
         }
 
         public void Update(Event entity)

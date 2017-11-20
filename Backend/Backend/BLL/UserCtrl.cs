@@ -30,14 +30,15 @@ namespace BLL
             return enduser;
         }
 
-        internal User FindByEmail(string userEmail)
+        public User FindByEmail(DALContext ctx, string userEmail)
         {
-            throw new NotImplementedException();
+            return new UserDB(ctx).FindByEmail(userEmail);
         }
+
 
         public User LogIn(DALContext ctx, string email, string clearTextPw)
         {
-            User u = new UserDB(ctx).FindByEmail(email);
+            User u = this.FindByEmail(ctx, email);
             if (u == null) return null;
 
             if (ValidatePassword(u, clearTextPw))

@@ -30,9 +30,9 @@ namespace BLL
             return finalEvent;
         }
 
-        internal Event FindById(int eventId)
+        public Event FindById(DALContext ctx, int eventId)
         {
-            throw new NotImplementedException();
+            return new EventDB(ctx).FindByID(eventId);
         }
 
         public Registration RegisterToEvent(DALContext ctx, Event e, User user)
