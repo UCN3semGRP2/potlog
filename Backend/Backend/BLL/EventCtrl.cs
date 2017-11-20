@@ -10,7 +10,6 @@ namespace BLL
 {
     public class EventCtrl
     {
-        //private EventDB db = new EventDB();
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
 
@@ -28,7 +27,6 @@ namespace BLL
                 IsPublic = isPublic
             };
             var finalEvent = new EventDB(ctx).Create(e);
-            //db.Commit();
             return finalEvent;
         }
 
@@ -36,8 +34,7 @@ namespace BLL
         {
             Registration reg = rCtrl.CreateRegistration(ctx, user, e);
             e.Registrations.Add(reg);
-            uCtrl.AddRegistration(user, reg);
-            //db.Commit();
+            uCtrl.AddRegistration(ctx, user, reg);
             return reg;
         }
     }

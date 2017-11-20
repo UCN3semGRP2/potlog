@@ -10,10 +10,7 @@ namespace BLL
 {
     public class UserCtrl
     {
-        
         private SessionCtrl SesCtrl = new SessionCtrl();
-
-        //private UserDB uDB = new UserDB();
 
         public User CreateUser(DALContext ctx, string Firstname, string Lastname, string Email, string Password)
         {
@@ -30,7 +27,6 @@ namespace BLL
                 Salt = salt
             };
             var enduser = new UserDB(ctx).Create(user);
-            //uDB.Commit();
             return enduser;
         }
 
@@ -49,10 +45,10 @@ namespace BLL
             }
         }
 
-        public void AddRegistration(User user, Registration reg)
+        public void AddRegistration(DALContext ctx, User user, Registration reg)
         {
             user.Registrations.Add(reg);
-            // uDB.Update(user); if entity isnt smart add this line
+            new UserDB(ctx).Update(user);
         }
 
         public bool ValidatePassword(User u, string clearTextPw)
