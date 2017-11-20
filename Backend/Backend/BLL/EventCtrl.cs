@@ -30,6 +30,11 @@ namespace BLL
             return finalEvent;
         }
 
+        internal Event FindById(int eventId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Registration RegisterToEvent(DALContext ctx, Event e, User user)
         {
             Registration reg = rCtrl.CreateRegistration(ctx, user, e);

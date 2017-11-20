@@ -23,6 +23,18 @@ namespace BLL
         //    }
         //}
 
+        public Registration SignUpForEvent(string userEmail, int eventId)
+        {
+            using (var ctx = new DALContext())
+            {
+                Event e = eCtrl.FindById(eventId);
+                User u = uCtrl.FindByEmail(userEmail);
+                var reg = new EventCtrl().RegisterToEvent(ctx, e, u);
+                ctx.SaveChanges();
+                return reg;
+            }
+        }
+
         //public void SignUpForEvent(Guid sessionId)
         //{
         //    using (var ctx = new DALContext())

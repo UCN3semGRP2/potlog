@@ -27,5 +27,10 @@ namespace PotLogService
         {
             return UoW.LogIn(email, clearTextPw);
         }
+
+        public Registration SignUpForEvent(string userEmail, int eventId)
+        {
+            return UoW.SignUpForEvent(userEmail, eventId);
+        }
     }
 }
