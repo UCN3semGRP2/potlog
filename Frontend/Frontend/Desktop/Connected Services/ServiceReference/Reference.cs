@@ -41,6 +41,9 @@ namespace Desktop.ServiceReference {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.Registration[] RegistrationsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SaltField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -127,6 +130,19 @@ namespace Desktop.ServiceReference {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.Registration[] Registrations {
+            get {
+                return this.RegistrationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegistrationsField, value) != true)) {
+                    this.RegistrationsField = value;
+                    this.RaisePropertyChanged("Registrations");
                 }
             }
         }
@@ -233,6 +249,99 @@ namespace Desktop.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Registration", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Registration : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateOfCreationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.Event EventField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.User UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateOfCreation {
+            get {
+                return this.DateOfCreationField;
+            }
+            set {
+                if ((this.DateOfCreationField.Equals(value) != true)) {
+                    this.DateOfCreationField = value;
+                    this.RaisePropertyChanged("DateOfCreation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.Event Event {
+            get {
+                return this.EventField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventField, value) != true)) {
+                    this.EventField = value;
+                    this.RaisePropertyChanged("Event");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Event", Namespace="http://schemas.datacontract.org/2004/07/Model")]
     [System.SerializableAttribute()]
     public partial class Event : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -263,6 +372,9 @@ namespace Desktop.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PriceToField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.Registration[] RegistrationsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
@@ -382,6 +494,19 @@ namespace Desktop.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.Registration[] Registrations {
+            get {
+                return this.RegistrationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegistrationsField, value) != true)) {
+                    this.RegistrationsField = value;
+                    this.RaisePropertyChanged("Registrations");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Title {
             get {
                 return this.TitleField;
@@ -408,12 +533,6 @@ namespace Desktop.ServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetData", ReplyAction="http://tempuri.org/IService/GetDataResponse")]
-        string GetData(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetData", ReplyAction="http://tempuri.org/IService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateUser", ReplyAction="http://tempuri.org/IService/CreateUserResponse")]
         void CreateUser(string Firstname, string Lastname, string Email, string Password);
         
@@ -431,6 +550,12 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
+        Desktop.ServiceReference.Event FindEventById(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -460,14 +585,6 @@ namespace Desktop.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
-        }
-        
         public void CreateUser(string Firstname, string Lastname, string Email, string Password) {
             base.Channel.CreateUser(Firstname, Lastname, Email, Password);
         }
@@ -490,6 +607,14 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
             return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        }
+        
+        public Desktop.ServiceReference.Event FindEventById(int id) {
+            return base.Channel.FindEventById(id);
+        }
+        
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id) {
+            return base.Channel.FindEventByIdAsync(id);
         }
     }
 }
