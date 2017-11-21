@@ -556,6 +556,12 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
+        bool IsRegisteredToEvent(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
+        System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -615,6 +621,14 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id) {
             return base.Channel.FindEventByIdAsync(id);
+        }
+        
+        public bool IsRegisteredToEvent(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e) {
+            return base.Channel.IsRegisteredToEvent(u, e);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e) {
+            return base.Channel.IsRegisteredToEventAsync(u, e);
         }
     }
 }

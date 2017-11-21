@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Desktop.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,9 @@ namespace Desktop
         }
          private void Load_Window(object sender, RoutedEventArgs e)
         {
-           MainFrame.NavigationService.Navigate(new EventDetails(service.FindEventById(1)));
+            var evnt = service.FindEventById(1);
+            var u = new User();
+           MainFrame.NavigationService.Navigate(new EventDetails(evnt,u));
         }
          
     }

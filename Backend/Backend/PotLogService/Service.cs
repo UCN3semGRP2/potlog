@@ -37,5 +37,10 @@ namespace PotLogService
         {
             return UoW.FindEventById(id);
         }
+
+        public bool IsRegisteredToEvent(User u, Event e)
+        {
+            return UoW.IsRegisteredToEvent(u, e);
+        }
     }
 }

@@ -22,5 +22,8 @@ namespace PotLogService
 
         [OperationContract]
         Event FindEventById(int id);
+
+        [OperationContract]
+        bool IsRegisteredToEvent(User u, Event e);
     }
 }
