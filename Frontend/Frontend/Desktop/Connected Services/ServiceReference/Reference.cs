@@ -557,6 +557,12 @@ namespace Desktop.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
+        Desktop.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
         bool IsRegisteredToEvent(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e);
         
@@ -621,6 +627,14 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> FindEventByIdAsync(int id) {
             return base.Channel.FindEventByIdAsync(id);
+        }
+        
+        public Desktop.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId) {
+            return base.Channel.SignUpForEvent(userEmail, eventId);
+        }
+        
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId) {
+            return base.Channel.SignUpForEventAsync(userEmail, eventId);
         }
         
         public bool IsRegisteredToEvent(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e) {

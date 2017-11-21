@@ -24,6 +24,9 @@ namespace PotLogService
         Event FindEventById(int id);
 
         [OperationContract]
+        Registration SignUpForEvent(string userEmail, int eventId);
+
+        [OperationContract]
         bool IsRegisteredToEvent(User u, Event e);
     }
 }

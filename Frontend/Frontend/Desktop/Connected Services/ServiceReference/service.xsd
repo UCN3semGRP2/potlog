@@ -66,11 +66,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SignUpForEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="eventId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignUpForEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SignUpForEventResult" nillable="true" type="q4:Registration" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="IsRegisteredToEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="u" nillable="true" type="q4:User" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="e" nillable="true" type="q5:Event" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="u" nillable="true" type="q5:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="e" nillable="true" type="q6:Event" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -26,6 +26,9 @@ namespace Desktop
         private bool isRegisteredToEvent = false;
         private bool isAdmin = false;
 
+        private Event e;
+        private User u;
+
         public EventDetails(Event e, User u)
         {
             InitializeComponent();
@@ -50,6 +53,9 @@ namespace Desktop
             }
 
             populateInfo(e);
+
+            this.u = u;
+            this.e = e;
         }
 
         private void populateInfo(Event e)
@@ -65,6 +71,16 @@ namespace Desktop
             var registrations = e.Registrations == null ? 0 : e.Registrations.Length;
             lblEventNumOfParticipants.Content = string.Format("{0} ud af {1} deltagere", registrations, e.NumOfParticipants);
 
+        }
+
+        private void btnEventRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var reg = service.SignUpForEvent(u.Email, this.e.Id);
+
+            MessageBox.Show(string.Format("Success registering oprettet {0}", reg.DateOfCreation));
+
+            //var nextPage = TODO
+            //this.NavigationService.Navigate(nextPage);
         }
     }
 }
