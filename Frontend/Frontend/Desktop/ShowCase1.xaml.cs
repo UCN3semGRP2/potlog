@@ -1,7 +1,5 @@
-﻿using Desktop.ServiceReference;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,22 +16,33 @@ using System.Windows.Shapes;
 namespace Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ShowCase1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ShowCase1 : Page
     {
-        ServiceReference.IService service = new ServiceReference.ServiceClient();
-        public MainWindow()
+        public ShowCase1()
         {
             InitializeComponent();
-            Loaded += Load_Window;
+        }
+
+        private void Button_Click_Create_Event(object sender, RoutedEventArgs e)
+        {
             
         }
-         private void Load_Window(object sender, RoutedEventArgs e)
+
+        private void Button_Click_Create_User(object sender, RoutedEventArgs e)
         {
-           MainFrame.NavigationService.Navigate(new UserLogIn());
+
         }
 
+        private void Button_Click_Event_Details(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void Button_Click_User_Log_In(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
