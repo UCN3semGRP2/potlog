@@ -35,6 +35,19 @@ namespace BLL
             }
         }
 
+        public bool IsRegisteredToEvent(User u, Event e)
+        {
+            using (var ctx = new DALContext())
+            {
+                if (!uCtrl.IsValidated(u))
+                {
+                    return false;
+                }
+
+                return uCtrl.IsRegisteredToEvent(ctx, u, e);
+            }
+        }
+
         //public void SignUpForEvent(Guid sessionId)
         //{
         //    using (var ctx = new DALContext())

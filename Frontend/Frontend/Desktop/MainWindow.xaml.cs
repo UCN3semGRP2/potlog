@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Desktop.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        ServiceReference.IService service = new ServiceReference.ServiceClient();
         public MainWindow()
         {
             InitializeComponent();

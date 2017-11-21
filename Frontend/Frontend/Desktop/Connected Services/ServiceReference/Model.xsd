@@ -9,6 +9,7 @@
       <xs:element minOccurs="0" name="Lastname" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LogInSession" nillable="true" type="tns:Session" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Registrations" nillable="true" type="tns:ArrayOfRegistration" />
       <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -21,6 +22,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Session" nillable="true" type="tns:Session" />
+  <xs:complexType name="ArrayOfRegistration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Registration" nillable="true" type="tns:Registration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRegistration" nillable="true" type="tns:ArrayOfRegistration" />
+  <xs:complexType name="Registration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateOfCreation" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Event" nillable="true" type="tns:Event" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Registration" nillable="true" type="tns:Registration" />
   <xs:complexType name="Event">
     <xs:sequence>
       <xs:element minOccurs="0" name="Datetime" type="xs:dateTime" />
@@ -31,6 +47,7 @@
       <xs:element minOccurs="0" name="NumOfParticipants" type="xs:int" />
       <xs:element minOccurs="0" name="PriceFrom" type="xs:double" />
       <xs:element minOccurs="0" name="PriceTo" type="xs:double" />
+      <xs:element minOccurs="0" name="Registrations" nillable="true" type="tns:ArrayOfRegistration" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
