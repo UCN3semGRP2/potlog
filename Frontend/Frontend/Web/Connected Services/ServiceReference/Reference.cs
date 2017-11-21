@@ -556,6 +556,12 @@ namespace Web.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
         System.Threading.Tasks.Task<Web.ServiceReference.Event> FindEventByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
+        Web.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
+        System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -615,6 +621,14 @@ namespace Web.ServiceReference {
         
         public System.Threading.Tasks.Task<Web.ServiceReference.Event> FindEventByIdAsync(int id) {
             return base.Channel.FindEventByIdAsync(id);
+        }
+        
+        public Web.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId) {
+            return base.Channel.SignUpForEvent(userEmail, eventId);
+        }
+        
+        public System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId) {
+            return base.Channel.SignUpForEventAsync(userEmail, eventId);
         }
     }
 }

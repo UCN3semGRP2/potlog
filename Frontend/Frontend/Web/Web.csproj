@@ -204,6 +204,9 @@
     <Content Include="Connected Services\ServiceReference\Web.ServiceReference.Event.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceReference\Web.ServiceReference.Registration.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -235,6 +238,7 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\CreateSuccess.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\SignUpSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

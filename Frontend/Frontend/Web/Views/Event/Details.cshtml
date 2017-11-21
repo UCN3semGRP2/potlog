@@ -55,7 +55,7 @@
         </dt>
 
         <dd>
-            @if(Model.IsPublic == true)
+            @if (Model.IsPublic == true)
             {
                 <span>
                     Ja
@@ -95,21 +95,32 @@
         </dd>
 
     </dl>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2">
-            @Html.ActionLink("Tilbage", "Index")
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                @Html.ActionLink("Tilbage", "Index")
+            </div>
 
-        <div class="col-lg-2">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+            <div class="col-lg-2">
                 <div class="form-group">
-                    <input type="submit" value="Tilmeld" class="btn btn-default" />
+                    @using (Html.BeginForm("SignUp", "Event", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Title)
+                        @Html.HiddenFor(model => model.Location)
+                        @Html.HiddenFor(model => model.Date)
+                        @Html.HiddenFor(model => model.Time)
+                        @Html.HiddenFor(model => model.NumOfParticipants)
+                        @Html.HiddenFor(model => model.IsPublic)
+                        @Html.HiddenFor(model => model.Description)
+                        @Html.HiddenFor(model => model.PriceFrom)
+                        @Html.HiddenFor(model => model.PriceTo)
+                        <input type="submit" value="Tilmeld" class="btn btn-default" />
+                    }
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>

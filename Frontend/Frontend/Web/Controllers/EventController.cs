@@ -72,9 +72,20 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SignUp(DetailsEventViewModel model)
         {
-            
+            //TODO Session
+            var reg = service.SignUpForEvent("TODO", model.Id);
+            if (reg == null)
+            {
+                // TODO Help user here
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+            }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("SignUpSuccess");
+        }
+
+        public ActionResult SignUpSuccess()
+        {
+            return View();
         }
     }
 }
