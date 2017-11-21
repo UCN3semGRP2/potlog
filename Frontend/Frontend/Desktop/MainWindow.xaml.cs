@@ -20,6 +20,7 @@ namespace Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        ServiceReference.IService service = new ServiceReference.ServiceClient();
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Desktop
         }
          private void Load_Window(object sender, RoutedEventArgs e)
         {
-           MainFrame.NavigationService.Navigate(new UserLogIn());
+           MainFrame.NavigationService.Navigate(new EventDetails(service.FindEventById(1)));
         }
          
     }

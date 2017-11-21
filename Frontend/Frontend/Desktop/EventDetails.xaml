@@ -17,7 +17,7 @@
         <Label x:Name="lblEventDate" Content="" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="90"/>
         <Label Content="Tid" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="90"/>
         <Label x:Name="lblEventTime" Content="" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Width="90"/>
-        <RadioButton x:Name="Offentlig" Content="Offentlig" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,262,0,0"/>
+        <RadioButton x:Name="rbEventPublic" Content="Offentlig" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,262,0,0"/>
         <RadioButton x:Name="rbEventPrivate" Content="Privat" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="tbEventDescription" HorizontalAlignment="Left" Margin="201,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="189" Width="236"/>
         <Label Content="Beskrivelse" HorizontalAlignment="Left" Margin="285,10,0,0" VerticalAlignment="Top"/>

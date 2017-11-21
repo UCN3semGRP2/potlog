@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Desktop.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,35 @@ namespace Desktop
     /// </summary>
     public partial class EventDetails : Page
     {
-        public EventDetails()
+        ServiceReference.IService service = new ServiceReference.ServiceClient();
+        public EventDetails(Event e)
         {
             InitializeComponent();
+            rbEventPublic.IsEnabled = false;
+            rbEventPrivate.IsEnabled = false;
+
+            if (true)
+            {
+                btnEventEdit.IsEnabled = false;
+            }
+
+            populateInfo(e);
+        }
+
+        private void populateInfo(Event e)
+        {
+            lblEventName.Content = e.Title;
+            lblEventLocation.Content = e.Location;
+            lblEventDate.Content = e.Datetime.Date.ToString("dd/MM/yyyy");
+            lblEventTime.Content = e.Datetime.ToString("HH:mm");
+            rbEventPrivate.IsChecked = !e.IsPublic;
+            rbEventPublic.IsChecked = e.IsPublic;
+            tbEventDescription.Text = e.Description;
+
+            var registrations = e.Registrations == null ? 0 : e.Registrations.Length;
+            lblEventNumOfParticipants.Content = string.Format("{0} ud af {1} deltagere", registrations, e.NumOfParticipants);
+
         }
     }
 }
+
