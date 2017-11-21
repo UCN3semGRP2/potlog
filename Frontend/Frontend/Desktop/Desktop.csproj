@@ -78,6 +78,15 @@
     <Compile Include="CreateEvent.xaml.cs">
       <DependentUpon>CreateEvent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventDetails.xaml.cs">
+      <DependentUpon>EventDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCase1.xaml.cs">
+      <DependentUpon>ShowCase1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCaseWindow.xaml.cs">
+      <DependentUpon>ShowCaseWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserLogIn.xaml.cs">
       <DependentUpon>UserLogIn.xaml</DependentUpon>
     </Compile>
@@ -86,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +122,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ShowCase1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowCaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserLogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +154,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.Event.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.Registration.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.User.datasource">

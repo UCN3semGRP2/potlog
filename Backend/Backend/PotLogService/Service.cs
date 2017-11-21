@@ -11,27 +11,36 @@ namespace PotLogService
 {
     public class Service : IService
     {
-        UserCtrl uCtrl = new UserCtrl();
-        EventCtrl eCtrl = new EventCtrl();
+        private UnitOfWork UoW = new UnitOfWork();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
-            return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+            return UoW.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
         }
 
-        public void CreateUser(string Firstname, string Lastname, string Email, string Password)
+        public void CreateUser(string firstName, string lastName, string email, string password)
         {
-            uCtrl.CreateUser(Firstname, Lastname, Email, Password);
-        }
-
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
+            UoW.CreateUser(firstName, lastName, email, password);
         }
 
         public User LogIn(string email, string clearTextPw)
         {
-            return uCtrl.LogIn(email, clearTextPw);
+            return UoW.LogIn(email, clearTextPw);
+        }
+
+        public Registration SignUpForEvent(string userEmail, int eventId)
+        {
+            return UoW.SignUpForEvent(userEmail, eventId);
+        }
+
+        public Event FindEventById(int id)
+        {
+            return UoW.FindEventById(id);
+        }
+
+        public bool IsRegisteredToEvent(User u, Event e)
+        {
+            return UoW.IsRegisteredToEvent(u, e);
         }
     }
 }

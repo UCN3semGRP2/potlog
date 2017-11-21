@@ -12,9 +12,6 @@ namespace PotLogService
     public interface IService
     {
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
         void CreateUser(string Firstname, string Lastname, string Email, string Password);
 
         [OperationContract]
@@ -22,5 +19,14 @@ namespace PotLogService
 
         [OperationContract]
         Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic);
+
+        [OperationContract]
+        Event FindEventById(int id);
+
+        [OperationContract]
+        Registration SignUpForEvent(string userEmail, int eventId);
+
+        [OperationContract]
+        bool IsRegisteredToEvent(User u, Event e);
     }
 }

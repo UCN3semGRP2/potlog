@@ -14,6 +14,8 @@ namespace DAL
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
     }
 }

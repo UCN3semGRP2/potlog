@@ -43,5 +43,12 @@ namespace Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            
+            return View();
+        }
     }
 }

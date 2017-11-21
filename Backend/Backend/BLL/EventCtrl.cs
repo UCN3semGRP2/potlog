@@ -10,9 +10,10 @@ namespace BLL
 {
     public class EventCtrl
     {
-        private EventDB db = new EventDB();
+        private RegistrationCtrl rCtrl = new RegistrationCtrl();
+        private UserCtrl uCtrl = new UserCtrl();
 
-        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        public Event CreateEvent(DALContext ctx, string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
             var e = new Event
             {
@@ -25,7 +26,21 @@ namespace BLL
                 Datetime = datetime,
                 IsPublic = isPublic
             };
-            return db.Create(e);
+            var finalEvent = new EventDB(ctx).Create(e);
+            return finalEvent;
+        }
+
+        public Event FindById(DALContext ctx, int eventId)
+        {
+            return new EventDB(ctx).FindByID(eventId);
+        }
+
+        public Registration RegisterToEvent(DALContext ctx, Event e, User user)
+        {
+            Registration reg = rCtrl.CreateRegistration(ctx, user, e);
+            e.Registrations.Add(reg);
+            uCtrl.AddRegistration(ctx, user, reg);
+            return reg;
         }
     }
 }

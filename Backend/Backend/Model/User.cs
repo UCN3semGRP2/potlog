@@ -21,5 +21,6 @@ namespace Model
         public string Salt { get; set; }
 
         public Session LogInSession { get; set; }
+        public List<Registration> Registrations { get; set; }
     }
 }
