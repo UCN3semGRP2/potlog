@@ -51,6 +51,11 @@ namespace BLL
             }
         }
 
+        public bool IsRegisteredToEvent(DALContext ctx, User u, Event e)
+        {
+            return u.Registrations.Select(reg => reg.Event).Contains(e);
+        }
+
         public void AddRegistration(DALContext ctx, User user, Registration reg)
         {
             user.Registrations.Add(reg);

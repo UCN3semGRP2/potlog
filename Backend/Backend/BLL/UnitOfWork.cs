@@ -35,6 +35,19 @@ namespace BLL
             }
         }
 
+        public bool IsRegisteredToEvent(User u, Event e)
+        {
+            using (var ctx = new DALContext())
+            {
+                if (!uCtrl.IsValidated(u))
+                {
+                    return false;
+                }
+
+                return uCtrl.IsRegisteredToEvent(ctx, u, e);
+            }
+        }
+
         //public void SignUpForEvent(Guid sessionId)
         //{
         //    using (var ctx = new DALContext())
@@ -73,6 +86,15 @@ namespace BLL
 
                 ctx.SaveChanges();
                 return u;
+            }
+        }
+
+        public Event FindEventById(int id)
+        {
+            using (var ctx = new DALContext())
+            {
+                var e = eCtrl.FindById(ctx, id);
+                return e;
             }
         }
     }
