@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\CreateViewModel.cs" />
+    <Compile Include="Models\DetailsEventViewModel.cs" />
     <Compile Include="Models\UserLogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -203,6 +204,9 @@
     <Content Include="Connected Services\ServiceReference\Web.ServiceReference.Event.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceReference\Web.ServiceReference.Registration.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -233,6 +237,8 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\CreateSuccess.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\SignUpSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
