@@ -30,9 +30,7 @@ namespace Desktop
         }
          private void Load_Window(object sender, RoutedEventArgs e)
         {
-            var evnt = service.FindEventById(1);
-            var u = new User();
-           MainFrame.NavigationService.Navigate(new EventDetails(evnt,u));
+           MainFrame.NavigationService.Navigate(new UserLogIn());
         }
          
     }

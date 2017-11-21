@@ -51,7 +51,7 @@ namespace BLL
             }
         }
 
-        internal bool IsRegisteredToEvent(DALContext ctx, User u, Event e)
+        public bool IsRegisteredToEvent(DALContext ctx, User u, Event e)
         {
             return u.Registrations.Select(reg => reg.Event).Contains(e);
         }
