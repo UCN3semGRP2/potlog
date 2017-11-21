@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
@@ -45,10 +46,35 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var e = service.FindEventById(id.Value);
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                Id = e.Id,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                Title = e.Title
+            };
+            return View(ev);
+        }
+
+        [HttpPost]
+        public ActionResult SignUp(DetailsEventViewModel model)
         {
             
-            return View();
+
+            return RedirectToAction("Index");
         }
     }
 }

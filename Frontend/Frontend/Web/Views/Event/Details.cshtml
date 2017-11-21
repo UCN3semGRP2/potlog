@@ -1,0 +1,115 @@
+﻿@model Web.Models.DetailsEventViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaljer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time.Hours):@Html.DisplayFor(model => model.Time.Minutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfParticipants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumOfParticipants)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublic)
+        </dt>
+
+        <dd>
+            @if(Model.IsPublic == true)
+            {
+                <span>
+                    Ja
+                </span>
+            }
+            else
+            {
+                <span>
+                    Nej
+                </span>
+            }
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceTo)
+        </dd>
+
+    </dl>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            @Html.ActionLink("Tilbage", "Index")
+        </div>
+
+        <div class="col-lg-2">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <input type="submit" value="Tilmeld" class="btn btn-default" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
