@@ -25,6 +25,7 @@
         <Label x:Name="lblEventNumOfParticipants" Content="" HorizontalAlignment="Left" Margin="201,262,0,0" VerticalAlignment="Top" Width="134"/>
         <Button x:Name="btnEventEdit" Content="Rediger" HorizontalAlignment="Left" Margin="420,281,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnEventSeeParticipants" Content="Se deltagere" HorizontalAlignment="Left" Margin="340,281,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnEventRegister" Content="Tilmeld" HorizontalAlignment="Left" Margin="420,250,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Page>

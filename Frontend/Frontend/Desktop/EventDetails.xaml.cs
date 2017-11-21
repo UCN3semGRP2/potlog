@@ -22,15 +22,31 @@ namespace Desktop
     public partial class EventDetails : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
-        public EventDetails(Event e)
+
+        private bool isRegisteredToEvent = false;
+        private bool isAdmin = false;
+
+        public EventDetails(Event e, User u)
         {
             InitializeComponent();
             rbEventPublic.IsEnabled = false;
             rbEventPrivate.IsEnabled = false;
 
-            if (true)
+            btnEventEdit.IsEnabled = false;
+            isRegisteredToEvent = service.IsRegisteredToEvent(u, e);
+
+            if (isAdmin && isRegisteredToEvent)
             {
-                btnEventEdit.IsEnabled = false;
+                btnEventEdit.IsEnabled = true;
+            }
+
+            if (isRegisteredToEvent)
+            {
+                btnEventRegister.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnEventSeeParticipants.Visibility = Visibility.Hidden;
             }
 
             populateInfo(e);
