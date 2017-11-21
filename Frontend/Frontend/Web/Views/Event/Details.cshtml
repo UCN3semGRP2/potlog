@@ -1,0 +1,126 @@
+﻿@model Web.Models.DetailsEventViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaljer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time.Hours):@Html.DisplayFor(model => model.Time.Minutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfParticipants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumOfParticipants)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublic)
+        </dt>
+
+        <dd>
+            @if (Model.IsPublic == true)
+            {
+                <span>
+                    Ja
+                </span>
+            }
+            else
+            {
+                <span>
+                    Nej
+                </span>
+            }
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceTo)
+        </dd>
+
+    </dl>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                @Html.ActionLink("Tilbage", "Index")
+            </div>
+
+            <div class="col-lg-2">
+                <div class="form-group">
+                    @using (Html.BeginForm("SignUp", "Event", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Title)
+                        @Html.HiddenFor(model => model.Location)
+                        @Html.HiddenFor(model => model.Date)
+                        @Html.HiddenFor(model => model.Time)
+                        @Html.HiddenFor(model => model.NumOfParticipants)
+                        @Html.HiddenFor(model => model.IsPublic)
+                        @Html.HiddenFor(model => model.Description)
+                        @Html.HiddenFor(model => model.PriceFrom)
+                        @Html.HiddenFor(model => model.PriceTo)
+                        <input type="submit" value="Tilmeld" class="btn btn-default" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
