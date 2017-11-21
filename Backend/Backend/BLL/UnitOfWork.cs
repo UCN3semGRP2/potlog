@@ -75,5 +75,14 @@ namespace BLL
                 return u;
             }
         }
+
+        public Event FindEventById(int id)
+        {
+            using (var ctx = new DALContext())
+            {
+                var e = eCtrl.FindById(ctx, id);
+                return e;
+            }
+        }
     }
 }

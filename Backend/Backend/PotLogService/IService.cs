@@ -19,5 +19,8 @@ namespace PotLogService
 
         [OperationContract]
         Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic);
+
+        [OperationContract]
+        Event FindEventById(int id);
     }
 }
