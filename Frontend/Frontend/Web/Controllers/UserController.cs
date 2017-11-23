@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Web.Models;
+using Web.ServiceReference;
 
 namespace Web.Controllers
 {
@@ -32,7 +33,7 @@ namespace Web.Controllers
                 return View();
             }
 
-            var user = service.LogIn(model.Email, model.Password);
+            User user = service.LogIn(model.Email, model.Password);
             if (user == null)
             {
                 var errMsg = "Email eller password er ikke korrekt";
@@ -41,7 +42,7 @@ namespace Web.Controllers
             }
 
             Session["LoggedIn"] = true;
-            Session["UserEmail"] = user.Email; 
+            Session["User"] = user; 
             return RedirectToAction("Index"); // TODO: redirect to the correct view
         }
 

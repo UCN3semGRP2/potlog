@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Web.ServiceReference;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,6 +24,16 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    @if (Session["LoggedIn"] == null)
+                    {
+                        <li>@Html.ActionLink("Log Ind", "LogIn", "User")</li>
+                    }
+                    else
+                    {
+                        <li class="navbar-text">Velkommen <span>@(((User)Session["User"]).Firstname)</span></li>
+                    }
                 </ul>
             </div>
         </div>
