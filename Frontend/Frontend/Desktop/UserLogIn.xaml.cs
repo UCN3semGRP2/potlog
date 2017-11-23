@@ -38,7 +38,7 @@ namespace Desktop
                 MessageBox.Show("Email or Password is incorrect");
                 return;
             }
-
+            ((MainWindow)Application.Current.MainWindow).loggedIn = user;
             var nextPage = new Page(); // TODO: use the correct page
             this.NavigationService.Navigate(nextPage, user);
         }
