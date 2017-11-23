@@ -13,7 +13,7 @@ namespace BLL
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
 
-        public Event CreateEvent(DALContext ctx, string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        public Event CreateEvent(DALContext ctx, string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
             var e = new Event
             {
@@ -24,7 +24,8 @@ namespace BLL
                 PriceTo = priceTo,
                 Location = location,
                 Datetime = datetime,
-                IsPublic = isPublic
+                IsPublic = isPublic,
+                Admin = admin
             };
             var finalEvent = new EventDB(ctx).Create(e);
             return finalEvent;

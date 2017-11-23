@@ -32,7 +32,8 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model)
         {
-            if (Session["LoggedIn"] == null)
+            var u = (User)Session["LoggedIn"];
+            if (u == null)
             {
                 return RedirectToAction("LogIn", "User");
             }
@@ -43,7 +44,7 @@ namespace Web.Controllers
 
             DateTime dt = model.Date + model.Time;
 
-            var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic);
+            var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
 
             return RedirectToAction("CreateSuccess");
         }

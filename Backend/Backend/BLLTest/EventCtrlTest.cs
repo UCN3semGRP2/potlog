@@ -34,7 +34,7 @@ namespace BLLTest
             using (var ctx = new DALContext())
             {
                 // Act
-                Event output = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic);
+                Event output = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, null);
 
                 // Assert
                 Assert.AreEqual(e.Title, output.Title);
@@ -63,7 +63,7 @@ namespace BLLTest
                     IsPublic = true
                 };
                 var user = uCtrl.CreateUser(ctx, "piss", "pee", "tis@urin.dk" + Guid.NewGuid(), "pissurinkage");
-                Event newEvent = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic);
+                Event newEvent = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, user);
 
 
                 // Act

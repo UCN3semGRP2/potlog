@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Desktop.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,9 +22,12 @@ namespace Desktop
     public partial class CreateEvent : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
+        private User user;
+
         public CreateEvent()
         {
             InitializeComponent();
+            user = ((MainWindow)Application.Current.MainWindow).loggedIn;
         }
 
         private void btnCreateEvent_Click(object sender, RoutedEventArgs e)
@@ -50,14 +54,15 @@ namespace Desktop
                 Int32.TryParse(tbEventMaxPrice.Text, out maxPrice);
 
                 service.CreateEvent(
-                tbEventName.Text,
-                tbEventDescription.Text,
-                numOfParticipants,
-                minPrice,
-                maxPrice,
-                tbEventLocation.Text,
-                datetime,
-                isPublic
+                    tbEventName.Text,
+                    tbEventDescription.Text,
+                    numOfParticipants,
+                    minPrice,
+                    maxPrice,
+                    tbEventLocation.Text,
+                    datetime,
+                    isPublic,
+                    user
                 );
                 MessageBox.Show("Event oprettet");
             } else

@@ -23,7 +23,7 @@ namespace BLLTest
             using (var ctx = new DALContext())
             {
                 var user = new UserCtrl().CreateUser(ctx, "1", "2", "test@test.test"+Guid.NewGuid(), "1234");
-                var e = new EventCtrl().CreateEvent(ctx, "dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now, false);
+                var e = new EventCtrl().CreateEvent(ctx, "dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now, false, user);
                 ctx.SaveChanges();
 
 

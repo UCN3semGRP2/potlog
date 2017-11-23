@@ -39,6 +39,7 @@
   <xs:element name="Registration" nillable="true" type="tns:Registration" />
   <xs:complexType name="Event">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Admin" nillable="true" type="tns:User" />
       <xs:element minOccurs="0" name="Datetime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
