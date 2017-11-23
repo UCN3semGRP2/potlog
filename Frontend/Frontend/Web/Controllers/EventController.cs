@@ -21,6 +21,10 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            if (Session["LoggedIn"] == null)
+            {
+                return RedirectToAction("LogIn","User");
+            }
             return View();
         }
 

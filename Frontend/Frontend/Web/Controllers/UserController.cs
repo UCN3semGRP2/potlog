@@ -10,7 +10,6 @@ namespace Web.Controllers
 {
     public class UserController : Controller
     {
-        private const string SessionGUIDCookie = "SessionGUID";
 
         ServiceReference.IService service = new ServiceReference.ServiceClient();
         // GET: User
@@ -22,9 +21,6 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            var sesCookie = Request.Cookies[SessionGUIDCookie]; // Example of extracting the cookie
-            
-
             return View();
         }
 
@@ -44,7 +40,8 @@ namespace Web.Controllers
                 return View(model);
             }
 
-            Response.Cookies[SessionGUIDCookie].Value = user.LogInSession.GUID.ToString(); 
+            Session["LoggedIn"] = true;
+            Session["UserEmail"] = user.Email; 
             return RedirectToAction("Index"); // TODO: redirect to the correct view
         }
 
@@ -64,8 +61,7 @@ namespace Web.Controllers
 
             service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
 
-            //TODO
-            return RedirectToAction("TODO");
+            return RedirectToAction("LogIn");
         }
     }
 }
