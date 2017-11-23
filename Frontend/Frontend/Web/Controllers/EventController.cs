@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
+using Web.ServiceReference;
 
 namespace Web.Controllers
 {
@@ -31,6 +32,10 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
             if (!ModelState.IsValid)
             {
                 return View();
@@ -52,6 +57,10 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Details(int? id)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -76,8 +85,12 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SignUp(DetailsEventViewModel model)
         {
-            //TODO Session
-            var reg = service.SignUpForEvent("TODO", model.Id);
+            User u = (User)Session["User"];
+            if (u == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+            var reg = service.SignUpForEvent(u.Email, model.Id);
             if (reg == null)
             {
                 // TODO Help user here
@@ -91,5 +104,6 @@ namespace Web.Controllers
         {
             return View();
         }
+
     }
 }
