@@ -36,12 +36,16 @@ namespace BLL
             return eDB.FindByID(eventId);
         }
 
-        public Registration RegisterToEvent(DALContext ctx, Event e, User user)
+        public void RegisterToEvent(Event evnt, User user)
         {
-            Registration reg = rCtrl.CreateRegistration(ctx, user, e);
-            e.Registrations.Add(reg);
-            uCtrl.AddRegistration(user, reg);
-            return reg;
+            rCtrl.CreateRegistration(user, evnt);
+        }
+
+        public void SignUpForEvent(string userEmail, int eventId)
+        {
+                Event e = FindById(eventId);
+                User u = uCtrl.FindByEmail(userEmail);
+                RegisterToEvent(e, u);
         }
 
         public Event FindEventById(int id)

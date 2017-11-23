@@ -9,17 +9,28 @@ namespace DAL
 {
     public class RegistrationDB : ICRUD<Registration>
     {
-        private DALContext ctx;
-
-        public RegistrationDB(DALContext ctx)
-        {
-            this.ctx = ctx;
-        }
 
         public Registration Create(Registration entity)
         {
-            var reg = ctx.Registrations.Add(entity);
-            return reg;
+            Registration reg = null;
+            using (DALContext ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        reg = ctx.Registrations.Add(entity);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return reg;
+                    }
+                    catch (Exception)
+                    {
+                        ctxTransaction.Rollback();
+                        return reg;
+                    }
+                }
+            }
         }
 
         public void Delete(Registration entity)

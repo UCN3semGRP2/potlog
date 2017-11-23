@@ -10,15 +10,17 @@ namespace BLL
 {
     public class RegistrationCtrl
     {
-        public Registration CreateRegistration(DALContext ctx, User user, Event eve)
+        private RegistrationDB rDB = new RegistrationDB();
+
+        public Registration CreateRegistration(User user, Event evnt)
         {
             var reg = new Registration
             {
                 DateOfCreation = DateTime.Now,
-                Event = eve,
+                Event = evnt,
                 User = user
             };
-            var finalReg = new RegistrationDB(ctx).Create(reg);
+            var finalReg = rDB.Create(reg);
             return finalReg;
         }
     }
