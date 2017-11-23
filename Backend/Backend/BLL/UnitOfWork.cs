@@ -28,7 +28,7 @@ namespace BLL
             using (var ctx = new DALContext())
             {
                 Event e = eCtrl.FindById(ctx, eventId);
-                User u = uCtrl.FindByEmail(ctx, userEmail);
+                User u = uCtrl.FindByEmail(userEmail);
                 var reg = new EventCtrl().RegisterToEvent(ctx, e, u);
                 ctx.SaveChanges();
                 return reg;
@@ -44,7 +44,7 @@ namespace BLL
                     return false;
                 }
 
-                return uCtrl.IsRegisteredToEvent(ctx, u, e);
+                return uCtrl.IsRegisteredToEvent(u, e);
             }
         }
 
@@ -66,17 +66,6 @@ namespace BLL
 
                 ctx.SaveChanges();
                 return e;
-            }
-        }
-
-        public User LogIn(string email, string clearTextPw)
-        {
-            using (var ctx = new DALContext())
-            {
-                var u = uCtrl.LogIn(ctx, email, clearTextPw);
-
-                ctx.SaveChanges();
-                return u;
             }
         }
 

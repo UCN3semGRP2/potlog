@@ -26,7 +26,7 @@ namespace PotLogService
 
         public User LogIn(string email, string clearTextPw)
         {
-            return UoW.LogIn(email, clearTextPw);
+            return uCtrl.LogIn(email, clearTextPw);
         }
 
         public Registration SignUpForEvent(string userEmail, int eventId)

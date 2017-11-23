@@ -30,15 +30,15 @@ namespace BLL
             return enduser;
         }
 
-        public User FindByEmail(DALContext ctx, string userEmail)
+        public User FindByEmail(string userEmail)
         {
-            return new UserDB(ctx).FindByEmail(userEmail);
+           return uDB.FindByEmail(userEmail);
         }
 
 
-        public User LogIn(DALContext ctx, string email, string clearTextPw)
+        public User LogIn(string email, string clearTextPw)
         {
-            User u = this.FindByEmail(ctx, email);
+            User u = this.FindByEmail(email);
             if (u == null) return null;
 
             if (ValidatePassword(u, clearTextPw))
@@ -51,15 +51,15 @@ namespace BLL
             }
         }
 
-        public bool IsRegisteredToEvent(DALContext ctx, User u, Event e)
+        public bool IsRegisteredToEvent(User u, Event e)
         {
             return u.Registrations.Select(reg => reg.Event).Contains(e);
         }
 
-        public void AddRegistration(DALContext ctx, User user, Registration reg)
+        public void AddRegistration(User user, Registration reg)
         {
             user.Registrations.Add(reg);
-            new UserDB(ctx).Update(user);
+            uDB.Update(user);
         }
 
         public bool ValidatePassword(User u, string clearTextPw)

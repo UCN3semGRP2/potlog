@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Transactions;
 using Model;
 
 namespace DAL
@@ -15,7 +14,7 @@ namespace DAL
 
         public UserDB()
         {
-           
+
         }
 
         public User Create(User user)
@@ -38,7 +37,7 @@ namespace DAL
                         ctxTransaction.Rollback();
                         return u;
                     }
-                    
+
                 }
             }
         }
@@ -55,7 +54,10 @@ namespace DAL
 
         public User FindByEmail(string email)
         {
-            return ctx.Users.FirstOrDefault(x => x.Email == email);
+            using (var ctx = new DALContext())
+            {
+                return ctx.Users.FirstOrDefault(x => x.Email == email);
+            }
         }
 
         public User FindByID(int id)
@@ -65,8 +67,22 @@ namespace DAL
 
         public void Update(User entity)
         {
-            ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-        }
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
 
+                    try
+                    {
+                        ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+
+                        ctxTransaction.Rollback();
+                    }
+            }
+        }
     }
 }
