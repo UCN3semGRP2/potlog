@@ -350,6 +350,9 @@ namespace Desktop.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.User AdminField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DatetimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -386,6 +389,19 @@ namespace Desktop.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.User Admin {
+            get {
+                return this.AdminField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AdminField, value) != true)) {
+                    this.AdminField = value;
+                    this.RaisePropertyChanged("Admin");
+                }
             }
         }
         
@@ -546,10 +562,10 @@ namespace Desktop.ServiceReference {
         System.Threading.Tasks.Task<Desktop.ServiceReference.User> LogInAsync(string email, string clearTextPw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
-        Desktop.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        Desktop.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Desktop.ServiceReference.User admin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
-        System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Desktop.ServiceReference.User admin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
         Desktop.ServiceReference.Event FindEventById(int id);
@@ -613,12 +629,12 @@ namespace Desktop.ServiceReference {
             return base.Channel.LogInAsync(email, clearTextPw);
         }
         
-        public Desktop.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
-            return base.Channel.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        public Desktop.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Desktop.ServiceReference.User admin) {
+            return base.Channel.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
         }
         
-        public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
-            return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Desktop.ServiceReference.User admin) {
+            return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
         }
         
         public Desktop.ServiceReference.Event FindEventById(int id) {

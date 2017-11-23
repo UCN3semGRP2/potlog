@@ -350,6 +350,9 @@ namespace Web.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.User AdminField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DatetimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -386,6 +389,19 @@ namespace Web.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.User Admin {
+            get {
+                return this.AdminField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AdminField, value) != true)) {
+                    this.AdminField = value;
+                    this.RaisePropertyChanged("Admin");
+                }
             }
         }
         
@@ -546,10 +562,10 @@ namespace Web.ServiceReference {
         System.Threading.Tasks.Task<Web.ServiceReference.User> LogInAsync(string email, string clearTextPw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
-        Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Web.ServiceReference.User admin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
-        System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic);
+        System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Web.ServiceReference.User admin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindEventById", ReplyAction="http://tempuri.org/IService/FindEventByIdResponse")]
         Web.ServiceReference.Event FindEventById(int id);
@@ -562,6 +578,12 @@ namespace Web.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
         System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
+        bool IsRegisteredToEvent(Web.ServiceReference.User u, Web.ServiceReference.Event e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
+        System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Web.ServiceReference.User u, Web.ServiceReference.Event e);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -607,12 +629,12 @@ namespace Web.ServiceReference {
             return base.Channel.LogInAsync(email, clearTextPw);
         }
         
-        public Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
-            return base.Channel.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        public Web.ServiceReference.Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Web.ServiceReference.User admin) {
+            return base.Channel.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
         }
         
-        public System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic) {
-            return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+        public System.Threading.Tasks.Task<Web.ServiceReference.Event> CreateEventAsync(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, System.DateTime datetime, bool isPublic, Web.ServiceReference.User admin) {
+            return base.Channel.CreateEventAsync(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
         }
         
         public Web.ServiceReference.Event FindEventById(int id) {
@@ -629,6 +651,14 @@ namespace Web.ServiceReference {
         
         public System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId) {
             return base.Channel.SignUpForEventAsync(userEmail, eventId);
+        }
+        
+        public bool IsRegisteredToEvent(Web.ServiceReference.User u, Web.ServiceReference.Event e) {
+            return base.Channel.IsRegisteredToEvent(u, e);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Web.ServiceReference.User u, Web.ServiceReference.Event e) {
+            return base.Channel.IsRegisteredToEventAsync(u, e);
         }
     }
 }
