@@ -22,7 +22,7 @@ namespace BLLTest
                 UserCtrl uCtrl = new UserCtrl();
                 var user = uCtrl.CreateUser(ctx, "Jesper", "Jørgensen", "e@w.dk" + Guid.NewGuid(), "1234");
                 EventCtrl eCtrl = new EventCtrl();
-                var eve = eCtrl.CreateEvent(ctx, "Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now, false);
+                var eve = eCtrl.CreateEvent(ctx, "Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now, false, user);
                 RegistrationCtrl rCtrl = new RegistrationCtrl();
 
                 // Act
@@ -33,6 +33,8 @@ namespace BLLTest
                 bool eventHasReg = eve.Registrations.Contains(reg);
                 Assert.IsTrue(userHasReg);
                 Assert.IsTrue(eventHasReg);
+
+                Assert.IsTrue(eve.Admin == user);
             }
         }
     }

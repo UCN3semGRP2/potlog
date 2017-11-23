@@ -18,5 +18,6 @@ namespace Model
         public DateTime Datetime { get; set; }
         public bool IsPublic { get; set; }
         public List<Registration> Registrations { get; set; }
+        public User Admin { get; set; }
     }
 }

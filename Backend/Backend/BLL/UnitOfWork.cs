@@ -67,11 +67,11 @@ namespace BLL
             }
         }
 
-        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
             using (var ctx = new DALContext())
             {
-                Event e = eCtrl.CreateEvent(ctx, title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+                Event e = eCtrl.CreateEvent(ctx, title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
 
                 ctx.SaveChanges();
                 return e;

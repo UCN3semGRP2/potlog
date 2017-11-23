@@ -13,9 +13,9 @@ namespace PotLogService
     {
         private UnitOfWork UoW = new UnitOfWork();
 
-        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
+        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
-            return UoW.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+            return UoW.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
         }
 
         public void CreateUser(string firstName, string lastName, string email, string password)
