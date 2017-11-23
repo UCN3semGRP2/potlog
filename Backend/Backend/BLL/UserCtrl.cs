@@ -11,8 +11,8 @@ namespace BLL
     public class UserCtrl
     {
         private SessionCtrl SesCtrl = new SessionCtrl();
-
-        public User CreateUser(DALContext ctx, string Firstname, string Lastname, string Email, string Password)
+        private UserDB uDB = new UserDB();
+        public User CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
 
             string salt = HashingHelper.GenerateSalt();
@@ -26,7 +26,7 @@ namespace BLL
                 Password = hashedPassword,
                 Salt = salt
             };
-            var enduser = new UserDB(ctx).Create(user);
+            var enduser = uDB.Create(user);
             return enduser;
         }
 

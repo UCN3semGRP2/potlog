@@ -58,15 +58,6 @@ namespace BLL
         //    }
         //}
 
-        public void CreateUser(string firstName, string lastName, string email, string password)
-        {
-            using (var ctx = new DALContext())
-            {
-                uCtrl.CreateUser(ctx, firstName, lastName, email, password);
-                ctx.SaveChanges();
-            }
-        }
-
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
             using (var ctx = new DALContext())

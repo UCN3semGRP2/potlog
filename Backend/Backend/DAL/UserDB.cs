@@ -4,23 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Transactions;
 using Model;
 
 namespace DAL
 {
     public class UserDB : IUserDB
     {
-        private DALContext ctx;
+        //private DALContext ctx = new DALContext();
 
-        public UserDB(DALContext ctx)
+        public UserDB()
         {
-            this.ctx = ctx;
+           
         }
 
         public User Create(User user)
         {
-                var u = ctx.Users.Add(user);
-                return u;
+            User u = null;
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        u = ctx.Users.Add(user);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return u;
+                    }
+                    catch (Exception)
+                    {
+
+                        ctxTransaction.Rollback();
+                        return u;
+                    }
+                    
+                }
+            }
         }
 
         public void Delete(User entity)
