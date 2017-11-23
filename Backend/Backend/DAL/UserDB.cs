@@ -8,7 +8,7 @@ using Model;
 
 namespace DAL
 {
-    public class UserDB : ICRUD<User>
+    public class UserDB : IUserDB
     {
         private DALContext ctx;
 
