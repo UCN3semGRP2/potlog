@@ -54,6 +54,7 @@
     <Compile Include="ICRUD.cs" />
     <Compile Include="DALContext.cs" />
     <Compile Include="EventDB.cs" />
+    <Compile Include="IEventDB.cs" />
     <Compile Include="IUserDB.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

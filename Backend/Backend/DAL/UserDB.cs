@@ -10,13 +10,6 @@ namespace DAL
 {
     public class UserDB : IUserDB
     {
-        //private DALContext ctx = new DALContext();
-
-        public UserDB()
-        {
-
-        }
-
         public User Create(User user)
         {
             User u = null;

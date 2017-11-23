@@ -13,10 +13,11 @@ namespace PotLogService
     {
         private UnitOfWork UoW = new UnitOfWork();
         private UserCtrl uCtrl = new UserCtrl();
+        private EventCtrl eCtrl = new EventCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
-            return UoW.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
+            return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
         }
 
         public void CreateUser(string firstName, string lastName, string email, string password)
@@ -36,7 +37,7 @@ namespace PotLogService
 
         public Event FindEventById(int id)
         {
-            return UoW.FindEventById(id);
+            return eCtrl.FindEventById(id);
         }
 
         public bool IsRegisteredToEvent(User u, Event e)

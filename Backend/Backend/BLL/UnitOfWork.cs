@@ -27,9 +27,9 @@ namespace BLL
         {
             using (var ctx = new DALContext())
             {
-                Event e = eCtrl.FindById(ctx, eventId);
+                Event e = eCtrl.FindById(eventId);
                 User u = uCtrl.FindByEmail(userEmail);
-                var reg = new EventCtrl().RegisterToEvent(ctx, e, u);
+                var reg = new EventCtrl().RegisterToEvent(e, u);
                 ctx.SaveChanges();
                 return reg;
             }
@@ -58,24 +58,6 @@ namespace BLL
         //    }
         //}
 
-        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
-        {
-            using (var ctx = new DALContext())
-            {
-                Event e = eCtrl.CreateEvent(ctx, title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic);
-
-                ctx.SaveChanges();
-                return e;
-            }
-        }
-
-        public Event FindEventById(int id)
-        {
-            using (var ctx = new DALContext())
-            {
-                var e = eCtrl.FindById(ctx, id);
-                return e;
-            }
-        }
+  
     }
 }

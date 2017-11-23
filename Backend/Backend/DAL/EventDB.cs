@@ -7,21 +7,32 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class EventDB : ICRUD<Event>
+    public class EventDB : IEventDB
     {
-        private DALContext ctx;
-
-        public EventDB(DALContext ctx)
-        {
-            this.ctx = ctx;
-        }
-
         public Event Create(Event entity)
         {
-            var e = ctx.Events.Add(entity);
-            return e;
-        }
+            Event e = null;
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        e = ctx.Events.Add(entity);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return e;
+                    }
+                    catch (Exception)
+                    {
 
+                        ctxTransaction.Rollback();
+                        return e;
+
+                    }
+                }
+            }
+        }
 
         public void Delete(Event entity)
         {
@@ -35,7 +46,10 @@ namespace DAL
 
         public Event FindByID(int id)
         {
-            return ctx.Events.Find(id);
+            using (DALContext ctx = new DALContext())
+            {
+                return ctx.Events.Find(id);
+            }
         }
 
         public void Update(Event entity)
