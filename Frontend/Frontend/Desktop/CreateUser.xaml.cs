@@ -31,7 +31,8 @@ namespace Desktop
             if (tb_Password.Text.Equals(tb_RepeatPassword.Text) 
                 && tb_Email.Text.Length != 0 
                 && tb_Firstname.Text.Length != 0 
-                && tb_Lastname.Text.Length != 0)
+                && tb_Lastname.Text.Length != 0
+                && tb_Password.Text.Length >= 6)
             {
                 service.CreateUser(tb_Firstname.Text, tb_Lastname.Text, tb_Email.Text, tb_Password.Text);
                 MessageBox.Show("Bruger er oprettet.");
@@ -41,18 +42,18 @@ namespace Desktop
                 MessageBox.Show("Vær sød at indtaste alle de nødvendige oplysninger.");
             }
 
-            //this.NavigationService.Navigate(/*LOGIN SIDE */);
+            this.NavigationService.Navigate(new UserLogIn());
         }
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (tb_Password.Text.Length < 6)
             {
-                tb_Password.BorderBrush = System.Windows.Media.Brushes.Red;
+                tb_Password.BorderBrush = Brushes.Red;
             }
             else
             {
-                tb_Password.BorderBrush = System.Windows.Media.Brushes.Black;
+                tb_Password.BorderBrush = Brushes.Black;
             }
         }
 
@@ -60,11 +61,11 @@ namespace Desktop
         {
             if (tb_Password.Text.Equals(tb_RepeatPassword.Text))
             {
-                tb_RepeatPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+                tb_RepeatPassword.BorderBrush = Brushes.Red;
             }
             else
             {
-                tb_RepeatPassword.BorderBrush = System.Windows.Media.Brushes.Black;
+                tb_RepeatPassword.BorderBrush = Brushes.Black;
             }
         }
 
@@ -72,35 +73,35 @@ namespace Desktop
         {
             if (!tb_Email.Text.Contains("@"))
             {
-                tb_Email.BorderBrush = System.Windows.Media.Brushes.Red;
+                tb_Email.BorderBrush = Brushes.Red;
             }
             else
             {
-                tb_Email.BorderBrush = System.Windows.Media.Brushes.Black;
+                tb_Email.BorderBrush = Brushes.Black;
             }
         }
 
         private void tb_Firstname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Firstname.Text.Length < 6)
+            if (tb_Firstname.Text.Length < 1)
             {
-                tb_Firstname.BorderBrush = System.Windows.Media.Brushes.Red;
+                tb_Firstname.BorderBrush = Brushes.Red;
             }
             else
             {
-                tb_Firstname.BorderBrush = System.Windows.Media.Brushes.Black;
+                tb_Firstname.BorderBrush = Brushes.Black;
             }
         }
 
         private void tb_Lastname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Lastname.Text.Length < 6)
+            if (tb_Lastname.Text.Length < 1)
             {
-                tb_Lastname.BorderBrush = System.Windows.Media.Brushes.Red;
+                tb_Lastname.BorderBrush = Brushes.Red;
             }
             else
             {
-                tb_Lastname.BorderBrush = System.Windows.Media.Brushes.Black;
+                tb_Lastname.BorderBrush = Brushes.Black;
             }
         }
     }
