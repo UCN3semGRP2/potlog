@@ -22,12 +22,14 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+            Session.Clear();
             return View();
         }
 
         [HttpPost]
         public ActionResult LogIn(UserLogInViewModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View();
@@ -43,7 +45,7 @@ namespace Web.Controllers
 
             Session["LoggedIn"] = true;
             Session["User"] = user; 
-            return RedirectToAction("Index"); // TODO: redirect to the correct view
+            return RedirectToAction("SignedUpEvents", "MainPage"); 
         }
 
         [HttpGet]

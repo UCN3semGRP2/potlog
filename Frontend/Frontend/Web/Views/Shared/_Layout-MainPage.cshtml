@@ -17,13 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Potlog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Tilmeldte", "SignedUpEvents", "MainPage")</li>
+                    <li>@Html.ActionLink("Offentlige", "PublicEvents", "MainPage")</li>
+                    <li>@Html.ActionLink("Oprettede", "CreatedEvents", "MainPage")</li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     @if (Session["LoggedIn"] == null)
@@ -33,6 +32,8 @@
                     else
                     {
                         <li class="navbar-text">Velkommen <span>@(((User)Session["User"]).Firstname)</span></li>
+                        <li>@Html.ActionLink("Log Ud", "LogIn", "User")</li>
+
                         //Husk at give et link til detaljer side for brugeren
                     }
                 </ul>
