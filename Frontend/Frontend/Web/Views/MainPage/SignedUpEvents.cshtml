@@ -4,5 +4,35 @@
     Layout = "~/Views/Shared/_Layout-MainPage.cshtml";
 }
 
-<h2>SignedUpEvents</h2>
+<div class="container">
+    <div class="row">
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-offset-9 col-sm-offset-9 col-lg-offset-9">
+            <div class="form-group">
+                @using (Html.BeginForm("Details", "User", FormMethod.Get))
+                {
+
+                    <input type="button" value="Rediger Bruger Oplysninger" class="btn btn-default" />
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-9 col-sm-offset-9 col-lg-offset-9">
+            <div class="form-group">
+                @using (Html.BeginForm("Create", "Event"))
+                {
+
+                    <input type="submit" value="Opret ny begivenhed" class="btn btn-default" />
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
 

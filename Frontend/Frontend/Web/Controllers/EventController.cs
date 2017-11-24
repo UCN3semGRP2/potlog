@@ -31,9 +31,8 @@ namespace Web.Controllers
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model)
-        {
-            var u = (User)Session["LoggedIn"];
-            if (u == null)
+        {   
+            if (Session["LoggedIn"] == null)
             {
                 return RedirectToAction("LogIn", "User");
             }
@@ -41,6 +40,7 @@ namespace Web.Controllers
             {
                 return View();
             }
+            var u = (User)Session["User"];
 
             DateTime dt = model.Date + model.Time;
 
