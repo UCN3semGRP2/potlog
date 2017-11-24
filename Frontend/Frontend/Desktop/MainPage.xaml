@@ -40,7 +40,7 @@
                     <Frame Name="publicEventsFrame" Content="TODO" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="itCreatedEvents" Header="Oprretede Begivenheder">
+            <TabItem x:Name="itCreatedEvents" Header="Operretede Begivenheder">
                 <Grid Background="#FFE5E5E5">
                     <Frame Name="createdEventsFrame" Content="TODO" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
                 </Grid>

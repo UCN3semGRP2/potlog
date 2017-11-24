@@ -19,8 +19,8 @@
         <Label x:Name="lblEventLocation" Content="Sted:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,61,0,0"/>
         <TextBox x:Name="tbEventLocation" HorizontalAlignment="Left" Height="23" Margin="10,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166"/>
         <Label x:Name="lblEventTime" Content="Tid:" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbEventPublic" Content="Offentlig" HorizontalAlignment="Left" Margin="10,256,0,0.4"/>
-        <RadioButton x:Name="rbEventPrivate" Content="Privat" HorizontalAlignment="Left" Margin="10,9.6,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbEventPublic" Content="Offentlig" HorizontalAlignment="Left" Margin="10,180,0,76"/>
+        <RadioButton x:Name="rbEventPrivate" Content="Privat" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblEventDescription" Content="Beskrivelse" HorizontalAlignment="Left" Margin="245,0,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblEventNumOfParticipants" Content="Antal deltagere" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,133,0,0"/>
         <TextBox x:Name="tbEventNumOfParticipants" HorizontalAlignment="Left" Height="23" Margin="245,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -33,6 +33,7 @@
         <Label Foreground="Red" ToolTip="Beløbsgrænse for hvor lidt og hvor meget folk skal medbringe for" Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,215,0,0"/>
 
         <xctk:DateTimePicker x:Name="dtpEventDatetime" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Width="166"/>
+        <Button x:Name="btnBack" Content="Tilbage" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
 
     </Grid>
 </Page>

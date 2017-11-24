@@ -70,5 +70,10 @@ namespace Desktop
                 MessageBox.Show("Oplysninger mangler");
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
     }
 }
