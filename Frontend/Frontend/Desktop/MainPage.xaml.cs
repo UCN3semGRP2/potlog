@@ -23,7 +23,7 @@ namespace Desktop
         public MainPage()
         {
             InitializeComponent();
-            lblCurrentUserName.Content = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname + ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
+            lblCurrentUserName.Content = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname + " " + ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
