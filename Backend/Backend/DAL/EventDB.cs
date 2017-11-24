@@ -23,11 +23,11 @@ namespace DAL
                         ctxTransaction.Commit();
                         return e;
                     }
-                    catch (Exception)
+                    catch (Exception err)
                     {
 
                         ctxTransaction.Rollback();
-                        return e;
+                        throw err;
 
                     }
                 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public interface IUserDB : ICRUD<User>
+    public interface IRegistrationDB : ICRUD<Registration>
     {
-        User FindByEmail(string userEmail);
     }
 }

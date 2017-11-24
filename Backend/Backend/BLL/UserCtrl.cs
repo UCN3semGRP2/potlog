@@ -11,7 +11,7 @@ namespace BLL
     public class UserCtrl
     {
         private SessionCtrl SesCtrl = new SessionCtrl();
-        private UserDB uDB = new UserDB();
+        private IUserDB uDB = new UserDB();
         public User CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
 

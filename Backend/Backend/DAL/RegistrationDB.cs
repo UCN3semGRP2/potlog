@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class RegistrationDB : ICRUD<Registration>
+    public class RegistrationDB : IRegistrationDB
     {
 
         public Registration Create(Registration entity)
@@ -24,10 +24,10 @@ namespace DAL
                         ctxTransaction.Commit();
                         return reg;
                     }
-                    catch (Exception)
+                    catch (Exception err)
                     {
                         ctxTransaction.Rollback();
-                        return reg;
+                        throw err;
                     }
                 }
             }

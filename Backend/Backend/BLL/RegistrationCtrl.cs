@@ -10,7 +10,7 @@ namespace BLL
 {
     public class RegistrationCtrl
     {
-        private RegistrationDB rDB = new RegistrationDB();
+        private IRegistrationDB rDB = new RegistrationDB();
 
         public Registration CreateRegistration(User user, Event evnt)
         {

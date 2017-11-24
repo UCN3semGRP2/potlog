@@ -12,7 +12,7 @@ namespace BLL
     {
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
-        private EventDB eDB = new EventDB();
+        private IEventDB eDB = new EventDB();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic)
         {
@@ -36,6 +36,11 @@ namespace BLL
             return eDB.FindByID(eventId);
         }
 
+        /// <summary>
+        /// Registor to event registors the given user to the given event. 
+        /// </summary>
+        /// <param name="evnt">Note: Event is not valid after the method has been called</param>
+        /// <param name="user">Note: User is not valid after the method has been called</param>
         public void RegisterToEvent(Event evnt, User user)
         {
             rCtrl.CreateRegistration(user, evnt);
