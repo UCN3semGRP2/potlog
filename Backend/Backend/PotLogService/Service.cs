@@ -11,7 +11,6 @@ namespace PotLogService
 {
     public class Service : IService
     {
-        private UnitOfWork UoW = new UnitOfWork();
         private UserCtrl uCtrl = new UserCtrl();
         private EventCtrl eCtrl = new EventCtrl();
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
@@ -43,7 +42,8 @@ namespace PotLogService
 
         public bool IsRegisteredToEvent(User u, Event e)
         {
-            return UoW.IsRegisteredToEvent(u, e);
+
+            return uCtrl.IsRegisteredToEvent(u, e);
         }
     }
 }

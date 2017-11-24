@@ -32,7 +32,7 @@ namespace BLL
 
         public User FindByEmail(string userEmail)
         {
-           return uDB.FindByEmail(userEmail);
+            return uDB.FindByEmail(userEmail);
         }
 
 
@@ -45,7 +45,8 @@ namespace BLL
             {
                 u.LogInSession = new Session();
                 return u;
-            } else
+            }
+            else
             {
                 return null;
             }
@@ -53,7 +54,13 @@ namespace BLL
 
         public bool IsRegisteredToEvent(User u, Event e)
         {
+            if (!this.IsValidated(u))
+            {
+                return false;
+            }
+
             return u.Registrations.Select(reg => reg.Event).Contains(e);
+
         }
 
         public void AddRegistration(User user, Registration reg)
@@ -70,7 +77,7 @@ namespace BLL
         public bool IsValidated(User u1)
         {
             return SesCtrl.IsValidated(u1.LogInSession);
-            
+
         }
     }
 }
