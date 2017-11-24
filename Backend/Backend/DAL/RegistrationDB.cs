@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,16 @@ namespace DAL
             Registration reg = null;
             using (DALContext ctx = new DALContext())
             {
+                // user and event objets was created by another ctx so we need to reattach them to this ctx
+                ctx.Users.Attach(entity.User);
+                ctx.Events.Attach(entity.Event);
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
                     {
                         reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
-                        //ctxTransaction.Complete();
+                        ctxTransaction.Commit();
                         return reg;
                     }
                     catch (Exception err)

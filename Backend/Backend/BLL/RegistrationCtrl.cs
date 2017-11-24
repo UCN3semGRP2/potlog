@@ -14,6 +14,7 @@ namespace BLL
 
         public Registration CreateRegistration(User user, Event evnt)
         {
+           
             var reg = new Registration
             {
                 DateOfCreation = DateTime.Now,
