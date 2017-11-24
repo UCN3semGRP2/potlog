@@ -21,7 +21,7 @@ namespace DAL
                     {
                         reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
-                        ctxTransaction.Commit();
+                        //ctxTransaction.Complete();
                         return reg;
                     }
                     catch (Exception err)

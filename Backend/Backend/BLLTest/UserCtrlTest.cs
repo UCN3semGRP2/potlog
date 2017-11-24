@@ -13,26 +13,25 @@ namespace BLLTest
         [TestMethod]
         public void CreateUserTest()
         {
+            UserCtrl uCtrl = new UserCtrl();
+            User user = new User
+            {
+                Firstname = "Niklas",
+                Lastname = "Jørgensen",
+                Email = "n@n.dk" + Guid.NewGuid(), // To avoid creating the same user when rerunning the test
+                Password = "1234"
+            };
+
+            uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
+
             using (var ctx = new DALContext())
             {
-                UserCtrl uCtrl = new UserCtrl();
-                User user = new User
-                {
-                    Firstname = "Niklas",
-                    Lastname = "Jørgensen",
-                    Email = "n@n.dk" + Guid.NewGuid(), // To avoid creating the same user when rerunning the test
-                    Password = "1234"
-                };
-
-                uCtrl.CreateUser(ctx, user.Firstname, user.Lastname, user.Email, user.Password);
-                ctx.SaveChanges();
-
                 User foundUser = ctx.Users.Where(u => u.Email == user.Email).FirstOrDefault();
-                
-
                 Assert.IsNotNull(foundUser);
                 Assert.AreEqual(user.Firstname, foundUser.Firstname);
             }
+
+
         }
 
         private User CreateTestUser(string clearTextPW)
@@ -115,6 +114,6 @@ namespace BLLTest
 
             // Assert
             Assert.IsFalse(isValidated);
-       }
+        }
     }
 }

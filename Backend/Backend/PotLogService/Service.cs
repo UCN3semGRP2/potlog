@@ -37,7 +37,7 @@ namespace PotLogService
 
         public Event FindEventById(int id)
         {
-            return eCtrl.FindEventById(id);
+            return eCtrl.FindById(id);
         }
 
         public bool IsRegisteredToEvent(User u, Event e)

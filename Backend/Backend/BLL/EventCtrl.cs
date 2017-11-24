@@ -52,10 +52,5 @@ namespace BLL
                 User u = uCtrl.FindByEmail(userEmail);
                 RegisterToEvent(e, u);
         }
-
-        public Event FindEventById(int id)
-        {
-            return eDB.FindByID(id);
-        }
     }
 }
