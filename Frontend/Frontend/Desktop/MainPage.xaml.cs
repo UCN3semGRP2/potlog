@@ -23,21 +23,24 @@ namespace Desktop
         public MainPage()
         {
             InitializeComponent();
+            lblCurrentUserName.Content = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname + ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-
+            Page TODO = new Page();
+            this.NavigationService.Navigate(TODO);
         }
 
         private void btnCreateNewEvent_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new CreateEvent());
         }
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
-
+            ((MainWindow)Application.Current.MainWindow).loggedIn = null;
+            this.NavigationService.Navigate(new UserLogIn());
         }
     }
 }

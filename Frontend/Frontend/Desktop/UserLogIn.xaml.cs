@@ -39,8 +39,7 @@ namespace Desktop
                 return;
             }
             ((MainWindow)Application.Current.MainWindow).loggedIn = user;
-            var nextPage = new Page(); // TODO: use the correct page
-            this.NavigationService.Navigate(nextPage, user);
+            this.NavigationService.Navigate(new MainPage());
         }
 
         private void Btn_CreateUser_Click(object sender, RoutedEventArgs e)
