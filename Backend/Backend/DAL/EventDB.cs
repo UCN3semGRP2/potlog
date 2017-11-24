@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -48,7 +49,11 @@ namespace DAL
         {
             using (DALContext ctx = new DALContext())
             {
-                return ctx.Events.Find(id);
+                return ctx.Events
+                    .Include(x => x.Registrations)
+                    .Where(x => x.Id == id)
+                    .First(); //.Find(id);
+                //return ctx.Events.Where(x => x.Id == id).Intersect()
             }
         }
 

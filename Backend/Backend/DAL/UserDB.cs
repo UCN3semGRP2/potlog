@@ -49,7 +49,11 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
-                return ctx.Users.FirstOrDefault(x => x.Email == email);
+                return ctx.Users
+                    .Include(x => x.Registrations.Select(y => y.Event))
+                    .Where(x => x.Email == email)
+                    .First();
+                //return ctx.Users.FirstOrDefault(x => x.Email == email);
             }
         }
 

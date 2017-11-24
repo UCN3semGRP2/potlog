@@ -70,9 +70,10 @@ namespace BLLTest
                 var reg = user.Registrations[0];
 
                 Assert.AreEqual(reg.User, user);
-                Assert.AreEqual(reg.Event, newEvent);
+                Assert.AreEqual(reg.Event.Id, newEvent.Id);
                 Assert.IsTrue(user.Registrations.Contains(reg));
-                Assert.IsTrue(newEvent.Registrations.Contains(reg));
+                
+                Assert.IsTrue(newEvent.Registrations.Exists(r => r.Id == reg.Id));
             }
         }
 
