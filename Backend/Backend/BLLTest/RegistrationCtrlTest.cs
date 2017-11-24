@@ -16,26 +16,21 @@ namespace BLLTest
         [TestMethod]
         public void CreateRegistrationTest()
         {
-            using (var ctx = new DALContext())
-            {
-                // Arrange
-                UserCtrl uCtrl = new UserCtrl();
-                var user = uCtrl.CreateUser(ctx, "Jesper", "Jørgensen", "e@w.dk" + Guid.NewGuid(), "1234");
-                EventCtrl eCtrl = new EventCtrl();
-                var eve = eCtrl.CreateEvent(ctx, "Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now, false, user);
-                RegistrationCtrl rCtrl = new RegistrationCtrl();
+            // Arrange
+            UserCtrl uCtrl = new UserCtrl();
+            var user = uCtrl.CreateUser("Jesper", "Jørgensen", "e@w.dk" + Guid.NewGuid(), "1234");
+            EventCtrl eCtrl = new EventCtrl();
+            var eve = eCtrl.CreateEvent("Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now, false, user);
+            RegistrationCtrl rCtrl = new RegistrationCtrl();
 
-                // Act
-                var reg = rCtrl.CreateRegistration(ctx, user, eve);
+            // Act
+            var reg = rCtrl.CreateRegistration(user, eve);
 
-                //Assert
-                bool userHasReg = user.Registrations.Contains(reg);
-                bool eventHasReg = eve.Registrations.Contains(reg);
-                Assert.IsTrue(userHasReg);
-                Assert.IsTrue(eventHasReg);
-
-                Assert.IsTrue(eve.Admin == user);
-            }
+            //Assert
+            bool userHasReg = user.Registrations.Contains(reg);
+            bool eventHasReg = eve.Registrations.Contains(reg);
+            Assert.IsTrue(userHasReg);
+            Assert.IsTrue(eventHasReg);
         }
     }
 }

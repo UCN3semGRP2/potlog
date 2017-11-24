@@ -12,8 +12,9 @@ namespace BLL
     {
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
+        private IEventDB eDB = new EventDB();
 
-        public Event CreateEvent(DALContext ctx, string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
+        public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
             var e = new Event
             {
@@ -27,21 +28,30 @@ namespace BLL
                 IsPublic = isPublic,
                 Admin = admin
             };
-            var finalEvent = new EventDB(ctx).Create(e);
+            var finalEvent = eDB.Create(e);
             return finalEvent;
         }
 
-        public Event FindById(DALContext ctx, int eventId)
+        public Event FindById(int eventId)
         {
-            return new EventDB(ctx).FindByID(eventId);
+            return eDB.FindByID(eventId);
         }
 
-        public Registration RegisterToEvent(DALContext ctx, Event e, User user)
+        /// <summary>
+        /// Registor to event registors the given user to the given event. 
+        /// </summary>
+        /// <param name="evnt">Note: Event is not valid after the method has been called</param>
+        /// <param name="user">Note: User is not valid after the method has been called</param>
+        public void RegisterToEvent(Event evnt, User user)
         {
-            Registration reg = rCtrl.CreateRegistration(ctx, user, e);
-            e.Registrations.Add(reg);
-            uCtrl.AddRegistration(ctx, user, reg);
-            return reg;
+            rCtrl.CreateRegistration(user, evnt);
+        }
+
+        public void SignUpForEvent(string userEmail, int eventId)
+        {
+                Event e = FindById(eventId);
+                User u = uCtrl.FindByEmail(userEmail);
+                RegisterToEvent(e, u);
         }
     }
 }

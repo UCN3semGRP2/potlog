@@ -1,25 +1,40 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class RegistrationDB : ICRUD<Registration>
+    public class RegistrationDB : IRegistrationDB
     {
-        private DALContext ctx;
-
-        public RegistrationDB(DALContext ctx)
-        {
-            this.ctx = ctx;
-        }
 
         public Registration Create(Registration entity)
         {
-            var reg = ctx.Registrations.Add(entity);
-            return reg;
+            Registration reg = null;
+            using (DALContext ctx = new DALContext())
+            {
+                // user and event objets was created by another ctx so we need to reattach them to this ctx
+                ctx.Users.Attach(entity.User);
+                ctx.Events.Attach(entity.Event);
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        reg = ctx.Registrations.Add(entity);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return reg;
+                    }
+                    catch (Exception err)
+                    {
+                        ctxTransaction.Rollback();
+                        throw err;
+                    }
+                }
+            }
         }
 
         public void Delete(Registration entity)

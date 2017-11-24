@@ -8,19 +8,31 @@ using Model;
 
 namespace DAL
 {
-    public class UserDB : ICRUD<User>
+    public class UserDB : IUserDB
     {
-        private DALContext ctx;
-
-        public UserDB(DALContext ctx)
-        {
-            this.ctx = ctx;
-        }
-
         public User Create(User user)
         {
-                var u = ctx.Users.Add(user);
-                return u;
+            User u = null;
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        u = ctx.Users.Add(user);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return u;
+                    }
+                    catch (Exception err)
+                    {
+
+                        ctxTransaction.Rollback();
+                        throw err;
+                    }
+
+                }
+            }
         }
 
         public void Delete(User entity)
@@ -35,7 +47,14 @@ namespace DAL
 
         public User FindByEmail(string email)
         {
-            return ctx.Users.FirstOrDefault(x => x.Email == email);
+            using (var ctx = new DALContext())
+            {
+                return ctx.Users
+                    .Include(x => x.Registrations.Select(y => y.Event))
+                    .Where(x => x.Email == email)
+                    .First();
+                //return ctx.Users.FirstOrDefault(x => x.Email == email);
+            }
         }
 
         public User FindByID(int id)
@@ -45,8 +64,22 @@ namespace DAL
 
         public void Update(User entity)
         {
-            ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-        }
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
 
+                    try
+                    {
+                        ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+
+                        ctxTransaction.Rollback();
+                    }
+            }
+        }
     }
 }

@@ -30,51 +30,73 @@ namespace BLLTest
                 IsPublic = true
             };
 
+            // Act
+            Event output = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, null);
 
-            using (var ctx = new DALContext())
-            {
-                // Act
-                Event output = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, null);
 
-                // Assert
-                Assert.AreEqual(e.Title, output.Title);
-
-            }
+            // Assert
+            Assert.AreEqual(e.Title, output.Title);
 
         }
         [TestMethod]
         public void TestRegisterToEvent()
         {
+            // Arrange
+            var ctrl = new EventCtrl();
+            var uCtrl = new UserCtrl();
+
+            Event e = new Event
+            {
+                Title = "test title" + Guid.NewGuid(),
+                Description = "This is a long description\ncontaining newlines",
+                NumOfParticipants = 5,
+                PriceFrom = 100.0,
+                PriceTo = 200.0,
+                Location = "Sofiendalsvej 60",
+                Datetime = DateTime.Now,
+                IsPublic = true
+            };
+            var user = uCtrl.CreateUser("efrgfvd", "fss", "sdf@sdf.dk" + Guid.NewGuid(), "dsasdc");
+            Event newEvent = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, user);
+
+            // Act
+            ctrl.RegisterToEvent(newEvent, user);
+
+            // Assert
+            using (var ctx = new DAL.DALContext())
+            {
+                user = uCtrl.FindByEmail(user.Email);
+                newEvent = ctrl.FindById(newEvent.Id);
+                var reg = user.Registrations[0];
+
+                Assert.AreEqual(reg.User, user);
+                Assert.AreEqual(reg.Event.Id, newEvent.Id);
+                Assert.IsTrue(user.Registrations.Contains(reg));
+                
+                Assert.IsTrue(newEvent.Registrations.Exists(r => r.Id == reg.Id));
+            }
+        }
+
+        [TestMethod]
+        public void TestSignUpForEvent()
+        {
+            var user = new UserCtrl().CreateUser("1", "2", "test@test.test" + Guid.NewGuid(), "1234");
+            var eCtrl = new EventCtrl();
+            var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now, false, user);
+
+
+            // Act
+            eCtrl.SignUpForEvent(user.Email, e.Id);
+
+            // Assert
             using (var ctx = new DALContext())
             {
-                // Arrange
-                var ctrl = new EventCtrl();
-                var uCtrl = new UserCtrl();
-
-                Event e = new Event
-                {
-                    Title = "test title" + Guid.NewGuid(),
-                    Description = "This is a long description\ncontaining newlines",
-                    NumOfParticipants = 5,
-                    PriceFrom = 100.0,
-                    PriceTo = 200.0,
-                    Location = "Sofiendalsvej 60",
-                    Datetime = DateTime.Now,
-                    IsPublic = true
-                };
-                var user = uCtrl.CreateUser(ctx, "piss", "pee", "tis@urin.dk" + Guid.NewGuid(), "pissurinkage");
-                Event newEvent = ctrl.CreateEvent(ctx, e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, user);
-
-
-                // Act
-                Registration reg = ctrl.RegisterToEvent(ctx, newEvent, user);
-
-                // Assert
-                Assert.AreEqual(reg.User, user);
-                Assert.AreEqual(reg.Event, newEvent);
-                Assert.IsTrue(user.Registrations.Contains(reg));
-                Assert.IsTrue(newEvent.Registrations.Contains(reg));
+                var reg = new UserCtrl().FindByEmail(user.Email).Registrations[0];
+                
+                var found = ctx.Registrations.Find(reg.Id);
+                Assert.AreEqual(reg.Id, found.Id);
             }
-        } 
+
+        }
     }
 }
