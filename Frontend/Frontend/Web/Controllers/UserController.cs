@@ -66,5 +66,10 @@ namespace Web.Controllers
 
             return RedirectToAction("LogIn");
         }
+
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }
