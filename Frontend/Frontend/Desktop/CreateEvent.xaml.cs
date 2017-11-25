@@ -28,6 +28,7 @@ namespace Desktop
         {
             InitializeComponent();
             user = ((MainWindow)Application.Current.MainWindow).loggedIn;
+            rbEventPrivate.IsChecked = true;
         }
 
         private void btnCreateEvent_Click(object sender, RoutedEventArgs e)
@@ -74,6 +75,30 @@ namespace Desktop
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainPage());
+        }
+
+        private void tbEventNumOfParticipants_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbEventNumOfParticipants.Text.Contains("1") ||
+               tbEventNumOfParticipants.Text.Contains("2") ||
+               tbEventNumOfParticipants.Text.Contains("3") ||
+               tbEventNumOfParticipants.Text.Contains("4") ||
+               tbEventNumOfParticipants.Text.Contains("5") ||
+               tbEventNumOfParticipants.Text.Contains("6") ||
+               tbEventNumOfParticipants.Text.Contains("7") ||
+               tbEventNumOfParticipants.Text.Contains("8") ||
+               tbEventNumOfParticipants.Text.Contains("9") ||
+               tbEventNumOfParticipants.Text.Contains("0"))
+            {
+                tbEventNumOfParticipants.ToolTip = null;
+                tbEventNumOfParticipants.BorderBrush = Brushes.Black;
+                
+            }
+            else
+            {
+                tbEventNumOfParticipants.BorderBrush = Brushes.Red;
+                tbEventNumOfParticipants.ToolTip = "Der må kun skrives tal i dette felt";
+            }
         }
     }
 }

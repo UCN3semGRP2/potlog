@@ -35,7 +35,7 @@ namespace Desktop
             var user = service.LogIn(email, pw);
             if (user == null)
             {
-                MessageBox.Show("Email or Password is incorrect");
+                MessageBox.Show("Email eller Password er ikke korrekt");
                 return;
             }
             ((MainWindow)Application.Current.MainWindow).loggedIn = user;

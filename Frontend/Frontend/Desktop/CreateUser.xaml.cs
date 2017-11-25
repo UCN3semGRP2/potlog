@@ -50,22 +50,26 @@ namespace Desktop
             if (tb_Password.Text.Length < 6)
             {
                 tb_Password.BorderBrush = Brushes.Red;
+                tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
             }
             else
             {
                 tb_Password.BorderBrush = Brushes.Black;
+                tb_Password.ToolTip = null;
             }
         }
 
         private void tb_RepeatPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Password.Text.Equals(tb_RepeatPassword.Text))
+            if (!tb_Password.Text.Equals(tb_RepeatPassword.Text))
             {
                 tb_RepeatPassword.BorderBrush = Brushes.Red;
+                tb_RepeatPassword.ToolTip = "Kodeordene er ikke det samme";
             }
             else
             {
                 tb_RepeatPassword.BorderBrush = Brushes.Black;
+                tb_RepeatPassword.ToolTip = null;
             }
         }
 
@@ -74,10 +78,12 @@ namespace Desktop
             if (!tb_Email.Text.Contains("@"))
             {
                 tb_Email.BorderBrush = Brushes.Red;
+                tb_Email.ToolTip = "Den indtasted email er ikke valid";
             }
             else
             {
                 tb_Email.BorderBrush = Brushes.Black;
+                tb_Email.ToolTip = null;
             }
         }
 
@@ -103,6 +109,11 @@ namespace Desktop
             {
                 tb_Lastname.BorderBrush = Brushes.Black;
             }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new UserLogIn());
         }
     }
 }
