@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.ServiceReference;
 
 namespace Web.Controllers
 {
@@ -15,7 +16,8 @@ namespace Web.Controllers
 
         public ActionResult SignedUpEvents()
         {
-            return View();
+            User u = (User)Session["User"];
+            return View(u);
         }
 
         public ActionResult CreatedEvents()
