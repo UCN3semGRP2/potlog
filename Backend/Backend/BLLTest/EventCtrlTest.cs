@@ -72,7 +72,7 @@ namespace BLLTest
                 Assert.AreEqual(reg.User, user);
                 Assert.AreEqual(reg.Event.Id, newEvent.Id);
                 Assert.IsTrue(user.Registrations.Contains(reg));
-                
+
                 Assert.IsTrue(newEvent.Registrations.Exists(r => r.Id == reg.Id));
             }
         }
@@ -92,11 +92,36 @@ namespace BLLTest
             using (var ctx = new DALContext())
             {
                 var reg = new UserCtrl().FindByEmail(user.Email).Registrations[0];
-                
+
                 var found = ctx.Registrations.Find(reg.Id);
                 Assert.AreEqual(reg.Id, found.Id);
             }
 
+        }
+
+        [TestMethod]
+        public void TestAddComponent()
+        {
+            // Arrange
+            EventCtrl eCtrl = new EventCtrl();
+            var e = eCtrl.CreateEvent("Event", "Evently event",
+                2, 20, 100, "Right here", DateTime.Now, true, null);
+            Category c = new Category
+            {
+                Title = "Cat",
+                Description = "CateCat",
+                Components = new List<Component>()
+            };
+
+            //Act
+            eCtrl.AddCategory(e, c);
+
+            //Assert
+            var foundEvent = eCtrl.FindById(e.Id);
+            Assert.IsTrue(foundEvent.Components.Count == 1);
+            var foundComponent = foundEvent.Components.First();
+            Assert.IsTrue(c.Id == foundComponent.Id);
+            Assert.IsTrue(foundComponent is Category); //is returns true if an instance is in the inheritance tree
         }
     }
 }

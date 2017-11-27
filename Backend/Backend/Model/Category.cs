@@ -8,6 +8,6 @@ namespace Model
 {
     public class Category : Component
     {
-        public List<Component> Components { get; set; }
+        public virtual List<Component> Components { get; set; }
     }
 }

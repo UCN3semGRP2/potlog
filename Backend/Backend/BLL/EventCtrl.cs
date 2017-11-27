@@ -53,5 +53,10 @@ namespace BLL
                 User u = uCtrl.FindByEmail(userEmail);
                 RegisterToEvent(e, u);
         }
+
+        public void AddCategory(Event e, Category c)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
