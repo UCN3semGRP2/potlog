@@ -56,7 +56,12 @@ namespace BLL
 
         public void AddCategory(Event e, Category c)
         {
-            throw new NotImplementedException();
+            if (e.Components == null)
+            {
+                e.Components = new List<Component>();
+            }
+            e.Components.Add(c);
+            eDB.Update(e);
         }
     }
 }
