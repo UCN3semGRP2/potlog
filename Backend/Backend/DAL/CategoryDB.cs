@@ -11,7 +11,24 @@ namespace DAL
     {
         public Category Create(Category entity)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var cat = ctx.Categories.Add(entity);
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                        return cat;
+                    }
+                    catch (Exception err)
+                    {
+                        ctxTransaction.Rollback();
+                        throw err;
+                    }
+                }
+            }
         }
 
         public void Delete(Category entity)
@@ -26,7 +43,10 @@ namespace DAL
 
         public Category FindByID(int id)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                return ctx.Categories.Find(id);
+            }
         }
 
         public void Update(Category entity)

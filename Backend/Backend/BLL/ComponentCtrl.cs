@@ -24,7 +24,7 @@ namespace BLL
 
         public Category FindCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return catDB.FindByID(id);
         }
     }
 }
