@@ -17,7 +17,7 @@ namespace DAL
                 {
                     try
                     {
-                        var cat = ctx.Categories.Add(entity);
+                        Category cat = (Category)ctx.Components.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
                         return cat;
@@ -45,7 +45,10 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
-                return ctx.Categories.Find(id);
+                return (Category)ctx.Components
+                    .Where(x => x is Category)
+                    .Where(x => x.Id == id)
+                    .First();
             }
         }
 

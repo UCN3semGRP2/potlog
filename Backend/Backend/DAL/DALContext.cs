@@ -18,7 +18,7 @@ namespace DAL
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<Component> Components { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
+        //public virtual DbSet<Category> Categories { get; set; }
+        //public virtual DbSet<Item> Items { get; set; }
     }
 }

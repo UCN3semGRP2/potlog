@@ -61,6 +61,8 @@ namespace BLL
                 e.Components = new List<Component>();
             }
             e.Components.Add(c);
+            c.Event = e;
+            c.EventId = e.Id;
             eDB.Update(e);
         }
     }
