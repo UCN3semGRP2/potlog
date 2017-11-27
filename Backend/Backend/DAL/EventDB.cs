@@ -67,20 +67,12 @@ namespace DAL
                     try
                     {
                         ctx.Events.Attach(entity);
-                        //ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                         if (entity.Components != null)
                         {
                             foreach (var comp in entity.Components)
                             {
-                                //if (comp is Category)
-                                //{
-                                //    ctx.Components.Attach((Category)comp);
-                                //}
-
-                                ctx.Components.Attach(comp);
-                                
+                                ctx.Components.Attach(comp);   
                                 ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
-                                //ctx.Entry(comp).State = System.Data.Entity.EntityState.Added;
                             }
                         }
                         ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
