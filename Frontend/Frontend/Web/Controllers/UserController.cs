@@ -67,9 +67,36 @@ namespace Web.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public ActionResult Details()
+        [HttpGet]
+        public ActionResult Edit()
         {
-            return View();
+            if (Session["LoggedIn"] == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+            User u = (User)Session["User"];
+            EditUserViewModel euvm = new EditUserViewModel
+            {
+                id = u.Id,
+                Email = u.Email,
+                Firstname = u.Firstname,
+                Lastname = u.Lastname
+            };
+            return View(euvm);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditUserViewModel model)
+        {
+            User u = new User {
+                Firstname = model.Firstname,
+                Lastname = model.Lastname,
+                Email = model.Email,
+                Id = model.id,
+                Password = model.Password                
+            };
+            //Todo service.UpdateUser(u);
+            return RedirectToAction("SignedUpEvents", "MainPage");
         }
     }
 }

@@ -28,8 +28,7 @@ namespace Desktop
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            Page TODO = new Page();
-            this.NavigationService.Navigate(TODO);
+            this.NavigationService.Navigate(new UserDetail());
         }
 
         private void btnCreateNewEvent_Click(object sender, RoutedEventArgs e)

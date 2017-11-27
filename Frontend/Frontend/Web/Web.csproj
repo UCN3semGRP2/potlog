@@ -166,6 +166,7 @@
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\CreateViewModel.cs" />
     <Compile Include="Models\DetailsEventViewModel.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\UserLogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,7 +245,7 @@
     <Content Include="Views\MainPage\PublicEvents.cshtml" />
     <Content Include="Views\MainPage\SignedUpEvents.cshtml" />
     <Content Include="Views\MainPage\CreatedEvents.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
