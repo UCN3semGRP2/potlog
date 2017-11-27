@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,9 +38,9 @@ namespace Desktop
                 tbEventName.Text.Length != 0 &&
                 tbEventLocation.Text.Length != 0 &&
                 tbEventDescription.Text.Length != 0 &&
-                tbEventMinPrice.Text.Length != 0 &&
-                tbEventMaxPrice.Text.Length != 0 &&
-                tbEventNumOfParticipants.Text.Length != 0
+                checkStringForNumbers(tbEventMinPrice.Text) &&
+                checkStringForNumbers(tbEventNumOfParticipants.Text) &&
+                checkStringForNumbers(tbEventMaxPrice.Text)
                 )
             {
                 DateTime datetime = dtpEventDatetime.Value.Value;
@@ -79,17 +80,8 @@ namespace Desktop
 
         private void tbEventNumOfParticipants_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(tbEventNumOfParticipants.Text.Contains("1") ||
-               tbEventNumOfParticipants.Text.Contains("2") ||
-               tbEventNumOfParticipants.Text.Contains("3") ||
-               tbEventNumOfParticipants.Text.Contains("4") ||
-               tbEventNumOfParticipants.Text.Contains("5") ||
-               tbEventNumOfParticipants.Text.Contains("6") ||
-               tbEventNumOfParticipants.Text.Contains("7") ||
-               tbEventNumOfParticipants.Text.Contains("8") ||
-               tbEventNumOfParticipants.Text.Contains("9") ||
-               tbEventNumOfParticipants.Text.Contains("0"))
-            {
+            if (checkStringForNumbers(tbEventNumOfParticipants.Text))
+                {
                 tbEventNumOfParticipants.ToolTip = null;
                 tbEventNumOfParticipants.BorderBrush = Brushes.Black;
                 
@@ -99,6 +91,41 @@ namespace Desktop
                 tbEventNumOfParticipants.BorderBrush = Brushes.Red;
                 tbEventNumOfParticipants.ToolTip = "Der må kun skrives tal i dette felt";
             }
+        }
+
+        private void tbEventMinPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (checkStringForNumbers(tbEventMinPrice.Text))
+            {
+                tbEventMinPrice.ToolTip = null;
+                tbEventMinPrice.BorderBrush = Brushes.Black;
+            }
+            else
+            {
+                tbEventMinPrice.BorderBrush = Brushes.Red;
+                tbEventMinPrice.ToolTip = "Der må kun skrives tal i dette felt";
+            }
+        }
+
+        private void tbEventMaxPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (checkStringForNumbers(tbEventMaxPrice.Text))
+            {
+                tbEventMaxPrice.ToolTip = null;
+                tbEventMaxPrice.BorderBrush = Brushes.Black;
+            }
+            else
+            {
+                tbEventMaxPrice.BorderBrush = Brushes.Red;
+                tbEventMaxPrice.ToolTip = "Der må kun skrives tal i dette felt";
+            }
+
+        }
+
+        private bool checkStringForNumbers(string testString)
+        {
+            var regex = new Regex("^[0-9]+$");
+            return regex.IsMatch(testString);
         }
     }
 }

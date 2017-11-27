@@ -39,13 +39,14 @@ namespace Desktop
             {
                 //TODO
                 MessageBox.Show("Brugeroplysninger er blevet opdateret");
+                this.NavigationService.Navigate(new MainPage());
             }
             else
             {
                 MessageBox.Show("Vær sød at indtaste alle de nødvendige oplysninger.");
             }
 
-            this.NavigationService.Navigate(new MainPage());
+            
         }
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
