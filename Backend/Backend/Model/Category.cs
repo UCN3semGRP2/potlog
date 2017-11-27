@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Categories : Component
+    public class Category : Component
     {
         public List<Component> Components { get; set; }
     }

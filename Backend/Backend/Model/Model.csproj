@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categories.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Item.cs" />
