@@ -91,12 +91,8 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            var reg = service.SignUpForEvent(u.Email, model.Id);
-            if (reg == null)
-            {
-                // TODO Help user here
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
-            }
+            service.SignUpForEvent(u.Email, model.Id);
+            
 
             return RedirectToAction("SignUpSuccess");
         }

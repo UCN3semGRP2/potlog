@@ -75,9 +75,9 @@ namespace Desktop
 
         private void btnEventRegister_Click(object sender, RoutedEventArgs e)
         {
-            var reg = service.SignUpForEvent(u.Email, this.e.Id);
+            service.SignUpForEvent(u.Email, this.e.Id);
 
-            MessageBox.Show(string.Format("Success registering oprettet {0}", reg.DateOfCreation));
+            MessageBox.Show(string.Format("Success registering oprettet"));
 
             //var nextPage = TODO
             //this.NavigationService.Navigate(nextPage);

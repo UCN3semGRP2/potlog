@@ -28,7 +28,8 @@ namespace PotLogService
 
         public User LogIn(string email, string clearTextPw)
         {
-            return uCtrl.LogIn(email, clearTextPw);
+            User u = uCtrl.LogIn(email, clearTextPw);
+            return u;
         }
 
         public void SignUpForEvent(string userEmail, int eventId)
