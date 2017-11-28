@@ -8,6 +8,7 @@ using System.Text;
 
 namespace PotLogService
 {
+
     [ServiceContract]
     public interface IService
     {

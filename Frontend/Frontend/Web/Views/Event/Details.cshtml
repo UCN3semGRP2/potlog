@@ -132,20 +132,11 @@
 
             <div class="col-lg-2">
                 <div class="form-group">
-                    @using (Html.BeginForm("AddCategory", "Event", FormMethod.Get))
+                    @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
                     {
                         @Html.AntiForgeryToken()
 
                         @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.Title)
-                        @Html.HiddenFor(model => model.Location)
-                        @Html.HiddenFor(model => model.Date)
-                        @Html.HiddenFor(model => model.Time)
-                        @Html.HiddenFor(model => model.NumOfParticipants)
-                        @Html.HiddenFor(model => model.IsPublic)
-                        @Html.HiddenFor(model => model.Description)
-                        @Html.HiddenFor(model => model.PriceFrom)
-                        @Html.HiddenFor(model => model.PriceTo)
                         <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
                     }
                 </div>

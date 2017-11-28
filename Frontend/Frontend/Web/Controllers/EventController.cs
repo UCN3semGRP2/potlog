@@ -46,7 +46,7 @@ namespace Web.Controllers
 
             var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
 
-            return RedirectToAction("CreateSuccess");
+            return RedirectToAction("SignedUpEvents", "MainPage");
         }
 
         [HttpGet]
@@ -101,21 +101,23 @@ namespace Web.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public ActionResult CreateCategory(DetailsEventViewModel model)
         {
+            int id = model.Id;
             return View(new CreateComponentViewModel
             {
-                EventId = model.Id,
+                EventId = id,
                 Title = "",
                 Description = ""
             });
         }
-
+        [HttpPost]
         public ActionResult CreateCategory(CreateComponentViewModel model)
         {
-            service.AddCategory(model.EventId, model.Title, model.Description);
-            return RedirectToAction("Details", new { id = model.EventId });
+            service.AddCategoryToEvent(model.EventId, model.Title, model.Description);
+            // TODO: ADD THIS INSTEAD OF THE NEXT LINE return RedirectToAction("Details", new { id = model.EventId });
+            return RedirectToAction("MainPage", "MainPage");
         }
 
     }
