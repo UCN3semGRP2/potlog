@@ -17,8 +17,8 @@ namespace Model
         public string Location { get; set; }
         public DateTime Datetime { get; set; }
         public bool IsPublic { get; set; }
-        public virtual List<Registration> Registrations { get; set; }
+        public List<Registration> Registrations { get; set; }
         public User Admin { get; set; }
-        public virtual List<Component> Components { get; set; }
+        public List<Component> Components { get; set; }
     }
 }

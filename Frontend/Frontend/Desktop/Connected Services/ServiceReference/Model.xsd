@@ -40,6 +40,7 @@
   <xs:complexType name="Event">
     <xs:sequence>
       <xs:element minOccurs="0" name="Admin" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Components" nillable="true" type="tns:ArrayOfComponent" />
       <xs:element minOccurs="0" name="Datetime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -53,4 +54,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Event" nillable="true" type="tns:Event" />
+  <xs:complexType name="ArrayOfComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Component" nillable="true" type="tns:Component" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComponent" nillable="true" type="tns:ArrayOfComponent" />
+  <xs:complexType name="Component">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Event" nillable="true" type="tns:Event" />
+      <xs:element minOccurs="0" name="EventId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Component" nillable="true" type="tns:Component" />
 </xs:schema>
