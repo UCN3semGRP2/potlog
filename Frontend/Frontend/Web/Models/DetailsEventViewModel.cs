@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Web.ServiceReference;
 
 namespace Web.Models
 {
@@ -45,5 +47,16 @@ namespace Web.Models
         [Display(Name = "Pris Til")]
         [DataType(DataType.Currency)]
         public double PriceTo { get; set; }
+
+        //public IEnumerable<Component> AllComponents { get; set; }
+        //public IEnumerable<SelectListItem> GetAllComponents(IEnumerable<Component> components, string defaultSelection = "")
+        //{
+        //    return components.Select(c => new SelectListItem
+        //    {
+        //        Text = c.Title,
+        //        Value = c.Title,
+        //        Selected = c.Title == defaultSelection
+        //    });
+        //}
     }
 }

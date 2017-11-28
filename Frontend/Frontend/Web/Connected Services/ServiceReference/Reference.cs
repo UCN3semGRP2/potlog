@@ -353,6 +353,9 @@ namespace Web.ServiceReference {
         private Web.ServiceReference.User AdminField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.Component[] ComponentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DatetimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -401,6 +404,19 @@ namespace Web.ServiceReference {
                 if ((object.ReferenceEquals(this.AdminField, value) != true)) {
                     this.AdminField = value;
                     this.RaisePropertyChanged("Admin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.Component[] Components {
+            get {
+                return this.ComponentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ComponentsField, value) != true)) {
+                    this.ComponentsField = value;
+                    this.RaisePropertyChanged("Components");
                 }
             }
         }
@@ -545,6 +561,115 @@ namespace Web.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Component", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Component : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.Event EventField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> EventIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.Event Event {
+            get {
+                return this.EventField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventField, value) != true)) {
+                    this.EventField = value;
+                    this.RaisePropertyChanged("Event");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -574,10 +699,10 @@ namespace Web.ServiceReference {
         System.Threading.Tasks.Task<Web.ServiceReference.Event> FindEventByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
-        Web.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId);
+        void SignUpForEvent(string userEmail, int eventId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForEvent", ReplyAction="http://tempuri.org/IService/SignUpForEventResponse")]
-        System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId);
+        System.Threading.Tasks.Task SignUpForEventAsync(string userEmail, int eventId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
         bool IsRegisteredToEvent(Web.ServiceReference.User u, Web.ServiceReference.Event e);
@@ -645,11 +770,11 @@ namespace Web.ServiceReference {
             return base.Channel.FindEventByIdAsync(id);
         }
         
-        public Web.ServiceReference.Registration SignUpForEvent(string userEmail, int eventId) {
-            return base.Channel.SignUpForEvent(userEmail, eventId);
+        public void SignUpForEvent(string userEmail, int eventId) {
+            base.Channel.SignUpForEvent(userEmail, eventId);
         }
         
-        public System.Threading.Tasks.Task<Web.ServiceReference.Registration> SignUpForEventAsync(string userEmail, int eventId) {
+        public System.Threading.Tasks.Task SignUpForEventAsync(string userEmail, int eventId) {
             return base.Channel.SignUpForEventAsync(userEmail, eventId);
         }
         

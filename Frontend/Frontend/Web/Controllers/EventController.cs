@@ -24,14 +24,14 @@ namespace Web.Controllers
         {
             if (Session["LoggedIn"] == null)
             {
-                return RedirectToAction("LogIn","User");
+                return RedirectToAction("LogIn", "User");
             }
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model)
-        {   
+        {
             if (Session["LoggedIn"] == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -78,7 +78,8 @@ namespace Web.Controllers
                 PriceFrom = e.PriceFrom,
                 PriceTo = e.PriceTo,
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                Title = e.Title
+                Title = e.Title,
+                //AllComponents = e.Components
             };
             return View(ev);
         }
@@ -91,12 +92,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            var reg = service.SignUpForEvent(u.Email, model.Id);
-            if (reg == null)
-            {
-                // TODO Help user here
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
-            }
+            service.SignUpForEvent(u.Email, model.Id);
 
             return RedirectToAction("SignUpSuccess");
         }
@@ -104,6 +100,22 @@ namespace Web.Controllers
         public ActionResult SignUpSuccess()
         {
             return View();
+        }
+
+        public ActionResult CreateCategory(DetailsEventViewModel model)
+        {
+            return View(new CreateComponentViewModel
+            {
+                EventId = model.Id,
+                Title = "",
+                Description = ""
+            });
+        }
+
+        public ActionResult CreateCategory(CreateComponentViewModel model)
+        {
+            service.AddCategory(model.EventId, model.Title, model.Description);
+            return RedirectToAction("Details", new { id = model.EventId });
         }
 
     }
