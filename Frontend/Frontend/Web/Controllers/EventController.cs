@@ -116,8 +116,7 @@ namespace Web.Controllers
         public ActionResult CreateCategory(CreateComponentViewModel model)
         {
             service.AddCategoryToEvent(model.EventId, model.Title, model.Description);
-            // TODO: ADD THIS INSTEAD OF THE NEXT LINE return RedirectToAction("Details", new { id = model.EventId });
-            return RedirectToAction("MainPage", "MainPage");
+            return RedirectToAction("Details", new { id = model.EventId });
         }
 
     }
