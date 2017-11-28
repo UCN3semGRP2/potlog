@@ -52,7 +52,7 @@ namespace DAL
             using (DALContext ctx = new DALContext())
             {
                 return ctx.Events
-                    .Include(x => x.Registrations)
+                    .Include(x => x.Registrations).Include(x => x.Components)
                     .Where(x => x.Id == id)
                     .First(); //.Find(id);
                 //return ctx.Events.Where(x => x.Id == id).Intersect()
@@ -61,7 +61,31 @@ namespace DAL
 
         public void Update(Event entity)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
+                    try
+                    {
+                        ctx.Events.Attach(entity);
+                        if (entity.Components != null)
+                        {
+                            foreach (var comp in entity.Components)
+                            {
+                                ctx.Components.Attach(comp);   
+                                ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                        ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                        
+                        ctx.SaveChanges();
+                        ctxTransaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        ctxTransaction.Rollback();
+                        throw ex;
+                    }
+            }
         }
     }
 }

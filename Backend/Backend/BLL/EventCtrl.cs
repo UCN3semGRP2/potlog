@@ -53,5 +53,17 @@ namespace BLL
                 User u = uCtrl.FindByEmail(userEmail);
                 RegisterToEvent(e, u);
         }
+
+        public void AddCategory(Event e, Category c)
+        {
+            if (e.Components == null)
+            {
+                e.Components = new List<Component>();
+            }
+            e.Components.Add(c);
+            c.Event = e;
+            c.EventId = e.Id;
+            eDB.Update(e);
+        }
     }
 }
