@@ -9,6 +9,7 @@ using Model;
 
 namespace PotLogService
 {
+
     public class Service : IService
     {
         private UserCtrl uCtrl = new UserCtrl();

@@ -163,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateComponentViewModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\CreateViewModel.cs" />
     <Compile Include="Models\DetailsEventViewModel.cs" />
@@ -243,6 +244,7 @@
     <Content Include="Views\MainPage\SignedUpEvents.cshtml" />
     <Content Include="Views\MainPage\CreatedEvents.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Event\CreateCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

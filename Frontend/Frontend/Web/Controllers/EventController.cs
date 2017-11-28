@@ -24,14 +24,14 @@ namespace Web.Controllers
         {
             if (Session["LoggedIn"] == null)
             {
-                return RedirectToAction("LogIn","User");
+                return RedirectToAction("LogIn", "User");
             }
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model)
-        {   
+        {
             if (Session["LoggedIn"] == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -46,7 +46,7 @@ namespace Web.Controllers
 
             var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
 
-            return RedirectToAction("CreateSuccess");
+            return RedirectToAction("SignedUpEvents", "MainPage");
         }
 
         [HttpGet]
@@ -78,7 +78,8 @@ namespace Web.Controllers
                 PriceFrom = e.PriceFrom,
                 PriceTo = e.PriceTo,
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                Title = e.Title
+                Title = e.Title,
+                //AllComponents = e.Components
             };
             return View(ev);
         }
@@ -92,7 +93,6 @@ namespace Web.Controllers
                 return RedirectToAction("LogIn", "User");
             }
             service.SignUpForEvent(u.Email, model.Id);
-            
 
             return RedirectToAction("SignUpSuccess");
         }
@@ -100,6 +100,23 @@ namespace Web.Controllers
         public ActionResult SignUpSuccess()
         {
             return View();
+        }
+        [HttpGet]
+        public ActionResult CreateCategory(DetailsEventViewModel model)
+        {
+            int id = model.Id;
+            return View(new CreateComponentViewModel
+            {
+                EventId = id,
+                Title = "",
+                Description = ""
+            });
+        }
+        [HttpPost]
+        public ActionResult CreateCategory(CreateComponentViewModel model)
+        {
+            service.AddCategoryToEvent(model.EventId, model.Title, model.Description);
+            return RedirectToAction("Details", new { id = model.EventId });
         }
 
     }

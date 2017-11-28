@@ -94,6 +94,14 @@
             @Html.DisplayFor(model => model.PriceTo)
         </dd>
 
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AllComponents)
+        </dt>
+
+        <dd>
+            @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
+        </dd>*@
+
     </dl>
     <div class="container">
         <div class="row">
@@ -118,6 +126,18 @@
                         @Html.HiddenFor(model => model.PriceFrom)
                         @Html.HiddenFor(model => model.PriceTo)
                         <input type="submit" value="Tilmeld" class="btn btn-default" />
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="form-group">
+                    @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
                     }
                 </div>
             </div>
