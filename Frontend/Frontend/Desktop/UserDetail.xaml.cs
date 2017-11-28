@@ -51,7 +51,7 @@ namespace Desktop
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (ValidateHelper.validatePassword(tb_Password.Text))
+            if (!ValidateHelper.validatePassword(tb_Password.Text))
             {
                 tb_Password.BorderBrush = Brushes.Red;
                 tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
