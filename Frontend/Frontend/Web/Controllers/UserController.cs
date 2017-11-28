@@ -22,12 +22,14 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+            Session.Clear();
             return View();
         }
 
         [HttpPost]
         public ActionResult LogIn(UserLogInViewModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View();
@@ -43,7 +45,7 @@ namespace Web.Controllers
 
             Session["LoggedIn"] = true;
             Session["User"] = user; 
-            return RedirectToAction("Index"); // TODO: redirect to the correct view
+            return RedirectToAction("SignedUpEvents", "MainPage"); 
         }
 
         [HttpGet]
@@ -63,6 +65,38 @@ namespace Web.Controllers
             service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
 
             return RedirectToAction("LogIn");
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            if (Session["LoggedIn"] == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+            User u = (User)Session["User"];
+            EditUserViewModel euvm = new EditUserViewModel
+            {
+                id = u.Id,
+                Email = u.Email,
+                Firstname = u.Firstname,
+                Lastname = u.Lastname
+            };
+            return View(euvm);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditUserViewModel model)
+        {
+            User u = new User {
+                Firstname = model.Firstname,
+                Lastname = model.Lastname,
+                Email = model.Email,
+                Id = model.id,
+                Password = model.Password                
+            };
+            //Todo service.UpdateUser(u);
+            return RedirectToAction("SignedUpEvents", "MainPage");
         }
     }
 }

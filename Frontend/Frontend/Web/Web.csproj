@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainPageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,6 +166,7 @@
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\CreateViewModel.cs" />
     <Compile Include="Models\DetailsEventViewModel.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\UserLogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -239,6 +241,11 @@
     <Content Include="Views\Event\CreateSuccess.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\SignUpSuccess.cshtml" />
+    <Content Include="Views\Shared\_Layout-MainPage.cshtml" />
+    <Content Include="Views\MainPage\PublicEvents.cshtml" />
+    <Content Include="Views\MainPage\SignedUpEvents.cshtml" />
+    <Content Include="Views\MainPage\CreatedEvents.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,16 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Desktop"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="319" d:DesignWidth="517"
       Title="UserLogIn">
 
     <Grid>
-        <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,88,0,0"/>
-        <TextBox x:Name="Txt_Email" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="113,91,0,0"/>
-        <PasswordBox x:Name="Pw_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113,119,0,0" Width="120" Height="23"/>
-        <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,119,0,0"/>
-        <Button x:Name="Btn_LogIn" Content="Log Ind" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="158,160,0,0" Click="BtnLogIn_Click"/>
-        <Button x:Name="Btn_CreateUser" Content="Opret Bruger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="78,160,0,0" Click="Btn_CreateUser_Click"/>
+        <Label Content="Email :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,100,0,0"/>
+        <TextBox x:Name="Txt_Email" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="198,103,0,0"/>
+        <PasswordBox x:Name="Pw_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="198,131,0,0" Width="120" Height="23"/>
+        <Label Content="Password :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,128,0,0"/>
+        <Button x:Name="Btn_LogIn" Content="Log Ind" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="243,159,0,0" Click="BtnLogIn_Click"/>
+        <Button x:Name="Btn_CreateUser" Content="Opret Bruger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="128,159,0,0" Click="Btn_CreateUser_Click"/>
 
     </Grid>
 </Page>

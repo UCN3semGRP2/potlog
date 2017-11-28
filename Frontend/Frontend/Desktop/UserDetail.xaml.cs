@@ -16,38 +16,42 @@ using System.Windows.Shapes;
 namespace Desktop
 {
     /// <summary>
-    /// Interaction logic for CreateUser.xaml
+    /// Interaction logic for UserDetail.xaml
     /// </summary>
-    public partial class CreateUser : Page
+    public partial class UserDetail : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
-        public CreateUser()
+        public UserDetail()
         {
             InitializeComponent();
+            tb_Email.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Email;
+            tb_Firstname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname;
+            tb_Lastname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
         }
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
-            if (tb_Password.Text.Equals(tb_RepeatPassword.Text) 
-                && tb_Email.Text.Length != 0 
-                && tb_Firstname.Text.Length != 0 
-                && tb_Lastname.Text.Length != 0
-                && tb_Password.Text.Length >= 6)
+            if (ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text)
+                && ValidateHelper.validateEmail(tb_Email.Text)
+                && ValidateHelper.isEntered(tb_Firstname)
+                && ValidateHelper.isEntered(tb_Lastname)
+                && ValidateHelper.validatePassword(tb_Password.Text))
             {
-                service.CreateUser(tb_Firstname.Text, tb_Lastname.Text, tb_Email.Text, tb_Password.Text);
-                MessageBox.Show("Bruger er oprettet.");
+                //TODO
+                MessageBox.Show("Brugeroplysninger er blevet opdateret");
+                this.NavigationService.Navigate(new MainPage());
             }
             else
             {
                 MessageBox.Show("Vær sød at indtaste alle de nødvendige oplysninger.");
             }
 
-            this.NavigationService.Navigate(new UserLogIn());
+            
         }
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Password.Text.Length < 6)
+            if (ValidateHelper.validatePassword(tb_Password.Text))
             {
                 tb_Password.BorderBrush = Brushes.Red;
                 tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
@@ -61,7 +65,7 @@ namespace Desktop
 
         private void tb_RepeatPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!tb_Password.Text.Equals(tb_RepeatPassword.Text))
+            if (!ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text))
             {
                 tb_RepeatPassword.BorderBrush = Brushes.Red;
                 tb_RepeatPassword.ToolTip = "Kodeordene er ikke det samme";
@@ -75,7 +79,7 @@ namespace Desktop
 
         private void tb_Email_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!tb_Email.Text.Contains("@"))
+            if (!ValidateHelper.validateEmail(tb_Email.Text))
             {
                 tb_Email.BorderBrush = Brushes.Red;
                 tb_Email.ToolTip = "Den indtasted email er ikke valid";
@@ -113,7 +117,7 @@ namespace Desktop
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UserLogIn());
+            this.NavigationService.Navigate(new MainPage());
         }
     }
 }

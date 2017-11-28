@@ -10,7 +10,7 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("LogIn","User");
+            return View();
         }
 
         public ActionResult About()

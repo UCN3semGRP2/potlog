@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,7 @@ namespace Desktop
         {
             InitializeComponent();
             user = ((MainWindow)Application.Current.MainWindow).loggedIn;
+            rbEventPrivate.IsChecked = true;
         }
 
         private void btnCreateEvent_Click(object sender, RoutedEventArgs e)
@@ -36,9 +38,9 @@ namespace Desktop
                 tbEventName.Text.Length != 0 &&
                 tbEventLocation.Text.Length != 0 &&
                 tbEventDescription.Text.Length != 0 &&
-                tbEventMinPrice.Text.Length != 0 &&
-                tbEventMaxPrice.Text.Length != 0 &&
-                tbEventNumOfParticipants.Text.Length != 0
+                ValidateHelper.checkStringForNumbers(tbEventMinPrice.Text) &&
+                ValidateHelper.checkStringForNumbers(tbEventNumOfParticipants.Text) &&
+                ValidateHelper.checkStringForNumbers(tbEventMaxPrice.Text)
                 )
             {
                 DateTime datetime = dtpEventDatetime.Value.Value;
@@ -70,5 +72,27 @@ namespace Desktop
                 MessageBox.Show("Oplysninger mangler");
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
+
+        private void tbEventNumOfParticipants_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateHelper.checkNumberTooltip(tbEventNumOfParticipants);
+        }
+
+        private void tbEventMinPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateHelper.checkNumberTooltip(tbEventMinPrice);
+        }
+
+        private void tbEventMaxPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateHelper.checkNumberTooltip(tbEventMaxPrice);
+        }
+
+
     }
 }
