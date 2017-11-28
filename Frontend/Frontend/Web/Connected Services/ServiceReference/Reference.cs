@@ -709,6 +709,12 @@ namespace Web.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
         System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Web.ServiceReference.User u, Web.ServiceReference.Event e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
+        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
+        System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -784,6 +790,14 @@ namespace Web.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Web.ServiceReference.User u, Web.ServiceReference.Event e) {
             return base.Channel.IsRegisteredToEventAsync(u, e);
+        }
+        
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription) {
+            base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription);
+        }
+        
+        public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription) {
+            return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription);
         }
     }
 }

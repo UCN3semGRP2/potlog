@@ -52,7 +52,7 @@ namespace DAL
                 return ctx.Users
                     .Include(x => x.Registrations.Select(y => y.Event))
                     .Where(x => x.Email == email)
-                    .First();
+                    .FirstOrDefault();
                 //return ctx.Users.FirstOrDefault(x => x.Email == email);
             }
         }

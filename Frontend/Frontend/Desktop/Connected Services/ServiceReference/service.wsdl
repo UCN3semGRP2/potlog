@@ -43,6 +43,12 @@
   <wsdl:message name="IService_IsRegisteredToEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsRegisteredToEventResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_AddCategoryToEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCategoryToEvent" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddCategoryToEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCategoryToEventResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
@@ -67,6 +73,10 @@
     <wsdl:operation name="IsRegisteredToEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsRegisteredToEvent" message="tns:IService_IsRegisteredToEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/IsRegisteredToEventResponse" message="tns:IService_IsRegisteredToEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCategoryToEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddCategoryToEvent" message="tns:IService_AddCategoryToEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddCategoryToEventResponse" message="tns:IService_AddCategoryToEvent_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -118,6 +128,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsRegisteredToEvent">
       <soap:operation soapAction="http://tempuri.org/IService/IsRegisteredToEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCategoryToEvent">
+      <soap:operation soapAction="http://tempuri.org/IService/AddCategoryToEvent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

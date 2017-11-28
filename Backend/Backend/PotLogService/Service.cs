@@ -14,6 +14,7 @@ namespace PotLogService
         private UserCtrl uCtrl = new UserCtrl();
         private EventCtrl eCtrl = new EventCtrl();
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
+        private ComponentCtrl cCtrl = new ComponentCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
@@ -46,6 +47,14 @@ namespace PotLogService
         {
 
             return uCtrl.IsRegisteredToEvent(u, e);
+        }
+
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription)
+        {
+            //TODO refactor to ectrl
+            Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription);
+            Event e = eCtrl.FindById(eventId);
+            eCtrl.AddCategory(e, c);
         }
     }
 }
