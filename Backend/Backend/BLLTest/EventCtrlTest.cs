@@ -107,12 +107,6 @@ namespace BLLTest
             var e = eCtrl.CreateEvent("Event", "Evently event",
                 2, 20, 100, "Right here", DateTime.Now, true, null);
             Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat");
-            //Category c = new Category
-            //{
-            //    Title = "Cat",
-            //    Description = "CateCat",
-            //    Components = new List<Component>()
-            //};
 
             //Act
             eCtrl.AddCategory(e, c);

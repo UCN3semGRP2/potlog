@@ -48,7 +48,7 @@ namespace DAL
                 return (Category)ctx.Components
                     .Where(x => x is Category)
                     .Where(x => x.Id == id)
-                    .First();
+                    .FirstOrDefault();
             }
         }
 
