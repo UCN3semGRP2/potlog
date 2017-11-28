@@ -24,6 +24,11 @@ namespace DAL
                         ctxTransaction.Commit();
                         return u;
                     }
+                    catch(System.Data.Entity.Infrastructure.DbUpdateException)
+                    {
+                        ctxTransaction.Rollback();
+                        return null;
+                    }
                     catch (Exception err)
                     {
 

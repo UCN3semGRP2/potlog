@@ -34,6 +34,33 @@ namespace BLLTest
 
         }
 
+        [TestMethod]
+        public void testCreateDublicateUser()
+        {
+            var g = Guid.NewGuid();
+            UserCtrl uCtrl = new UserCtrl();
+            User user = new User
+            {
+                Firstname = "Niklas",
+                Lastname = "Jørgensen",
+                Email = "n@n.dk"+g,
+                Password = "1234"
+            };
+
+            uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
+
+            try
+            {
+                uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
+                Assert.Fail();
+
+            }
+            catch (DublicateUserException)
+            {
+
+            }
+        }
+
         private User CreateTestUser(string clearTextPW)
         {
             var salt = BLL.HashingHelper.GenerateSalt();

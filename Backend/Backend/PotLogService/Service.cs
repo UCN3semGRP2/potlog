@@ -24,7 +24,14 @@ namespace PotLogService
 
         public void CreateUser(string firstName, string lastName, string email, string password)
         {
-            uCtrl.CreateUser(firstName, lastName, email, password);
+            try
+            {
+                uCtrl.CreateUser(firstName, lastName, email, password);
+            }
+            catch (DublicateUserException)
+            {
+                throw new FaultException("Brugeren eksisterer allerede");
+            }
         }
 
         public User LogIn(string email, string clearTextPw)

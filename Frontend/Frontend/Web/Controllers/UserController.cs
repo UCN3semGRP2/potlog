@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 using Web.Models;
 using Web.ServiceReference;
 
@@ -61,8 +63,16 @@ namespace Web.Controllers
             {
                 return View();
             }
-
-            service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
+            try
+            {
+                service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
+            }
+            catch (FaultException fax)
+            {
+                ViewBag.Message = fax.Message;
+                return View();
+                
+            }
 
             return RedirectToAction("LogIn");
         }
