@@ -28,5 +28,7 @@ namespace PotLogService
 
         [OperationContract]
         bool IsRegisteredToEvent(User u, Event e);
+        [OperationContract]
+        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
     }
 }
