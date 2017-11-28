@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,7 @@ namespace Desktop
         public CreateUser()
         {
             InitializeComponent();
+            lblErrorMsg.Visibility = Visibility.Hidden;
         }
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,18 @@ namespace Desktop
                 && tb_Lastname.Text.Length != 0
                 && tb_Password.Text.Length >= 6)
             {
-                service.CreateUser(tb_Firstname.Text, tb_Lastname.Text, tb_Email.Text, tb_Password.Text);
+                try
+                {
+                    lblErrorMsg.Visibility = Visibility.Hidden;
+                    service.CreateUser(tb_Firstname.Text, tb_Lastname.Text, tb_Email.Text, tb_Password.Text);
+                }
+                catch (FaultException fault)
+                {
+                    lblErrorMsg.Visibility = Visibility.Visible;
+                    lblErrorMsg.Content = fault.Message;
+                    lblErrorMsg.Foreground = Brushes.Red;
+                    return;
+                }
                 MessageBox.Show("Bruger er oprettet.");
             }
             else

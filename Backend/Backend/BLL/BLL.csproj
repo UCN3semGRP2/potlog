@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentCtrl.cs" />
+    <Compile Include="DublicateUserException.cs" />
     <Compile Include="EventCtrl.cs" />
     <Compile Include="HashingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

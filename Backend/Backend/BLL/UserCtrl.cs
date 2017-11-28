@@ -27,6 +27,10 @@ namespace BLL
                 Salt = salt
             };
             var enduser = uDB.Create(user);
+            if (enduser == null)
+            {
+                throw new DublicateUserException();
+            }
             return enduser;
         }
 
