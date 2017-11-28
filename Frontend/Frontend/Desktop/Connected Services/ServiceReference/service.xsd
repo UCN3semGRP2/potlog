@@ -95,4 +95,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddCategoryToEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="eventId" type="xs:int" />
+        <xs:element minOccurs="0" name="categoryTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="categoryDescription" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCategoryToEventResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
