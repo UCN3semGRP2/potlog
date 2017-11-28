@@ -31,11 +31,11 @@ namespace Desktop
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
-            if (tb_Password.Text.Equals(tb_RepeatPassword.Text)
-                && tb_Email.Text.Length != 0
-                && tb_Firstname.Text.Length != 0
-                && tb_Lastname.Text.Length != 0
-                && tb_Password.Text.Length >= 6)
+            if (ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text)
+                && ValidateHelper.validateEmail(tb_Email.Text)
+                && ValidateHelper.isEntered(tb_Firstname)
+                && ValidateHelper.isEntered(tb_Lastname)
+                && ValidateHelper.validatePassword(tb_Password.Text))
             {
                 //TODO
                 MessageBox.Show("Brugeroplysninger er blevet opdateret");
@@ -51,7 +51,7 @@ namespace Desktop
 
         private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Password.Text.Length < 6)
+            if (ValidateHelper.validatePassword(tb_Password.Text))
             {
                 tb_Password.BorderBrush = Brushes.Red;
                 tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
@@ -65,7 +65,7 @@ namespace Desktop
 
         private void tb_RepeatPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!tb_Password.Text.Equals(tb_RepeatPassword.Text))
+            if (!ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text))
             {
                 tb_RepeatPassword.BorderBrush = Brushes.Red;
                 tb_RepeatPassword.ToolTip = "Kodeordene er ikke det samme";
@@ -79,7 +79,7 @@ namespace Desktop
 
         private void tb_Email_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!tb_Email.Text.Contains("@"))
+            if (!ValidateHelper.validateEmail(tb_Email.Text))
             {
                 tb_Email.BorderBrush = Brushes.Red;
                 tb_Email.ToolTip = "Den indtasted email er ikke valid";

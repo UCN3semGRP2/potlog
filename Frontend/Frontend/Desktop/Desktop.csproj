@@ -90,6 +90,7 @@
     <Compile Include="UserLogIn.xaml.cs">
       <DependentUpon>UserLogIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidateHelper.cs" />
     <Page Include="CreateEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
