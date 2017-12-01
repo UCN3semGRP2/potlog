@@ -48,11 +48,23 @@ namespace DAL
             {
                 var query = ctx.Components.OfType<Category>()
                   .Where(x => x.Id == id)
-                  .Include(x => x.Components);
+                  .Include(x => x.Components);;
                 Console.WriteLine(query.ToString());
 
                 var cat = query
                   .FirstOrDefault();
+                cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.Parent.Id == cat.Id));
+
+                foreach (var subcomp in cat.Components)
+                {
+                    if (subcomp is Category)
+                    {
+                        var sub = (Category)subcomp;
+                        var items = ctx.Components.OfType<Item>()
+                            .Where(x => x.Parent.Id == sub.Id).ToList();
+                        sub.Components.AddRange(items);
+                    }
+                }
                   
                 return cat;
                 
