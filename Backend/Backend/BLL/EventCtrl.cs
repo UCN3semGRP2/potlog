@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using DAL;
+using System.Runtime.Serialization;
 
 namespace BLL
 {
@@ -19,6 +20,10 @@ namespace BLL
             if (priceFrom > priceTo)
             {
                 throw new ArgumentException("PriceTo must be larger than priceFrom");
+            }
+            if (datetime < DateTime.Now)
+            {
+                throw new DateInPastException("Time and date set is in the past");
             }
             var e = new Event
             {

@@ -25,8 +25,11 @@ namespace PotLogService
             }
             catch (ArgumentException)
             {
-
                 throw new FaultException("Minimumsprisen overstiger Maksimumsprisen");
+            }
+            catch (DateInPastException)
+            {
+                throw new FaultException("Tidspunktet er i fortiden");
             }
         }
 
