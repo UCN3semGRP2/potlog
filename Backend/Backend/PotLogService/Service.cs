@@ -19,8 +19,15 @@ namespace PotLogService
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
+            try
+            {
+                return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+            }
+            catch (ArgumentException)
+            {
 
-            return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                throw new FaultException("Minimumsprisen overstiger Maksimumsprisen");
+            }
         }
 
         public void CreateUser(string firstName, string lastName, string email, string password)

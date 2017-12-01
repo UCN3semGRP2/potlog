@@ -16,6 +16,10 @@ namespace BLL
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
+            if (priceFrom > priceTo)
+            {
+                throw new ArgumentException("PriceTo must be larger than priceFrom");
+            }
             var e = new Event
             {
                 Title = title,

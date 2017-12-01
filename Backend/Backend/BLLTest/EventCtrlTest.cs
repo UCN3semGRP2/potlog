@@ -118,5 +118,22 @@ namespace BLLTest
             Assert.IsTrue(c.Id == foundComponent.Id);
             Assert.IsTrue(foundComponent is Category); //is returns true if an instance is in the inheritance tree
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), 
+            "PriceFrom is NOT smaller than priceTo")]
+        public void TestPriceFromIsLargerThanPriceTo()
+        {
+            // Arrange
+            EventCtrl eCtrl = new EventCtrl();
+            double priceFrom = 100;
+            double priceTo = 50;
+            // Act
+            var e = eCtrl.CreateEvent("Event", "Evently event",
+               2, priceFrom, priceTo, "Right here", DateTime.Now, true, null);
+
+            // Assert
+            Assert.Fail();
+        }
     }
 }
