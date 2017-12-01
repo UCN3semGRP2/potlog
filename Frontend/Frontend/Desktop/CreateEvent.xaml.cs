@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace Desktop
 
         private void btnCreateEvent_Click(object sender, RoutedEventArgs e)
         {
+
             if (
                 tbEventName.Text.Length != 0 &&
                 tbEventLocation.Text.Length != 0 &&
@@ -55,19 +57,27 @@ namespace Desktop
                 int maxPrice;
                 Int32.TryParse(tbEventMaxPrice.Text, out maxPrice);
 
-                var evnt = service.CreateEvent(
-                    tbEventName.Text,
-                    tbEventDescription.Text,
-                    numOfParticipants,
-                    minPrice,
-                    maxPrice,
-                    tbEventLocation.Text,
-                    datetime,
-                    isPublic,
-                    user
-                );
-                MessageBox.Show("Event oprettet");
-                this.NavigationService.Navigate(new EventDetails(evnt, user));
+                try
+                {
+                    var evnt = service.CreateEvent(
+                               tbEventName.Text,
+                               tbEventDescription.Text,
+                               numOfParticipants,
+                               minPrice,
+                               maxPrice,
+                               tbEventLocation.Text,
+                               datetime,
+                               isPublic,
+                               user
+                           );
+                    MessageBox.Show("Event oprettet");
+                    this.NavigationService.Navigate(new EventDetails(evnt, user));
+                }
+                catch (FaultException err)
+                {
+                    MessageBox.Show(err.Message);
+                    return;
+                }
             } else
             {
                 MessageBox.Show("Oplysninger mangler");
