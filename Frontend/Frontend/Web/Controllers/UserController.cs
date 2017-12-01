@@ -66,6 +66,8 @@ namespace Web.Controllers
             try
             {
                 service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
+                ViewBag.SuccessMessage = "Bruger er nu oprettet";
+                return View();
             }
             catch (FaultException fax)
             {
