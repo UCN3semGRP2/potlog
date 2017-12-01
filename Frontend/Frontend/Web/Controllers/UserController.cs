@@ -108,7 +108,9 @@ namespace Web.Controllers
                 Password = model.Password                
             };
             //Todo service.UpdateUser(u);
-            return RedirectToAction("SignedUpEvents", "MainPage");
+            ViewBag.SuccessMessage = "Bruger er nu opdateret";
+            return View();
+            //return RedirectToAction("SignedUpEvents", "MainPage");
         }
     }
 }
