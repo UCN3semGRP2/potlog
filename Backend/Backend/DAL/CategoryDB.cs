@@ -54,7 +54,7 @@ namespace DAL
                 var cat = query
                   .FirstOrDefault();
                 cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.Parent.Id == cat.Id));
-
+                //TODO only for one level do for all levels
                 foreach (var subcomp in cat.Components)
                 {
                     if (subcomp is Category)

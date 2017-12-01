@@ -141,7 +141,8 @@ namespace BLLTest
             var foundCategory = cCtrl.FindCategoryById(category.Id);
             var foundItem = ((Item)((Category)evnt.Components[0]).Components[0]);
             Assert.IsNotNull(foundItem);
-            Assert.IsTrue(foundCategory.Components.Count > 0);
+            Assert.IsTrue(foundCategory.Components.Count == 1);
+            Assert.IsTrue(foundCategory.Components[0].Id == foundItem.Id);
 
         }
 
