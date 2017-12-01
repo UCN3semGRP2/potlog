@@ -57,10 +57,10 @@ namespace PotLogService
             return uCtrl.IsRegisteredToEvent(u, e);
         }
 
-        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription)
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Component parent)
         {
             //TODO refactor to ectrl
-            Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription);
+            Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription, parent);
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
         }

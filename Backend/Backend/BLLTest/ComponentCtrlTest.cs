@@ -17,7 +17,7 @@ namespace BLLTest
             string description = "Category description";
 
             // Act
-            var cat = cCtrl.CreateCategory(title, description);
+            var cat = cCtrl.CreateCategory(title, description, null);
 
             // Assert
             var foundCategory = cCtrl.FindCategoryById(cat.Id);

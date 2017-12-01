@@ -9,5 +9,6 @@ namespace Model
     public class Item : Component
     {
         public int Amount { get; set; }
+        public int ComponetId { get; set; }
     }
 }

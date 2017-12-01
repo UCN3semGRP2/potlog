@@ -69,6 +69,10 @@ namespace BLL
         public void AddItem(Event evnt, Category category, Item item)
         {
             category.Components.Add(item);
+            item.Event = category.Event;
+            item.EventId = category.EventId;
+            item.Parent = category;
+            item.ComponetId = category.Id;
             eDB.Update(evnt);
         }
     }

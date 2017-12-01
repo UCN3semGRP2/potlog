@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -45,10 +46,18 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
-                return (Category)ctx.Components
-                    .Where(x => x is Category)
-                    .Where(x => x.Id == id)
-                    .FirstOrDefault();
+                var query = ctx.Components.OfType<Category>()
+                  .Where(x => x.Id == id)
+                  .Include(x => x.Components);
+                Console.WriteLine(query.ToString());
+
+                var cat = query
+                  .FirstOrDefault();
+                  
+                return cat;
+                
+                
+
             }
         }
 

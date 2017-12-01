@@ -105,6 +105,9 @@ namespace DAL
                     }
                 }
             }
+            else
+            {
+            }
             
             ctx.Components.Attach(component);
             ctx.Entry(component).State = System.Data.Entity.EntityState.Modified;

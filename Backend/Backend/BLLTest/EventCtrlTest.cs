@@ -106,7 +106,7 @@ namespace BLLTest
             EventCtrl eCtrl = new EventCtrl();
             var e = eCtrl.CreateEvent("Event", "Evently event",
                 2, 20, 100, "Right here", DateTime.Now, true, null);
-            Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat");
+            Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat", null);
 
             //Act
             eCtrl.AddCategory(e, c);
@@ -130,9 +130,11 @@ namespace BLLTest
             EventCtrl eCtrl = new EventCtrl();
             // Act
             var evnt = eCtrl.CreateEvent("E Title", "E Desc", 42, 42, 42, "E Location", DateTime.Now.AddDays(5), true, null);
-            var category = cCtrl.CreateCategory("Cat Name", "Cat desc");
+            var category = cCtrl.CreateCategory("Cat Name", "Cat desc", null);
             eCtrl.AddCategory(evnt, category);
-            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42);
+            //var category2 = cCtrl.CreateCategory("Cat2 Name2", "Cat2 desc2", category);
+            //eCtrl.AddCategory(evnt, category2);
+            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42, category);
             eCtrl.AddItem(evnt, category, item);
 
             // Assert
