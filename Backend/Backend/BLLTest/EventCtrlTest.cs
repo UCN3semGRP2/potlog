@@ -118,5 +118,30 @@ namespace BLLTest
             Assert.IsTrue(c.Id == foundComponent.Id);
             Assert.IsTrue(foundComponent is Category); //is returns true if an instance is in the inheritance tree
         }
+
+
+        [TestMethod]
+        public void TestAddItem()
+        {
+
+
+            // Arrange
+            ComponentCtrl cCtrl = new ComponentCtrl();
+            EventCtrl eCtrl = new EventCtrl();
+            // Act
+            var evnt = eCtrl.CreateEvent("E Title", "E Desc", 42, 42, 42, "E Location", DateTime.Now.AddDays(5), true, null);
+            var category = cCtrl.CreateCategory("Cat Name", "Cat desc");
+            eCtrl.AddCategory(evnt, category);
+            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42);
+            eCtrl.AddItem(evnt, category, item);
+
+            // Assert
+            var foundCategory = cCtrl.FindCategoryById(category.Id);
+            var foundItem = ((Item)((Category)evnt.Components[0]).Components[0]);
+            Assert.IsNotNull(foundItem);
+            Assert.IsTrue(foundCategory.Components.Count > 0);
+
+        }
+
     }
 }
