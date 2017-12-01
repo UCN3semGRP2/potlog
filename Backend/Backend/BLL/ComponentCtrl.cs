@@ -11,6 +11,8 @@ namespace BLL
     public class ComponentCtrl
     {
         public ICategoryDB catDB = new CategoryDB();
+        public IItemDB iDB = new ItemDB();
+
         public Category CreateCategory(string title, string description)
         {
             var c = new Category
@@ -25,6 +27,22 @@ namespace BLL
         public Category FindCategoryById(int id)
         {
             return catDB.FindByID(id);
+        }
+
+        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, Category category)
+        {
+            var item = new Item
+            {
+                Title = itemTitle,
+                Description = itemDescription,
+                Amount = itemAmount
+            };
+
+            var createdItem = iDB.Create(item);
+            category.Components.Add(item);
+            catDB.Update(category);
+
+            return null;
         }
     }
 }

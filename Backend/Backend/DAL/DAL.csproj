@@ -57,7 +57,9 @@
     <Compile Include="DALContext.cs" />
     <Compile Include="EventDB.cs" />
     <Compile Include="IEventDB.cs" />
+    <Compile Include="IItemDB.cs" />
     <Compile Include="IRegistrationDB.cs" />
+    <Compile Include="ItemDB.cs" />
     <Compile Include="IUserDB.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
