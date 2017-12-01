@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 
 namespace Desktop
 {
@@ -81,6 +82,31 @@ namespace Desktop
 
             //var nextPage = TODO
             //this.NavigationService.Navigate(nextPage);
+        }
+
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            string catName = Interaction.InputBox(
+                "Indtast venligst navnet på kategorien nedenfor.",
+                "Ny Kategori: Navn",
+                ""
+                );
+
+            string catDesc = Interaction.InputBox(
+                "Indtast venligst en beskrivende tekst om kategorien nedenfor.",
+                "Ny Kategori: Beskrivelse",
+                ""
+                );
+
+            if (!catName.Equals("") && !catDesc.Equals(""))
+            {
+                service.AddCategoryToEvent(this.e.Id, catName, catDesc);
+                MessageBox.Show("Kategorien er tilføjet til eventet");
+            }
+            else
+            {
+                MessageBox.Show("Tilføjelse af kategori anulleret.");
+            }
         }
     }
 }

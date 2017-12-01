@@ -61,13 +61,27 @@
   </xs:complexType>
   <xs:element name="ArrayOfComponent" nillable="true" type="tns:ArrayOfComponent" />
   <xs:complexType name="Component">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Event" nillable="true" type="tns:Event" />
-      <xs:element minOccurs="0" name="EventId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:sequence />
   </xs:complexType>
   <xs:element name="Component" nillable="true" type="tns:Component" />
+  <xs:complexType name="Category">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Component">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Components" nillable="true" type="tns:ArrayOfComponent" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:complexType name="Item">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Component">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Item" nillable="true" type="tns:Item" />
 </xs:schema>
