@@ -13,8 +13,8 @@
         <TextBox x:Name="Txt_Email" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="198,103,0,0"/>
         <PasswordBox x:Name="Pw_Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="198,131,0,0" Width="120" Height="23"/>
         <Label Content="Password :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,128,0,0"/>
-        <Button x:Name="Btn_LogIn" Content="Log Ind" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="243,159,0,0" Click="BtnLogIn_Click"/>
-        <Button x:Name="Btn_CreateUser" Content="Opret Bruger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="128,159,0,0" Click="Btn_CreateUser_Click"/>
+        <Button x:Name="Btn_LogIn" Content="Log Ind" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="163,159,0,0" Click="BtnLogIn_Click"/>
+        <Button x:Name="Btn_CreateUser" Content="Opret Bruger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="243,159,0,0" Click="Btn_CreateUser_Click"/>
 
     </Grid>
 </Page>
