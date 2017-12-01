@@ -71,8 +71,7 @@ namespace DAL
                         {
                             foreach (var comp in entity.Components)
                             {
-                                ctx.Components.Attach(comp);   
-                                ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
+                                AttachComponent(ctx, comp);
                             }
                         }
                         ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
@@ -86,6 +85,31 @@ namespace DAL
                         throw ex;
                     }
             }
+        }
+
+        private void AttachComponent(DALContext ctx, Component component)
+        {
+            if (component is Category)
+            {
+                var cats = ((Category)component);
+                if (cats.Components != null)
+                {
+                    foreach (var comp in cats.Components)
+                    {
+                        ctx.Components.Attach(comp);
+                        ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
+                        if (comp is Category)
+                        {
+                            AttachComponent(ctx, comp);
+                        }
+                    }
+                }
+            }
+            
+            ctx.Components.Attach(component);
+            ctx.Entry(component).State = System.Data.Entity.EntityState.Modified;
+            
+
         }
     }
 }

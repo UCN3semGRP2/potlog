@@ -11,7 +11,7 @@ namespace DAL
     {
         public Item Create(Item entity)
         {
-            using (DALContext ctx = new DALContext())
+            using (var ctx = new DALContext())
             {
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {

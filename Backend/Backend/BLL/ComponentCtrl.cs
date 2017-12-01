@@ -29,7 +29,7 @@ namespace BLL
             return catDB.FindByID(id);
         }
 
-        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, Category category)
+        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount)
         {
             var item = new Item
             {
@@ -38,11 +38,7 @@ namespace BLL
                 Amount = itemAmount
             };
 
-            var createdItem = iDB.Create(item);
-            category.Components.Add(item);
-            catDB.Update(category);
-
-            return null;
+            return iDB.Create(item);
         }
     }
 }
