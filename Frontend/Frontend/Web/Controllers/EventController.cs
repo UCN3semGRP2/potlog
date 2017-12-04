@@ -115,7 +115,8 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult CreateCategory(CreateComponentViewModel model)
         {
-            service.AddCategoryToEvent(model.EventId, model.Title, model.Description);
+            // TODO Methods must handle parents.
+            service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
             return RedirectToAction("Details", new { id = model.EventId });
         }
 
