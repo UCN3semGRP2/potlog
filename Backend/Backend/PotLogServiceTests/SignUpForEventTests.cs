@@ -40,7 +40,7 @@ namespace PotLogServiceTests
                 .Contains(User.Id);
             Assert.IsTrue(userIsRegistered, "user is registered on returned event");
 
-            Assert.IsTrue(service.IsRegisteredToEvent(User, Evnt), "User is registed using the isRegisteredToEvent method");
+            Assert.IsTrue(service.IsRegisteredToEvent(User, Evnt), "User is registred using the isRegisteredToEvent method");
         }
     }
 }

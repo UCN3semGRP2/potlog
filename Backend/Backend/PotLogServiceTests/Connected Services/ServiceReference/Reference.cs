@@ -572,6 +572,21 @@ namespace PotLogServiceTests.ServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private PotLogServiceTests.ServiceReference.Event EventField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> EventIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -579,6 +594,71 @@ namespace PotLogServiceTests.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public PotLogServiceTests.ServiceReference.Event Event {
+            get {
+                return this.EventField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventField, value) != true)) {
+                    this.EventField = value;
+                    this.RaisePropertyChanged("Event");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
             }
         }
         
@@ -678,6 +758,12 @@ namespace PotLogServiceTests.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
         System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(PotLogServiceTests.ServiceReference.User u, PotLogServiceTests.ServiceReference.Event e);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        PotLogServiceTests.ServiceReference.Category FindCategoryById(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Category> FindCategoryByIdAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
         void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
         
@@ -758,6 +844,14 @@ namespace PotLogServiceTests.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(PotLogServiceTests.ServiceReference.User u, PotLogServiceTests.ServiceReference.Event e) {
             return base.Channel.IsRegisteredToEventAsync(u, e);
+        }
+        
+        public PotLogServiceTests.ServiceReference.Category FindCategoryById(int id) {
+            return base.Channel.FindCategoryById(id);
+        }
+        
+        public System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Category> FindCategoryByIdAsync(int id) {
+            return base.Channel.FindCategoryByIdAsync(id);
         }
         
         public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription) {
