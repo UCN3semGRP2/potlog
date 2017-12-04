@@ -720,9 +720,6 @@ namespace Desktop.ServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int AmountField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ComponetIdField;
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int Amount {
             get {
@@ -732,19 +729,6 @@ namespace Desktop.ServiceReference {
                 if ((this.AmountField.Equals(value) != true)) {
                     this.AmountField = value;
                     this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ComponetId {
-            get {
-                return this.ComponetIdField;
-            }
-            set {
-                if ((this.ComponetIdField.Equals(value) != true)) {
-                    this.ComponetIdField = value;
-                    this.RaisePropertyChanged("ComponetId");
                 }
             }
         }
