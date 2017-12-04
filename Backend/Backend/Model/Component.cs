@@ -22,5 +22,10 @@ namespace Model
         public Event Event { get; set; }
         public int? EventId { get; set; }
         public Component Parent { get; set; }
+        public override string ToString()
+        {
+            return this.Title;
+        }
     }
+
 }
