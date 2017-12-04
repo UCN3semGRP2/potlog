@@ -81,5 +81,34 @@ namespace Desktop
                 ""
                 );
         }
+
+        private void cbTopLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateSecondLevel();
+        }
+
+        private void UpdateSecondLevel()
+        {
+            string topCatName = cbTopLevel.SelectedItem.ToString();
+            var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
+
+            if (topCat != null)
+            {
+                if (topCat.Components != null)
+                {
+                    List<string> LevelTwoTitles = new List<string>();
+                    foreach (var item in topCat.Components)
+                    {
+                        LevelTwoTitles.Add(item.Title);
+                    }
+
+                    cbLevelTwo.ItemsSource = LevelTwoTitles;
+                    cbLevelTwo.IsEnabled = true;
+                }
+
+                btnAddCatLevelTwo.IsEnabled = true;
+                btnAddItemLevelTwo.IsEnabled = true;
+            }
+        }
     }
 }
