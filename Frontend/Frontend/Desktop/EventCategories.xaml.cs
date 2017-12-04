@@ -84,10 +84,10 @@ namespace Desktop
 
         private void cbTopLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateSecondLevel();
+            UpdateSecondComboBox();
         }
 
-        private void UpdateSecondLevel()
+        private void UpdateSecondComboBox()
         {
             string topCatName = cbTopLevel.SelectedItem.ToString();
             var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
@@ -109,6 +109,42 @@ namespace Desktop
                 btnAddCatLevelTwo.IsEnabled = true;
                 btnAddItemLevelTwo.IsEnabled = true;
             }
+        }
+
+        private void btnAddCatLevelTwo_Click(object sender, RoutedEventArgs e)
+        {
+            string catName = InsertName("kategori");
+            string catDesc = InsertDesc("kategori");
+
+            string topCatName = cbTopLevel.SelectedItem.ToString();
+            var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
+
+            if (!catName.Equals("") && !catDesc.Equals(""))
+            {
+                service.AddCategoryToEvent(this.e.Id, catName, catDesc, topCat);
+                this.e = service.FindEventById(this.e.Id);
+                UpdateSecondComboBox();
+                MessageBox.Show("Kategorien er tilføjet til eventet");
+            }
+            else
+            {
+                MessageBox.Show("Tilføjelse af kategori anulleret.");
+            }
+
+        }
+
+        private void AddCategory()
+        {
+            //TODO Refactor Click-events.
+        }
+
+        private void UpdateComboBoxN(int n)
+        {
+            //TODO CASES
+            //switch (switch_on)
+            //{
+            //    default:
+            //}
         }
     }
 }
