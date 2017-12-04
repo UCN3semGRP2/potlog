@@ -49,8 +49,6 @@ namespace DAL
                 var query = ctx.Components.OfType<Category>()
                   .Where(x => x.Id == id)
                   .Include(x => x.Components);;
-                Console.WriteLine(query.ToString());
-
                 var cat = query
                   .FirstOrDefault();
                 cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.Parent.Id == cat.Id));
