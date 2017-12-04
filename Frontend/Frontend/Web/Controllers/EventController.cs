@@ -46,7 +46,7 @@ namespace Web.Controllers
 
             var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
 
-            return RedirectToAction("SignedUpEvents", "MainPage");
+            return RedirectToAction("Details", new { id = evnt.Id});
         }
 
         [HttpGet]

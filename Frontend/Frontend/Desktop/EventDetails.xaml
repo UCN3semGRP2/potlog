@@ -19,13 +19,14 @@
         <Label x:Name="lblEventTime" Content="" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Width="90"/>
         <RadioButton x:Name="rbEventPublic" Content="Offentlig" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,262,0,0" FontWeight="Bold"/>
         <RadioButton x:Name="rbEventPrivate" Content="Privat" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBlock x:Name="tbEventDescription" HorizontalAlignment="Left" Margin="201,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="189" Width="236"/>
+        <TextBlock x:Name="tbEventDescription" HorizontalAlignment="Left" Margin="201,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="150" Width="236"/>
         <Label Content="Beskrivelse" HorizontalAlignment="Left" Margin="285,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="Antal deltagere" HorizontalAlignment="Left" Margin="201,239,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label x:Name="lblEventNumOfParticipants" Content="" HorizontalAlignment="Left" Margin="201,262,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label Content="Antal deltagere" HorizontalAlignment="Left" Margin="201,191,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lblEventNumOfParticipants" Content="" HorizontalAlignment="Left" Margin="201,217,0,0" VerticalAlignment="Top" Width="134"/>
         <Button x:Name="btnEventEdit" Content="Rediger" HorizontalAlignment="Left" Margin="420,281,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnEventSeeParticipants" Content="Se deltagere" HorizontalAlignment="Left" Margin="340,281,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnEventRegister" Content="Tilmeld" HorizontalAlignment="Left" Margin="420,250,0,0" VerticalAlignment="Top" Width="75" Click="btnEventRegister_Click"/>
+        <Button x:Name="btnAddCategory" Content="Tilføj Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="245,281,0,0" Click="btnAddCategory_Click"/>
 
     </Grid>
 </Page>

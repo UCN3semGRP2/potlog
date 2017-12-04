@@ -55,7 +55,7 @@ namespace Desktop
                 int maxPrice;
                 Int32.TryParse(tbEventMaxPrice.Text, out maxPrice);
 
-                service.CreateEvent(
+                var evnt = service.CreateEvent(
                     tbEventName.Text,
                     tbEventDescription.Text,
                     numOfParticipants,
@@ -67,6 +67,7 @@ namespace Desktop
                     user
                 );
                 MessageBox.Show("Event oprettet");
+                this.NavigationService.Navigate(new EventDetails(evnt, user));
             } else
             {
                 MessageBox.Show("Oplysninger mangler");
