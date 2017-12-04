@@ -101,6 +101,7 @@
         <xs:element minOccurs="0" name="eventId" type="xs:int" />
         <xs:element minOccurs="0" name="categoryTitle" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="categoryDescription" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="parent" nillable="true" type="q7:Component" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -79,6 +79,7 @@
       <xs:extension base="tns:Component">
         <xs:sequence>
           <xs:element minOccurs="0" name="Amount" type="xs:int" />
+          <xs:element minOccurs="0" name="ComponetId" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
