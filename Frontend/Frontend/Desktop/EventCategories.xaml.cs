@@ -28,10 +28,10 @@ namespace Desktop
         {
             InitializeComponent();
             e = evnt;
-            FillTopComboBox();
+            UpdateTopComboBox();
         }
 
-        private void FillTopComboBox()
+        private void UpdateTopComboBox()
         {
             if (e.Components != null)
             {
@@ -48,31 +48,38 @@ namespace Desktop
             //TODO Level 2 and Level 3.
         }
 
-        private void btnAddTopLevel_Click(object sender, RoutedEventArgs e)
+        private void btnAddCatTopLevel_Click(object sender, RoutedEventArgs e)
         {
-            string catName = Interaction.InputBox(
-                "Indtast venligst navnet på kategorien nedenfor.",
-                "Ny Kategori: Navn",
-                ""
-                );
-
-            string catDesc = Interaction.InputBox(
-                "Indtast venligst en beskrivende tekst om kategorien nedenfor.",
-                "Ny Kategori: Beskrivelse",
-                ""
-                );
+            string catName = InsertName("kategori");
+            string catDesc = InsertDesc("kategori");
 
             if (!catName.Equals("") && !catDesc.Equals(""))
             {
                 service.AddCategoryToEvent(this.e.Id, catName, catDesc, null);
                 this.e = service.FindEventById(this.e.Id);
-                FillTopComboBox();
+                UpdateTopComboBox();
                 MessageBox.Show("Kategorien er tilføjet til eventet");
             }
             else
             {
                 MessageBox.Show("Tilføjelse af kategori anulleret.");
             }
+        }
+        private string InsertName(string catOrItem)
+        {
+            return Interaction.InputBox(
+                String.Format("Indtast venligst navnet på den nye {0} nedenfor.", catOrItem),
+                String.Format("Ny {0}: Navn", catOrItem),
+                ""
+                );
+        }
+        private string InsertDesc(string catOrItem)
+        {
+            return Interaction.InputBox(
+                String.Format("Indtast venligst en beskrivende tekst om den nye {0} nedenfor.", catOrItem),
+                String.Format("Ny {0}: Beskrivelse", catOrItem),
+                ""
+                );
         }
     }
 }
