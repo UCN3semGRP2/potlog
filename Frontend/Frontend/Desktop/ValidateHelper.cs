@@ -38,7 +38,7 @@ namespace Desktop
             else
             {
                 tb.BorderBrush = Brushes.Red;
-                tb.ToolTip = "Der må kun skrives tal i dette felt";
+                tb.ToolTip = "Der må kun skrives tal større end 0 i dette felt";
             }
         }
 
