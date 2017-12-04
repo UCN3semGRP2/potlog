@@ -30,11 +30,11 @@ namespace Desktop
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
-            if (tb_Password.Text.Equals(tb_RepeatPassword.Text) 
-                && tb_Email.Text.Length != 0 
-                && tb_Firstname.Text.Length != 0 
+            if (ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text)
+                && ValidateHelper.validateEmail(tb_Email.Text)
+                && tb_Firstname.Text.Length != 0
                 && tb_Lastname.Text.Length != 0
-                && tb_Password.Text.Length >= 6)
+                && ValidateHelper.validatePassword(tb_Password.Text))
             {
                 try
                 {
@@ -53,6 +53,7 @@ namespace Desktop
             else
             {
                 MessageBox.Show("Vær sød at indtaste alle de nødvendige oplysninger.");
+                return;
             }
 
             this.NavigationService.Navigate(new UserLogIn());

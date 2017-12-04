@@ -75,8 +75,6 @@ namespace Web.Controllers
                 return View();
                 
             }
-
-            return RedirectToAction("LogIn");
         }
 
         [HttpGet]
