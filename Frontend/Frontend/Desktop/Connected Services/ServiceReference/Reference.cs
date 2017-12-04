@@ -779,6 +779,18 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
         System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddItemToCategory", ReplyAction="http://tempuri.org/IService/AddItemToCategoryResponse")]
+        void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddItemToCategory", ReplyAction="http://tempuri.org/IService/AddItemToCategoryResponse")]
+        System.Threading.Tasks.Task AddItemToCategoryAsync(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        Desktop.ServiceReference.Category FindCategoryById(int categoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Category> FindCategoryByIdAsync(int categoryId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -862,6 +874,22 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent) {
             return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription, parent);
+        }
+        
+        public void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription) {
+            base.Channel.AddItemToCategory(eventId, categoryId, amount, itemTitle, itemDescription);
+        }
+        
+        public System.Threading.Tasks.Task AddItemToCategoryAsync(int eventId, int categoryId, int amount, string itemTitle, string itemDescription) {
+            return base.Channel.AddItemToCategoryAsync(eventId, categoryId, amount, itemTitle, itemDescription);
+        }
+        
+        public Desktop.ServiceReference.Category FindCategoryById(int categoryId) {
+            return base.Channel.FindCategoryById(categoryId);
+        }
+        
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Category> FindCategoryByIdAsync(int categoryId) {
+            return base.Channel.FindCategoryByIdAsync(categoryId);
         }
     }
 }

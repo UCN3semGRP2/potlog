@@ -43,5 +43,10 @@ namespace BLL
 
             return iDB.Create(item);
         }
+
+        public IEnumerable<Component> FindComponentByParentId(int id)
+        {
+            return catDB.FindComponentByParentId(id);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace DAL
 {
     public interface ICategoryDB : ICRUD<Category>
     {
+        IEnumerable<Component> FindComponentByParentId(int id);
     }
 }

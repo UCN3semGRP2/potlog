@@ -82,5 +82,15 @@ namespace PotLogService
             Item item = cCtrl.CreateItem(itemTitle, itemDescription, amount, c);
             eCtrl.AddItem(e, c, item);
         }
+
+        public Category FindCategoryById(int categoryId)
+        {
+            return cCtrl.FindCategoryById(categoryId);
+        }
+
+        public IEnumerable<Component> FindComponentByParentId(int id)
+        {
+            return cCtrl.FindComponentByParentId(id);
+        }
     }
 }

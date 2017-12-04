@@ -71,6 +71,18 @@ namespace DAL
             }
         }
 
+        public IEnumerable<Component> FindComponentByParentId(int id)
+        {
+            IEnumerable<Component> components = null;
+            using (var ctx = new DALContext())
+            {
+                components = ctx.Components.Where(c => c.Parent.Id == id).ToArray();
+
+            }
+
+            return components;
+        }
+
         public void Update(Category entity)
         {
             throw new NotImplementedException();
