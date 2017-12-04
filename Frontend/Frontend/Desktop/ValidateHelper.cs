@@ -17,7 +17,14 @@ namespace Desktop
         
         public static bool checkStringForNumbers(string testString)
         {
-            return regexNumbers.IsMatch(testString);
+            if(!regexNumbers.IsMatch(testString))
+            {
+                return false;
+            }
+
+            int val;
+            Int32.TryParse(testString, out val);
+            return val > 0;
         }
 
         public static void checkNumberTooltip(TextBox tb)
@@ -31,7 +38,7 @@ namespace Desktop
             else
             {
                 tb.BorderBrush = Brushes.Red;
-                tb.ToolTip = "Der må kun skrives tal i dette felt";
+                tb.ToolTip = "Der må kun skrives tal større end 0 i dette felt";
             }
         }
 

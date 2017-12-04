@@ -26,7 +26,7 @@ namespace BLLTest
                 PriceFrom = 100.0,
                 PriceTo = 200.0,
                 Location = "Sofiendalsvej 60",
-                Datetime = DateTime.Now,
+                Datetime = DateTime.Now.AddHours(1), //+1 hour from now to not trigger the past date exception
                 IsPublic = true
             };
 
@@ -53,7 +53,7 @@ namespace BLLTest
                 PriceFrom = 100.0,
                 PriceTo = 200.0,
                 Location = "Sofiendalsvej 60",
-                Datetime = DateTime.Now,
+                Datetime = DateTime.Now.AddHours(1), //+1 hour from now to not trigger the past date exception
                 IsPublic = true
             };
             var user = uCtrl.CreateUser("efrgfvd", "fss", "sdf@sdf.dk" + Guid.NewGuid(), "dsasdc");
@@ -117,6 +117,23 @@ namespace BLLTest
             var foundComponent = foundEvent.Components.First();
             Assert.IsTrue(c.Id == foundComponent.Id);
             Assert.IsTrue(foundComponent is Category); //is returns true if an instance is in the inheritance tree
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), 
+            "PriceFrom is NOT smaller than priceTo")]
+        public void TestPriceFromIsLargerThanPriceTo()
+        {
+            // Arrange
+            EventCtrl eCtrl = new EventCtrl();
+            double priceFrom = 100;
+            double priceTo = 50;
+            // Act
+            var e = eCtrl.CreateEvent("Event", "Evently event",
+               2, priceFrom, priceTo, "Right here", DateTime.Now, true, null);
+
+            // Assert
+            Assert.Fail();
         }
     }
 }
