@@ -66,6 +66,8 @@ namespace Web.Controllers
             try
             {
                 service.CreateUser(model.Firstname, model.Lastname, model.Email, model.Password);
+                ViewBag.SuccessMessage = "Bruger er nu oprettet";
+                return View();
             }
             catch (FaultException fax)
             {
@@ -73,8 +75,6 @@ namespace Web.Controllers
                 return View();
                 
             }
-
-            return RedirectToAction("LogIn");
         }
 
         [HttpGet]
@@ -106,7 +106,9 @@ namespace Web.Controllers
                 Password = model.Password                
             };
             //Todo service.UpdateUser(u);
-            return RedirectToAction("SignedUpEvents", "MainPage");
+            ViewBag.SuccessMessage = "Bruger er nu opdateret";
+            return View();
+            //return RedirectToAction("SignedUpEvents", "MainPage");
         }
     }
 }
