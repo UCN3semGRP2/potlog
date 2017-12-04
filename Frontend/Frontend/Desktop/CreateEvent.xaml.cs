@@ -71,7 +71,10 @@ namespace Desktop
                                user
                            );
                     MessageBox.Show("Event oprettet");
-                    this.NavigationService.Navigate(new EventDetails(evnt, user));
+
+                    var eventWindow = new EventWindow(evnt, user);
+                    eventWindow.Show();
+                    this.NavigationService.Navigate(new MainPage());
                 }
                 catch (FaultException err)
                 {
