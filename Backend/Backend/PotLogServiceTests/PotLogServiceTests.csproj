@@ -56,9 +56,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="CreateEventTests.cs" />
     <Compile Include="CreateUserTests.cs" />
+    <Compile Include="FindEventByIdTests.cs" />
     <Compile Include="LogInTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignUpForEventTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
