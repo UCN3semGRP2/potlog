@@ -28,19 +28,21 @@ namespace Desktop
         {
             InitializeComponent();
             e = evnt;
-            FillTopComboBoxes();
+            FillTopComboBox();
         }
 
-        private void FillTopComboBoxes()
+        private void FillTopComboBox()
         {
-            if (e.Components.Count() > 0)
+            if (e.Components != null)
             {
-                cbTopLevel.IsEnabled = true;
-
+                List<string> topCompTitles = new List<string>();
                 foreach (var item in e.Components)
-                {
-                    cbTopLevel.Items.Add(item);
+                { 
+                    topCompTitles.Add(item.Title);
                 }
+
+                cbTopLevel.ItemsSource = topCompTitles;
+                cbTopLevel.IsEnabled = true;
             }
 
             //TODO Level 2 and Level 3.
@@ -63,6 +65,8 @@ namespace Desktop
             if (!catName.Equals("") && !catDesc.Equals(""))
             {
                 service.AddCategoryToEvent(this.e.Id, catName, catDesc, null);
+                this.e = service.FindEventById(this.e.Id);
+                FillTopComboBox();
                 MessageBox.Show("Kategorien er tilføjet til eventet");
             }
             else
