@@ -12,7 +12,7 @@ namespace Model
     // serialize/deserialize correctly
     [KnownType(typeof(Category))]
     [KnownType(typeof(Item))]
-    [DataContract]
+    [DataContract(IsReference = true)]
     public abstract class Component
     {
         public int Id { get; set; }
