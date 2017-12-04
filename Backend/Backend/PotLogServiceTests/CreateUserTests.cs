@@ -47,5 +47,73 @@ namespace PotLogServiceTests
             // Should never go here
             Assert.Fail();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void TestCreateUserWithNoFirstName()
+        {
+            var firstName = "";
+            var lastName = "lastname";
+            var email = "email@address.dk" + Guid.NewGuid();
+            var password = "hunter1";
+
+            // Act
+            service.CreateUser(firstName, lastName, email, password);
+
+            // Assert
+            // Should never go here
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void TestCreateUserWithNoLastName()
+        {
+            var firstName = "firstnae";
+            var lastName = "";
+            var email = "email@address.dk" + Guid.NewGuid();
+            var password = "hunter1";
+
+            // Act
+            service.CreateUser(firstName, lastName, email, password);
+
+            // Assert
+            // Should never go here
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void TestCreateUserWithNoEmail()
+        {
+            var firstName = "firstnae";
+            var lastName = "lastname";
+            var email = "";
+            var password = "hunter1";
+
+            // Act
+            service.CreateUser(firstName, lastName, email, password);
+
+            // Assert
+            // Should never go here
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void TestCreateUserWithNoPassword()
+        {
+            var firstName = "firstnae";
+            var lastName = "lastname";
+            var email = "email@address.dk" + Guid.NewGuid();
+            var password = "";
+
+            // Act
+            service.CreateUser(firstName, lastName, email, password);
+
+            // Assert
+            // Should never go here
+            Assert.Fail();
+        }
     }
 }
