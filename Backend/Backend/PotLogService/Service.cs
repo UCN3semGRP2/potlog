@@ -64,5 +64,13 @@ namespace PotLogService
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
         }
+
+        public void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription)
+        {
+            Category c = cCtrl.FindCategoryById(categoryId);
+            Event e = eCtrl.FindById(eventId);
+            Item item = cCtrl.CreateItem(itemTitle, itemDescription, amount, c);
+            eCtrl.AddItem(e, c, item);
+        }
     }
 }
