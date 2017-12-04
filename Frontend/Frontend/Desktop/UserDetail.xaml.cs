@@ -37,7 +37,7 @@ namespace Desktop
                 && ValidateHelper.isEntered(tb_Lastname)
                 && ValidateHelper.validatePassword(tb_Password.Password))
             {
-                //TODO
+                // TODO:
                 MessageBox.Show("Brugeroplysninger er blevet opdateret");
                 this.NavigationService.Navigate(new MainPage());
             }
