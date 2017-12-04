@@ -88,7 +88,7 @@ namespace PotLogService
             return cCtrl.FindCategoryById(categoryId);
         }
 
-        public IEnumerable<Component> FindComponentByParentId(int id)
+        public List<Component> FindComponentByParentId(int id)
         {
             return cCtrl.FindComponentByParentId(id);
         }

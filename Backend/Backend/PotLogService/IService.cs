@@ -37,6 +37,6 @@ namespace PotLogService
         [OperationContract]
         Category FindCategoryById(int categoryId);
         [OperationContract]
-        IEnumerable<Component> FindComponentByParentId(int id);
+        List<Component> FindComponentByParentId(int id);
     }
 }

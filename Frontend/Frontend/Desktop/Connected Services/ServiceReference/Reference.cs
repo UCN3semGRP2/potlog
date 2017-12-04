@@ -791,6 +791,12 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Category> FindCategoryByIdAsync(int categoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindComponentByParentId", ReplyAction="http://tempuri.org/IService/FindComponentByParentIdResponse")]
+        Desktop.ServiceReference.Component[] FindComponentByParentId(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindComponentByParentId", ReplyAction="http://tempuri.org/IService/FindComponentByParentIdResponse")]
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -890,6 +896,14 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Category> FindCategoryByIdAsync(int categoryId) {
             return base.Channel.FindCategoryByIdAsync(categoryId);
+        }
+        
+        public Desktop.ServiceReference.Component[] FindComponentByParentId(int id) {
+            return base.Channel.FindComponentByParentId(id);
+        }
+        
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id) {
+            return base.Channel.FindComponentByParentIdAsync(id);
         }
     }
 }

@@ -91,13 +91,14 @@ namespace Desktop
         {
             string topCatName = cbTopLevel.SelectedItem.ToString();
             var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
+            var subComponents = service.FindComponentByParentId(topCat.Id);
 
             if (topCat != null)
             {
-                if (topCat.Components != null)
+                if (subComponents != null && subComponents.Count() > 0)
                 {
                     List<string> LevelTwoTitles = new List<string>();
-                    foreach (var item in topCat.Components)
+                    foreach (var item in subComponents)
                     {
                         LevelTwoTitles.Add(item.Title);
                     }
