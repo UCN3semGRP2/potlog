@@ -11,6 +11,14 @@
     <div class="alert alert-danger">@ViewBag.Message</div>
 }
 
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @ViewBag.SuccessMessage
+        Du kan nu @Html.ActionLink("Logge Ind", "LogIn")
+    </div>
+}
+
 
 @using (Html.BeginForm(FormMethod.Post)) 
 {

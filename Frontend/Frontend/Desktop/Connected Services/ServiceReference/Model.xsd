@@ -12,6 +12,8 @@
       <xs:element minOccurs="0" name="Registrations" nillable="true" type="tns:ArrayOfRegistration" />
       <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
   <xs:complexType name="Session">
@@ -20,6 +22,8 @@
       <xs:element minOccurs="0" name="GUID" type="ser:guid" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Session" nillable="true" type="tns:Session" />
   <xs:complexType name="ArrayOfRegistration">
@@ -35,6 +39,8 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Registration" nillable="true" type="tns:Registration" />
   <xs:complexType name="Event">
@@ -52,6 +58,8 @@
       <xs:element minOccurs="0" name="Registrations" nillable="true" type="tns:ArrayOfRegistration" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Event" nillable="true" type="tns:Event" />
   <xs:complexType name="ArrayOfComponent">
@@ -61,14 +69,9 @@
   </xs:complexType>
   <xs:element name="ArrayOfComponent" nillable="true" type="tns:ArrayOfComponent" />
   <xs:complexType name="Component">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Event" nillable="true" type="tns:Event" />
-      <xs:element minOccurs="0" name="EventId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Parent" nillable="true" type="tns:Component" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:sequence />
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Component" nillable="true" type="tns:Component" />
   <xs:complexType name="Category">
@@ -86,7 +89,6 @@
       <xs:extension base="tns:Component">
         <xs:sequence>
           <xs:element minOccurs="0" name="Amount" type="xs:int" />
-          <xs:element minOccurs="0" name="ComponetId" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

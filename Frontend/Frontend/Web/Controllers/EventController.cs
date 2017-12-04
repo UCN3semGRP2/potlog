@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
@@ -44,9 +45,17 @@ namespace Web.Controllers
 
             DateTime dt = model.Date + model.Time;
 
-            var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
+            try
+            {
+                var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
+                return RedirectToAction("Details", new { id = evnt.Id});
+            }
+            catch (FaultException err)
+            {
+                ViewBag.Message = err.Message;
+                return View();
+            }
 
-            return RedirectToAction("Details", new { id = evnt.Id});
         }
 
         [HttpGet]
