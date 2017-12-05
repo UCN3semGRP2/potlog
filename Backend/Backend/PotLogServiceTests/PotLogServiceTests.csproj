@@ -73,6 +73,9 @@
     <None Include="Connected Services\ServiceReference\PotLogServiceTests.ServiceReference.Category.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReference\PotLogServiceTests.ServiceReference.Component.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference\PotLogServiceTests.ServiceReference.Event.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

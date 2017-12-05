@@ -30,7 +30,7 @@ namespace PotLogServiceTests
 
             var title = "Cat Title";
             var description = "Cat Description";
-            service.AddCategoryToEvent(evnt.Id, title, description);
+            service.AddCategoryToEvent(evnt.Id, title, description, null);
 
             var foundEvnt = service.FindEventById(evnt.Id);
 
@@ -49,7 +49,7 @@ namespace PotLogServiceTests
             var description = "Description with no title";
             var evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
 
-            service.AddCategoryToEvent(evnt.Id, title, description);
+            service.AddCategoryToEvent(evnt.Id, title, description, null);
             
             Assert.Fail();
         }
@@ -61,7 +61,7 @@ namespace PotLogServiceTests
             var description = "";
             var evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
 
-            service.AddCategoryToEvent(evnt.Id, title, description);
+            service.AddCategoryToEvent(evnt.Id, title, description, null);
    
             Assert.Fail();
         }

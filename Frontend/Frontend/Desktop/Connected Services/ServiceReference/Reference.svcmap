@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b828410b-d26a-4db9-8ca1-ab634ad3e7e1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d1c5f466-12c4-4b0e-b036-ff4b6ee188ed" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="fbecae6f-8b73-4798-a6f9-74f1169bd473" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="cb4fc285-81ed-4663-b70d-b2a17e1622d5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6ab21ec6-f725-494f-8cf9-7cb0ef75421d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
-    <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="19fa2517-9c2a-44e5-a2d1-45182d43a247" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
+    <MetadataFile FileName="Model1.xsd" MetadataType="Schema" ID="14167b15-8ce4-4407-af68-ee6f71a7b5cc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

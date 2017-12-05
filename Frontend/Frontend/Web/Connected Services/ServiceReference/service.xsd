@@ -109,21 +109,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddCategoryToEvent">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="eventId" type="xs:int" />
-        <xs:element minOccurs="0" name="categoryTitle" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="categoryDescription" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="parent" nillable="true" type="q7:Component" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddCategoryToEventResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="UpdateUserInfo">
     <xs:complexType>
       <xs:sequence>
@@ -135,6 +120,51 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="UpdateUserInfoResult" nillable="true" type="q9:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCategoryToEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="eventId" type="xs:int" />
+        <xs:element minOccurs="0" name="categoryTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="categoryDescription" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="parent" nillable="true" type="q10:Component" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCategoryToEventResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddItemToCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="eventId" type="xs:int" />
+        <xs:element minOccurs="0" name="categoryId" type="xs:int" />
+        <xs:element minOccurs="0" name="amount" type="xs:int" />
+        <xs:element minOccurs="0" name="itemTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="itemDescription" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddItemToCategoryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindComponentByParentId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindComponentByParentIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="FindComponentByParentIdResult" nillable="true" type="q11:ArrayOfComponent" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
