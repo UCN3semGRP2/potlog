@@ -118,12 +118,6 @@ namespace BLLTest
             Assert.AreEqual(1, registeredUsers.Count);
             var u = registeredUsers[0];
             Assert.AreEqual(User.Id, u.Id);
-            //bool userIsRegistered = Evnt
-            //    .Registrations
-            //    .Select(x => x.User)
-            //    .Select(x => x.Id)
-            //    .Contains(User.Id);
-            //Assert.IsTrue(userIsRegistered, "user is registered on returned event");
 
             Assert.IsTrue(new UserCtrl().IsRegisteredToEvent(User, Evnt), "User is registred using the isRegisteredToEvent method");
         }
