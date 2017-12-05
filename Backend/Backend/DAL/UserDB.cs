@@ -24,7 +24,7 @@ namespace DAL
                         ctxTransaction.Commit();
                         return u;
                     }
-                    catch(System.Data.Entity.Infrastructure.DbUpdateException)
+                    catch (System.Data.Entity.Infrastructure.DbUpdateException)
                     {
                         ctxTransaction.Rollback();
                         return null;
@@ -65,6 +65,22 @@ namespace DAL
         public User FindByID(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public bool IsRegisteredToEvent(User user, Event evnt)
+        {
+            using (var ctx = new DALContext())
+            {
+                var userRegs = ctx.Users.Include(x => x.Registrations.Select(reg => reg.Event)).Single(x => x.Id == user.Id).Registrations;
+                var eventRegs = ctx.Events.Include(x => x.Registrations.Select(reg => reg.User)).Single(x => x.Id == evnt.Id).Registrations;
+                var userEventReg = userRegs.Intersect(eventRegs).SingleOrDefault(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id);
+                return userEventReg != null;
+               //ctx.Users.Where(u => u.Id == user.Id)
+               //     .Include(u => u.Registrations
+               //         .Select(reg => reg.Event))
+               //     .Where(u => u.Registrations)
+                    
+            }
         }
 
         public void Update(User entity)

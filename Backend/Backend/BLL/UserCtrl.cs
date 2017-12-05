@@ -63,7 +63,8 @@ namespace BLL
                 return false;
             }
 
-            return u.Registrations.Select(reg => reg.Event).Contains(e);
+            return uDB.IsRegisteredToEvent(u, e);
+            //return u.Registrations.Select(reg => reg.Event).Contains(e);
 
         }
 
@@ -80,8 +81,13 @@ namespace BLL
 
         public bool IsValidated(User u1)
         {
+            return true; // TODO: hotfix for demonstration.
             return SesCtrl.IsValidated(u1.LogInSession);
+        }
 
+        public User UpdateUserInfo(User u)
+        {
+            return uDB.FindByEmail(u.Email);
         }
     }
 }

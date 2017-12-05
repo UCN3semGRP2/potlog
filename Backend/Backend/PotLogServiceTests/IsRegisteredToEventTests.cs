@@ -17,7 +17,7 @@ namespace PotLogServiceTests
         [TestInitialize]
         public void TestInitialize()
         {
-            var email = "t@t.t" + Guid.NewGuid();
+            var email = "ADMIN@t.t" + Guid.NewGuid();
             var pw = "hunter1";
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
             this.User = service.LogIn(email, pw);
@@ -31,7 +31,7 @@ namespace PotLogServiceTests
         {
             List<string> userEmails = new List<string>();
             //Create 10 users 
-            int nRegistered = 0;
+            int nRegistered = 1; // Admin user is already registered
             for (int i = 0; i < 10; i++)
             {
                 var email = "t@t.t" + Guid.NewGuid();
@@ -43,9 +43,9 @@ namespace PotLogServiceTests
                 if (i % 2 == 0)
                 {
                     service.SignUpForEvent(email, EventId);
-                    nRegistered++;
                     bool isRegistered = service.IsRegisteredToEvent(u, Evnt);
                     Assert.IsTrue(isRegistered);
+                    nRegistered++;
                 }
                 else
                 {

@@ -572,6 +572,21 @@ namespace Web.ServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.Event EventField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> EventIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -579,6 +594,71 @@ namespace Web.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.Event Event {
+            get {
+                return this.EventField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventField, value) != true)) {
+                    this.EventField = value;
+                    this.RaisePropertyChanged("Event");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
             }
         }
         
@@ -678,11 +758,23 @@ namespace Web.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsRegisteredToEvent", ReplyAction="http://tempuri.org/IService/IsRegisteredToEventResponse")]
         System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Web.ServiceReference.User u, Web.ServiceReference.Event e);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        Web.ServiceReference.Category FindCategoryById(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
+        System.Threading.Tasks.Task<Web.ServiceReference.Category> FindCategoryByIdAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
         void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
         System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
+        Web.ServiceReference.User UpdateUserInfo(Web.ServiceReference.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
+        System.Threading.Tasks.Task<Web.ServiceReference.User> UpdateUserInfoAsync(Web.ServiceReference.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -760,12 +852,28 @@ namespace Web.ServiceReference {
             return base.Channel.IsRegisteredToEventAsync(u, e);
         }
         
+        public Web.ServiceReference.Category FindCategoryById(int id) {
+            return base.Channel.FindCategoryById(id);
+        }
+        
+        public System.Threading.Tasks.Task<Web.ServiceReference.Category> FindCategoryByIdAsync(int id) {
+            return base.Channel.FindCategoryByIdAsync(id);
+        }
+        
         public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription) {
             base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription);
         }
         
         public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription) {
             return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription);
+        }
+        
+        public Web.ServiceReference.User UpdateUserInfo(Web.ServiceReference.User u) {
+            return base.Channel.UpdateUserInfo(u);
+        }
+        
+        public System.Threading.Tasks.Task<Web.ServiceReference.User> UpdateUserInfoAsync(Web.ServiceReference.User u) {
+            return base.Channel.UpdateUserInfoAsync(u);
         }
     }
 }

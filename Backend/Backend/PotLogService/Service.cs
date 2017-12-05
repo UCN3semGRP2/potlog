@@ -21,7 +21,11 @@ namespace PotLogService
         {
             try
             {
-                return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                Event e = eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                Registration r = rCtrl.CreateRegistration(e.Admin, e);
+                uCtrl.AddRegistration(e.Admin, r);
+                return e;
+
             }
             catch (ArgumentException ae)
             {
@@ -78,6 +82,11 @@ namespace PotLogService
         public Category FindCategoryById(int id)
         {
             return cCtrl.FindCategoryById(id);
+        }
+
+        public User UpdateUserInfo(User u)
+        {
+            return uCtrl.UpdateUserInfo(u);
         }
     }
 }

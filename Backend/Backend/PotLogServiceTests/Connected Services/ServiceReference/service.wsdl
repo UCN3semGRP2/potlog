@@ -55,6 +55,12 @@
   <wsdl:message name="IService_AddCategoryToEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddCategoryToEventResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_UpdateUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="AddCategoryToEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AddCategoryToEvent" message="tns:IService_AddCategoryToEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AddCategoryToEventResponse" message="tns:IService_AddCategoryToEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateUserInfo" message="tns:IService_UpdateUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateUserInfoResponse" message="tns:IService_UpdateUserInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -156,6 +166,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddCategoryToEvent">
       <soap:operation soapAction="http://tempuri.org/IService/AddCategoryToEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateUserInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

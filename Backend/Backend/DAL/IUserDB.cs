@@ -10,5 +10,6 @@ namespace DAL
     public interface IUserDB : ICRUD<User>
     {
         User FindByEmail(string userEmail);
+        bool IsRegisteredToEvent(User u, Event e);
     }
 }

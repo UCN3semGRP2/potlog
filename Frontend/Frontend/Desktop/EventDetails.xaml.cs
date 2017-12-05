@@ -35,7 +35,7 @@ namespace Desktop
             InitializeComponent();
             rbEventPublic.IsEnabled = false;
             rbEventPrivate.IsEnabled = false;
-
+            u = service.UpdateUserInfo(u);
             btnEventEdit.IsEnabled = false;
             isRegisteredToEvent = service.IsRegisteredToEvent(u, e);
 
@@ -61,6 +61,8 @@ namespace Desktop
 
         private void populateInfo(Event e)
         {
+            e = service.FindEventById(e.Id);
+
             lblEventName.Content = e.Title;
             lblEventLocation.Content = e.Location;
             lblEventDate.Content = e.Datetime.Date.ToString("dd/MM/yyyy");
