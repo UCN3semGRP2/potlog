@@ -769,6 +769,12 @@ namespace PotLogServiceTests.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
         System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
+        PotLogServiceTests.ServiceReference.User UpdateUserInfo(PotLogServiceTests.ServiceReference.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
+        System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.User> UpdateUserInfoAsync(PotLogServiceTests.ServiceReference.User u);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -860,6 +866,14 @@ namespace PotLogServiceTests.ServiceReference {
         
         public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription) {
             return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription);
+        }
+        
+        public PotLogServiceTests.ServiceReference.User UpdateUserInfo(PotLogServiceTests.ServiceReference.User u) {
+            return base.Channel.UpdateUserInfo(u);
+        }
+        
+        public System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.User> UpdateUserInfoAsync(PotLogServiceTests.ServiceReference.User u) {
+            return base.Channel.UpdateUserInfoAsync(u);
         }
     }
 }

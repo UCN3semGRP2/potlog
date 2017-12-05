@@ -35,7 +35,7 @@ namespace Desktop
             InitializeComponent();
             rbEventPublic.IsEnabled = false;
             rbEventPrivate.IsEnabled = false;
-            //u = service.UpdateUserInfo(u);
+            u = service.UpdateUserInfo(u);
             btnEventEdit.IsEnabled = false;
             isRegisteredToEvent = service.IsRegisteredToEvent(u, e);
 

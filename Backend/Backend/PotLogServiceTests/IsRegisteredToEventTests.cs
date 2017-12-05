@@ -40,6 +40,7 @@ namespace PotLogServiceTests
                 userEmails.Add(email);
 
                 var u = service.LogIn(email, pw);
+                Console.WriteLine(i);
                 if (i % 2 == 0)
                 {
                     service.SignUpForEvent(email, EventId);

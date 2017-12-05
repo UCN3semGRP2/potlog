@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,19 @@ namespace DAL
             Registration reg = null;
             using (DALContext ctx = new DALContext())
             {
+                // Here be dragons!
                 // user and event objets was created by another ctx so we need to reattach them to this ctx
-                ctx.Users.Attach(entity.User);
-                ctx.Events.Attach(entity.Event);
+                entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
+                //ctx.Users.Attach(entity.User);
+                entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
+                //ctx.Events.Attach(entity.Event);
+                //ctx.Entry(entity.Event).State = EntityState.Unchanged;
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
                     {
-                        reg = ctx.Registrations.Add(entity);
+                        ctx.Registrations.AddOrUpdate(entity);
+                        //reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
                         return reg;

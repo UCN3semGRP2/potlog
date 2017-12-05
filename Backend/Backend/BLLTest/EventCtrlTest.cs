@@ -100,6 +100,35 @@ namespace BLLTest
         }
 
         [TestMethod]
+        public void TestSignUpForEventHappyDaysBLL()
+        {
+            var email = "t@t.t" + Guid.NewGuid();
+            var pw = "hunter1";
+            new UserCtrl().CreateUser("TestCreateEventUser", "Test", email, pw);
+            var User = new UserCtrl().LogIn(email, pw);
+
+            var Evnt = new EventCtrl().CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, User);
+            var EventId = Evnt.Id;
+
+            new EventCtrl().SignUpForEvent(User.Email, EventId);
+
+            Evnt = new EventCtrl().FindById(EventId);
+
+            var registeredUsers = Evnt.Registrations.Select(x => x.User).ToList();
+            Assert.AreEqual(1, registeredUsers.Count);
+            var u = registeredUsers[0];
+            Assert.AreEqual(User.Id, u.Id);
+            //bool userIsRegistered = Evnt
+            //    .Registrations
+            //    .Select(x => x.User)
+            //    .Select(x => x.Id)
+            //    .Contains(User.Id);
+            //Assert.IsTrue(userIsRegistered, "user is registered on returned event");
+
+            Assert.IsTrue(new UserCtrl().IsRegisteredToEvent(User, Evnt), "User is registred using the isRegisteredToEvent method");
+        }
+
+        [TestMethod]
         public void TestAddComponent()
         {
             // Arrange
