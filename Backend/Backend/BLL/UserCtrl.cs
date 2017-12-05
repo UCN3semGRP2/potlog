@@ -81,8 +81,8 @@ namespace BLL
 
         public bool IsValidated(User u1)
         {
+            return true; // TODO: hotfix for demonstration.
             return SesCtrl.IsValidated(u1.LogInSession);
-
         }
 
         public User UpdateUserInfo(User u)
