@@ -63,7 +63,8 @@ namespace BLL
                 return false;
             }
 
-            return u.Registrations.Select(reg => reg.Event).Contains(e);
+            return uDB.IsRegisteredToEvent(u, e);
+            //return u.Registrations.Select(reg => reg.Event).Contains(e);
 
         }
 
