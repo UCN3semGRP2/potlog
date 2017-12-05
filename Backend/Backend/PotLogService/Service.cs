@@ -23,13 +23,13 @@ namespace PotLogService
             {
                 return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
             }
-            catch (ArgumentException)
+            catch (ArgumentException ae)
             {
-                throw new FaultException("Minimumsprisen overstiger Maksimumsprisen");
+                throw new FaultException(ae.Message);
             }
-            catch (DateInPastException)
+            catch (DateInPastException dipe)
             {
-                throw new FaultException("Tidspunktet er i fortiden");
+                throw new FaultException(dipe.Message);
             }
         }
 
@@ -73,6 +73,11 @@ namespace PotLogService
             Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription);
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
+        }
+
+        public Category FindCategoryById(int id)
+        {
+            return cCtrl.FindCategoryById(id);
         }
     }
 }

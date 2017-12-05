@@ -10,15 +10,15 @@
 
     <Grid RenderTransformOrigin="0.5,0.5">
         <Label Name="lbl_Email" Content="E-Mail :" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox Name="tb_Email" HorizontalAlignment="Left" Height="23" Margin="10,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tb_Email_TextChanged"/>
+        <TextBox Name="tb_Email" HorizontalAlignment="Left" Height="23" Margin="10,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" TextChanged="tb_Email_TextChanged"/>
         <Label Name="lbl_Firstname" Content="Fornavn :" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb_Firstname" HorizontalAlignment="Left" Height="23" Margin="10,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tb_Firstname_TextChanged"/>
+        <TextBox Name="tb_Firstname" HorizontalAlignment="Left" Height="23" Margin="10,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" TextChanged="tb_Firstname_TextChanged"/>
         <Label Name="lbl_Lastname" Content="Efternavn :" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tb_Lastname" HorizontalAlignment="Left" Height="23" Margin="10,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tb_Lastname_TextChanged"/>
+        <TextBox Name="tb_Lastname" HorizontalAlignment="Left" Height="23" Margin="10,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" TextChanged="tb_Lastname_TextChanged"/>
         <Label Name="lbl_Password" Content="Password :" HorizontalAlignment="Left" Margin="202,109,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="tb_Password" HorizontalAlignment="Left" Height="23" Margin="202,135,0,0" VerticalAlignment="Top" Width="120" PasswordChanged="tb_Password_PasswordChanged"/>
+        <PasswordBox Name="tb_Password" HorizontalAlignment="Left" Height="23" Margin="202,135,0,0" VerticalAlignment="Top" Width="150" PasswordChanged="tb_Password_PasswordChanged"/>
         <Label Name="lbl_RepeatPassword" Content="Gentag Password :" HorizontalAlignment="Left" Margin="202,178,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="tb_RepeatPassword" HorizontalAlignment="Left" Height="23" Margin="202,204,0,0" VerticalAlignment="Top" Width="120" PasswordChanged="tb_RepeatPassword_PasswordChanged"/>
+        <PasswordBox Name="tb_RepeatPassword" HorizontalAlignment="Left" Height="23" Margin="202,204,0,0" VerticalAlignment="Top" Width="150" PasswordChanged="tb_RepeatPassword_PasswordChanged"/>
         <Button Name="btn_CreatUser" Content="Opret" HorizontalAlignment="Left" Margin="422,279,0,0" VerticalAlignment="Top" Width="75" Click="btn_CreatUser_Click"/>
         <Button x:Name="btnBack" Content="Tilbage" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
         <Label x:Name="lblErrorMsg" Content="" HorizontalAlignment="Left" Margin="202,61,0,0" VerticalAlignment="Top" Width="200"/>

@@ -15,11 +15,19 @@ namespace Model
     [DataContract(IsReference = true)]
     public abstract class Component
     {
+        [DataMember]
         public int Id { get; set; }
+
+        [DataMember]
         public string Title { get; set; }
+
+        [DataMember]
         public string Description { get; set; }
 
+        [DataMember]
         public Event Event { get; set; }
+
+        [DataMember]
         public int? EventId { get; set; }
     }
 }

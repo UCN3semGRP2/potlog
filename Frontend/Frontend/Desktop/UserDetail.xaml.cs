@@ -31,13 +31,13 @@ namespace Desktop
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text)
+            if (ValidateHelper.validateRepeatPassword(tb_Password.Password, tb_RepeatPassword.Password)
                 && ValidateHelper.validateEmail(tb_Email.Text)
                 && ValidateHelper.isEntered(tb_Firstname)
                 && ValidateHelper.isEntered(tb_Lastname)
-                && ValidateHelper.validatePassword(tb_Password.Text))
+                && ValidateHelper.validatePassword(tb_Password.Password))
             {
-                //TODO
+                // TODO:
                 MessageBox.Show("Brugeroplysninger er blevet opdateret");
                 this.NavigationService.Navigate(new MainPage());
             }
@@ -49,33 +49,6 @@ namespace Desktop
             
         }
 
-        private void tb_Password_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!ValidateHelper.validatePassword(tb_Password.Text))
-            {
-                tb_Password.BorderBrush = Brushes.Red;
-                tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
-            }
-            else
-            {
-                tb_Password.BorderBrush = Brushes.Black;
-                tb_Password.ToolTip = null;
-            }
-        }
-
-        private void tb_RepeatPassword_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!ValidateHelper.validateRepeatPassword(tb_Password.Text, tb_RepeatPassword.Text))
-            {
-                tb_RepeatPassword.BorderBrush = Brushes.Red;
-                tb_RepeatPassword.ToolTip = "Kodeordene er ikke det samme";
-            }
-            else
-            {
-                tb_RepeatPassword.BorderBrush = Brushes.Black;
-                tb_RepeatPassword.ToolTip = null;
-            }
-        }
 
         private void tb_Email_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -118,6 +91,34 @@ namespace Desktop
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainPage());
+        }
+
+        private void tb_Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateHelper.validatePassword(tb_Password.Password))
+            {
+                tb_Password.BorderBrush = Brushes.Red;
+                tb_Password.ToolTip = "Kodeordet skal mindst være 6 tegn langt";
+            }
+            else
+            {
+                tb_Password.BorderBrush = Brushes.Black;
+                tb_Password.ToolTip = null;
+            }
+        }
+
+        private void tb_RepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateHelper.validateRepeatPassword(tb_Password.Password, tb_RepeatPassword.Password))
+            {
+                tb_RepeatPassword.BorderBrush = Brushes.Red;
+                tb_RepeatPassword.ToolTip = "Kodeordene er ikke det samme";
+            }
+            else
+            {
+                tb_RepeatPassword.BorderBrush = Brushes.Black;
+                tb_RepeatPassword.ToolTip = null;
+            }
         }
     }
 }

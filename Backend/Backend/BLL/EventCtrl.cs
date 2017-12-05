@@ -19,11 +19,15 @@ namespace BLL
         {
             if (priceFrom > priceTo)
             {
-                throw new ArgumentException("PriceTo must be larger than priceFrom");
+                throw new ArgumentException("Pris fra skal være mindre end pris til");
             }
             if (datetime < DateTime.Now)
             {
-                throw new DateInPastException("Time and date set is in the past");
+                throw new DateInPastException("Dato er sat i fortiden");
+            }
+            if (numOfParticipants < 0)
+            {
+                throw new ArgumentException("Der skal være mindst 1 deltager");
             }
             var e = new Event
             {
