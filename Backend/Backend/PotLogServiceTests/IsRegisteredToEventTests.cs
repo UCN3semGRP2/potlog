@@ -55,7 +55,7 @@ namespace PotLogServiceTests
             }
 
             var e = service.FindEventById(EventId);
-            Assert.AreEqual(e.Registrations.Length, nRegistered); // note the one off error
+            Assert.AreEqual(e.Registrations.Length, nRegistered);
         }
     }
 }
