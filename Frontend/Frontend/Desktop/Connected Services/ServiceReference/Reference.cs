@@ -585,7 +585,7 @@ namespace Desktop.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Desktop.ServiceReference.Component ParentField;
+        private int ParentIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
@@ -653,14 +653,14 @@ namespace Desktop.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Desktop.ServiceReference.Component Parent {
+        public int ParentId {
             get {
-                return this.ParentField;
+                return this.ParentIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.ParentField, value) != true)) {
-                    this.ParentField = value;
-                    this.RaisePropertyChanged("Parent");
+                if ((this.ParentIdField.Equals(value) != true)) {
+                    this.ParentIdField = value;
+                    this.RaisePropertyChanged("ParentId");
                 }
             }
         }
@@ -775,10 +775,10 @@ namespace Desktop.ServiceReference {
         System.Threading.Tasks.Task<bool> IsRegisteredToEventAsync(Desktop.ServiceReference.User u, Desktop.ServiceReference.Event e);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
-        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent);
+        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, System.Nullable<int> parentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
-        System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent);
+        System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, System.Nullable<int> parentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddItemToCategory", ReplyAction="http://tempuri.org/IService/AddItemToCategoryResponse")]
         void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
@@ -874,12 +874,12 @@ namespace Desktop.ServiceReference {
             return base.Channel.IsRegisteredToEventAsync(u, e);
         }
         
-        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent) {
-            base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription, parent);
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, System.Nullable<int> parentId) {
+            base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription, parentId);
         }
         
-        public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent) {
-            return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription, parent);
+        public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, System.Nullable<int> parentId) {
+            return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription, parentId);
         }
         
         public void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription) {

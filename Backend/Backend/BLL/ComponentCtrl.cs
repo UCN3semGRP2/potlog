@@ -13,14 +13,14 @@ namespace BLL
         public ICategoryDB catDB = new CategoryDB();
         public IItemDB iDB = new ItemDB();
 
-        public Category CreateCategory(string title, string description, Component parent)
+        public Category CreateCategory(string title, string description, int? parentId)
         {
             var c = new Category
             {
                 Title = title,
                 Description = description,
                 Components = new List<Component>(),
-                Parent = parent
+                ParentId = parentId.Value
                 
             };
             return catDB.Create(c);
@@ -31,14 +31,14 @@ namespace BLL
             return catDB.FindByID(id);
         }
 
-        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, Component parent)
+        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, int parentId)
         {
             var item = new Item
             {
                 Title = itemTitle,
                 Description = itemDescription,
                 Amount = itemAmount,
-                Parent = parent
+                ParentId = parentId
             };
 
             return iDB.Create(item);

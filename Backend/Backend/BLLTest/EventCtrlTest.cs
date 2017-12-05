@@ -134,7 +134,7 @@ namespace BLLTest
             eCtrl.AddCategory(evnt, category);
             //var category2 = cCtrl.CreateCategory("Cat2 Name2", "Cat2 desc2", category);
             //eCtrl.AddCategory(evnt, category2);
-            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42, category);
+            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42, category.Id);
             eCtrl.AddItem(evnt, category, item);
 
             // Assert

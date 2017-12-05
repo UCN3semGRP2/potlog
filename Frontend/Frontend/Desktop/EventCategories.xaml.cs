@@ -122,7 +122,7 @@ namespace Desktop
 
             if (!catName.Equals("") && !catDesc.Equals(""))
             {
-                service.AddCategoryToEvent(this.e.Id, catName, catDesc, topCat);
+                service.AddCategoryToEvent(this.e.Id, catName, catDesc, topCat.Id);
                 this.e = service.FindEventById(this.e.Id);
                 UpdateSecondComboBox();
                 MessageBox.Show("Kategorien er tilføjet til eventet");

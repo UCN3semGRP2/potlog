@@ -51,7 +51,7 @@ namespace DAL
                   .Include(x => x.Components);;
                 var cat = query
                   .FirstOrDefault();
-                cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.Parent.Id == cat.Id));
+                cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.ParentId == cat.Id));
                 //TODO only for one level do for all levels
                 foreach (var subcomp in cat.Components)
                 {
@@ -59,7 +59,7 @@ namespace DAL
                     {
                         var sub = (Category)subcomp;
                         var items = ctx.Components.OfType<Item>()
-                            .Where(x => x.Parent.Id == sub.Id).ToList();
+                            .Where(x => x.ParentId == sub.Id).ToList();
                         sub.Components.AddRange(items);
                     }
                 }
@@ -76,7 +76,7 @@ namespace DAL
             List<Component> components = null;
             using (var ctx = new DALContext())
             {
-                components = ctx.Components.Where(c => c.Parent.Id == id).ToList();
+                components = ctx.Components.Where(c => c.ParentId == id).ToList();
 
             }
 

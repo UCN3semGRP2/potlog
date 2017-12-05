@@ -80,7 +80,7 @@ namespace BLL
             category.Components.Add(item);
             item.Event = category.Event;
             item.EventId = category.EventId;
-            item.Parent = category;
+            item.ParentId = category.Id;
             item.ComponetId = category.Id;
             eDB.Update(evnt);
         }
