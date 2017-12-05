@@ -18,6 +18,11 @@ namespace DAL
                 {
                     try
                     {
+                        if (entity.Parent != null)
+                        {
+                            ctx.Components.Attach(entity.Parent);
+                        }
+
                         Category cat = (Category)ctx.Components.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();

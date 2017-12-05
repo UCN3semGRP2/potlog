@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -41,6 +42,7 @@ namespace Model
         public List<Registration> Registrations { get; set; }
 
         [DataMember]
+        [Required]
         public User Admin { get; set; }
 
         [DataMember]
