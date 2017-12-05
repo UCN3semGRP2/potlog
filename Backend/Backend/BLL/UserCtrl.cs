@@ -83,5 +83,10 @@ namespace BLL
             return SesCtrl.IsValidated(u1.LogInSession);
 
         }
+
+        public User UpdateUserInfo(User u)
+        {
+            return uDB.FindByEmail(u.Email);
+        }
     }
 }

@@ -35,5 +35,8 @@ namespace PotLogService
 
         [OperationContract]
         void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
+
+        [OperationContract]
+        User UpdateUserInfo(User u);
     }
 }
