@@ -23,13 +23,13 @@ namespace PotLogService
             {
                 return eCtrl.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
             }
-            catch (ArgumentException)
+            catch (ArgumentException ae)
             {
-                throw new FaultException("Minimumsprisen overstiger Maksimumsprisen");
+                throw new FaultException(ae.Message);
             }
-            catch (DateInPastException)
+            catch (DateInPastException dipe)
             {
-                throw new FaultException("Tidspunktet er i fortiden");
+                throw new FaultException(dipe.Message);
             }
         }
 
