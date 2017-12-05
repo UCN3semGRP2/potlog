@@ -12,5 +12,6 @@ namespace Model
     {
         [DataMember]
         public int Amount { get; set; }
+        public int ComponetId { get; set; }
     }
 }

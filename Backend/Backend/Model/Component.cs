@@ -29,5 +29,9 @@ namespace Model
 
         [DataMember]
         public int? EventId { get; set; }
+
+        [DataMember]
+        public Component Parent { get; set; }
     }
+
 }

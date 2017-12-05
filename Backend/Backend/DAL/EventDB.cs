@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace DAL
 {
@@ -55,9 +56,8 @@ namespace DAL
                     .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
                     .Where(x => x.Id == id)
                     .Single();
-                    //.First(); //.Find(id);
+
                 return e;
-                //return ctx.Events.Where(x => x.Id == id).Intersect()
             }
         }
 
@@ -73,21 +73,48 @@ namespace DAL
                         {
                             foreach (var comp in entity.Components)
                             {
-                                ctx.Components.Attach(comp);   
-                                ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
+                                AttachComponent(ctx, comp);
                             }
                         }
+                        //ctx.Events.AddOrUpdate(entity);
                         ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-                        
+
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
                     }
                     catch (Exception ex)
                     {
                         ctxTransaction.Rollback();
+                        Console.WriteLine(ex.StackTrace);
                         throw ex;
                     }
             }
+        }
+
+        private void AttachComponent(DALContext ctx, Component component)
+        {
+            if (component is Category)
+            {
+                var cats = ((Category)component);
+                if (cats.Components != null)
+                {
+                    foreach (var comp in cats.Components)
+                    {
+                        ctx.Components.Attach(comp);
+                        ctx.Entry(comp).State = System.Data.Entity.EntityState.Modified;
+                        ctx.Components.AddOrUpdate(comp);
+                        if (comp is Category)
+                        {
+                            AttachComponent(ctx, comp);
+                        }
+                    }
+                }
+            }
+
+            ctx.Components.Attach(component);
+            ctx.Entry(component).State = System.Data.Entity.EntityState.Modified;
+
+
         }
     }
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public interface ICategoryDB : ICRUD<Category>
+    public interface IItemDB : ICRUD<Item>
     {
-        List<Component> FindComponentByParentId(int id);
     }
 }

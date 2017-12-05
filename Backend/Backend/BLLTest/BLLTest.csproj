@@ -81,6 +81,10 @@
       <Project>{b09b5ee6-34cf-4e5f-b7de-b1d8b0ad2a35}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PotLogService\PotLogService.csproj">
+      <Project>{9CFFE1C7-BE5A-4B8E-AC03-57F10A4ED6D7}</Project>
+      <Name>PotLogService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

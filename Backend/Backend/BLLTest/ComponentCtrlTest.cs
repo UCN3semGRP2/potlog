@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BLL;
+using Model;
 
 namespace BLLTest
 {
@@ -16,7 +17,7 @@ namespace BLLTest
             string description = "Category description";
 
             // Act
-            var cat = cCtrl.CreateCategory(title, description);
+            var cat = cCtrl.CreateCategory(title, description, null);
 
             // Assert
             var foundCategory = cCtrl.FindCategoryById(cat.Id);

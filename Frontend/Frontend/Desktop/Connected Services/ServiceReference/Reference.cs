@@ -585,6 +585,9 @@ namespace Desktop.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.Component ParentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -645,6 +648,19 @@ namespace Desktop.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.Component Parent {
+            get {
+                return this.ParentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParentField, value) != true)) {
+                    this.ParentField = value;
+                    this.RaisePropertyChanged("Parent");
                 }
             }
         }
@@ -764,17 +780,29 @@ namespace Desktop.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindCategoryById", ReplyAction="http://tempuri.org/IService/FindCategoryByIdResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Category> FindCategoryByIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
-        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
-        System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
         Desktop.ServiceReference.User UpdateUserInfo(Desktop.ServiceReference.User u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateUserInfo", ReplyAction="http://tempuri.org/IService/UpdateUserInfoResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.User> UpdateUserInfoAsync(Desktop.ServiceReference.User u);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
+        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCategoryToEvent", ReplyAction="http://tempuri.org/IService/AddCategoryToEventResponse")]
+        System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddItemToCategory", ReplyAction="http://tempuri.org/IService/AddItemToCategoryResponse")]
+        void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddItemToCategory", ReplyAction="http://tempuri.org/IService/AddItemToCategoryResponse")]
+        System.Threading.Tasks.Task AddItemToCategoryAsync(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindComponentByParentId", ReplyAction="http://tempuri.org/IService/FindComponentByParentIdResponse")]
+        Desktop.ServiceReference.Component[] FindComponentByParentId(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindComponentByParentId", ReplyAction="http://tempuri.org/IService/FindComponentByParentIdResponse")]
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -860,20 +888,36 @@ namespace Desktop.ServiceReference {
             return base.Channel.FindCategoryByIdAsync(id);
         }
         
-        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription) {
-            base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription);
-        }
-        
-        public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription) {
-            return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription);
-        }
-        
         public Desktop.ServiceReference.User UpdateUserInfo(Desktop.ServiceReference.User u) {
             return base.Channel.UpdateUserInfo(u);
         }
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.User> UpdateUserInfoAsync(Desktop.ServiceReference.User u) {
             return base.Channel.UpdateUserInfoAsync(u);
+        }
+        
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent) {
+            base.Channel.AddCategoryToEvent(eventId, categoryTitle, categoryDescription, parent);
+        }
+        
+        public System.Threading.Tasks.Task AddCategoryToEventAsync(int eventId, string categoryTitle, string categoryDescription, Desktop.ServiceReference.Component parent) {
+            return base.Channel.AddCategoryToEventAsync(eventId, categoryTitle, categoryDescription, parent);
+        }
+        
+        public void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription) {
+            base.Channel.AddItemToCategory(eventId, categoryId, amount, itemTitle, itemDescription);
+        }
+        
+        public System.Threading.Tasks.Task AddItemToCategoryAsync(int eventId, int categoryId, int amount, string itemTitle, string itemDescription) {
+            return base.Channel.AddItemToCategoryAsync(eventId, categoryId, amount, itemTitle, itemDescription);
+        }
+        
+        public Desktop.ServiceReference.Component[] FindComponentByParentId(int id) {
+            return base.Channel.FindComponentByParentId(id);
+        }
+        
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id) {
+            return base.Channel.FindComponentByParentIdAsync(id);
         }
     }
 }

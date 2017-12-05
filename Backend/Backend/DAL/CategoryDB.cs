@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace DAL
 {
@@ -17,6 +19,11 @@ namespace DAL
                 {
                     try
                     {
+                        if (entity.Parent != null)
+                        {
+                            ctx.Components.Attach(entity.Parent);
+                        }
+
                         Category cat = (Category)ctx.Components.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
@@ -45,16 +52,50 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
-                return (Category)ctx.Components
-                    .Where(x => x is Category)
-                    .Where(x => x.Id == id)
-                    .FirstOrDefault();
+                var query = ctx.Components.OfType<Category>()
+                  .Where(x => x.Id == id)
+                  .Include(x => x.Components);;
+                var cat = query
+                  .FirstOrDefault();
+                cat.Components.AddRange(ctx.Components.OfType<Item>().Where(item => item.Parent.Id == cat.Id));
+                //TODO only for one level do for all levels
+                foreach (var subcomp in cat.Components)
+                {
+                    if (subcomp is Category)
+                    {
+                        var sub = (Category)subcomp;
+                        var items = ctx.Components.OfType<Item>()
+                            .Where(x => x.Parent.Id == sub.Id).ToList();
+                        sub.Components.AddRange(items);
+                    }
+                }
+                  
+                return cat;
+                
+                
+
             }
+        }
+
+        public List<Component> FindComponentByParentId(int id)
+        {
+            List<Component> components = null;
+            using (var ctx = new DALContext())
+            {
+                components = ctx.Components.Where(c => c.Parent.Id == id).ToList();
+
+            }
+
+            return components;
         }
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                ctx.Components.AddOrUpdate(entity);
+                ctx.SaveChanges();
+            }
         }
     }
 }

@@ -79,6 +79,9 @@
     <Compile Include="CreateEvent.xaml.cs">
       <DependentUpon>CreateEvent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventCategories.xaml.cs">
+      <DependentUpon>EventCategories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventDetails.xaml.cs">
       <DependentUpon>EventDetails.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +170,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.Component.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference\Desktop.ServiceReference.Event.datasource">

@@ -33,10 +33,18 @@ namespace PotLogService
         [OperationContract]
         Category FindCategoryById(int id);
 
-        [OperationContract]
-        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription);
 
         [OperationContract]
         User UpdateUserInfo(User u);
+
+        [OperationContract]
+        void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Component parent);
+
+        [OperationContract]
+        void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription);
+
+        [OperationContract]
+        List<Component> FindComponentByParentId(int id);
+
     }
 }

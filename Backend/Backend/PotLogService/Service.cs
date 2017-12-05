@@ -71,13 +71,14 @@ namespace PotLogService
             return uCtrl.IsRegisteredToEvent(u, e);
         }
 
-        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription)
+        public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Component parent)
         {
             //TODO refactor to ectrl
-            Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription);
+            Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription, parent);
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
         }
+
 
         public Category FindCategoryById(int id)
         {
@@ -87,6 +88,20 @@ namespace PotLogService
         public User UpdateUserInfo(User u)
         {
             return uCtrl.UpdateUserInfo(u);
+        }
+
+        public void AddItemToCategory(int eventId, int categoryId, int amount, string itemTitle, string itemDescription)
+        {
+            Category c = cCtrl.FindCategoryById(categoryId);
+            Event e = eCtrl.FindById(eventId);
+            Item item = cCtrl.CreateItem(itemTitle, itemDescription, amount, c);
+            eCtrl.AddItem(e, c, item);
+        }
+
+
+        public List<Component> FindComponentByParentId(int id)
+        {
+            return cCtrl.FindComponentByParentId(id);
         }
     }
 }

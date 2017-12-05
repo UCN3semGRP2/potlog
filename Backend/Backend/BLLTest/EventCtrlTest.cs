@@ -2,6 +2,7 @@
 using DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using PotLogService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace BLLTest
         public void TestCreateEvent()
         {
             var ctrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
 
             Event e = new Event
             {
@@ -27,11 +31,12 @@ namespace BLLTest
                 PriceTo = 200.0,
                 Location = "Sofiendalsvej 60",
                 Datetime = DateTime.Now.AddHours(1), //+1 hour from now to not trigger the past date exception
-                IsPublic = true
+                IsPublic = true,
+                Admin = u
             };
 
             // Act
-            Event output = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, null);
+            Event output = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, u);
 
 
             // Assert
@@ -82,7 +87,7 @@ namespace BLLTest
         {
             var user = new UserCtrl().CreateUser("1", "2", "test@test.test" + Guid.NewGuid(), "1234");
             var eCtrl = new EventCtrl();
-            var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now, false, user);
+            var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now.AddHours(5), false, user);
 
 
             // Act
@@ -127,9 +132,12 @@ namespace BLLTest
         {
             // Arrange
             EventCtrl eCtrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
             var e = eCtrl.CreateEvent("Event", "Evently event",
-                2, 20, 100, "Right here", DateTime.Now, true, null);
-            Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat");
+                2, 20, 100, "Right here", DateTime.Now, true, u);
+            Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat", null);
 
             //Act
             eCtrl.AddCategory(e, c);
@@ -143,7 +151,80 @@ namespace BLLTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), 
+        public void TestAddCategoryToCategory()
+        {
+            // Arrange
+            EventCtrl eCtrl = new EventCtrl();
+            ComponentCtrl cCtrl = new ComponentCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+            var e = eCtrl.CreateEvent("Testing Event", "Test", 2, 20, 100, "Right here", DateTime.Now.AddHours(5), true, u);
+            var c1 = cCtrl.CreateCategory("Testing Category Lvl 1", "Test", null);
+
+            // Act
+            eCtrl.AddCategory(e, c1);
+
+            var c2 = cCtrl.CreateCategory("Testing Category Lvl 2", "Test", c1);
+            var e2 = eCtrl.FindById(e.Id);
+            eCtrl.AddCategory(e2, c2);
+
+            Assert.IsTrue(c2.Parent.Id == c1.Id);
+            Assert.IsTrue(c2.EventId == e.Id);
+
+        }
+
+        [TestMethod]
+        public void SystemTestAddCategoryToCategory()
+        {
+            EventCtrl eCtrl = new EventCtrl();
+            ComponentCtrl cCtrl = new ComponentCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            IService service = new Service();
+
+            User u = uCtrl.CreateUser("System Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+            Event e = service.CreateEvent("System Test Event", "Test", 2, 20, 100, "Right here", DateTime.Now.AddHours(5), true, u);
+            
+            service.AddCategoryToEvent(e.Id, "System Test Cat 1", "Cat 1", null);
+            e = service.FindEventById(e.Id);
+
+            service.AddCategoryToEvent(e.Id, "System Test Cat 2", "Cat 2",
+                e.Components.Where(c => c.Title == "System Test Cat 1" && c is Category).FirstOrDefault());
+
+            Assert.IsTrue(true);
+
+        }
+
+        [TestMethod]
+        public void TestAddItem()
+        {
+
+
+            // Arrange
+            ComponentCtrl cCtrl = new ComponentCtrl();
+            EventCtrl eCtrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
+            // Act
+            var evnt = eCtrl.CreateEvent("E Title", "E Desc", 42, 42, 42, "E Location", DateTime.Now.AddDays(5), true, u);
+            var category = cCtrl.CreateCategory("Cat Name", "Cat desc", null);
+            eCtrl.AddCategory(evnt, category);
+            var category2 = cCtrl.CreateCategory("Cat2 Name2", "Cat2 desc2", category);
+            eCtrl.AddCategory(evnt, category2);
+            var item = cCtrl.CreateItem("Item Name", "Item Desc", 42, category2);
+            eCtrl.AddItem(evnt, category2, item);
+
+            // Assert
+            var foundCategory = cCtrl.FindCategoryById(category2.Id);
+            var foundItem = ((Item)((Category)evnt.Components[1]).Components[0]);
+            Assert.IsNotNull(foundItem);
+            Assert.IsTrue(foundCategory.Components.Count == 1);
+            Assert.IsTrue(foundCategory.Components[0].Id == foundItem.Id);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
             "PriceFrom is NOT smaller than priceTo")]
         public void TestPriceFromIsLargerThanPriceTo()
         {
