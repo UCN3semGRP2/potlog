@@ -39,7 +39,7 @@ namespace Desktop
                 List<string> topCompTitles = new List<string>();
                 foreach (var item in e.Components)
                 {
-                    topCompTitles.Add(item.Title);
+                    if (item.Parent == null) topCompTitles.Add(item.Title);
                 }
 
                 cbTopLevel.ItemsSource = topCompTitles;
@@ -85,11 +85,13 @@ namespace Desktop
 
         private void cbTopLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            cbLevelTwo.SelectedIndex = -1;
             UpdateSecondComboBox();
         }
 
         private void UpdateSecondComboBox()
         {
+            cbLevelTwo.ItemsSource = null;
             string topCatName = cbTopLevel.SelectedItem.ToString();
             var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
             var subComponents = service.FindComponentByParentId(topCat.Id);
@@ -202,21 +204,23 @@ namespace Desktop
 
         private void UpdateThirdComboBox()
         {
-            string topCatName = cbTopLevel.SelectedItem.ToString();
-            int topCatId = ((Category)this.e.Components
-                .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
-
-            string subCatName = cbLevelTwo.SelectedItem.ToString();
-
-            var lvlTwoCats = service.FindComponentByParentId(topCatId);
-            var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
-
-            if (lvlTwoCat != null)
+            if (cbLevelTwo.ItemsSource != null && cbLevelTwo.SelectedIndex != -1)
             {
-                var lvlThreeCats = service.FindComponentByParentId(lvlTwoCat.Id);
+
+                cbLevelThree.ItemsSource = null;
+                string topCatName = cbTopLevel.SelectedItem.ToString();
+                int topCatId = ((Category)this.e.Components
+                    .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
+
+                string subCatName = cbLevelTwo.SelectedItem.ToString();
+
+                var lvlTwoCats = service.FindComponentByParentId(topCatId);
+                var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
 
                 if (lvlTwoCat != null)
                 {
+                    var lvlThreeCats = service.FindComponentByParentId(lvlTwoCat.Id);
+
                     if (lvlThreeCats != null && lvlThreeCats.Count() > 0)
                     {
                         List<string> LevelThreeTitles = new List<string>();
@@ -228,8 +232,23 @@ namespace Desktop
                         cbLevelThree.ItemsSource = LevelThreeTitles;
                         cbLevelThree.IsEnabled = true;
                     }
-
                     btnAddItemLevelThree.IsEnabled = true;
+
+                    lblCatTitle.Content = "";
+                    tbCatDescription.Text = "";
+                    lblCatAmount.Content = "";
+
+
+                }
+                else
+                {
+                    var lvlTwoItem = (Item)lvlTwoCats.Where(x => x.Title == subCatName && x is Item).FirstOrDefault();
+                    lblCatTitle.Content = lvlTwoItem.Title;
+                    tbCatDescription.Text = lvlTwoItem.Description;
+                    lblCatAmount.Content = lvlTwoItem.Amount;
+                    btnAddItemLevelThree.IsEnabled = false;
+                    cbLevelThree.IsEnabled = false;
+                    cbLevelThree.SelectedIndex = -1;
                 }
             }
         }
@@ -260,6 +279,35 @@ namespace Desktop
             {
                 MessageBox.Show("Tilføjelse af retten anulleret.");
             }
+        }
+
+        private void cbLevelThree_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateItemInfoLevelThree();
+        }
+
+        private void UpdateItemInfoLevelThree()
+        {
+            if (cbLevelThree.SelectedIndex != -1)
+            {
+                string topCatName = cbTopLevel.SelectedItem.ToString();
+                int topCatId = ((Category)this.e.Components
+                    .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
+
+                string subCatName = cbLevelTwo.SelectedItem.ToString();
+
+                var lvlTwoCats = service.FindComponentByParentId(topCatId);
+                var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
+
+                string itemName = cbLevelThree.SelectedItem.ToString();
+                var lvlThreeItems = service.FindComponentByParentId(lvlTwoCat.Id);
+                var lvlThreeItem = (Item)lvlThreeItems.Where(x => x.Title == itemName && x is Item).FirstOrDefault();
+
+                lblCatTitle.Content = lvlThreeItem.Title;
+                tbCatDescription.Text = lvlThreeItem.Description;
+                lblCatAmount.Content = lvlThreeItem.Amount;
+            }
+
         }
     }
 }
