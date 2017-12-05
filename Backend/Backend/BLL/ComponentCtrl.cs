@@ -48,5 +48,10 @@ namespace BLL
         {
             return catDB.FindComponentByParentId(id);
         }
+
+        public void Update(Category c)
+        {
+            catDB.Update(c);
+        }
     }
 }

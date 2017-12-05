@@ -58,9 +58,9 @@ namespace BLL
 
         public void SignUpForEvent(string userEmail, int eventId)
         {
-                Event e = FindById(eventId);
-                User u = uCtrl.FindByEmail(userEmail);
-                RegisterToEvent(e, u);
+            Event e = FindById(eventId);
+            User u = uCtrl.FindByEmail(userEmail);
+            RegisterToEvent(e, u);
         }
 
         public void AddCategory(Event e, Category c)
@@ -69,10 +69,27 @@ namespace BLL
             {
                 e.Components = new List<Component>();
             }
-            e.Components.Add(c);
-            c.Event = e;
-            c.EventId = e.Id;
-            eDB.Update(e);
+            if (c.Parent != null && c.Parent is Category)
+            {
+                // Should be moved to Component/category/item ctrl
+                var p = (Category)c.Parent;
+                p.Components.Add(c);
+                c.Event = p.Event;
+                c.EventId = p.EventId;
+                new ComponentCtrl().Update(c);
+                new ComponentCtrl().Update(p);
+                // ctx.Component.AddOrUpdate(p);
+                // ctx.Component.AddOrUpdate(c);
+
+            }
+            else
+            {
+                e.Components.Add(c);
+                c.Event = e;
+                c.EventId = e.Id;
+                eDB.Update(e);
+            }
+
         }
 
         public void AddItem(Event evnt, Category category, Item item)

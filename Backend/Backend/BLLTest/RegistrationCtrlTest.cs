@@ -20,7 +20,7 @@ namespace BLLTest
             UserCtrl uCtrl = new UserCtrl();
             var user = uCtrl.CreateUser("Jesper", "Jørgensen", "e@w.dk" + Guid.NewGuid(), "1234");
             EventCtrl eCtrl = new EventCtrl();
-            var eve = eCtrl.CreateEvent("Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now, false, user);
+            var eve = eCtrl.CreateEvent("Hej", "nej", 5, 5.5, 6.5, "42", DateTime.Now.AddHours(5), false, user);
             RegistrationCtrl rCtrl = new RegistrationCtrl();
 
             // Act

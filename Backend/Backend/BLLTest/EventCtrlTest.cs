@@ -17,6 +17,9 @@ namespace BLLTest
         public void TestCreateEvent()
         {
             var ctrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
 
             Event e = new Event
             {
@@ -27,11 +30,12 @@ namespace BLLTest
                 PriceTo = 200.0,
                 Location = "Sofiendalsvej 60",
                 Datetime = DateTime.Now.AddHours(1), //+1 hour from now to not trigger the past date exception
-                IsPublic = true
+                IsPublic = true,
+                Admin = u
             };
 
             // Act
-            Event output = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, null);
+            Event output = ctrl.CreateEvent(e.Title, e.Description, e.NumOfParticipants, e.PriceFrom, e.PriceTo, e.Location, e.Datetime, e.IsPublic, u);
 
 
             // Assert
@@ -82,7 +86,7 @@ namespace BLLTest
         {
             var user = new UserCtrl().CreateUser("1", "2", "test@test.test" + Guid.NewGuid(), "1234");
             var eCtrl = new EventCtrl();
-            var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now, false, user);
+            var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now.AddHours(5), false, user);
 
 
             // Act
@@ -104,8 +108,11 @@ namespace BLLTest
         {
             // Arrange
             EventCtrl eCtrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
             var e = eCtrl.CreateEvent("Event", "Evently event",
-                2, 20, 100, "Right here", DateTime.Now, true, null);
+                2, 20, 100, "Right here", DateTime.Now, true, u);
             Category c = new ComponentCtrl().CreateCategory("Cat", "CateCat", null);
 
             //Act
@@ -126,14 +133,16 @@ namespace BLLTest
             EventCtrl eCtrl = new EventCtrl();
             ComponentCtrl cCtrl = new ComponentCtrl();
             UserCtrl uCtrl = new UserCtrl();
-            var u = uCtrl.CreateUser("Test User", "Test User", "test@email.com", "password");
+            var u = uCtrl.CreateUser("Test User", "Test User", "test"+Guid.NewGuid()+"@email.com", "password");
             var e = eCtrl.CreateEvent("Testing Event", "Test", 2, 20, 100, "Right here", DateTime.Now.AddHours(5), true, u);
             var c1 = cCtrl.CreateCategory("Testing Category Lvl 1", "Test", null);
-            var c2 = cCtrl.CreateCategory("Testing Category Lvl 2", "Test", c1);
 
             // Act
             eCtrl.AddCategory(e, c1);
-            eCtrl.AddCategory(e, c2);
+
+            var c2 = cCtrl.CreateCategory("Testing Category Lvl 2", "Test", c1);
+            var e2 = eCtrl.FindById(e.Id);
+            eCtrl.AddCategory(e2, c2);
 
             Assert.IsTrue(true);
 
@@ -150,8 +159,11 @@ namespace BLLTest
             // Arrange
             ComponentCtrl cCtrl = new ComponentCtrl();
             EventCtrl eCtrl = new EventCtrl();
+            UserCtrl uCtrl = new UserCtrl();
+            var u = uCtrl.CreateUser("Test User", "Test User", "test" + Guid.NewGuid() + "@email.com", "password");
+
             // Act
-            var evnt = eCtrl.CreateEvent("E Title", "E Desc", 42, 42, 42, "E Location", DateTime.Now.AddDays(5), true, null);
+            var evnt = eCtrl.CreateEvent("E Title", "E Desc", 42, 42, 42, "E Location", DateTime.Now.AddDays(5), true, u);
             var category = cCtrl.CreateCategory("Cat Name", "Cat desc", null);
             eCtrl.AddCategory(evnt, category);
             //var category2 = cCtrl.CreateCategory("Cat2 Name2", "Cat2 desc2", category);

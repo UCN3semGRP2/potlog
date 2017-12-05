@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace DAL
 {
@@ -90,7 +91,11 @@ namespace DAL
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                ctx.Components.AddOrUpdate(entity);
+                ctx.SaveChanges();
+            }
         }
     }
 }

@@ -15,6 +15,16 @@ namespace DAL
             {
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
+                    if (entity.Parent != null)
+                    {
+                        ctx.Components.Attach(entity.Parent);
+                    }
+
+                    if (entity.Event != null)
+                    {
+                        ctx.Events.Attach(entity.Event);
+                    }
+
                     try
                     {
                         Item item = (Item)ctx.Components.Add(entity);
