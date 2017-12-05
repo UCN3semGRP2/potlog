@@ -73,6 +73,10 @@ namespace BLL
             {
                 // Should be moved to Component/category/item ctrl
                 var p = (Category)c.Parent;
+                if (p.Components == null)
+                {
+                    p.Components = new List<Component>();
+                }
                 p.Components.Add(c);
                 c.Event = p.Event;
                 c.EventId = p.EventId;

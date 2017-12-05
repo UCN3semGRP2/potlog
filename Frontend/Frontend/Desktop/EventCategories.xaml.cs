@@ -33,19 +33,20 @@ namespace Desktop
 
         private void UpdateTopComboBox()
         {
+            this.e = service.FindEventById(this.e.Id);
             if (e.Components != null)
             {
                 List<string> topCompTitles = new List<string>();
                 foreach (var item in e.Components)
-                { 
+                {
                     topCompTitles.Add(item.Title);
                 }
 
                 cbTopLevel.ItemsSource = topCompTitles;
                 cbTopLevel.IsEnabled = true;
-            }
 
-            //TODO Level 2 and Level 3.
+
+            }
         }
 
         private void btnAddCatTopLevel_Click(object sender, RoutedEventArgs e)
@@ -146,6 +147,119 @@ namespace Desktop
             //{
             //    default:
             //}
+        }
+
+        private void btnAddItemLevelTwo_Click(object sender, RoutedEventArgs e)
+        {
+            string itemTitle = InsertName("ret");
+            string itemDescription = InsertDesc("ret");
+            int amount = InsertAmount();
+
+            string topCatName = cbTopLevel.SelectedItem.ToString();
+            var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
+
+            if (!itemTitle.Equals("") && !itemDescription.Equals("") && amount > 0)
+            {
+                service.AddItemToCategory(this.e.Id, topCat.Id, amount, itemTitle, itemDescription);
+                this.e = service.FindEventById(this.e.Id);
+                UpdateSecondComboBox();
+                MessageBox.Show("Retten er tilføjet til eventet");
+            }
+            else
+            {
+                MessageBox.Show("Tilføjelse af retten anulleret.");
+            }
+
+        }
+
+        private int InsertAmount()
+        {
+            int amount = 0;
+
+            try
+            {
+
+                Int32.TryParse(Interaction.InputBox(
+                    String.Format("Indtast venligst mængden på den nye ret nedenfor."),
+                    String.Format("Ny ret: Mængde"),
+                    ""
+                    ), out amount);
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Indtastede mængde skal angives som tal.");
+                InsertAmount();
+            }
+
+            return amount;
+        }
+
+        private void cbLevelTwo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateThirdComboBox();
+        }
+
+        private void UpdateThirdComboBox()
+        {
+            string topCatName = cbTopLevel.SelectedItem.ToString();
+            int topCatId = ((Category)this.e.Components
+                .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
+
+            string subCatName = cbLevelTwo.SelectedItem.ToString();
+
+            var lvlTwoCats = service.FindComponentByParentId(topCatId);
+            var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
+
+            if (lvlTwoCat != null)
+            {
+                var lvlThreeCats = service.FindComponentByParentId(lvlTwoCat.Id);
+
+                if (lvlTwoCat != null)
+                {
+                    if (lvlThreeCats != null && lvlThreeCats.Count() > 0)
+                    {
+                        List<string> LevelThreeTitles = new List<string>();
+                        foreach (var item in lvlThreeCats)
+                        {
+                            LevelThreeTitles.Add(item.Title);
+                        }
+
+                        cbLevelThree.ItemsSource = LevelThreeTitles;
+                        cbLevelThree.IsEnabled = true;
+                    }
+
+                    btnAddItemLevelThree.IsEnabled = true;
+                }
+            }
+        }
+
+        private void btnAddItemLevelThree_Click(object sender, RoutedEventArgs e)
+        {
+            string itemTitle = InsertName("ret");
+            string itemDescription = InsertDesc("ret");
+            int amount = InsertAmount();
+
+            string topCatName = cbTopLevel.SelectedItem.ToString();
+            int topCatId = ((Category)this.e.Components
+                .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
+
+            string subCatName = cbLevelTwo.SelectedItem.ToString();
+
+            var lvlTwoCats = service.FindComponentByParentId(topCatId);
+            var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
+
+            if (!itemTitle.Equals("") && !itemDescription.Equals("") && amount > 0)
+            {
+                service.AddItemToCategory(this.e.Id, lvlTwoCat.Id, amount, itemTitle, itemDescription);
+                this.e = service.FindEventById(this.e.Id);
+                UpdateThirdComboBox();
+                MessageBox.Show("Retten er tilføjet til eventet");
+            }
+            else
+            {
+                MessageBox.Show("Tilføjelse af retten anulleret.");
+            }
         }
     }
 }
