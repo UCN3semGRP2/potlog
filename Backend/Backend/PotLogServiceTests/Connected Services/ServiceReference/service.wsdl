@@ -73,6 +73,18 @@
   <wsdl:message name="IService_FindComponentByParentId_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindComponentByParentIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetInviteString_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInviteString" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetInviteString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInviteStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_AcceptInviteString_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptInviteString" />
+  </wsdl:message>
+  <wsdl:message name="IService_AcceptInviteString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptInviteStringResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
@@ -117,6 +129,14 @@
     <wsdl:operation name="FindComponentByParentId">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/FindComponentByParentId" message="tns:IService_FindComponentByParentId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/FindComponentByParentIdResponse" message="tns:IService_FindComponentByParentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInviteString">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetInviteString" message="tns:IService_GetInviteString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetInviteStringResponse" message="tns:IService_GetInviteString_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptInviteString">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AcceptInviteString" message="tns:IService_AcceptInviteString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AcceptInviteStringResponse" message="tns:IService_AcceptInviteString_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -213,6 +233,24 @@
     </wsdl:operation>
     <wsdl:operation name="FindComponentByParentId">
       <soap:operation soapAction="http://tempuri.org/IService/FindComponentByParentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInviteString">
+      <soap:operation soapAction="http://tempuri.org/IService/GetInviteString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptInviteString">
+      <soap:operation soapAction="http://tempuri.org/IService/AcceptInviteString" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -9,5 +9,6 @@ namespace DAL
 {
     public interface IEventDB : ICRUD<Event>
     {
+        Event FindFromInviteString(string inviteString);
     }
 }

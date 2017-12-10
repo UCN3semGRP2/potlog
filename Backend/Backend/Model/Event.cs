@@ -47,5 +47,8 @@ namespace Model
 
         [DataMember]
         public List<Component> Components { get; set; }
+
+        [DataMember]
+        public string InviteString { get; set; }
     }
 }

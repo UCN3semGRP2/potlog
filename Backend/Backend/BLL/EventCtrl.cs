@@ -39,7 +39,8 @@ namespace BLL
                 Location = location,
                 Datetime = datetime,
                 IsPublic = isPublic,
-                Admin = admin
+                Admin = admin,
+                InviteString = Guid.NewGuid().ToString()
             };
             var finalEvent = eDB.Create(e);
             return finalEvent;
@@ -100,6 +101,12 @@ namespace BLL
 
         }
 
+        public Event FindByInviteString(string inviteString)
+        {
+            return eDB.FindFromInviteString(inviteString);
+        }
+
+
         public void AddItem(Event evnt, Category category, Item item)
         {
             category.Components.Add(item);
@@ -108,6 +115,18 @@ namespace BLL
             item.Parent = category;
             item.ComponetId = category.Id;
             eDB.Update(evnt);
+        }
+
+        public string GetInviteString(Event evnt, User usr)
+        {
+           // TODO verify that we are logged in and that usr is indeed admin for event
+           if (evnt.Admin.Id != usr.Id)
+           {
+                throw new ArgumentException("the user is not admin for the event");
+           }
+
+            return evnt.InviteString;
+
         }
     }
 }

@@ -89,5 +89,14 @@ namespace BLL
         {
             return uDB.FindByEmail(u.Email);
         }
+
+        public void AcceptInviteString(User usr, string inviteString)
+        {
+            // TODO check that the user is logged in
+            var eCtrl = new EventCtrl();
+            Event e = eCtrl.FindByInviteString(inviteString);
+
+            eCtrl.RegisterToEvent(e, usr);
+        }
     }
 }
