@@ -45,6 +45,5 @@ namespace PotLogService
 
         [OperationContract]
         List<Component> FindComponentByParentId(int id);
-
     }
 }
