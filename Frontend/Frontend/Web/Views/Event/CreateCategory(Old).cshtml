@@ -2,28 +2,20 @@
 
 @{
     ViewBag.Title = "CreateCategory";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout-MainPage.cshtml";
 }
 
 <h2>Opret Kategori</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.EventId, new { htmlAttributes = new { @class = "form-control" } })
-             
-        <div class="form-group">
-            @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10 dropdown">
-                @Html.DropDownListFor(model => model.Categories, Model.Categories, new { @class = "btn btn-secondary dropdown-toggle" })
-                @Html.ValidationMessageFor(model => model.Categories, "", new { @class = "text-danger" })
-            </div>
-        </div> 
+        @Html.HiddenFor(model => model.EventId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,7 +35,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
             </div>
         </div>
     </div>

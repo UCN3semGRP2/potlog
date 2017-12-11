@@ -163,19 +163,68 @@ namespace Web.Controllers
         public ActionResult CreateCategory(DetailsEventViewModel model)
         {
             int id = model.Id;
-            return View(new CreateComponentViewModel
+            var evnt = service.FindEventById(model.Id);
+
+            CreateComponentViewModel viewModel = new CreateComponentViewModel
             {
                 EventId = id,
                 Title = "",
                 Description = ""
-            });
+            };
+
+            List<SelectListItem> categories = new List<SelectListItem>();
+            foreach (var item in evnt.Components)
+            {
+                if (item is Category)
+                {
+                    categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
+            }
+
+            viewModel.Categories = categories;            
+
+            return View(viewModel);
         }
         [HttpPost]
-        public ActionResult CreateCategory(CreateComponentViewModel model)
+        public ActionResult CreateCategory(CreateComponentViewModel model, FormCollection form)
         {
-            // TODO Methods must handle parents.
+            
+            //var component = service.FindCategoryById();
             service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
             return RedirectToAction("Details", new { id = model.EventId });
+        }
+
+        [HttpGet]
+        public ActionResult CreateItem(DetailsEventViewModel model)
+        {
+            int id = model.Id;
+            CreateComponentViewModel viewmodel = new CreateComponentViewModel
+            {
+                EventId = id,
+                Title = "",
+                Description = "",
+                Categories = new List<SelectListItem>()
+            };
+
+            foreach (var item in model.ComponentModel.LevelOneList)
+            {
+                viewmodel.Categories.Add(item);
+            }
+
+            foreach (var item in model.ComponentModel.LevelTwoList)
+            {
+                viewmodel.Categories.Add(item);
+            }
+
+            return View(viewmodel);
+
+        }
+
+        [HttpPost]
+        public ActionResult CreateItem()
+        {
+
+            return View();
         }
 
     }
