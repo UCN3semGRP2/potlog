@@ -150,6 +150,8 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult InvitationString(InviteStringViewModel model)
         {
+            const string errorMsg = "Den indtastede invitationskode er ikke gyldig";
+
             var usr = (User)Session["User"];
             if (usr == null)
             {
@@ -162,6 +164,7 @@ namespace Web.Controllers
             if (inviteString == null || inviteString == "")
             {
                 // Show an error
+                ViewBag.ErrorMsg = errorMsg;
                 return View();
             }
 
@@ -169,7 +172,7 @@ namespace Web.Controllers
             var evnt = service.AcceptInviteString(usr, inviteString);
             if (evnt == null)
             {
-                // Show an error
+                ViewBag.ErrorMsg = errorMsg;
                 return View();
             }
 

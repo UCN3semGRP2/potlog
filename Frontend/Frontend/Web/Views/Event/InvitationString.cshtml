@@ -7,10 +7,16 @@
 
 <h2>Invistationskode</h2>
 
-@using (Html.BeginForm()) 
+@if (ViewBag.ErrorMsg != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+}
+
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>@*InviteStringViewModel*@</h4>
         <hr />
@@ -31,6 +37,6 @@
     </div>
 }
 
-    <div>
-        @Html.ActionLink("Tilbage", "SignedUpEvents", "MainPage")
-    </div>
+<div>
+    @Html.ActionLink("Tilbage", "SignedUpEvents", "MainPage")
+</div>
