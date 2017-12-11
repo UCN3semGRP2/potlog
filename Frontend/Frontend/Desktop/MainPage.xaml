@@ -10,7 +10,7 @@
 
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517">
-            <TabItem x:Name="tiSignedUpEvents" Header="Tilmeldte Events">
+            <TabItem x:Name="tiSignedUpEvents" Header="Tilmeldte Begivenheder">
                 <Grid Background="#FFE5E5E5">
                     <Frame Name="signUpEventsFrame" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
                     <ListView x:Name="lwSignedUpEvents"  HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="154">
