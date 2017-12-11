@@ -25,7 +25,7 @@ namespace BLL
             {
                 throw new DateInPastException("Dato er sat i fortiden");
             }
-            if (numOfParticipants < 0)
+            if (!(numOfParticipants > 0))
             {
                 throw new ArgumentException("Der skal være mindst 1 deltager");
             }
