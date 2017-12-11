@@ -94,7 +94,7 @@ namespace PotLogService
         {
             Category c = cCtrl.FindCategoryById(categoryId);
             Event e = eCtrl.FindById(eventId);
-            Item item = cCtrl.CreateItem(itemTitle, itemDescription, amount, c);
+            Item item = cCtrl.CreateItem(itemTitle, itemDescription, amount, c, e);
             eCtrl.AddItem(e, c, item);
         }
 

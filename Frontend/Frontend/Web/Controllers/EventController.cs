@@ -121,6 +121,22 @@ namespace Web.Controllers
                 }
             }
 
+            foreach (var item in e.Components)
+            {
+                if (item.Parent != null)
+                {
+                    var test = cModel.LevelTwoList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
+                    if (test != null)
+                    {
+                        cModel.LevelThreeList.Add(new SelectListItem
+                        {
+                            Text = item.Title,
+                            Value = item.Id.ToString()
+                        });
+                    }
+                }
+            }
+
             ev.ComponentModel = cModel;
 
             return View(ev);
