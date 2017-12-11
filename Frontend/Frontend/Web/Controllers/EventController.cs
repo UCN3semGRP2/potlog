@@ -92,7 +92,6 @@ namespace Web.Controllers
 
             ComponentModel cModel = new ComponentModel();
 
-            // Top level category
             foreach (var item in e.Components)
             {
                 if (item.Parent == null)
@@ -105,34 +104,88 @@ namespace Web.Controllers
                 }
             }
 
-            foreach (var item in e.Components)
+            //foreach (var item in e.Components)
+            //{
+            //    if (item.Parent != null)
+            //    {
+            //        var test = cModel.LevelOneList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
+            //        if (test != null)
+            //        {
+            //            cModel.LevelTwoList.Add(new SelectListItem
+            //            {
+            //                Text = item.Title,
+            //                Value = item.Id.ToString()
+            //            });
+            //        }
+            //    }
+            //}
+
+            //foreach (var item in e.Components)
+            //{
+            //    if (item.Parent != null)
+            //    {
+            //        var test = cModel.LevelTwoList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
+            //        if (test != null)
+            //        {
+            //            cModel.LevelThreeList.Add(new SelectListItem
+            //            {
+            //                Text = item.Title,
+            //                Value = item.Id.ToString()
+            //            });
+            //        }
+            //    }
+            //}
+
+            ev.ComponentModel = cModel;
+
+            return View(ev);
+        }
+
+        [HttpPost]
+        public ActionResult Details(int? eventId, int? levelOneId, int? levelTwoId, int? levelThreeId)
+        {
+            var e = service.FindEventById(eventId.Value);
+            DetailsEventViewModel ev = new DetailsEventViewModel
             {
-                if (item.Parent != null)
-                {
-                    var test = cModel.LevelOneList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
-                    if (test != null)
-                    {
-                        cModel.LevelTwoList.Add(new SelectListItem
-                        {
-                            Text = item.Title,
-                            Value = item.Id.ToString()
-                        });
-                    }
-                }
-            }
+                Id = e.Id,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                Title = e.Title
+            };
+            ComponentModel cModel = new ComponentModel();
 
             foreach (var item in e.Components)
             {
-                if (item.Parent != null)
+                if (item.Parent == null)
                 {
-                    var test = cModel.LevelTwoList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
-                    if (test != null)
+                    cModel.LevelOneList.Add(new SelectListItem
                     {
-                        cModel.LevelThreeList.Add(new SelectListItem
-                        {
-                            Text = item.Title,
-                            Value = item.Id.ToString()
-                        });
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            if (levelOneId.HasValue)
+            {
+                var levelTwoComponents = service.FindComponentByParentId((int)levelOneId);
+                foreach (var item in levelTwoComponents)
+                {
+                    cModel.LevelTwoList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
+
+                if (levelTwoId.HasValue)
+                {
+                    var levelThreeComponents = service.FindComponentByParentId((int)levelTwoId);
+                    foreach (var item in levelThreeComponents)
+                    {
+                        cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
                 }
             }
@@ -179,7 +232,7 @@ namespace Web.Controllers
             {
                 if (item is Category && item.Parent == null)
                 {
-                    
+
                     categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                 }
             }

@@ -98,24 +98,22 @@
             @Html.DisplayNameFor(model => model.ComponentModel.LevelOneId)
         </dt>
 
-        <dd style="break-before: avoid;">
-
-            @Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle" })
-
-
+        <dd>
+            @Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelOneBox", onchange = "document.forms[0].submit();" })
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.ComponentModel.LevelTwoId)
         </dt>
         <dd>
-            @Html.DropDownListFor(model => model.ComponentModel.LevelTwoId, Model.ComponentModel.LevelTwoList, "Vælg en kategori eller ret", new { @class = "btn btn-secondary dropdown-toggle" })
+            @Html.DropDownListFor(model => model.ComponentModel.LevelTwoId, Model.ComponentModel.LevelTwoList, "Vælg en kategori eller ret", new { @class = "btn btn-secondary dropdown-toggle", id = "LevelTwoBox", onchange = "document.forms[0].submit();", disabled = "disabled" })
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.ComponentModel.LevelThreeId)
         </dt>
         <dd>
-            @Html.DropDownListFor(model => model.ComponentModel.LevelThreeId, Model.ComponentModel.LevelThreeList, "Vælg en ret", new { @class = "btn btn-secondary dropdown-toggle" })
+            @Html.DropDownListFor(model => model.ComponentModel.LevelThreeId, Model.ComponentModel.LevelThreeList, "Vælg en ret", new { @class = "btn btn-secondary dropdown-toggle", disabled = "disabled" })
         </dd>
 
     </dl>
@@ -170,21 +168,23 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-    $(function () {
-        if ($("#ComponentModel_LevelTwoId option").length > 1) {
-            $("#ComponentModel_LevelTwoId").removeAttr("disabled");
-        }
+        $(function () {
+            if ($("#LevelTwoId option").length > 1) {
+                $("#LevelTwoId").removeAttr("disabled");
+            }
 
-        if ($("#ComponentModel_LevelThreeId option").length > 1) {
-            $("#ComponentModel_LevelThreeId").removeAttr("disabled");
-        }
+            if ($("#LevelThreeId option").length > 1) {
+                $("#LevelThreeId").removeAttr("disabled");
+            }
 
-        //if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
-        //    var message = "Country: " + $("#CountryId option:selected").text();
-        //    message += "\nState: " + $("#StateId option:selected").text();
-        //    message += "\nCity: " + $("#CityId option:selected").text();
-        //    alert(message);
-        //}
-    });
+            //if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
+            //    var message = "Country: " + $("#CountryId option:selected").text();
+            //    message += "\nState: " + $("#StateId option:selected").text();
+            //    message += "\nCity: " + $("#CityId option:selected").text();
+            //    alert(message);
+            //}
+        });
 </script>
