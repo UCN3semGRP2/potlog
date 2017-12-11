@@ -33,6 +33,10 @@ namespace BLL
             {
                 throw new ArgumentException("There must and admin for an event");
             }
+            if (priceFrom < 0 || priceTo < 0)
+            {
+                throw new ArgumentException("Prisen må ikke være negativ");
+            }
 
             var e = new Event
             {

@@ -133,7 +133,6 @@ namespace PotLogServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
         public void TestCreateEventWithZeroParticipants()
         {
             string title = "title";
@@ -146,14 +145,18 @@ namespace PotLogServiceTests
             bool isPublic = false;
             User admin = User;
 
-            var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+            try
+            {
+                var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                Assert.Fail();
 
-            // Assert
-            Assert.Fail();
+            }
+            catch (FaultException)
+            {
+            }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
         public void TestCreateEventWithNegativePriceFrom()
         {
             string title = "title";
@@ -166,10 +169,15 @@ namespace PotLogServiceTests
             bool isPublic = false;
             User admin = User;
 
-            var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+            try
+            {
+                var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                Assert.Fail();
 
-            // Assert
-            Assert.Fail();
+            }
+            catch (FaultException)
+            {
+            }
         }
 
         [TestMethod]
