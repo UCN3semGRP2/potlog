@@ -43,7 +43,7 @@ namespace BLLTest
             {
                 Firstname = "Niklas",
                 Lastname = "Jørgensen",
-                Email = "n@n.dk"+g,
+                Email = "n@n.dk" + g,
                 Password = "123456"
             };
 
@@ -109,7 +109,7 @@ namespace BLLTest
             bool isValidated = ctrl.IsValidated(u1);
 
             // Assert
-            Assert.IsFalse(isValidated);
+            Assert.IsFalse(isValidated, "The user was validated though he should not be");
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace BLLTest
             bool isValidated = ctrl.IsValidated(u1);
 
             // Assert
-            Assert.IsFalse(isValidated);
+            Assert.IsFalse(isValidated, "The user was validated though his session is expired");
         }
     }
 }
