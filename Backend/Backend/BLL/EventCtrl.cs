@@ -37,6 +37,14 @@ namespace BLL
             {
                 throw new ArgumentException("Prisen må ikke være negativ");
             }
+            if (title == "")
+            {
+                throw new ArgumentException("Der skal indtastes en titel");
+            }
+            if (description == "")
+            {
+                throw new ArgumentException("Der skal indtastes en beskrivelse");
+            }
 
             var e = new Event
             {
