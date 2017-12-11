@@ -168,6 +168,7 @@
     <Compile Include="Models\CreateViewModel.cs" />
     <Compile Include="Models\DetailsEventViewModel.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\InviteStringViewModel.cs" />
     <Compile Include="Models\UserLogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -251,6 +252,7 @@
     <Content Include="Views\MainPage\CreatedEvents.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Event\CreateCategory.cshtml" />
+    <Content Include="Views\Event\InvitationString.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@ namespace Web.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Create", "Event");
         }
 
         [HttpGet]
@@ -134,6 +134,47 @@ namespace Web.Controllers
             // TODO Methods must handle parents.
             service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
             return RedirectToAction("Details", new { id = model.EventId });
+        }
+
+        [HttpGet]
+        public ActionResult InvitationString()
+        {
+            var usr = (User)Session["User"];
+            if (usr == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult InvitationString(InviteStringViewModel model)
+        {
+            var usr = (User)Session["User"];
+            if (usr == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+            // TODO redirect to the found event
+
+            var inviteString = model.InviteString;
+
+            if (inviteString == null || inviteString == "")
+            {
+                // Show an error
+                return View();
+            }
+
+            
+            var evnt = service.AcceptInviteString(usr, inviteString);
+            if (evnt == null)
+            {
+                // Show an error
+                return View();
+            }
+
+
+            return RedirectToAction("Details", "Event", new { id = evnt.Id });
         }
 
     }
