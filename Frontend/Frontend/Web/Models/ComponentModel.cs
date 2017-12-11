@@ -9,6 +9,8 @@ namespace Web.Models
 {
     public class ComponentModel
     {
+        [HiddenInput(DisplayValue = false)]
+        public int EventId { get; set; }
         [Display(Name = "Hovedkategori:")]
         public int LevelOneId { get; set; }
         [Display(Name = "Niveau 2:")]

@@ -142,22 +142,23 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(int? eventId, int? levelOneId, int? levelTwoId, int? levelThreeId)
+        public ActionResult Details(int? eventId, int? LevelOneId, int? LevelTwoId, int? LevelThreeId)
         {
-            var e = service.FindEventById(eventId.Value);
-            DetailsEventViewModel ev = new DetailsEventViewModel
-            {
-                Id = e.Id,
-                Date = e.Datetime.Date,
-                Description = e.Description,
-                IsPublic = e.IsPublic,
-                Location = e.Location,
-                NumOfParticipants = e.NumOfParticipants,
-                PriceFrom = e.PriceFrom,
-                PriceTo = e.PriceTo,
-                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                Title = e.Title
-            };
+                var e = service.FindEventById(eventId.Value);
+                DetailsEventViewModel ev = new DetailsEventViewModel
+                {
+                    Id = e.Id,
+                    Date = e.Datetime.Date,
+                    Description = e.Description,
+                    IsPublic = e.IsPublic,
+                    Location = e.Location,
+                    NumOfParticipants = e.NumOfParticipants,
+                    PriceFrom = e.PriceFrom,
+                    PriceTo = e.PriceTo,
+                    Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                    Title = e.Title
+                };
+
             ComponentModel cModel = new ComponentModel();
 
             foreach (var item in e.Components)
@@ -172,17 +173,17 @@ namespace Web.Controllers
                 }
             }
 
-            if (levelOneId.HasValue)
+            if (LevelOneId.HasValue)
             {
-                var levelTwoComponents = service.FindComponentByParentId((int)levelOneId);
+                var levelTwoComponents = service.FindComponentByParentId((int)LevelOneId);
                 foreach (var item in levelTwoComponents)
                 {
                     cModel.LevelTwoList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                 }
 
-                if (levelTwoId.HasValue)
+                if (LevelTwoId.HasValue)
                 {
-                    var levelThreeComponents = service.FindComponentByParentId((int)levelTwoId);
+                    var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
                     foreach (var item in levelThreeComponents)
                     {
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
