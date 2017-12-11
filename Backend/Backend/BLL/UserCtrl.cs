@@ -90,13 +90,15 @@ namespace BLL
             return uDB.FindByEmail(u.Email);
         }
 
-        public void AcceptInviteString(User usr, string inviteString)
+        public Event AcceptInviteString(User usr, string inviteString)
         {
             // TODO check that the user is logged in
             var eCtrl = new EventCtrl();
             Event e = eCtrl.FindByInviteString(inviteString);
+            if (e == null) return null;
 
             eCtrl.RegisterToEvent(e, usr);
+            return e;
         }
     }
 }

@@ -109,9 +109,9 @@ namespace PotLogService
             return eCtrl.GetInviteString(evnt, usr);
         }
 
-        public void AcceptInviteString(User usr, string inviteString)
+        public Event AcceptInviteString(User usr, string inviteString)
         {
-            uCtrl.AcceptInviteString(usr, inviteString);
+            return uCtrl.AcceptInviteString(usr, inviteString);
         }
     }
 }

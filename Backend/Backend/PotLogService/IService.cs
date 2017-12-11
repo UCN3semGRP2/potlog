@@ -50,6 +50,6 @@ namespace PotLogService
         string GetInviteString(Event evnt, User usr);
 
         [OperationContract]
-        void AcceptInviteString(User usr, string inviteString);
+        Event AcceptInviteString(User usr, string inviteString);
     }
 }

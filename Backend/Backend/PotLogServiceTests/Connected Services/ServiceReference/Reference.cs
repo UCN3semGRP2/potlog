@@ -827,10 +827,10 @@ namespace PotLogServiceTests.ServiceReference {
         System.Threading.Tasks.Task<string> GetInviteStringAsync(PotLogServiceTests.ServiceReference.Event evnt, PotLogServiceTests.ServiceReference.User usr);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        void AcceptInviteString(PotLogServiceTests.ServiceReference.User usr, string inviteString);
+        PotLogServiceTests.ServiceReference.Event AcceptInviteString(PotLogServiceTests.ServiceReference.User usr, string inviteString);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        System.Threading.Tasks.Task AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString);
+        System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Event> AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -956,11 +956,11 @@ namespace PotLogServiceTests.ServiceReference {
             return base.Channel.GetInviteStringAsync(evnt, usr);
         }
         
-        public void AcceptInviteString(PotLogServiceTests.ServiceReference.User usr, string inviteString) {
-            base.Channel.AcceptInviteString(usr, inviteString);
+        public PotLogServiceTests.ServiceReference.Event AcceptInviteString(PotLogServiceTests.ServiceReference.User usr, string inviteString) {
+            return base.Channel.AcceptInviteString(usr, inviteString);
         }
         
-        public System.Threading.Tasks.Task AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString) {
+        public System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Event> AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
         }
     }

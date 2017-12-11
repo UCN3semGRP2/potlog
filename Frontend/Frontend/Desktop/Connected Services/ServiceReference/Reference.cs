@@ -827,10 +827,10 @@ namespace Desktop.ServiceReference {
         System.Threading.Tasks.Task<string> GetInviteStringAsync(Desktop.ServiceReference.Event evnt, Desktop.ServiceReference.User usr);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        void AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString);
+        Desktop.ServiceReference.Event AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        System.Threading.Tasks.Task AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString);
+        System.Threading.Tasks.Task<Desktop.ServiceReference.Event> AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -956,11 +956,11 @@ namespace Desktop.ServiceReference {
             return base.Channel.GetInviteStringAsync(evnt, usr);
         }
         
-        public void AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString) {
-            base.Channel.AcceptInviteString(usr, inviteString);
+        public Desktop.ServiceReference.Event AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString) {
+            return base.Channel.AcceptInviteString(usr, inviteString);
         }
         
-        public System.Threading.Tasks.Task AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString) {
+        public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
         }
     }

@@ -67,7 +67,7 @@ namespace DAL
             {
                 return ctx.Events
                     .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
-                    .Single(x => x.InviteString == inviteString);
+                    .SingleOrDefault(x => x.InviteString == inviteString);
             }
         }
 

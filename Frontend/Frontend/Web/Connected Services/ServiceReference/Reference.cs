@@ -827,10 +827,10 @@ namespace Web.ServiceReference {
         System.Threading.Tasks.Task<string> GetInviteStringAsync(Web.ServiceReference.Event evnt, Web.ServiceReference.User usr);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        void AcceptInviteString(Web.ServiceReference.User usr, string inviteString);
+        Web.ServiceReference.Event AcceptInviteString(Web.ServiceReference.User usr, string inviteString);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
-        System.Threading.Tasks.Task AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString);
+        System.Threading.Tasks.Task<Web.ServiceReference.Event> AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -956,11 +956,11 @@ namespace Web.ServiceReference {
             return base.Channel.GetInviteStringAsync(evnt, usr);
         }
         
-        public void AcceptInviteString(Web.ServiceReference.User usr, string inviteString) {
-            base.Channel.AcceptInviteString(usr, inviteString);
+        public Web.ServiceReference.Event AcceptInviteString(Web.ServiceReference.User usr, string inviteString) {
+            return base.Channel.AcceptInviteString(usr, inviteString);
         }
         
-        public System.Threading.Tasks.Task AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString) {
+        public System.Threading.Tasks.Task<Web.ServiceReference.Event> AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
         }
     }

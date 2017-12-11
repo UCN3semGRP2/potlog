@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PotLogServiceTests.ServiceReference;
 
 namespace PotLogServiceTests
 {
@@ -33,7 +34,10 @@ namespace PotLogServiceTests
 
             // The normal user logs in and accepts
             var usr = service.LogIn(userEmail, userPw);
-            service.AcceptInviteString(usr, inviteString);
+            Event invitedEvent = service.AcceptInviteString(usr, inviteString);
+
+            Assert.IsNotNull(invitedEvent);
+            Assert.AreEqual(evnt.Id, invitedEvent.Id);
         }
     }
 }
