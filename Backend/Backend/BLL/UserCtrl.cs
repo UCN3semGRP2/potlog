@@ -87,6 +87,10 @@ namespace BLL
 
         public void AddRegistration(User user, Registration reg)
         {
+            if (user.Registrations == null)
+            {
+                user.Registrations = new List<Registration>();
+            }
             user.Registrations.Add(reg);
             uDB.Update(user);
         }
