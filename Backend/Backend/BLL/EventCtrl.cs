@@ -14,6 +14,7 @@ namespace BLL
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
         private IEventDB eDB = new EventDB();
+        private ComponentCtrl cCtrl = new ComponentCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
@@ -92,10 +93,10 @@ namespace BLL
                 e.Components = new List<Component>();
             }
 
-            if (new ComponentCtrl().HasParentCategory(c))
+            if (cCtrl.HasParentCategory(c))
             {
                 // Add category to the parent Category
-                new ComponentCtrl().AttachCategoryToItsParent(c);
+                cCtrl.AttachCategoryToItsParent(c);
             }
             else
             {
