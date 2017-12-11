@@ -755,10 +755,10 @@ namespace PotLogServiceTests.ServiceReference {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateUser", ReplyAction="http://tempuri.org/IService/CreateUserResponse")]
-        void CreateUser(string Firstname, string Lastname, string Email, string Password);
+        void CreateUser(string firstname, string lastname, string pmail, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateUser", ReplyAction="http://tempuri.org/IService/CreateUserResponse")]
-        System.Threading.Tasks.Task CreateUserAsync(string Firstname, string Lastname, string Email, string Password);
+        System.Threading.Tasks.Task CreateUserAsync(string firstname, string lastname, string pmail, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LogIn", ReplyAction="http://tempuri.org/IService/LogInResponse")]
         PotLogServiceTests.ServiceReference.User LogIn(string email, string clearTextPw);
@@ -860,12 +860,12 @@ namespace PotLogServiceTests.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateUser(string Firstname, string Lastname, string Email, string Password) {
-            base.Channel.CreateUser(Firstname, Lastname, Email, Password);
+        public void CreateUser(string firstname, string lastname, string pmail, string password) {
+            base.Channel.CreateUser(firstname, lastname, pmail, password);
         }
         
-        public System.Threading.Tasks.Task CreateUserAsync(string Firstname, string Lastname, string Email, string Password) {
-            return base.Channel.CreateUserAsync(Firstname, Lastname, Email, Password);
+        public System.Threading.Tasks.Task CreateUserAsync(string firstname, string lastname, string pmail, string password) {
+            return base.Channel.CreateUserAsync(firstname, lastname, pmail, password);
         }
         
         public PotLogServiceTests.ServiceReference.User LogIn(string email, string clearTextPw) {
