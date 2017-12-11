@@ -91,25 +91,15 @@ namespace BLL
             {
                 e.Components = new List<Component>();
             }
-            if (c.Parent != null && c.Parent is Category)
-            {
-                // Should be moved to Component/category/item ctrl
-                var p = (Category)c.Parent;
-                if (p.Components == null)
-                {
-                    p.Components = new List<Component>();
-                }
-                p.Components.Add(c);
-                c.Event = p.Event;
-                c.EventId = p.EventId;
-                new ComponentCtrl().Update(c);
-                new ComponentCtrl().Update(p);
-                // ctx.Component.AddOrUpdate(p);
-                // ctx.Component.AddOrUpdate(c);
 
+            if (new ComponentCtrl().HasParentCategory(c))
+            {
+                // Add category to the parent Category
+                new ComponentCtrl().AttachCategoryToItsParent(c);
             }
             else
             {
+                // Add the category to the Event
                 e.Components.Add(c);
                 c.Event = e;
                 c.EventId = e.Id;
