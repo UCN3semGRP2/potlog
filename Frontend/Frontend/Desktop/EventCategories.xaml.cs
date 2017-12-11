@@ -17,9 +17,7 @@ using Microsoft.VisualBasic;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventCategories.xaml
-    /// </summary>
+
     public partial class EventCategories : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -135,20 +133,6 @@ namespace Desktop
                 MessageBox.Show("Tilføjelse af kategori anulleret.");
             }
 
-        }
-
-        private void AddCategory()
-        {
-            //TODO Refactor Click-events.
-        }
-
-        private void UpdateComboBoxN(int n)
-        {
-            //TODO CASES
-            //switch (switch_on)
-            //{
-            //    default:
-            //}
         }
 
         private void btnAddItemLevelTwo_Click(object sender, RoutedEventArgs e)

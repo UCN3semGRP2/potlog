@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for UserLogIn.xaml
-    /// </summary>
+
     public partial class UserLogIn : Page
     {
         private ServiceReference.IService service = new ServiceReference.ServiceClient();

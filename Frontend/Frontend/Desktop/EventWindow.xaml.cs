@@ -15,9 +15,7 @@ using Desktop.ServiceReference;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventWindow.xaml
-    /// </summary>
+
     public partial class EventWindow : Window
     {
         private Event evnt;

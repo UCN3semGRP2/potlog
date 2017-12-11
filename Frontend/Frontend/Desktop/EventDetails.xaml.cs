@@ -17,9 +17,7 @@ using Microsoft.VisualBasic;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventDetails.xaml
-    /// </summary>
+
     public partial class EventDetails : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -95,9 +93,6 @@ namespace Desktop
             service.SignUpForEvent(u.Email, this.e.Id);
 
             MessageBox.Show(string.Format("Success registering oprettet"));
-
-            //var nextPage = TODO
-            //this.NavigationService.Navigate(nextPage);
         }
 
         private void btnCategories_Click(object sender, RoutedEventArgs e)

@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for UserDetail.xaml
-    /// </summary>
+
     public partial class UserDetail : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -31,6 +29,7 @@ namespace Desktop
             
         }
 
+        // TODO: the event should be something with UPDATE
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateHelper.validateRepeatPassword(tb_Password.Password, tb_RepeatPassword.Password)
@@ -39,7 +38,7 @@ namespace Desktop
                 && ValidateHelper.isEntered(tb_Lastname)
                 && ValidateHelper.validatePassword(tb_Password.Password))
             {
-                // TODO:
+                // TODO: We should actually do something here.
                 MessageBox.Show("Denne funktionalitet er endnu ikke lavet");
                 //MessageBox.Show("Brugeroplysninger er blevet opdateret");
                 this.NavigationService.Navigate(new MainPage());

@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 namespace Desktop
 {
     
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         internal User loggedIn = null;

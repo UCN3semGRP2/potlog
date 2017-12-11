@@ -17,9 +17,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
+
     public partial class MainPage : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
