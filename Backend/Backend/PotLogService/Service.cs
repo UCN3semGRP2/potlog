@@ -47,6 +47,10 @@ namespace PotLogService
             {
                 throw new FaultException("Brugeren eksisterer allerede");
             }
+            catch (ArgumentException argE)
+            {
+                throw new FaultException(argE.Message);
+            }
         }
 
         public User LogIn(string email, string clearTextPw)
