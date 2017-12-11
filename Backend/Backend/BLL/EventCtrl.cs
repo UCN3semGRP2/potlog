@@ -29,6 +29,11 @@ namespace BLL
             {
                 throw new ArgumentException("Der skal være mindst 1 deltager");
             }
+            if (admin == null)
+            {
+                throw new ArgumentException("There must and admin for an event");
+            }
+
             var e = new Event
             {
                 Title = title,

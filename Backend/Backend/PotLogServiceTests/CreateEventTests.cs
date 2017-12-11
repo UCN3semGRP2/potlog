@@ -49,7 +49,6 @@ namespace PotLogServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
         public void TestCreateEventNullAdmin()
         {
             string title = "title";
@@ -62,10 +61,15 @@ namespace PotLogServiceTests
             bool isPublic = false;
             User admin = null;
 
-            var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+            try
+            {
+                var evnt = service.CreateEvent(title, description, numOfParticipants, priceFrom, priceTo, location, datetime, isPublic, admin);
+                Assert.Fail();
 
-            // Assert
-            Assert.Fail();
+            }
+            catch (FaultException)
+            {
+            }
         }
 
         [TestMethod]
