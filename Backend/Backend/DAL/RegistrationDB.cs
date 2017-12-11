@@ -16,19 +16,15 @@ namespace DAL
         {
             using (DALContext ctx = new DALContext())
             {
-                // Here be dragons!
-                // user and event objets was created by another ctx so we need to reattach them to this ctx
+                // User and Event objets was created by another ctx so we need to reattach them to this ctx
                 entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
-                //ctx.Users.Attach(entity.User);
                 entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
-                //ctx.Events.Attach(entity.Event);
-                //ctx.Entry(entity.Event).State = EntityState.Unchanged;
+
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
                     {
                         ctx.Registrations.AddOrUpdate(entity);
-                        //reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
                         return entity;
