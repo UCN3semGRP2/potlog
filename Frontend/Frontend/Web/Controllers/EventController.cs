@@ -173,24 +173,45 @@ namespace Web.Controllers
             };
 
             List<SelectListItem> categories = new List<SelectListItem>();
+            categories.Add(new SelectListItem { Text = "Ingen", Value = null });
+
             foreach (var item in evnt.Components)
             {
-                if (item is Category)
+                if (item is Category && item.Parent == null)
                 {
+                    
                     categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                 }
             }
 
-            viewModel.Categories = categories;            
+            foreach (var item in categories)
+            {
+                
+            }
+
+            viewModel.Categories = categories;
 
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult CreateCategory(CreateComponentViewModel model, FormCollection form)
+        public ActionResult CreateCategory(CreateComponentViewModel model)
         {
-            
-            //var component = service.FindCategoryById();
-            service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
+            int parentId;
+            string selectedCategory = model.SelectedCategory;
+
+            if (selectedCategory != null || selectedCategory != "")
+            {
+                Int32.TryParse(selectedCategory, out parentId);
+                var component = service.FindCategoryById(parentId);
+                service.AddCategoryToEvent(model.EventId, model.Title, model.Description, component);
+
+            }
+            else
+            {
+                service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
+            }
+
+
             return RedirectToAction("Details", new { id = model.EventId });
         }
 
