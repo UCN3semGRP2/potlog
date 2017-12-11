@@ -87,9 +87,21 @@ namespace Web.Controllers
                 PriceFrom = e.PriceFrom,
                 PriceTo = e.PriceTo,
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                Title = e.Title,
-                //AllComponents = e.Components
+                Title = e.Title
             };
+
+            ComponentModel cModel = new ComponentModel();
+
+            foreach (var item in e.Components)
+            {
+                cModel.LevelOneList.Add(new SelectListItem {
+                    Text = item.Title,
+                    Value = item.Id.ToString()
+                });
+            }
+
+            ev.ComponentModel = cModel;
+
             return View(ev);
         }
 
