@@ -46,5 +46,10 @@ namespace PotLogService
         [OperationContract]
         List<Component> FindComponentByParentId(int id);
 
+        [OperationContract]
+        string GetInviteString(Event evnt, User usr);
+
+        [OperationContract]
+        Event AcceptInviteString(User usr, string inviteString);
     }
 }

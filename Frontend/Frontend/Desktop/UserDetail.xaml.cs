@@ -27,6 +27,8 @@ namespace Desktop
             tb_Email.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Email;
             tb_Firstname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname;
             tb_Lastname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
+
+            
         }
 
         private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
@@ -38,7 +40,8 @@ namespace Desktop
                 && ValidateHelper.validatePassword(tb_Password.Password))
             {
                 // TODO:
-                MessageBox.Show("Brugeroplysninger er blevet opdateret");
+                MessageBox.Show("Denne funktionalitet er endnu ikke lavet");
+                //MessageBox.Show("Brugeroplysninger er blevet opdateret");
                 this.NavigationService.Navigate(new MainPage());
             }
             else

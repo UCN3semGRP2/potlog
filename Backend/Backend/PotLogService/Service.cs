@@ -103,5 +103,15 @@ namespace PotLogService
         {
             return cCtrl.FindComponentByParentId(id);
         }
+
+        public string GetInviteString(Event evnt, User usr)
+        {
+            return eCtrl.GetInviteString(evnt, usr);
+        }
+
+        public Event AcceptInviteString(User usr, string inviteString)
+        {
+            return uCtrl.AcceptInviteString(usr, inviteString);
+        }
     }
 }

@@ -61,6 +61,16 @@ namespace DAL
             }
         }
 
+        public Event FindFromInviteString(string inviteString)
+        {
+            using (var ctx = new DALContext())
+            {
+                return ctx.Events
+                    .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
+                    .SingleOrDefault(x => x.InviteString == inviteString);
+            }
+        }
+
         public void Update(Event entity)
         {
             using (var ctx = new DALContext())

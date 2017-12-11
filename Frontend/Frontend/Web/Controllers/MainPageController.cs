@@ -9,6 +9,11 @@ namespace Web.Controllers
 {
     public class MainPageController : Controller
     {
+        public ActionResult Home()
+        {
+            return RedirectToAction("SignedUpEvents");
+        }
+
         public ActionResult PublicEvents()
         {
             if (Session["LoggedIn"] == null)
