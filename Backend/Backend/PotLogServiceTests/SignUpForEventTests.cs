@@ -10,9 +10,10 @@ namespace PotLogServiceTests
     {
         private ServiceReference.IService service = new ServiceReference.ServiceClient();
 
-        public User User { get; set; }
+        public User Admin { get; set; }
         public Event Evnt { get; set; }
         public int EventId { get; set; }
+        
 
         [TestInitialize]
         public void TestInitialize()
@@ -20,15 +21,22 @@ namespace PotLogServiceTests
             var email = "t@t.t" + Guid.NewGuid();
             var pw = "hunter1";
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
-            this.User = service.LogIn(email, pw);
+            this.Admin = service.LogIn(email, pw);
 
-            this.Evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
+            this.Evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.Admin);
             this.EventId = Evnt.Id;
+
+
         }
 
         [TestMethod]
         public void TestSignUpForEventHappyDays()
         {
+            var email = "user@t.t" + Guid.NewGuid();
+            var pw = "hunter1";
+            service.CreateUser("TestCreateEventUser", "Test", email, pw);
+            var User = service.LogIn(email, pw);
+
             service.SignUpForEvent(User.Email, EventId);
 
             Evnt = service.FindEventById(EventId);

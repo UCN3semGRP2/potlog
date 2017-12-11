@@ -85,7 +85,7 @@ namespace BLLTest
         [TestMethod]
         public void TestSignUpForEvent()
         {
-            var user = new UserCtrl().CreateUser("1", "2", "test@test.test" + Guid.NewGuid(), "1234");
+            var user = new UserCtrl().CreateUser("Fornavn", "Efternavn", "test@test.test" + Guid.NewGuid(), "123456");
             var eCtrl = new EventCtrl();
             var e = eCtrl.CreateEvent("dsd", "dewdc", 23, 213.3, 21312.3, "here", DateTime.Now.AddHours(5), false, user);
 

@@ -14,6 +14,23 @@ namespace BLL
         private IUserDB uDB = new UserDB();
         public User CreateUser(string Firstname, string Lastname, string Email, string Password)
         {
+            if (!Validator.ValidateFirstname(Firstname))
+            {
+                throw new ArgumentException("Der skal indtastes fornavn");
+            }
+            if (!Validator.ValidateLastname(Lastname))
+            {
+                throw new ArgumentException("Der skal indtastes efternavn");
+            }
+            if (!Validator.ValidateEmail(Email))
+            {
+                throw new ArgumentException("Der skal indtastes en gyldig email");
+            }
+            
+            if (!Validator.ValidatePassword(Password))
+            {
+                throw new ArgumentException(string.Format("Der skal indtastes et password på mindst {} karakterer", Validator.MinPasswordLength));
+            }
 
             string salt = HashingHelper.GenerateSalt();
             string hashedPassword = HashingHelper.HashPassword(Password, salt);
@@ -70,6 +87,10 @@ namespace BLL
 
         public void AddRegistration(User user, Registration reg)
         {
+            if (user.Registrations == null)
+            {
+                user.Registrations = new List<Registration>();
+            }
             user.Registrations.Add(reg);
             uDB.Update(user);
         }

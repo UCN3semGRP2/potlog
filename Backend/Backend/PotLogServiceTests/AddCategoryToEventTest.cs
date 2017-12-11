@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotLogServiceTests.ServiceReference;
 using System.Linq;
+using System.ServiceModel;
 
 namespace PotLogServiceTests
 {
@@ -49,9 +50,14 @@ namespace PotLogServiceTests
             var description = "Description with no title";
             var evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
 
-            service.AddCategoryToEvent(evnt.Id, title, description, null);
-            
-            Assert.Fail();
+            try
+            {
+                service.AddCategoryToEvent(evnt.Id, title, description, null);
+                Assert.Fail();
+            }
+            catch (FaultException)
+            {
+            }
         }
 
         [TestMethod]
@@ -61,9 +67,15 @@ namespace PotLogServiceTests
             var description = "";
             var evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
 
-            service.AddCategoryToEvent(evnt.Id, title, description, null);
-   
-            Assert.Fail();
+            try
+            {
+                service.AddCategoryToEvent(evnt.Id, title, description, null);
+                Assert.Fail();
+            }
+            catch (FaultException)
+            {
+                
+            }
         }
     }
 }

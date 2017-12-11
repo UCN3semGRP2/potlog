@@ -47,6 +47,10 @@ namespace PotLogService
             {
                 throw new FaultException("Brugeren eksisterer allerede");
             }
+            catch (ArgumentException argE)
+            {
+                throw new FaultException(argE.Message);
+            }
         }
 
         public User LogIn(string email, string clearTextPw)
@@ -73,6 +77,15 @@ namespace PotLogService
 
         public void AddCategoryToEvent(int eventId, string categoryTitle, string categoryDescription, Component parent)
         {
+            if (categoryTitle == "")
+            {
+                throw new ArgumentException("Der skal indtastes en titel");
+            }
+            if (categoryDescription == "")
+            {
+                throw new ArgumentException("Der skal indtastes en beskrivelse");
+            }
+
             //TODO refactor to ectrl
             Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription, parent);
             Event e = eCtrl.FindById(eventId);

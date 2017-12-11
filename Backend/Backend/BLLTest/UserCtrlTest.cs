@@ -19,7 +19,7 @@ namespace BLLTest
                 Firstname = "Niklas",
                 Lastname = "Jørgensen",
                 Email = "n@n.dk" + Guid.NewGuid(), // To avoid creating the same user when rerunning the test
-                Password = "1234"
+                Password = "123456"
             };
 
             uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
@@ -43,8 +43,8 @@ namespace BLLTest
             {
                 Firstname = "Niklas",
                 Lastname = "Jørgensen",
-                Email = "n@n.dk"+g,
-                Password = "1234"
+                Email = "n@n.dk" + g,
+                Password = "123456"
             };
 
             uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
@@ -109,7 +109,7 @@ namespace BLLTest
             bool isValidated = ctrl.IsValidated(u1);
 
             // Assert
-            Assert.IsFalse(isValidated);
+            Assert.IsFalse(isValidated, "The user was validated though he should not be");
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace BLLTest
             bool isValidated = ctrl.IsValidated(u1);
 
             // Assert
-            Assert.IsFalse(isValidated);
+            Assert.IsFalse(isValidated, "The user was validated though his session is expired");
         }
     }
 }

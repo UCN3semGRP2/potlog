@@ -25,10 +25,27 @@ namespace BLL
             {
                 throw new DateInPastException("Dato er sat i fortiden");
             }
-            if (numOfParticipants < 0)
+            if (!(numOfParticipants > 0))
             {
                 throw new ArgumentException("Der skal være mindst 1 deltager");
             }
+            if (admin == null)
+            {
+                throw new ArgumentException("There must and admin for an event");
+            }
+            if (priceFrom < 0 || priceTo < 0)
+            {
+                throw new ArgumentException("Prisen må ikke være negativ");
+            }
+            if (title == "")
+            {
+                throw new ArgumentException("Der skal indtastes en titel");
+            }
+            if (description == "")
+            {
+                throw new ArgumentException("Der skal indtastes en beskrivelse");
+            }
+
             var e = new Event
             {
                 Title = title,
