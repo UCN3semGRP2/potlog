@@ -48,7 +48,7 @@ namespace Web.Controllers
             try
             {
                 var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
-                return RedirectToAction("Details", new { id = evnt.Id});
+                return RedirectToAction("Details", new { id = evnt.Id });
             }
             catch (FaultException err)
             {
@@ -92,12 +92,33 @@ namespace Web.Controllers
 
             ComponentModel cModel = new ComponentModel();
 
+            // Top level category
             foreach (var item in e.Components)
             {
-                cModel.LevelOneList.Add(new SelectListItem {
-                    Text = item.Title,
-                    Value = item.Id.ToString()
-                });
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            foreach (var item in e.Components)
+            {
+                if (item.Parent != null)
+                {
+                    var test = cModel.LevelOneList.Find(i => Int32.Parse(i.Value) == item.Parent.Id);
+                    if (test != null)
+                    {
+                        cModel.LevelTwoList.Add(new SelectListItem
+                        {
+                            Text = item.Title,
+                            Value = item.Id.ToString()
+                        });
+                    }
+                }
             }
 
             ev.ComponentModel = cModel;

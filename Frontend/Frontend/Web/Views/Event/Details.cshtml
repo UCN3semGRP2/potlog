@@ -95,19 +95,31 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.AllComponents)
-        </dt>
+                @Html.DisplayNameFor(model => model.AllComponents)
+            </dt>
 
-        <dd>
-            @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
-        </dd>*@
+            <dd>
+                @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.ComponentModel.LevelOneList)
         </dt>
 
-        <dd class="dropdown">
-            @Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class="btn btn-secondary dropdown-toggle" })
+        <dd>
+            <div class="dropdown">
+                @Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "btn btn-secondary dropdown-toggle" })
+            </div>
+            @*<div class="form-group">*@
+            @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(model => model.Id)
+                <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
+            }
+            @*</div>*@
+
         </dd>
 
     </dl>
@@ -138,17 +150,17 @@
                 </div>
             </div>
 
-            <div class="col-lg-2">
-                <div class="form-group">
-                    @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
-                    {
-                        @Html.AntiForgeryToken()
+            @*<div class="col-lg-2">
+                    <div class="form-group">
+                        @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
 
-                        @Html.HiddenFor(model => model.Id)
-                        <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
-                    }
-                </div>
-            </div>
+                            @Html.HiddenFor(model => model.Id)
+                            <input type="submit" value="Tilføj Kategori" class="btn btn-default" />
+                        }
+                    </div>
+                </div>*@
         </div>
     </div>
 </div>
