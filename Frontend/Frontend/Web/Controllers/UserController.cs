@@ -15,10 +15,11 @@ namespace Web.Controllers
     {
 
         ServiceReference.IService service = new ServiceReference.ServiceClient();
-        // GET: User
+
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "MainPage");
         }
 
         [HttpGet]

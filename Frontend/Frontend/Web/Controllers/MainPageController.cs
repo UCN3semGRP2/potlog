@@ -9,6 +9,14 @@ namespace Web.Controllers
 {
     public class MainPageController : Controller
     {
+        // TODO: At all places that we display something about the user that is logged in we should get a fresh user object
+        //       from the service so that we know that the data is updated.
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("SignedUpEvents");
+        }
+
         public ActionResult Home()
         {
             return RedirectToAction("SignedUpEvents");

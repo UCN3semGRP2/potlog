@@ -14,7 +14,7 @@ namespace Web.Controllers
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
-        // GET: Event
+        [HttpGet]
         public ActionResult Index()
         {
             return RedirectToAction("Create", "Event");
@@ -95,7 +95,6 @@ namespace Web.Controllers
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
                 Title = e.Title,
                 InviteString = inviteString
-                //AllComponents = e.Components
             };
             return View(ev);
         }
@@ -157,13 +156,11 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            // TODO redirect to the found event
 
             var inviteString = model.InviteString;
 
             if (inviteString == null || inviteString == "")
             {
-                // Show an error
                 ViewBag.ErrorMsg = errorMsg;
                 return View();
             }

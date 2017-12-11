@@ -10,6 +10,11 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["LoggedIn"] != null)
+            {
+                return RedirectToAction("Index", "MainPage");
+            }
+
             return View();
         }
 
