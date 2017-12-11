@@ -53,13 +53,20 @@ namespace Desktop
                 btnEventSeeParticipants.Visibility = Visibility.Hidden;
             }
 
-            populateInfo(e);
+            if (u.Id != e.Admin.Id)
+            {
+                lblInviteLink.Visibility = Visibility.Hidden;
+                tbInviteString.Visibility = Visibility.Hidden;
+            }
 
             this.u = u;
             this.e = e;
+
+            populateInfo(e,u);
+
         }
 
-        private void populateInfo(Event e)
+        private void populateInfo(Event e, User u)
         {
             e = service.FindEventById(e.Id);
 
@@ -73,6 +80,13 @@ namespace Desktop
 
             var registrations = e.Registrations == null ? 0 : e.Registrations.Length;
             lblEventNumOfParticipants.Content = string.Format("{0} ud af {1} deltagere", registrations, e.NumOfParticipants);
+
+            if (u.Id == e.Admin.Id)
+            {
+                var inviteString = service.GetInviteString(e, u);
+                tbInviteString.Text = inviteString;
+                tbInviteString.IsReadOnly = true;
+            }
 
         }
 

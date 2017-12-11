@@ -50,6 +50,7 @@
       <xs:element minOccurs="0" name="Datetime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="InviteString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsPublic" type="xs:boolean" />
       <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumOfParticipants" type="xs:int" />

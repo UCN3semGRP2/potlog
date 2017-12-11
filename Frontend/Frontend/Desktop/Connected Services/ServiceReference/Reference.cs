@@ -365,6 +365,9 @@ namespace Desktop.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InviteStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPublicField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -456,6 +459,19 @@ namespace Desktop.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string InviteString {
+            get {
+                return this.InviteStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InviteStringField, value) != true)) {
+                    this.InviteStringField = value;
+                    this.RaisePropertyChanged("InviteString");
                 }
             }
         }
@@ -803,6 +819,18 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/FindComponentByParentId", ReplyAction="http://tempuri.org/IService/FindComponentByParentIdResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetInviteString", ReplyAction="http://tempuri.org/IService/GetInviteStringResponse")]
+        string GetInviteString(Desktop.ServiceReference.Event evnt, Desktop.ServiceReference.User usr);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetInviteString", ReplyAction="http://tempuri.org/IService/GetInviteStringResponse")]
+        System.Threading.Tasks.Task<string> GetInviteStringAsync(Desktop.ServiceReference.Event evnt, Desktop.ServiceReference.User usr);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
+        void AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
+        System.Threading.Tasks.Task AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -918,6 +946,22 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Component[]> FindComponentByParentIdAsync(int id) {
             return base.Channel.FindComponentByParentIdAsync(id);
+        }
+        
+        public string GetInviteString(Desktop.ServiceReference.Event evnt, Desktop.ServiceReference.User usr) {
+            return base.Channel.GetInviteString(evnt, usr);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetInviteStringAsync(Desktop.ServiceReference.Event evnt, Desktop.ServiceReference.User usr) {
+            return base.Channel.GetInviteStringAsync(evnt, usr);
+        }
+        
+        public void AcceptInviteString(Desktop.ServiceReference.User usr, string inviteString) {
+            base.Channel.AcceptInviteString(usr, inviteString);
+        }
+        
+        public System.Threading.Tasks.Task AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString) {
+            return base.Channel.AcceptInviteStringAsync(usr, inviteString);
         }
     }
 }
