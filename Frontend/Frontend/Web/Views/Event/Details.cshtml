@@ -102,6 +102,14 @@
             @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
         </dd>*@
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ComponentModel.LevelOneList)
+        </dt>
+
+        <dd class="dropdown">
+            @Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class="btn btn-secondary dropdown-toggle" })
+        </dd>
+
     </dl>
     <div class="container">
         <div class="row">
