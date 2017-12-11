@@ -86,7 +86,7 @@ namespace PotLogService
                 throw new ArgumentException("Der skal indtastes en beskrivelse");
             }
 
-            //TODO refactor to ectrl
+            // TODO could refactor to ectrl
             Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription, parent);
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
