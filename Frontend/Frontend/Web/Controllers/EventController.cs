@@ -184,11 +184,6 @@ namespace Web.Controllers
                 }
             }
 
-            foreach (var item in categories)
-            {
-                
-            }
-
             viewModel.Categories = categories;
 
             return View(viewModel);
@@ -219,33 +214,44 @@ namespace Web.Controllers
         public ActionResult CreateItem(DetailsEventViewModel model)
         {
             int id = model.Id;
-            CreateComponentViewModel viewmodel = new CreateComponentViewModel
+            var evnt = service.FindEventById(model.Id);
+
+            CreateItemViewModel viewModel = new CreateItemViewModel
             {
                 EventId = id,
                 Title = "",
-                Description = "",
-                Categories = new List<SelectListItem>()
+                Description = ""
             };
 
-            foreach (var item in model.ComponentModel.LevelOneList)
+            List<SelectListItem> categories = new List<SelectListItem>();
+            foreach (var item in evnt.Components)
             {
-                viewmodel.Categories.Add(item);
+                if (item is Category)
+                {
+
+                    categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
             }
 
-            foreach (var item in model.ComponentModel.LevelTwoList)
-            {
-                viewmodel.Categories.Add(item);
-            }
+            viewModel.Categories = categories;
 
-            return View(viewmodel);
+            return View(viewModel);
 
         }
 
         [HttpPost]
-        public ActionResult CreateItem()
+        public ActionResult CreateItem(CreateItemViewModel model)
         {
+            int parentId;
+            string selectedCategory = model.SelectedCategory;
 
-            return View();
+            if (selectedCategory != null || selectedCategory != "")
+            {
+                Int32.TryParse(selectedCategory, out parentId);
+                service.AddItemToCategory(model.EventId, parentId, model.Amount, model.Title, model.Description);
+            }
+
+            return RedirectToAction("Details", new { id = model.EventId });
         }
 
     }
