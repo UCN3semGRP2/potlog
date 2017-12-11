@@ -100,7 +100,7 @@ namespace PotLogServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        //[ExpectedException(typeof(FaultException))] // This does not work as it will claim it got an FaultException'1 exception. Note the '1
         public void TestCreateUserWithNoPassword()
         {
             var firstName = "firstnae";
@@ -109,11 +109,15 @@ namespace PotLogServiceTests
             var password = "";
 
             // Act
-            service.CreateUser(firstName, lastName, email, password);
-
-            // Assert
-            // Should never go here
-            Assert.Fail();
+            try
+            {
+                service.CreateUser(firstName, lastName, email, password);
+                Assert.Fail();
+            }
+            catch (FaultException)
+            {
+                
+            }
         }
     }
 }
