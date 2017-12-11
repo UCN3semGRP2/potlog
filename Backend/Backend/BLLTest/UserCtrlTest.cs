@@ -44,7 +44,7 @@ namespace BLLTest
                 Firstname = "Niklas",
                 Lastname = "Jørgensen",
                 Email = "n@n.dk"+g,
-                Password = "1234"
+                Password = "123456"
             };
 
             uCtrl.CreateUser(user.Firstname, user.Lastname, user.Email, user.Password);
