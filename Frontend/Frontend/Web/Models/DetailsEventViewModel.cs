@@ -48,15 +48,7 @@ namespace Web.Models
         [DataType(DataType.Currency)]
         public double PriceTo { get; set; }
 
-        //public IEnumerable<Component> AllComponents { get; set; }
-        //public IEnumerable<SelectListItem> GetAllComponents(IEnumerable<Component> components, string defaultSelection = "")
-        //{
-        //    return components.Select(c => new SelectListItem
-        //    {
-        //        Text = c.Title,
-        //        Value = c.Title,
-        //        Selected = c.Title == defaultSelection
-        //    });
-        //}
+        [Display(Name="Retter")]
+        public ComponentModel ComponentModel { get; set; }
     }
 }
