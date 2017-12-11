@@ -94,13 +94,26 @@
             @Html.DisplayFor(model => model.PriceTo)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.AllComponents)
-        </dt>
 
-        <dd>
-            @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
-        </dd>*@
+        @if (Model.InviteString != null || Model.InviteString != "")
+        {
+            <tl data-toggle="tooltip" title="Send denne invitationskode til dem du vil inviterer til dette event">
+                <dt>
+                    @Html.DisplayNameFor(model => model.InviteString)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.InviteString)
+                </dd>
+            </tl>
+        }
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.AllComponents)
+            </dt>
+
+            <dd>
+                @Html.DropDownListFor(model => model.AllComponents, Model.GetAllComponents(Model.AllComponents))
+            </dd>*@
 
     </dl>
     <div class="container">

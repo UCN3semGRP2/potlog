@@ -71,11 +71,17 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
+            var usr = (User)Session["User"];
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var e = service.FindEventById(id.Value);
+
+            var inviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null;
+            
+
             DetailsEventViewModel ev = new DetailsEventViewModel
             {
                 Id = e.Id,
@@ -88,6 +94,7 @@ namespace Web.Controllers
                 PriceTo = e.PriceTo,
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
                 Title = e.Title,
+                InviteString = inviteString
                 //AllComponents = e.Components
             };
             return View(ev);
