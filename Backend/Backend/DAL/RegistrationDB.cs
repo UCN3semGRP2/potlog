@@ -14,7 +14,6 @@ namespace DAL
 
         public Registration Create(Registration entity)
         {
-            Registration reg = null;
             using (DALContext ctx = new DALContext())
             {
                 // Here be dragons!
@@ -32,7 +31,7 @@ namespace DAL
                         //reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
-                        return reg;
+                        return entity;
                     }
                     catch (Exception err)
                     {
