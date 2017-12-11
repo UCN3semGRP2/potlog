@@ -27,8 +27,8 @@
         <Button x:Name="btnEventSeeParticipants" Content="Se deltagere" HorizontalAlignment="Left" Margin="340,281,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnEventRegister" Content="Tilmeld" HorizontalAlignment="Left" Margin="420,250,0,0" VerticalAlignment="Top" Width="75" Click="btnEventRegister_Click"/>
         <Button x:Name="btnCategories" Content="Se kategorier" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="245,281,0,0" Click="btnCategories_Click"/>
-        <TextBox x:Name="tbInviteString" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" Margin="350,208,0,0"/>
-        <Label x:Name="lblInviteLink" Content="Invitationslink:" HorizontalAlignment="Left" Margin="375,177,0,0" VerticalAlignment="Top" Width="96"/>
+        <TextBox x:Name="tbInviteString" ToolTip="Send dette til dem du vil invitere til dette event" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" Margin="350,208,0,0"/>
+        <Label x:Name="lblInviteLink" ToolTip="Send dette til dem du vil invitere til dette event." Content="Invitationskode:" HorizontalAlignment="Left" Margin="369,177,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold"/>
 
     </Grid>
 </Page>
