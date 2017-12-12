@@ -13,9 +13,9 @@ namespace Web.Models
         public int EventId { get; set; }
         [Display(Name = "Hovedkategori:")]
         public int LevelOneId { get; set; }
-        [Display(Name = "Niveau 2:")]
+        [Display(Name = "Underkategori eller ret:")]
         public int LevelTwoId { get; set; }
-        [Display(Name = "Niveau 3:")]
+        [Display(Name = "Ret i underkategori:")]
         public int LevelThreeId { get; set; }
         [Display(Name = "Hovedkategori:")]
         public List<SelectListItem> LevelOneList { get; set; }
