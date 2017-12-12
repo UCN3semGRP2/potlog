@@ -16,7 +16,7 @@ namespace DAL
             Event e = null;
             using (var ctx = new DALContext())
             {
-                if (entity.Admin != null) ctx.Users.Attach(entity.Admin);
+                if (entity.Admin != null) entity.Admin = ctx.Users.Single(x => x.Id == entity.Admin.Id); //ctx.Users.Attach(entity.Admin);
 
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {

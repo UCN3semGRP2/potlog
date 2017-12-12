@@ -69,6 +69,10 @@ namespace PotLogService
             {
                 throw new FaultException(aex.Message);
             }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public Event FindEventById(int id)
@@ -131,7 +135,14 @@ namespace PotLogService
 
         public Event AcceptInviteString(User usr, string inviteString)
         {
-            return uCtrl.AcceptInviteString(usr, inviteString);
+            try
+            {
+                return uCtrl.AcceptInviteString(usr, inviteString);
+            }
+            catch (ArgumentException arge)
+            {
+                throw new FaultException(arge.Message);
+            }
         }
     }
 }

@@ -14,15 +14,23 @@ namespace BLL
 
         public Registration CreateRegistration(User user, Event evnt)
         {
-           
+
             var reg = new Registration
             {
                 DateOfCreation = DateTime.Now,
                 Event = evnt,
                 User = user
             };
-            var finalReg = rDB.Create(reg);
-            return finalReg;
+
+            try
+            {
+                var finalReg = rDB.Create(reg);
+                return finalReg;
+            }
+            catch (DuplicateRegistrationException)
+            {
+                throw new ArgumentException("The user is already registered to the event");
+            }
         }
     }
 }
