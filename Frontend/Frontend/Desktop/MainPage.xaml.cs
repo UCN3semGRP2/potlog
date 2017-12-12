@@ -73,7 +73,8 @@ namespace Desktop
         private void btnInfo_click(object sender, RoutedEventArgs e)
         {
             //evnt42 = 
-            var eventWindow = new EventWindow(evnt42, usr);
+            Event e2 = (Event)lwSignedUpEvents.SelectedItem; 
+            var eventWindow = new EventWindow(e2, usr);
             eventWindow.Show();
             //this.NavigationService.Navigate();
         }
