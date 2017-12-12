@@ -14,6 +14,8 @@ namespace Web.Controllers
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
+        
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -41,7 +43,7 @@ namespace Web.Controllers
             {
                 return View();
             }
-            var u = (User)Session["User"];
+            var u = utils.Utils.GetUser(Session);
 
             DateTime dt = model.Date + model.Time;
 
@@ -71,7 +73,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
 
             if (id == null)
             {
@@ -174,7 +176,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SignUp(DetailsEventViewModel model)
         {
-            User u = (User)Session["User"];
+            User u = utils.Utils.GetUser(Session);
             if (u == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -286,7 +288,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult InvitationString()
         {
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
             if (usr == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -299,7 +301,7 @@ namespace Web.Controllers
         {
             const string errorMsg = "Den indtastede invitationskode er ikke gyldig";
 
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
             if (usr == null)
             {
                 return RedirectToAction("LogIn", "User");
