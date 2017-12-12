@@ -10,5 +10,6 @@ namespace DAL
     public interface ICategoryDB : ICRUD<Category>
     {
         List<Component> FindComponentByParentId(int id);
+        Item FindItemByID(int itemId);
     }
 }

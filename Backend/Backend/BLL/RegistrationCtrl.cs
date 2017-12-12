@@ -24,5 +24,21 @@ namespace BLL
             var finalReg = rDB.Create(reg);
             return finalReg;
         }
+
+        public void CreateRegistrationForItem(User usr, Event evnt, Item item)
+        {
+            var reg = usr.Registrations.Where(x => x.Event.Id == evnt.Id).SingleOrDefault();
+            if (reg == null)
+            {
+                throw new ArgumentNullException("The user is not registred to the event.");
+            }
+            if (reg.Items == null)
+            {
+                reg.Items = new List<Item>();
+            }
+
+            reg.Items.Add(item);
+            rDB.Update(reg);
+        }
     }
 }

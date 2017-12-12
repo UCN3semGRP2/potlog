@@ -266,6 +266,9 @@ namespace PotLogServiceTests.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private PotLogServiceTests.ServiceReference.Item[] ItemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private PotLogServiceTests.ServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -313,6 +316,19 @@ namespace PotLogServiceTests.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public PotLogServiceTests.ServiceReference.Item[] Items {
+            get {
+                return this.ItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ItemsField, value) != true)) {
+                    this.ItemsField = value;
+                    this.RaisePropertyChanged("Items");
                 }
             }
         }
@@ -579,6 +595,45 @@ namespace PotLogServiceTests.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class Item : PotLogServiceTests.ServiceReference.Component {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private PotLogServiceTests.ServiceReference.Registration RegistrationField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public PotLogServiceTests.ServiceReference.Registration Registration {
+            get {
+                return this.RegistrationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegistrationField, value) != true)) {
+                    this.RegistrationField = value;
+                    this.RaisePropertyChanged("Registration");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Component", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(PotLogServiceTests.ServiceReference.Category))]
@@ -727,29 +782,6 @@ namespace PotLogServiceTests.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class Item : PotLogServiceTests.ServiceReference.Component {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -831,6 +863,12 @@ namespace PotLogServiceTests.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
         System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Event> AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        void SignUpForItem(string userEmail, int itemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -962,6 +1000,14 @@ namespace PotLogServiceTests.ServiceReference {
         
         public System.Threading.Tasks.Task<PotLogServiceTests.ServiceReference.Event> AcceptInviteStringAsync(PotLogServiceTests.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
+        }
+        
+        public void SignUpForItem(string userEmail, int itemId) {
+            base.Channel.SignUpForItem(userEmail, itemId);
+        }
+        
+        public System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId) {
+            return base.Channel.SignUpForItemAsync(userEmail, itemId);
         }
     }
 }
