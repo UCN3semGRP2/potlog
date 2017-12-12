@@ -323,6 +323,7 @@ namespace Desktop
         private void btnSignUpForItem_Click(object sender, RoutedEventArgs e)
         {
             service.SignUpForItem(u.Email, currentItem.Id);
+            MessageBox.Show("Du er nu tilmeldt til event, og medbringer: " + currentItem.Title + "." + "\nMedbring mad til " + currentItem.Amount.ToString() + " personer.");
         }
     }
 }
