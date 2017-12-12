@@ -72,10 +72,8 @@ namespace PotLogServiceTests
             int itemId = subcomps[0].Id;
 
             service.SignUpForItem(User.Email, itemId);
-
+            
             Evnt = service.FindEventById(EventId);
-
-
             bool userIsRegistered = Evnt
                 .Registrations
                 .Select(x => x.User)

@@ -53,8 +53,10 @@ namespace DAL
             using (DALContext ctx = new DALContext())
             {
                 var e = ctx.Events
-                    .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
+                    .Include(x => x.Registrations.Select(reg => reg.User))
                     .Include(x => x.Registrations.Select(reg => reg.Items))
+                    .Include(x => x.Components)
+                    .Include(x => x.Admin)
                     .Where(x => x.Id == id)
                     .Single();
 

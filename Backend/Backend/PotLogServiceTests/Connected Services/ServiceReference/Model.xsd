@@ -98,6 +98,7 @@
       <xs:extension base="tns:Component">
         <xs:sequence>
           <xs:element minOccurs="0" name="Amount" type="xs:int" />
+          <xs:element minOccurs="0" name="Registration" nillable="true" type="tns:Registration" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
