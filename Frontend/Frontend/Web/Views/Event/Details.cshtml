@@ -103,7 +103,6 @@
             </dt>
 
             <dd>
-                @*@Html.DropDownListFor(model => model.ComponentModel.LevelOneId, Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelOneBox", onchange = "document.forms[0].submit();" })*@
                 @Html.DropDownList("LevelOneId", Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelOneId", onchange = "document.forms[0].submit();" })
             </dd>
 
@@ -111,7 +110,6 @@
                 @Html.DisplayNameFor(model => model.ComponentModel.LevelTwoId)
             </dt>
             <dd>
-                @*@Html.DropDownListFor(model => model.ComponentModel.LevelTwoId, Model.ComponentModel.LevelTwoList, "Vælg en kategori eller ret", new { @class = "btn btn-secondary dropdown-toggle", id = "LevelTwoBox", onchange = "document.forms[0].submit();", disabled = "disabled" })*@
                 @Html.DropDownList("LevelTwoId", Model.ComponentModel.LevelTwoList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelTwoId", onchange = "document.forms[0].submit();", disabled = "disabled" })
             </dd>
 
@@ -119,7 +117,6 @@
                 @Html.DisplayNameFor(model => model.ComponentModel.LevelThreeId)
             </dt>
             <dd>
-                @*@Html.DropDownListFor(model => model.ComponentModel.LevelThreeId, Model.ComponentModel.LevelThreeList, "Vælg en ret", new { @class = "btn btn-secondary dropdown-toggle", disabled = "disabled" })*@
                 @Html.DropDownList("LevelThreeId", Model.ComponentModel.LevelThreeList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelThreeId", onchange = "document.forms[0].submit();", disabled = "disabled" })
             </dd>
 
