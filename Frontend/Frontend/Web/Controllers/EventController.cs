@@ -191,6 +191,11 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult CreateCategory(DetailsEventViewModel model)
         {
+            User u = (User)Session["User"];
+            if (u == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
             int id = model.Id;
             var evnt = service.FindEventById(model.Id);
 

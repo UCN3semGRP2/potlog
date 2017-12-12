@@ -31,8 +31,7 @@ namespace Desktop
             
         }
 
-        // TODO: the event should be something with UPDATE
-        private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
+        private void btn_UpdateUser_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateHelper.validateRepeatPassword(tb_Password.Password, tb_RepeatPassword.Password)
                 && ValidateHelper.validateEmail(tb_Email.Text)
