@@ -25,19 +25,20 @@ namespace BLL
             return finalReg;
         }
 
-        public Registration CreateRegistrationForItem(User usr, Event evnt, Item item)
+        public void CreateRegistrationForItem(User usr, Event evnt, Item item)
         {
-            var reg = new Registration
+            var reg = usr.Registrations.Where(x => x.Event.Id == evnt.Id).SingleOrDefault();
+            if (reg == null)
             {
-                DateOfCreation = DateTime.Now,
-                Event = evnt,
-                User = usr,
-                Items = new List<Item>()
-            };
+                throw new ArgumentNullException("The user is not registred to the event.");
+            }
+            if (reg.Items == null)
+            {
+                reg.Items = new List<Item>();
+            }
 
             reg.Items.Add(item);
-            var finalReg = rDB.Create(reg);
-            return finalReg;
+            rDB.Update(reg);
         }
     }
 }

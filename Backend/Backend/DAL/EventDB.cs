@@ -54,6 +54,7 @@ namespace DAL
             {
                 var e = ctx.Events
                     .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
+                    .Include(x => x.Registrations.Select(reg => reg.Items))
                     .Where(x => x.Id == id)
                     .Single();
 

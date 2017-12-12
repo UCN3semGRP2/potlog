@@ -29,7 +29,7 @@ namespace PotLogServiceTests
             service.AddCategoryToEvent(EventId, "Test Category", "Test Category", null);
             this.Evnt = service.FindEventById(EventId);
             service.AddItemToCategory(EventId, Evnt.Components[0].Id, 5, "Test Item", "Test Item");
-
+            this.Evnt = service.FindEventById(EventId);
         }
 
         [TestMethod]
@@ -62,18 +62,35 @@ namespace PotLogServiceTests
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
             var User = service.LogIn(email, pw);
 
-            int ItemId = ((Category)(Evnt.Components[0])).Components[0].Id;
+            service.SignUpForEvent(User.Email, EventId);
 
-            service.SignUpForItem(User.Email, ItemId);
+            User = service.UpdateUserInfo(User);
             Evnt = service.FindEventById(EventId);
+
+            var comp = Evnt.Components[0];
+            var subcomps = service.FindComponentByParentId(comp.Id);
+            int itemId = subcomps[0].Id;
+
+            service.SignUpForItem(User.Email, itemId);
+
+            Evnt = service.FindEventById(EventId);
+
+
+            bool userIsRegistered = Evnt
+                .Registrations
+                .Select(x => x.User)
+                .Select(x => x.Id)
+                .Contains(User.Id);
 
             Registration reg = Evnt
                 .Registrations
                 .Where(x => x.User.Id == User.Id)
-                .Where(x => x.Items.Select(i => i.Id).Contains(ItemId))
-                .SingleOrDefault();
+                .Single();
 
-            Assert.IsNotNull(reg);
+            Item i = reg.Items[0];
+
+            Assert.IsTrue(userIsRegistered, "user is registered on returned event");
+            Assert.AreEqual(subcomps[0].Id, i.Id);
         }
     }
 }

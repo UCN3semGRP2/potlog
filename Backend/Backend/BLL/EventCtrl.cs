@@ -139,13 +139,17 @@ namespace BLL
         {
             User u = uCtrl.FindByEmail(userEmail);
             Item i = cCtrl.FindItemById(itemId);
-            Event e = FindById(i.Event.Id);
+            Event e = FindById((int)i.EventId);
 
             RegisterToItem(u, e, i);
         }
 
         public void RegisterToItem(User usr, Event evnt, Item item)
         {
+            if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+            {
+                throw new ArgumentException("The user is not registred to the event.");
+            }
             rCtrl.CreateRegistrationForItem(usr, evnt, item);
         }
 

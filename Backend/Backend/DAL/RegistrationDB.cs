@@ -21,6 +21,7 @@ namespace DAL
                 entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
                 //ctx.Users.Attach(entity.User);
                 entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
+                 
                 //ctx.Events.Attach(entity.Event);
                 //ctx.Entry(entity.Event).State = EntityState.Unchanged;
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
@@ -59,7 +60,10 @@ namespace DAL
 
         public void Update(Registration entity)
         {
-            throw new NotImplementedException();
+            using (var ctx = new DALContext())
+            {
+                ctx.Registrations.AddOrUpdate(entity);
+            }
         }
 
     }
