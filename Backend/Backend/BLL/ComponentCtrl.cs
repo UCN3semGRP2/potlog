@@ -31,14 +31,15 @@ namespace BLL
             return catDB.FindByID(id);
         }
 
-        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, Component parent)
+        public Item CreateItem(string itemTitle, string itemDescription, int itemAmount, Component parent, Event e)
         {
             var item = new Item
             {
                 Title = itemTitle,
                 Description = itemDescription,
                 Amount = itemAmount,
-                Parent = parent
+                Parent = parent,
+                EventId = e.Id
             };
 
             return iDB.Create(item);

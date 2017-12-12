@@ -7,13 +7,15 @@ using System.Web.Mvc;
 
 namespace Web.Models
 {
-    public class CreateComponentViewModel
+    public class CreateItemViewModel
     {
-        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
+        [HiddenInput(DisplayValue = false)]
         public int EventId { get; set; }
         [Required]
         [Display(Name = "Øvre kategori")]
         public List<SelectListItem> Categories { get; set; }
+        [Required]
+        [Display(Name = "Øvre kategori")]
         public string SelectedCategory { get; set; }
         [Required]
         [Display(Name = "Titel")]
@@ -21,5 +23,8 @@ namespace Web.Models
         [Required]
         [Display(Name = "Beskrivelse")]
         public string Description { get; set; }
+        [Required]
+        [Display(Name = "Til antal personer")]
+        public int Amount { get; set; }
     }
 }

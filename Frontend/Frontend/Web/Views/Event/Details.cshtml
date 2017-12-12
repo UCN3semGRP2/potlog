@@ -108,6 +108,36 @@
             </tl>
         }
 
+
+        @using (Html.BeginForm("Details", "Event", FormMethod.Post))
+        {
+
+            @Html.Hidden("eventId", Model.Id)
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ComponentModel.LevelOneId)
+            </dt>
+
+            <dd>
+                @Html.DropDownList("LevelOneId", Model.ComponentModel.LevelOneList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelOneId", onchange = "document.forms[0].submit();" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ComponentModel.LevelTwoId)
+            </dt>
+            <dd>
+                @Html.DropDownList("LevelTwoId", Model.ComponentModel.LevelTwoList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelTwoId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ComponentModel.LevelThreeId)
+            </dt>
+            <dd>
+                @Html.DropDownList("LevelThreeId", Model.ComponentModel.LevelThreeList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelThreeId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+            </dd>
+
+        }
+
     </dl>
     <div class="container">
         <div class="row">
@@ -135,8 +165,7 @@
                     }
                 </div>
             </div>
-
-            <div class="col-lg-2">
+            <div class="col-lg-2"
                 <div class="form-group">
                     @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
                     {
@@ -147,6 +176,30 @@
                     }
                 </div>
             </div>
+
+            <div class="col-lg-2">
+                <div class="form-group">
+                    @using (Html.BeginForm("CreateItem", "Event", FormMethod.Get))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <input type="submit" value="Tilføj Ret" class="btn btn-default" />
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        if ($("#LevelTwoId option").length > 1) {
+            $("#LevelTwoId").removeAttr("disabled");
+        }
+
+        if ($("#LevelThreeId option").length > 1) {
+            $("#LevelThreeId").removeAttr("disabled");
+        }
+    });
+</script>

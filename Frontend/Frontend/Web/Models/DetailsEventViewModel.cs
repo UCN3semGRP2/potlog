@@ -51,6 +51,8 @@ namespace Web.Models
         [Display(Name = "Invitationskode")]
         [DataType(DataType.Text)]
         public string InviteString { get; set; }
-        
+
+        [Display(Name="Retter")]
+        public ComponentModel ComponentModel { get; set; }
     }
 }

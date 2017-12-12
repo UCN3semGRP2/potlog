@@ -48,7 +48,7 @@ namespace Web.Controllers
             try
             {
                 var evnt = service.CreateEvent(model.Title, model.Description, model.NumOfParticipants, model.PriceFrom, model.PriceTo, model.Location, dt, model.IsPublic, u);
-                return RedirectToAction("Details", new { id = evnt.Id});
+                return RedirectToAction("Details", new { id = evnt.Id });
             }
             catch (FaultException err)
             {
@@ -96,6 +96,78 @@ namespace Web.Controllers
                 Title = e.Title,
                 InviteString = inviteString
             };
+
+            ComponentModel cModel = new ComponentModel();
+
+            foreach (var item in e.Components)
+            {
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+            
+            ev.ComponentModel = cModel;
+
+            return View(ev);
+        }
+
+        [HttpPost]
+        public ActionResult Details(int? eventId, int? LevelOneId, int? LevelTwoId, int? LevelThreeId)
+        {
+                var e = service.FindEventById(eventId.Value);
+                DetailsEventViewModel ev = new DetailsEventViewModel
+                {
+                    Id = e.Id,
+                    Date = e.Datetime.Date,
+                    Description = e.Description,
+                    IsPublic = e.IsPublic,
+                    Location = e.Location,
+                    NumOfParticipants = e.NumOfParticipants,
+                    PriceFrom = e.PriceFrom,
+                    PriceTo = e.PriceTo,
+                    Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                    Title = e.Title
+                };
+
+            ComponentModel cModel = new ComponentModel();
+
+            foreach (var item in e.Components)
+            {
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            if (LevelOneId.HasValue)
+            {
+                var levelTwoComponents = service.FindComponentByParentId((int)LevelOneId);
+                foreach (var item in levelTwoComponents)
+                {
+                    cModel.LevelTwoList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
+
+                if (LevelTwoId.HasValue)
+                {
+                    var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
+                    foreach (var item in levelThreeComponents)
+                    {
+                        cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                    }
+                }
+            }
+
+            ev.ComponentModel = cModel;
+
             return View(ev);
         }
 
@@ -120,18 +192,94 @@ namespace Web.Controllers
         public ActionResult CreateCategory(DetailsEventViewModel model)
         {
             int id = model.Id;
-            return View(new CreateComponentViewModel
+            var evnt = service.FindEventById(model.Id);
+
+            CreateComponentViewModel viewModel = new CreateComponentViewModel
             {
                 EventId = id,
                 Title = "",
                 Description = ""
-            });
+            };
+
+            List<SelectListItem> categories = new List<SelectListItem>();
+            categories.Add(new SelectListItem { Text = "Ingen", Value = null });
+
+            foreach (var item in evnt.Components)
+            {
+                if (item is Category && item.Parent == null)
+                {
+
+                    categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
+            }
+
+            viewModel.Categories = categories;
+
+            return View(viewModel);
         }
         [HttpPost]
         public ActionResult CreateCategory(CreateComponentViewModel model)
         {
-            // TODO Methods must handle parents.
-            service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
+            int parentId;
+            string selectedCategory = model.SelectedCategory;
+
+            if (!(selectedCategory == null || selectedCategory == "" || selectedCategory == "Ingen"))
+            {
+                Int32.TryParse(selectedCategory, out parentId);
+                var component = service.FindCategoryById(parentId);
+                service.AddCategoryToEvent(model.EventId, model.Title, model.Description, component);
+
+            }
+            else
+            {
+                service.AddCategoryToEvent(model.EventId, model.Title, model.Description, null);
+            }
+
+
+            return RedirectToAction("Details", new { id = model.EventId });
+        }
+
+        [HttpGet]
+        public ActionResult CreateItem(DetailsEventViewModel model)
+        {
+            int id = model.Id;
+            var evnt = service.FindEventById(model.Id);
+
+            CreateItemViewModel viewModel = new CreateItemViewModel
+            {
+                EventId = id,
+                Title = "",
+                Description = ""
+            };
+
+            List<SelectListItem> categories = new List<SelectListItem>();
+            foreach (var item in evnt.Components)
+            {
+                if (item is Category)
+                {
+
+                    categories.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
+                }
+            }
+
+            viewModel.Categories = categories;
+
+            return View(viewModel);
+
+        }
+
+        [HttpPost]
+        public ActionResult CreateItem(CreateItemViewModel model)
+        {
+            int parentId;
+            string selectedCategory = model.SelectedCategory;
+
+            if (selectedCategory != null || selectedCategory != "")
+            {
+                Int32.TryParse(selectedCategory, out parentId);
+                service.AddItemToCategory(model.EventId, parentId, model.Amount, model.Title, model.Description);
+            }
+
             return RedirectToAction("Details", new { id = model.EventId });
         }
 
