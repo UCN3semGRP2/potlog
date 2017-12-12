@@ -25,12 +25,33 @@ namespace Desktop
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
         private User usr;
+        private List<Registration> regs; 
 
         public MainPage()
         {
             InitializeComponent();
             usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
             lblCurrentUserName.Content = usr.Firstname + " " + usr.Lastname;
+            regs = usr.Registrations.ToList();
+            //var gridView = new GridView();
+            //lwSignedUpEvents.View = gridView;
+
+            //gridView.Columns.Add(new GridViewColumn
+            //{
+            //    Header = "Begivenhed",
+            //    DisplayMemberBinding = new Binding("usr.Registrations")
+            //});
+            //gridView.Columns.Add(new GridViewColumn
+            //{
+            //    Header = "Info",
+            //    DisplayMemberBinding = new Binding("Id")
+            //});
+
+            foreach (var r in regs)
+            {
+                Event e = r.Event;
+                lwSignedUpEvents.Items.Add(e);
+            }
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)

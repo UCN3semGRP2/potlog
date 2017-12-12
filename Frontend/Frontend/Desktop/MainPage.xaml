@@ -16,7 +16,17 @@
                     <ListView x:Name="lwSignedUpEvents"  HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="154">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn/>
+                                <GridViewColumn Header="Begivenhed" DisplayMemberBinding= "{Binding Title}"/>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                            Content="info"
+                                            Margin="0"
+                                            VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
