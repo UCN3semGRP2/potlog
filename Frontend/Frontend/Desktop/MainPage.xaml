@@ -21,9 +21,9 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
-                                            Content="info"
-                                            Margin="0"
-                                            VerticalAlignment="Center"/>
+                                            Content="Info"
+                                            VerticalAlignment="Center"
+                                            Click="btnInfo_click" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

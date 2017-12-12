@@ -25,7 +25,8 @@ namespace Desktop
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
         private User usr;
-        private List<Registration> regs; 
+        private List<Registration> regs;
+        private Event evnt42;
 
         public MainPage()
         {
@@ -33,24 +34,11 @@ namespace Desktop
             usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
             lblCurrentUserName.Content = usr.Firstname + " " + usr.Lastname;
             regs = usr.Registrations.ToList();
-            //var gridView = new GridView();
-            //lwSignedUpEvents.View = gridView;
-
-            //gridView.Columns.Add(new GridViewColumn
-            //{
-            //    Header = "Begivenhed",
-            //    DisplayMemberBinding = new Binding("usr.Registrations")
-            //});
-            //gridView.Columns.Add(new GridViewColumn
-            //{
-            //    Header = "Info",
-            //    DisplayMemberBinding = new Binding("Id")
-            //});
-
+            evnt42 = new Event();
             foreach (var r in regs)
             {
-                Event e = r.Event;
-                lwSignedUpEvents.Items.Add(e);
+                evnt42 = r.Event;
+                lwSignedUpEvents.Items.Add(evnt42);
             }
         }
 
@@ -80,6 +68,14 @@ namespace Desktop
                 return;
             }
             new EventWindow(evnt, usr).Show();
+        }
+
+        private void btnInfo_click(object sender, RoutedEventArgs e)
+        {
+            //evnt42 = 
+            var eventWindow = new EventWindow(evnt42, usr);
+            eventWindow.Show();
+            //this.NavigationService.Navigate();
         }
     }
 }
