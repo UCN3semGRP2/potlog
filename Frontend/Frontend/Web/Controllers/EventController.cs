@@ -223,7 +223,7 @@ namespace Web.Controllers
             int parentId;
             string selectedCategory = model.SelectedCategory;
 
-            if (selectedCategory != null || selectedCategory != "" || selectedCategory == "Ingen")
+            if (!(selectedCategory == null || selectedCategory == "" || selectedCategory == "Ingen"))
             {
                 Int32.TryParse(selectedCategory, out parentId);
                 var component = service.FindCategoryById(parentId);

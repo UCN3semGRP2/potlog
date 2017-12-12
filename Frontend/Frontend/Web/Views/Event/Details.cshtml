@@ -139,7 +139,7 @@
     </dl>
     <div class="container">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 @Html.ActionLink("Tilbage", "SignedUpEvents", "MainPage")
             </div>
 
@@ -163,7 +163,7 @@
                     }
                 </div>
             </div>
-            <div class="col-lg-2"
+            <div class="col-lg-2">
                 <div class="form-group">
                     @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
                     {
@@ -199,12 +199,5 @@
         if ($("#LevelThreeId option").length > 1) {
             $("#LevelThreeId").removeAttr("disabled");
         }
-
-        //if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
-        //    var message = "Country: " + $("#CountryId option:selected").text();
-        //    message += "\nState: " + $("#StateId option:selected").text();
-        //    message += "\nCity: " + $("#CityId option:selected").text();
-        //    alert(message);
-        //}
     });
 </script>
