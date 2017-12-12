@@ -126,5 +126,10 @@ namespace PotLogService
         {
             return uCtrl.AcceptInviteString(usr, inviteString);
         }
+
+        public void SignUpForItem(string userEmail, int itemId)
+        {
+            eCtrl.SignUpForItem(userEmail, itemId);
+        }
     }
 }

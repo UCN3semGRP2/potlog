@@ -26,6 +26,9 @@ namespace PotLogServiceTests
             this.Evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.Admin);
             this.EventId = Evnt.Id;
 
+            service.AddCategoryToEvent(EventId, "Test Category", "Test Category", null);
+            this.Evnt = service.FindEventById(EventId);
+            service.AddItemToCategory(EventId, Evnt.Components[0].Id, 5, "Test Item", "Test Item");
 
         }
 
@@ -49,6 +52,28 @@ namespace PotLogServiceTests
             Assert.IsTrue(userIsRegistered, "user is registered on returned event");
 
             Assert.IsTrue(service.IsRegisteredToEvent(User, Evnt), "User is registred using the isRegisteredToEvent method");
+        }
+
+        [TestMethod]
+        public void TestSignUpForItemHappyDays()
+        {
+            var email = "user@t.t" + Guid.NewGuid();
+            var pw = "hunter1";
+            service.CreateUser("TestCreateEventUser", "Test", email, pw);
+            var User = service.LogIn(email, pw);
+
+            int ItemId = ((Category)(Evnt.Components[0])).Components[0].Id;
+
+            service.SignUpForItem(User.Email, ItemId);
+            Evnt = service.FindEventById(EventId);
+
+            Registration reg = Evnt
+                .Registrations
+                .Where(x => x.User.Id == User.Id)
+                .Where(x => x.Items.Select(i => i.Id).Contains(ItemId))
+                .SingleOrDefault();
+
+            Assert.IsNotNull(reg);
         }
     }
 }

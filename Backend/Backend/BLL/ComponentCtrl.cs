@@ -54,5 +54,10 @@ namespace BLL
         {
             catDB.Update(c);
         }
+
+        internal Item FindItemById(int itemId)
+        {
+            return catDB.FindItemByID(itemId);
+        }
     }
 }

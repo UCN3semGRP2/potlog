@@ -89,6 +89,17 @@ namespace DAL
             return components;
         }
 
+        public Item FindItemByID(int itemId)
+        {
+            using (DALContext ctx = new DALContext())
+            {
+                return ctx.Components
+                    .OfType<Item>()
+                    .Where(i => i.Id == itemId)
+                    .SingleOrDefault();
+            }
+        }
+
         public void Update(Category entity)
         {
             using (var ctx = new DALContext())

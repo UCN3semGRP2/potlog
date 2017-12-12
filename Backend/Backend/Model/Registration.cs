@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Model
@@ -17,5 +18,8 @@ namespace Model
 
         [DataMember]
         public Event Event { get; set; }
+
+        [DataMember]
+        public List<Item> Items { get; set; }
     }
 }
