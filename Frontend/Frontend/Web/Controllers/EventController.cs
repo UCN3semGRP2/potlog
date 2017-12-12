@@ -158,11 +158,26 @@ namespace Web.Controllers
 
                 if (LevelTwoId.HasValue)
                 {
+                    if (levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
+                    {
+                        cModel.IsItem = true;
+                        cModel.currentItemId = LevelTwoId;
+                    }
+
                     var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
                     foreach (var item in levelThreeComponents)
                     {
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
+                }
+
+                if (LevelThreeId.HasValue)
+                {
+                    //if (levelThreeComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
+                    //{
+                    //    cModel.IsItem = true;
+                    //    cModel.currentItemId = LevelThreeId;
+                    //}
                 }
             }
 

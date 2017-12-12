@@ -24,6 +24,9 @@ namespace Web.Models
         [Display(Name = "Niveau 3:")]
         public List<SelectListItem> LevelThreeList { get; set; }
 
+        public bool IsItem { get; set; }
+        public int? currentItemId { get; set; }
+
         public ComponentModel()
         {
             this.LevelOneList = new List<SelectListItem>();
