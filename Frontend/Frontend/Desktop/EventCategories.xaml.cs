@@ -24,10 +24,13 @@ namespace Desktop
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
         private Event e;
-        public EventCategories(Event evnt)
+        private User u;
+
+        public EventCategories(Event evnt, User usr)
         {
             InitializeComponent();
             e = evnt;
+            u = usr;
             UpdateTopComboBox();
         }
 
@@ -316,7 +319,8 @@ namespace Desktop
 
         private void btnSignUpForItem_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            service.SignUpForItem(u.Email, 0);
         }
     }
 }
