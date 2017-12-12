@@ -24,5 +24,20 @@ namespace BLL
             var finalReg = rDB.Create(reg);
             return finalReg;
         }
+
+        public Registration CreateRegistrationForItem(User usr, Event evnt, Item item)
+        {
+            var reg = new Registration
+            {
+                DateOfCreation = DateTime.Now,
+                Event = evnt,
+                User = usr,
+                Items = new List<Item>()
+            };
+
+            reg.Items.Add(item);
+            var finalReg = rDB.Create(reg);
+            return finalReg;
+        }
     }
 }

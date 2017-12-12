@@ -139,8 +139,14 @@ namespace BLL
         {
             User u = uCtrl.FindByEmail(userEmail);
             Item i = cCtrl.FindItemById(itemId);
+            Event e = FindById(i.Event.Id);
 
-            RegisterToItem(u, i);
+            RegisterToItem(u, e, i);
+        }
+
+        public void RegisterToItem(User usr, Event evnt, Item item)
+        {
+            rCtrl.CreateRegistrationForItem(usr, evnt, item);
         }
 
         public string GetInviteString(Event evnt, User usr)
