@@ -48,7 +48,7 @@ namespace Model
         [DataMember]
         public List<Component> Components { get; set; }
 
-        [DataMember]
+        // Note this is not a datamemeber as the clients should not have access to it
         public string InviteString { get; set; }
     }
 }

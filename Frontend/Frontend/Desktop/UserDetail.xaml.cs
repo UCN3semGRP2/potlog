@@ -15,23 +15,23 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for UserDetail.xaml
-    /// </summary>
+
     public partial class UserDetail : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
+
         public UserDetail()
         {
             InitializeComponent();
-            tb_Email.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Email;
-            tb_Firstname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname;
-            tb_Lastname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
+            var usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
+            tb_Email.Text = usr.Email;
+            tb_Firstname.Text = usr.Firstname;
+            tb_Lastname.Text = usr.Lastname;
 
             
         }
 
-        private void btn_CreatUser_Click(object sender, RoutedEventArgs e)
+        private void btn_UpdateUser_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateHelper.validateRepeatPassword(tb_Password.Password, tb_RepeatPassword.Password)
                 && ValidateHelper.validateEmail(tb_Email.Text)
@@ -39,7 +39,7 @@ namespace Desktop
                 && ValidateHelper.isEntered(tb_Lastname)
                 && ValidateHelper.validatePassword(tb_Password.Password))
             {
-                // TODO:
+                // TODO: We should actually do something here.
                 MessageBox.Show("Denne funktionalitet er endnu ikke lavet");
                 //MessageBox.Show("Brugeroplysninger er blevet opdateret");
                 this.NavigationService.Navigate(new MainPage());

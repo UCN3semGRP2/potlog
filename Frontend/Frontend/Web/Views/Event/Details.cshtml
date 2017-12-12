@@ -97,7 +97,6 @@
 
         @if (Model.InviteString != null)
         {
-            <span>@Model.InviteString</span>
             <tl data-toggle="tooltip" title="Send denne invitationskode til dem du vil inviterer til dette event">
                 <dt>
                     @Html.DisplayNameFor(model => model.InviteString)
@@ -107,6 +106,7 @@
                 </dd>
             </tl>
         }
+
 
         @using (Html.BeginForm("Details", "Event", FormMethod.Post))
         {
@@ -136,6 +136,7 @@
             </dd>
 
         }
+
     </dl>
     <div class="container">
         <div class="row">
@@ -159,11 +160,17 @@
                         @Html.HiddenFor(model => model.Description)
                         @Html.HiddenFor(model => model.PriceFrom)
                         @Html.HiddenFor(model => model.PriceTo)
-                        <input type="submit" value="Tilmeld" class="btn btn-default" />
+
+
+                        if (!Model.IsAlreadyRegistered)
+                        {
+                            <input type="submit" value="Tilmeld" class="btn btn-default" />
+                        }
+
                     }
                 </div>
             </div>
-            <div class="col-lg-2"
+            <div class="col-lg-2">
                 <div class="form-group">
                     @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
                     {
@@ -199,12 +206,5 @@
         if ($("#LevelThreeId option").length > 1) {
             $("#LevelThreeId").removeAttr("disabled");
         }
-
-        //if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
-        //    var message = "Country: " + $("#CountryId option:selected").text();
-        //    message += "\nState: " + $("#StateId option:selected").text();
-        //    message += "\nCity: " + $("#CityId option:selected").text();
-        //    alert(message);
-        //}
     });
 </script>

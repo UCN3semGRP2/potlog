@@ -147,7 +147,7 @@ namespace BLLTest
             Assert.IsTrue(foundEvent.Components.Count == 1);
             var foundComponent = foundEvent.Components.First();
             Assert.IsTrue(c.Id == foundComponent.Id);
-            Assert.IsTrue(foundComponent is Category); //is returns true if an instance is in the inheritance tree
+            Assert.IsTrue(foundComponent is Category); // it returns true if an instance is in the inheritance tree
         }
 
         [TestMethod]

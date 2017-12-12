@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for UserLogIn.xaml
-    /// </summary>
+
     public partial class UserLogIn : Page
     {
         private ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -38,7 +36,7 @@ namespace Desktop
                 MessageBox.Show("Email eller Password er ikke korrekt");
                 return;
             }
-            ((MainWindow)Application.Current.MainWindow).loggedIn = user;
+            ((MainWindow)Application.Current.MainWindow).loggedIn = user; // Set the global user in the MainWindow
             this.NavigationService.Navigate(new MainPage());
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Model
@@ -14,8 +15,12 @@ namespace Model
 
         [DataMember]
         public User User { get; set; }
+        [Index("IX_UniqueUserReg", 1, IsUnique = true)]
+        public int? UserId { get; set; }
 
         [DataMember]
         public Event Event { get; set; }
+        [Index("IX_UniqueUserReg", 2, IsUnique = true)]
+        public int? EventId { get; set; }
     }
 }

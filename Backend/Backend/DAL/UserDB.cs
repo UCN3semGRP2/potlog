@@ -58,7 +58,6 @@ namespace DAL
                     .Include(x => x.Registrations.Select(y => y.Event))
                     .Where(x => x.Email == email)
                     .FirstOrDefault();
-                //return ctx.Users.FirstOrDefault(x => x.Email == email);
             }
         }
 
@@ -73,13 +72,8 @@ namespace DAL
             {
                 var userRegs = ctx.Users.Include(x => x.Registrations.Select(reg => reg.Event)).Single(x => x.Id == user.Id).Registrations;
                 var eventRegs = ctx.Events.Include(x => x.Registrations.Select(reg => reg.User)).Single(x => x.Id == evnt.Id).Registrations;
-                var userEventReg = userRegs.Intersect(eventRegs).SingleOrDefault(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id);
-                return userEventReg != null;
-               //ctx.Users.Where(u => u.Id == user.Id)
-               //     .Include(u => u.Registrations
-               //         .Select(reg => reg.Event))
-               //     .Where(u => u.Registrations)
-                    
+                var userEventReg = userRegs.Intersect(eventRegs)/*.Where(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id).ToList();*/ .SingleOrDefault(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id);
+                return userEventReg/*.Single()*/ != null;                    
             }
         }
 

@@ -15,10 +15,11 @@ namespace Web.Controllers
     {
 
         ServiceReference.IService service = new ServiceReference.ServiceClient();
-        // GET: User
+
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "MainPage");
         }
 
         [HttpGet]
@@ -84,7 +85,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            User u = (User)Session["User"];
+            User u = utils.Utils.GetUser(Session);
             EditUserViewModel euvm = new EditUserViewModel
             {
                 id = u.Id,

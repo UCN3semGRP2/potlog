@@ -9,11 +9,11 @@
       Title="EventCategories">
 
     <Grid>
-        <Label x:Name="lblTopLevel" Content="Niveau 1:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <Label x:Name="lblTopLevel" Content="Hovedkategori:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <ComboBox x:Name="cbTopLevel" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,36,0,0" SelectionChanged="cbTopLevel_SelectionChanged"/>
-        <Label x:Name="lblLevelTwo" Content="Niveau 2:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,58,0,0"/>
+        <Label x:Name="lblLevelTwo" Content="Underkategori eller ret:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,58,0,0"/>
         <ComboBox x:Name="cbLevelTwo" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,84,0,0" SelectionChanged="cbLevelTwo_SelectionChanged"/>
-        <Label x:Name="lblLevelThree" Content="Niveau 3:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,106,0,0"/>
+        <Label x:Name="lblLevelThree" Content="Ret i underkategori:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,106,0,0"/>
         <ComboBox x:Name="cbLevelThree" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,133,0,0" SelectionChanged="cbLevelThree_SelectionChanged"/>
         <Button x:Name="btnAddCatTopLevel" Content="Ny Kategori"  IsEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="135,36,0,0" Height="22" Click="btnAddCatTopLevel_Click"/>
         <Button x:Name="btnAddCatLevelTwo" Content="Ny Kategori" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="135,84,0,0" Height="22" Click="btnAddCatLevelTwo_Click"/>

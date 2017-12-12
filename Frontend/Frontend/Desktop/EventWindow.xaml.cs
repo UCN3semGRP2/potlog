@@ -15,11 +15,11 @@ using Desktop.ServiceReference;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventWindow.xaml
-    /// </summary>
+
     public partial class EventWindow : Window
     {
+        ServiceReference.IService service = new ServiceReference.ServiceClient();
+
         private Event evnt;
         private User user;
 
@@ -28,8 +28,8 @@ namespace Desktop
             InitializeComponent();
             Loaded += Load_Window;
 
-            this.evnt = evnt;
-            this.user = user;
+            this.evnt = service.FindEventById(evnt.Id);
+            this.user = service.UpdateUserInfo(user);
         }
 
         private void Load_Window(object sender, RoutedEventArgs e)

@@ -16,7 +16,7 @@ namespace DAL
             Event e = null;
             using (var ctx = new DALContext())
             {
-                if (entity.Admin != null) ctx.Users.Attach(entity.Admin);
+                if (entity.Admin != null) entity.Admin = ctx.Users.Single(x => x.Id == entity.Admin.Id); //ctx.Users.Attach(entity.Admin);
 
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
@@ -53,7 +53,9 @@ namespace DAL
             using (DALContext ctx = new DALContext())
             {
                 var e = ctx.Events
-                    .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
+                    .Include(x => x.Registrations.Select(reg => reg.User))
+                    .Include(x => x.Components)
+                    .Include(x => x.Admin)
                     .Where(x => x.Id == id)
                     .Single();
 
@@ -66,7 +68,9 @@ namespace DAL
             using (var ctx = new DALContext())
             {
                 return ctx.Events
-                    .Include(x => x.Registrations.Select(reg => reg.User)).Include(x => x.Components).Include(x => x.Admin)
+                    .Include(x => x.Registrations.Select(reg => reg.User))
+                    .Include(x => x.Components)
+                    .Include(x => x.Admin)
                     .SingleOrDefault(x => x.InviteString == inviteString);
             }
         }
@@ -86,7 +90,6 @@ namespace DAL
                                 AttachComponent(ctx, comp);
                             }
                         }
-                        //ctx.Events.AddOrUpdate(entity);
                         ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
 
                         ctx.SaveChanges();
@@ -123,8 +126,6 @@ namespace DAL
 
             ctx.Components.Attach(component);
             ctx.Entry(component).State = System.Data.Entity.EntityState.Modified;
-
-
         }
     }
 }

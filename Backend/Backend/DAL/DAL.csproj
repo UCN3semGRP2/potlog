@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryDB.cs" />
+    <Compile Include="DuplicateRegistrationException.cs" />
     <Compile Include="ICategoryDB.cs" />
     <Compile Include="ICRUD.cs" />
     <Compile Include="DALContext.cs" />

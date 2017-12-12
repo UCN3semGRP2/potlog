@@ -61,7 +61,18 @@ namespace PotLogService
 
         public void SignUpForEvent(string userEmail, int eventId)
         {
-            eCtrl.SignUpForEvent(userEmail, eventId);
+            try
+            {
+                eCtrl.SignUpForEvent(userEmail, eventId);
+            }
+            catch (ArgumentException aex)
+            {
+                throw new FaultException(aex.Message);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public Event FindEventById(int id)
@@ -86,7 +97,7 @@ namespace PotLogService
                 throw new ArgumentException("Der skal indtastes en beskrivelse");
             }
 
-            //TODO refactor to ectrl
+            // TODO could refactor to ectrl
             Category c = cCtrl.CreateCategory(categoryTitle, categoryDescription, parent);
             Event e = eCtrl.FindById(eventId);
             eCtrl.AddCategory(e, c);
@@ -124,7 +135,14 @@ namespace PotLogService
 
         public Event AcceptInviteString(User usr, string inviteString)
         {
-            return uCtrl.AcceptInviteString(usr, inviteString);
+            try
+            {
+                return uCtrl.AcceptInviteString(usr, inviteString);
+            }
+            catch (ArgumentException arge)
+            {
+                throw new FaultException(arge.Message);
+            }
         }
     }
 }
