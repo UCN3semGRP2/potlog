@@ -36,8 +36,10 @@ namespace PotLogServiceTests
 
             var foundItem = service.FindComponentByParentId(topCat.Id);
 
-            Assert.IsTrue(true);
-            
+
+            Assert.AreEqual(foundItem[0].EventId, newFoundEvent.Id);
+            Assert.AreEqual(foundItem[0].Title, "Testing Item Title");
+            Assert.AreEqual(foundItem[0].Description, "Testing Item Description");
         }
     }
 }
