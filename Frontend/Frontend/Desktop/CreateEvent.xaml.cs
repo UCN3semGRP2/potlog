@@ -28,6 +28,7 @@ namespace Desktop
         {
             InitializeComponent();
             user = ((MainWindow)Application.Current.MainWindow).loggedIn;
+            user = service.UpdateUserInfo(user);
             rbEventPrivate.IsChecked = true;
         }
 

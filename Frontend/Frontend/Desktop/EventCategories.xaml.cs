@@ -25,7 +25,7 @@ namespace Desktop
         public EventCategories(Event evnt)
         {
             InitializeComponent();
-            e = evnt;
+            e = service.FindEventById(evnt.Id);
             UpdateTopComboBox();
         }
 

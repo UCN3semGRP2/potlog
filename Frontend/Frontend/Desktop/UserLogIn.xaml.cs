@@ -36,7 +36,7 @@ namespace Desktop
                 MessageBox.Show("Email eller Password er ikke korrekt");
                 return;
             }
-            ((MainWindow)Application.Current.MainWindow).loggedIn = user;
+            ((MainWindow)Application.Current.MainWindow).loggedIn = user; // Set the global user in the MainWindow
             this.NavigationService.Navigate(new MainPage());
         }
 

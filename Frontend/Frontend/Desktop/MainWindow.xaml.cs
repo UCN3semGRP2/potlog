@@ -17,20 +17,21 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    
+
     public partial class MainWindow : Window
     {
         internal User loggedIn = null;
         ServiceReference.IService service = new ServiceReference.ServiceClient();
+
         public MainWindow()
         {
             InitializeComponent();
             Loaded += Load_Window;
-            
+
         }
-         private void Load_Window(object sender, RoutedEventArgs e)
+        private void Load_Window(object sender, RoutedEventArgs e)
         {
-           MainFrame.NavigationService.Navigate(new UserLogIn());
+            MainFrame.NavigationService.Navigate(new UserLogIn());
         }
 
 

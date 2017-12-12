@@ -19,12 +19,14 @@ namespace Desktop
     public partial class UserDetail : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
+
         public UserDetail()
         {
             InitializeComponent();
-            tb_Email.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Email;
-            tb_Firstname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Firstname;
-            tb_Lastname.Text = ((MainWindow)Application.Current.MainWindow).loggedIn.Lastname;
+            var usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
+            tb_Email.Text = usr.Email;
+            tb_Firstname.Text = usr.Firstname;
+            tb_Lastname.Text = usr.Lastname;
 
             
         }

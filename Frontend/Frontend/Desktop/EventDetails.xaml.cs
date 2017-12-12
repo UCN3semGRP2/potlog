@@ -57,16 +57,17 @@ namespace Desktop
                 tbInviteString.Visibility = Visibility.Hidden;
             }
 
-            this.u = u;
-            this.e = e;
+            this.u = service.UpdateUserInfo(u);
+            this.e = service.FindEventById(e.Id);
 
-            populateInfo(e,u);
+            populateInfo(this.e, this.u);
 
         }
 
         private void populateInfo(Event e, User u)
         {
             e = service.FindEventById(e.Id);
+            u = service.UpdateUserInfo(u);
 
             lblEventName.Content = e.Title;
             lblEventLocation.Content = e.Location;
