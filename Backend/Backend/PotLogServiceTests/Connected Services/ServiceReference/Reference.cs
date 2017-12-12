@@ -602,6 +602,12 @@ namespace PotLogServiceTests.ServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int AmountField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private PotLogServiceTests.ServiceReference.Registration RegistrationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> RegistrationIdField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int Amount {
             get {
@@ -611,6 +617,32 @@ namespace PotLogServiceTests.ServiceReference {
                 if ((this.AmountField.Equals(value) != true)) {
                     this.AmountField = value;
                     this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public PotLogServiceTests.ServiceReference.Registration Registration {
+            get {
+                return this.RegistrationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegistrationField, value) != true)) {
+                    this.RegistrationField = value;
+                    this.RaisePropertyChanged("Registration");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> RegistrationId {
+            get {
+                return this.RegistrationIdField;
+            }
+            set {
+                if ((this.RegistrationIdField.Equals(value) != true)) {
+                    this.RegistrationIdField = value;
+                    this.RaisePropertyChanged("RegistrationId");
                 }
             }
         }
