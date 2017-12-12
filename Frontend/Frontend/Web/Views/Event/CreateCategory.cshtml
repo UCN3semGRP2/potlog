@@ -50,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Tilbage til hovedmenu", "SignedUpEvents", "MainPage")
+    @Html.ActionLink("Tilbage til Event", "Details", "Event", new { id = Model.EventId }, null)
 </div>
 
 @section Scripts {
