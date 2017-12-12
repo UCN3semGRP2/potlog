@@ -331,11 +331,19 @@ namespace Web.Controllers
                 return View();
             }
 
-
-            var evnt = service.AcceptInviteString(usr, inviteString);
-            if (evnt == null)
+            Event evnt;
+            try
             {
-                ViewBag.ErrorMsg = errorMsg;
+                evnt = service.AcceptInviteString(usr, inviteString);
+                if (evnt == null)
+                {
+                    ViewBag.ErrorMsg = errorMsg;
+                    return View();
+                }
+            }
+            catch (FaultException fe)
+            {
+                ViewBag.ErrorMsg = fe.Message;
                 return View();
             }
 
