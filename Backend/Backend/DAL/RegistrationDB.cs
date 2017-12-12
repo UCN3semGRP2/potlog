@@ -63,15 +63,13 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
-                foreach (var item in entity.Items)
-                {
-                    ctx.Components.Attach(item);
-                    ctx.Entry(item).State = EntityState.Modified;
-
-                }
+                entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
+                entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
+                entity.Items = ctx.Components.OfType<Item>().Include(i => i.Parent).Where(i => i.Event.Id == entity.Event.Id).ToList();
 
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
+
                     try
                     {
                         ctx.Registrations.AddOrUpdate(entity);

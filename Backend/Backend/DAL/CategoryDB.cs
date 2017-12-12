@@ -96,6 +96,7 @@ namespace DAL
                 return ctx.Components
                     .OfType<Item>()
                     .Where(i => i.Id == itemId)
+                    .Include(x => x.Parent)
                     .SingleOrDefault();
             }
         }

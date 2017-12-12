@@ -37,6 +37,7 @@ namespace BLL
                 reg.Items = new List<Item>();
             }
 
+            //item.Registration = reg;
             reg.Items.Add(item);
             rDB.Update(reg);
         }
