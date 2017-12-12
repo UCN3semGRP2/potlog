@@ -127,14 +127,13 @@ namespace BLL
 
         public string GetInviteString(Event evnt, User usr)
         {
-           // TODO verify that we are logged in and that usr is indeed admin for event
-           if (evnt.Admin.Id != usr.Id)
-           {
+            // TODO verify that we are logged in and that usr is indeed admin for event
+            if (evnt.Admin.Id != usr.Id)
+            {
                 throw new ArgumentException("the user is not admin for the event");
-           }
+            }
 
-            return evnt.InviteString;
-
+            return eDB.FindByID(evnt.Id).InviteString;
         }
     }
 }

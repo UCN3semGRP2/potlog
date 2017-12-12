@@ -365,9 +365,6 @@ namespace PotLogServiceTests.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string InviteStringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPublicField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -459,19 +456,6 @@ namespace PotLogServiceTests.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string InviteString {
-            get {
-                return this.InviteStringField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.InviteStringField, value) != true)) {
-                    this.InviteStringField = value;
-                    this.RaisePropertyChanged("InviteString");
                 }
             }
         }
