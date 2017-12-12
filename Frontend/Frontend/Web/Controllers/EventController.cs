@@ -80,7 +80,7 @@ namespace Web.Controllers
             var e = service.FindEventById(id.Value);
 
             var inviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null;
-            
+
 
             DetailsEventViewModel ev = new DetailsEventViewModel
             {
@@ -110,7 +110,7 @@ namespace Web.Controllers
                     });
                 }
             }
-            
+
             ev.ComponentModel = cModel;
 
             return View(ev);
@@ -119,20 +119,20 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Details(int? eventId, int? LevelOneId, int? LevelTwoId, int? LevelThreeId)
         {
-                var e = service.FindEventById(eventId.Value);
-                DetailsEventViewModel ev = new DetailsEventViewModel
-                {
-                    Id = e.Id,
-                    Date = e.Datetime.Date,
-                    Description = e.Description,
-                    IsPublic = e.IsPublic,
-                    Location = e.Location,
-                    NumOfParticipants = e.NumOfParticipants,
-                    PriceFrom = e.PriceFrom,
-                    PriceTo = e.PriceTo,
-                    Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                    Title = e.Title
-                };
+            var e = service.FindEventById(eventId.Value);
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                Id = e.Id,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                Title = e.Title
+            };
 
             ComponentModel cModel = new ComponentModel();
 
@@ -162,6 +162,7 @@ namespace Web.Controllers
                     {
                         cModel.IsItem = true;
                         cModel.currentItemId = LevelTwoId;
+                        //TODO: Need to create button in UI for this.
                     }
 
                     var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
@@ -169,16 +170,18 @@ namespace Web.Controllers
                     {
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
+
+                    if (LevelThreeId.HasValue)
+                    {
+                        if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+                        {
+                            cModel.IsItem = true;
+                            cModel.currentItemId = LevelThreeId;
+                            //TODO: Need to create button in UI for this.
+                        }
+                    }
                 }
 
-                if (LevelThreeId.HasValue)
-                {
-                    //if (levelThreeComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
-                    //{
-                    //    cModel.IsItem = true;
-                    //    cModel.currentItemId = LevelThreeId;
-                    //}
-                }
             }
 
             ev.ComponentModel = cModel;
@@ -330,7 +333,7 @@ namespace Web.Controllers
                 return View();
             }
 
-            
+
             var evnt = service.AcceptInviteString(usr, inviteString);
             if (evnt == null)
             {
