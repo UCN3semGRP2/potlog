@@ -70,13 +70,19 @@ namespace Desktop
             new EventWindow(evnt, usr).Show();
         }
 
-        private void btnInfo_click(object sender, RoutedEventArgs e)
+
+        private void btnSelectedEventInfo_Click(object sender, RoutedEventArgs e)
         {
-            //evnt42 = 
-            Event e2 = (Event)lwSignedUpEvents.SelectedItem; 
-            var eventWindow = new EventWindow(e2, usr);
-            eventWindow.Show();
-            //this.NavigationService.Navigate();
+            Event e2 = (Event)lwSignedUpEvents.SelectedItem;
+            if (e2 == null)
+            {
+                MessageBox.Show("Du skal trykke på en begivenhed for at kunne se info om den");
+            }
+            else
+            {
+                var eventWindow = new EventWindow(e2, usr);
+                eventWindow.Show();
+            }
         }
     }
 }
