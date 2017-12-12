@@ -83,6 +83,12 @@ namespace BLL
         {
             Event e = FindById(eventId);
             User u = uCtrl.FindByEmail(userEmail);
+
+            if (uCtrl.IsRegisteredToEvent(u, e))
+            {
+                throw new ArgumentException("The user is already registered to the event");
+            }
+
             RegisterToEvent(e, u);
         }
 

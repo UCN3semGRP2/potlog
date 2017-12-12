@@ -61,7 +61,14 @@ namespace PotLogService
 
         public void SignUpForEvent(string userEmail, int eventId)
         {
-            eCtrl.SignUpForEvent(userEmail, eventId);
+            try
+            {
+                eCtrl.SignUpForEvent(userEmail, eventId);
+            }
+            catch (ArgumentException aex)
+            {
+                throw new FaultException(aex.Message);
+            }
         }
 
         public Event FindEventById(int id)

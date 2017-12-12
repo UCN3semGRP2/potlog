@@ -257,6 +257,7 @@
     <Content Include="Views\Event\CreateCategory.cshtml" />
     <Content Include="Views\Event\InvitationString.cshtml" />
     <Content Include="Views\Event\CreateItem.cshtml" />
+    <Content Include="Views\Event\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
