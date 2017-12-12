@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,17 @@ namespace DAL
                     catch (Exception err)
                     {
                         ctxTransaction.Rollback();
+
+                        
+                        while (err.InnerException != null)
+                        {
+                            err = err.InnerException;
+                            if (err.Message.Contains("IX_UniqueUserReg"))
+                            {
+                                throw new DuplicateRegistrationException();
+                            }
+                        }
+
                         throw err;
                     }
                 }

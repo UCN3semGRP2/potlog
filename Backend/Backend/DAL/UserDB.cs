@@ -72,8 +72,8 @@ namespace DAL
             {
                 var userRegs = ctx.Users.Include(x => x.Registrations.Select(reg => reg.Event)).Single(x => x.Id == user.Id).Registrations;
                 var eventRegs = ctx.Events.Include(x => x.Registrations.Select(reg => reg.User)).Single(x => x.Id == evnt.Id).Registrations;
-                var userEventReg = userRegs.Intersect(eventRegs).SingleOrDefault(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id);
-                return userEventReg != null;                    
+                var userEventReg = userRegs.Intersect(eventRegs)/*.Where(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id).ToList();*/ .SingleOrDefault(reg => reg.Event.Id == evnt.Id && reg.User.Id == user.Id);
+                return userEventReg/*.Single()*/ != null;                    
             }
         }
 

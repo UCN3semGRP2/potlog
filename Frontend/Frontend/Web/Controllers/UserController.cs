@@ -85,7 +85,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            User u = (User)Session["User"];
+            User u = utils.Utils.GetUser(Session);
             EditUserViewModel euvm = new EditUserViewModel
             {
                 id = u.Id,

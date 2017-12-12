@@ -14,6 +14,8 @@ namespace Web.Controllers
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
+
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -41,7 +43,7 @@ namespace Web.Controllers
             {
                 return View();
             }
-            var u = (User)Session["User"];
+            var u = utils.Utils.GetUser(Session);
 
             DateTime dt = model.Date + model.Time;
 
@@ -71,7 +73,8 @@ namespace Web.Controllers
             {
                 return RedirectToAction("LogIn", "User");
             }
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
+
 
             if (id == null)
             {
@@ -80,7 +83,7 @@ namespace Web.Controllers
             var e = service.FindEventById(id.Value);
 
             var inviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null;
-            
+
 
             DetailsEventViewModel ev = new DetailsEventViewModel
             {
@@ -94,8 +97,9 @@ namespace Web.Controllers
                 PriceTo = e.PriceTo,
                 Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
                 Title = e.Title,
-                InviteString = inviteString
-            };
+                InviteString = inviteString,
+                IsAlreadyRegistered = service.IsRegisteredToEvent(usr, e)
+        };
 
             ComponentModel cModel = new ComponentModel();
 
@@ -110,7 +114,7 @@ namespace Web.Controllers
                     });
                 }
             }
-            
+
             ev.ComponentModel = cModel;
 
             return View(ev);
@@ -119,20 +123,24 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Details(int? eventId, int? LevelOneId, int? LevelTwoId, int? LevelThreeId)
         {
-                var e = service.FindEventById(eventId.Value);
-                DetailsEventViewModel ev = new DetailsEventViewModel
-                {
-                    Id = e.Id,
-                    Date = e.Datetime.Date,
-                    Description = e.Description,
-                    IsPublic = e.IsPublic,
-                    Location = e.Location,
-                    NumOfParticipants = e.NumOfParticipants,
-                    PriceFrom = e.PriceFrom,
-                    PriceTo = e.PriceTo,
-                    Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                    Title = e.Title
-                };
+            var e = service.FindEventById(eventId.Value);
+
+            var isAlreadyRegistered = service.IsRegisteredToEvent(utils.Utils.GetUser(Session), e);
+
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                Id = e.Id,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                Title = e.Title,
+                IsAlreadyRegistered = isAlreadyRegistered
+            };
 
             ComponentModel cModel = new ComponentModel();
 
@@ -174,12 +182,21 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SignUp(DetailsEventViewModel model)
         {
-            User u = (User)Session["User"];
+            User u = utils.Utils.GetUser(Session);
             if (u == null)
             {
                 return RedirectToAction("LogIn", "User");
             }
-            service.SignUpForEvent(u.Email, model.Id);
+
+            try
+            {
+                service.SignUpForEvent(u.Email, model.Id);
+            }
+            catch (FaultException fe)
+            {
+                ViewBag.ErrorMsg = fe.Message;
+                return View();
+            }
 
             return RedirectToAction("SignUpSuccess");
         }
@@ -188,6 +205,7 @@ namespace Web.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult CreateCategory(DetailsEventViewModel model)
         {
@@ -291,7 +309,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult InvitationString()
         {
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
             if (usr == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -304,7 +322,7 @@ namespace Web.Controllers
         {
             const string errorMsg = "Den indtastede invitationskode er ikke gyldig";
 
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
             if (usr == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -318,7 +336,7 @@ namespace Web.Controllers
                 return View();
             }
 
-            
+
             var evnt = service.AcceptInviteString(usr, inviteString);
             if (evnt == null)
             {
