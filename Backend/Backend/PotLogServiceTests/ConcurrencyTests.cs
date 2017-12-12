@@ -58,7 +58,7 @@ namespace PotLogServiceTests
             t1.Join();
             t2.Join();
 
-            Assert.AreNotEqual(u1SignedUp, u2SignedUp, "User1 and User2 have the same signedup state");
+            Assert.AreNotEqual(u1SignedUp, u2SignedUp, string.Format("User1 and User2 have the same signedup state {0} and {1}", u1SignedUp, u2SignedUp));
 
             bool atLeastOneSignedUp = u1SignedUp || u2SignedUp;
             Assert.IsTrue(atLeastOneSignedUp, "At least one user should be signed up, but they are not");
