@@ -61,30 +61,48 @@ namespace DAL
 
         public void Update(Registration entity)
         {
-            using (var ctx = new DALContext())
-            {
-                entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
-                entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
-                entity.Items = ctx.Components.OfType<Item>().Include(i => i.Parent).Where(i => i.Event.Id == entity.Event.Id).ToList();
+            //using (var ctx = new DALContext())
+            //{
+            //    using (var ctxTransaction = ctx.Database.BeginTransaction())
+            //    {
 
-                using (var ctxTransaction = ctx.Database.BeginTransaction())
-                {
+            //    }
+            //}
 
-                    try
-                    {
-                        ctx.Registrations.AddOrUpdate(entity);
-                        ctx.SaveChanges();
-                        ctxTransaction.Commit();
 
-                    }
-                    catch (Exception err)
-                    {
-                        ctxTransaction.Rollback();
-                        throw err;
-                    }
-                }
-            }
+            //foreach (var item in entity.Items)
+            //{
+            //    var exItem = ctx.Components.Find(item.Id);
+            //    if (exItem != null)
+            //    {
+            //        var itemEntry = ctx.Entry(exItem);
+            //        itemEntry.CurrentValues.SetValues(item);
+            //    }
+
+            //}
+
+            //entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
+            //entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
+            //entity.Items = ctx.Components.OfType<Item>().Include(i => i.Parent).Where(i => i.Event.Id == entity.Event.Id).ToList();
+
+            //using (var ctxTransaction = ctx.Database.BeginTransaction())
+            //{
+
+            //    try
+            //    {
+            //        ctx.Registrations.AddOrUpdate(entity);
+            //        ctx.SaveChanges();
+            //        ctxTransaction.Commit();
+
+            //    }
+            //    catch (Exception err)
+            //    {
+            //        ctxTransaction.Rollback();
+            //        throw err;
+            //    }
+            //}
         }
-
     }
+
 }
+

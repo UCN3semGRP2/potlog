@@ -25,6 +25,7 @@
             <TextBlock x:Name="tbCatDescription" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="10,52,0,0" Height="121" Width="192"/>
             <Label x:Name="lblCatAmountHeader" Content="Mængde:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,178,0,0" FontWeight="Bold"/>
             <Label x:Name="lblCatAmount" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="78,178,0,0" Width="124"/>
+            <Button x:Name="btnSignUpForItem" Content="Medbring Ret" HorizontalAlignment="Left" Margin="11,204,0,0" VerticalAlignment="Top" Width="191" IsEnabled="False" Click="btnSignUpForItem_Click"/>
 
         </Grid>
         <Button x:Name="btnAddItemLevelTwo" Content="Ny Ret"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="215,84,0,0" Height="22" Click="btnAddItemLevelTwo_Click"/>

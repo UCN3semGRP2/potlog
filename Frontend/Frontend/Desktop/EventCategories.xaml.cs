@@ -237,6 +237,7 @@ namespace Desktop
                     lblCatTitle.Content = "";
                     tbCatDescription.Text = "";
                     lblCatAmount.Content = "";
+                    btnSignUpForItem.IsEnabled = false;
 
 
                 }
@@ -249,6 +250,7 @@ namespace Desktop
                     btnAddItemLevelThree.IsEnabled = false;
                     cbLevelThree.IsEnabled = false;
                     cbLevelThree.SelectedIndex = -1;
+                    btnSignUpForItem.IsEnabled = true;
                 }
             }
         }
@@ -306,8 +308,15 @@ namespace Desktop
                 lblCatTitle.Content = lvlThreeItem.Title;
                 tbCatDescription.Text = lvlThreeItem.Description;
                 lblCatAmount.Content = lvlThreeItem.Amount;
+
+                btnSignUpForItem.IsEnabled = true;
             }
 
+        }
+
+        private void btnSignUpForItem_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
