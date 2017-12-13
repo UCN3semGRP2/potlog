@@ -21,7 +21,8 @@ namespace DAL
                     {
                         if (entity.Parent != null)
                         {
-                            ctx.Components.Attach(entity.Parent);
+                            entity.Parent = ctx.Components.Single(x => x.Id == entity.Parent.Id);
+                            //ctx.Components.Attach(entity.Parent);
                         }
 
                         Category cat = (Category)ctx.Components.Add(entity);

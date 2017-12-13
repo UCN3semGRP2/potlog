@@ -145,8 +145,8 @@
       <wsdl:output wsam:Action="http://tempuri.org/IService/AcceptInviteStringResponse" message="tns:IService_AcceptInviteString_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignUpForItem">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/SignUpForItem" message="tns:IService_SignUpForItem_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/SignUpForItemResponse" message="tns:IService_SignUpForItem_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/SignUpForItem" message="tns:IService_SignUpForItem_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/SignUpForItemResponse" message="tns:IService_SignUpForItem_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
