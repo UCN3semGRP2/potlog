@@ -51,5 +51,8 @@ namespace PotLogService
 
         [OperationContract]
         Event AcceptInviteString(User usr, string inviteString);
+
+        [OperationContract]
+        void SignUpForItem(string userEmail, int itemId);
     }
 }

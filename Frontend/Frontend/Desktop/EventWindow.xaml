@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
-        Title="EventWindow" Height="350" Width="525">
+        Title="EventWindow" Height="400" Width="525">
     <Grid>
-        <Frame Name="EventMainFrame" Content="Frame" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517" Margin="0,0,0,-0.4"/>
+        <Frame Name="EventMainFrame" Content="Frame" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="517" Margin="0,0,0,-0.4"/>
 
     </Grid>
 </Window>

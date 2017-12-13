@@ -13,6 +13,10 @@ namespace DAL
         {
             using (var ctx = new DALContext())
             {
+                ctx.Database.Log = (s) => {
+                    Console.WriteLine(entity);
+                    System.Diagnostics.Debug.WriteLine(s);
+                };//Console.Write;
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     if (entity.Parent != null)

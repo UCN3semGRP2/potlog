@@ -7,6 +7,19 @@
 
 <h2>Detaljer</h2>
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message</div>
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @ViewBag.SuccessMessage
+        Du accepterer nu at medbringe den valgte ret.
+    </div>
+}
+
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -126,6 +139,11 @@
             </dt>
             <dd>
                 @Html.DropDownList("LevelTwoId", Model.ComponentModel.LevelTwoList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelTwoId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+
+                @if (Model.ComponentModel.CurrentLevelTwoItemId != null)
+                {
+                    @Html.ActionLink("Medbring", "SignUpForItem", "Event", this.Model.ComponentModel, new { @class = "btn btn-primary", id = "LevelTwoBtn" })
+                }
             </dd>
 
             <dt>
@@ -133,13 +151,18 @@
             </dt>
             <dd>
                 @Html.DropDownList("LevelThreeId", Model.ComponentModel.LevelThreeList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelThreeId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+
+                @if (Model.ComponentModel.CurrentLevelThreeItemId != null)
+                {
+                    @Html.ActionLink("Medbring", "SignUpForItem", "Event", this.Model.ComponentModel, new { @class = "btn btn-primary", id = "LevelThreeBtn" })
+                }
             </dd>
 
         }
     </dl>
     <div class="container">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 @Html.ActionLink("Tilbage", "SignedUpEvents", "MainPage")
             </div>
 
@@ -163,7 +186,7 @@
                     }
                 </div>
             </div>
-            <div class="col-lg-2"
+            <div class="col-lg-2">
                 <div class="form-group">
                     @using (Html.BeginForm("CreateCategory", "Event", FormMethod.Get))
                     {
@@ -199,12 +222,8 @@
         if ($("#LevelThreeId option").length > 1) {
             $("#LevelThreeId").removeAttr("disabled");
         }
-
-        //if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
-        //    var message = "Country: " + $("#CountryId option:selected").text();
-        //    message += "\nState: " + $("#StateId option:selected").text();
-        //    message += "\nCity: " + $("#CityId option:selected").text();
-        //    alert(message);
-        //}
     });
 </script>
+
+
+

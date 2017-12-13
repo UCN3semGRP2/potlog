@@ -24,10 +24,15 @@ namespace Desktop
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
         private Event e;
-        public EventCategories(Event evnt)
+        private User u;
+        private Item currentItem; 
+
+        public EventCategories(Event evnt, User usr)
         {
             InitializeComponent();
             e = evnt;
+            u = usr;
+            currentItem = null;
             UpdateTopComboBox();
         }
 
@@ -237,6 +242,7 @@ namespace Desktop
                     lblCatTitle.Content = "";
                     tbCatDescription.Text = "";
                     lblCatAmount.Content = "";
+                    btnSignUpForItem.IsEnabled = false;
 
 
                 }
@@ -249,6 +255,8 @@ namespace Desktop
                     btnAddItemLevelThree.IsEnabled = false;
                     cbLevelThree.IsEnabled = false;
                     cbLevelThree.SelectedIndex = -1;
+                    currentItem = lvlTwoItem;
+                    btnSignUpForItem.IsEnabled = true;
                 }
             }
         }
@@ -306,8 +314,16 @@ namespace Desktop
                 lblCatTitle.Content = lvlThreeItem.Title;
                 tbCatDescription.Text = lvlThreeItem.Description;
                 lblCatAmount.Content = lvlThreeItem.Amount;
+                currentItem = lvlThreeItem;
+                btnSignUpForItem.IsEnabled = true;
             }
 
+        }
+
+        private void btnSignUpForItem_Click(object sender, RoutedEventArgs e)
+        {
+            service.SignUpForItem(u.Email, currentItem.Id);
+            MessageBox.Show("Du er nu tilmeldt til event, og medbringer: " + currentItem.Title + "." + "\nMedbring mad til " + currentItem.Amount.ToString() + " personer.");
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Web.Controllers
             var e = service.FindEventById(id.Value);
 
             var inviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null;
-            
+
 
             DetailsEventViewModel ev = new DetailsEventViewModel
             {
@@ -110,7 +110,7 @@ namespace Web.Controllers
                     });
                 }
             }
-            
+
             ev.ComponentModel = cModel;
 
             return View(ev);
@@ -119,23 +119,23 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Details(int? eventId, int? LevelOneId, int? LevelTwoId, int? LevelThreeId)
         {
-                var e = service.FindEventById(eventId.Value);
-                DetailsEventViewModel ev = new DetailsEventViewModel
-                {
-                    Id = e.Id,
-                    Date = e.Datetime.Date,
-                    Description = e.Description,
-                    IsPublic = e.IsPublic,
-                    Location = e.Location,
-                    NumOfParticipants = e.NumOfParticipants,
-                    PriceFrom = e.PriceFrom,
-                    PriceTo = e.PriceTo,
-                    Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
-                    Title = e.Title
-                };
+            var e = service.FindEventById(eventId.Value);
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                Id = e.Id,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = new TimeSpan(e.Datetime.Hour, e.Datetime.Minute, e.Datetime.Second),
+                Title = e.Title
+            };
 
             ComponentModel cModel = new ComponentModel();
-
+            cModel.EventId = e.Id;
             foreach (var item in e.Components)
             {
                 if (item.Parent == null)
@@ -158,12 +158,33 @@ namespace Web.Controllers
 
                 if (LevelTwoId.HasValue)
                 {
+                    cModel.CurrentLevelTwoItemId = null;
+                    if (levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
+                    {
+                        cModel.CurrentLevelTwoItemId = LevelTwoId;
+                        cModel.CurrentLevelThreeItemId = null;
+                    }
+
                     var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
                     foreach (var item in levelThreeComponents)
                     {
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
+
+                    if (!(levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item))
+                    {
+
+                        if (LevelThreeId.HasValue)
+                        {
+                            if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+                            {
+                                cModel.CurrentLevelThreeItemId = LevelThreeId;
+                                cModel.CurrentLevelTwoItemId = null;
+                            }
+                        }
+                    }
                 }
+
             }
 
             ev.ComponentModel = cModel;
@@ -223,7 +244,7 @@ namespace Web.Controllers
             int parentId;
             string selectedCategory = model.SelectedCategory;
 
-            if (selectedCategory != null || selectedCategory != "" || selectedCategory == "Ingen")
+            if (!(selectedCategory == null || selectedCategory == "" || selectedCategory == "Ingen"))
             {
                 Int32.TryParse(selectedCategory, out parentId);
                 var component = service.FindCategoryById(parentId);
@@ -315,7 +336,7 @@ namespace Web.Controllers
                 return View();
             }
 
-            
+
             var evnt = service.AcceptInviteString(usr, inviteString);
             if (evnt == null)
             {
@@ -327,5 +348,76 @@ namespace Web.Controllers
             return RedirectToAction("Details", "Event", new { id = evnt.Id });
         }
 
+        public ActionResult SignUpForItem(ComponentModel model)
+        {
+            var usr = (User)Session["User"];
+            if (usr == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+
+            try
+            {
+                if (model.CurrentLevelTwoItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelTwoItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+                else if (model.CurrentLevelThreeItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelThreeItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+                
+
+                return View("Details", ev);
+            }
+            catch (FaultException fax)
+            {
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+
+                ViewBag.Message = fax.Message;
+                return View("Details", ev);
+            }
+
+        }
+        public DetailsEventViewModel CreateDetailsForEvent(Event e)
+        {
+            ComponentModel cModel = new ComponentModel();
+            cModel.EventId = e.Id;
+            foreach (var item in e.Components)
+            {
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                ComponentModel = cModel,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                Id = e.Id,
+                InviteString = e.InviteString,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = e.Datetime.TimeOfDay,
+                Title = e.Title
+            };
+
+            return ev;
+        }
     }
 }

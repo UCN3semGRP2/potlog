@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace DAL
                 entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
                 //ctx.Users.Attach(entity.User);
                 entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
+
                 //ctx.Events.Attach(entity.Event);
                 //ctx.Entry(entity.Event).State = EntityState.Unchanged;
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
@@ -59,8 +61,25 @@ namespace DAL
 
         public void Update(Registration entity)
         {
-            throw new NotImplementedException();
-        }
+            using (var ctx = new DALContext())
+            {
 
+                ctx.Registrations.Attach(entity);
+                ctx.Entry(entity).State = EntityState.Modified;
+
+                ctx.Users.Attach(entity.User);
+                ctx.Events.Attach(entity.Event);
+
+                foreach (var item in entity.Items)
+                {
+                    ctx.Components.Attach(item);
+                    ctx.Entry(item).State = EntityState.Modified;
+                }
+
+                ctx.SaveChanges();
+            }
+        }
     }
+
 }
+
