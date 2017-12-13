@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PotLogServiceTests.ServiceReference;
 
 namespace PotLogServiceTests
 {
@@ -110,36 +111,74 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForSameItemConcurrent()
         {
-            var mainService = new ServiceReference.ServiceClient();
+            for (int i = 0; i < 10; i++)
+            {
 
-            var adminEmail = "admin@admin.admin" + Guid.NewGuid();
-            var adminPw = "123456";
-            mainService.CreateUser("admin", "Adminson", adminEmail, adminPw);
-            var admin = mainService.LogIn(adminEmail, adminPw);
 
-            var evnt = mainService.CreateEvent("main event", "the event", 1000, 5.5, 100.5, "here", DateTime.Now.AddDays(1), false, admin);
 
-            var inviteString = mainService.GetInviteString(evnt, admin);
+                var mainService = new ServiceReference.ServiceClient();
 
-            var user1Mail = "user@1." + Guid.NewGuid();
-            var user1Pw = "123456";
-            mainService.CreateUser("user1", "userson", user1Mail, user1Pw);
+                var adminEmail = "admin@admin.admin" + Guid.NewGuid();
+                var adminPw = "123456";
+                mainService.CreateUser("admin", "Adminson", adminEmail, adminPw);
+                var admin = mainService.LogIn(adminEmail, adminPw);
 
-            var user2Mail = "user@2." + Guid.NewGuid();
-            var user2Pw = "123456";
-            mainService.CreateUser("user2", "userson", user2Mail, user2Pw);
+                var evnt = mainService.CreateEvent("main event", "the event", 1000, 5.5, 100.5, "here", DateTime.Now.AddDays(1), false, admin);
 
-            ServiceReference.IService service1 = new ServiceReference.ServiceClient();
-            var u1 = service1.LogIn(user1Mail, user1Pw);
-            var u1Event = service1.AcceptInviteString(u1, inviteString);
+                var inviteString = mainService.GetInviteString(evnt, admin);
 
-            ServiceReference.IService service2 = new ServiceReference.ServiceClient();
-            var u2 = service2.LogIn(user2Mail, user2Pw);
-            var u2Event = service1.AcceptInviteString(u2, inviteString);
+                var user1Mail = "user@1." + Guid.NewGuid();
+                var user1Pw = "123456";
+                mainService.CreateUser("user1", "userson", user1Mail, user1Pw);
 
-            
-            mainService.AddCategoryToEvent(evnt.Id, "Main cat", "The main cat", null);
-            //mainService.AddItemToCategory(evnt.Id, )
+                var user2Mail = "user@2." + Guid.NewGuid();
+                var user2Pw = "123456";
+                mainService.CreateUser("user2", "userson", user2Mail, user2Pw);
+
+                ServiceReference.IService service1 = new ServiceReference.ServiceClient();
+                var u1 = service1.LogIn(user1Mail, user1Pw);
+                var u1Event = service1.AcceptInviteString(u1, inviteString);
+
+                ServiceReference.IService service2 = new ServiceReference.ServiceClient();
+                var u2 = service2.LogIn(user2Mail, user2Pw);
+                var u2Event = service1.AcceptInviteString(u2, inviteString);
+
+
+                mainService.AddCategoryToEvent(evnt.Id, "Main cat", "The main cat", null);
+                evnt = mainService.FindEventById(evnt.Id);
+                var cat = (Category)evnt.Components[0];
+                mainService.AddItemToCategory(evnt.Id, cat.Id, 10, "item", "THE item");
+
+
+                bool u1SignedUpForItem = false;
+                bool u2SignedUpForItem = false;
+
+                var t1 = new Thread(() =>
+                {
+                    u1Event = service1.FindEventById(u1Event.Id);
+
+
+                    u1SignedUpForItem = true;
+                });
+
+                var t2 = new Thread(() =>
+                {
+                    u2Event = service1.FindEventById(u2Event.Id);
+
+                    u2SignedUpForItem = true;
+                });
+
+                t1.Start();
+                t2.Start();
+
+                t1.Join();
+                t2.Join();
+
+                Assert.AreNotEqual(u1SignedUpForItem, u2SignedUpForItem, string.Format("User1 and User2 have the same signedup state {0} and {1} after {2} runs", u1SignedUpForItem, u2SignedUpForItem, i));
+
+                bool atLeastOneSignedUp = u1SignedUpForItem || u2SignedUpForItem;
+                Assert.IsTrue(atLeastOneSignedUp, string.Format("At least one user should be signed up, but they are not after {0} runs", i));
+            }
         }
     }
 }
