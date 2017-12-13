@@ -76,7 +76,7 @@ namespace BLL
         /// <param name="user">Note: User is not valid after the method has been called</param>
         public void RegisterToEvent(Event evnt, User user)
         {
-            if (new EventCtrl().EventIsFull(evnt))
+            if (EventIsFull(evnt))
             {
                 throw new ArgumentException("Event is full. There can not be created any more registrations");
             }
@@ -86,6 +86,7 @@ namespace BLL
 
         public bool EventIsFull(Event evnt)
         {
+            if (evnt.Registrations == null) return false;
             return evnt.NumOfParticipants <= evnt.Registrations.Count;
         }
 
