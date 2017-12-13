@@ -26,6 +26,11 @@ namespace PotLogServiceTests
             this.EventId = Evnt.Id;
         }
 
+        private DateTime truncateDT(DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Kind);
+        }
+
         [TestMethod]
         public void TestFindEventByIdHappyDay()
         {
@@ -35,7 +40,9 @@ namespace PotLogServiceTests
             Assert.AreEqual(Evnt.Title, e.Title);
             Assert.AreEqual(Evnt.Description, e.Description);
             Assert.AreEqual(Evnt.Location, e.Location);
-            //Assert.AreEqual(Evnt.Datetime, e.Datetime);
+            
+            // Because the db and C# does not store datetimes with exactly the same precision we truncate them
+            Assert.AreEqual(truncateDT(Evnt.Datetime), truncateDT(e.Datetime));
             Assert.AreEqual(Evnt.IsPublic, e.IsPublic);
             Assert.AreEqual(Evnt.NumOfParticipants, e.NumOfParticipants);
             Assert.AreEqual(Evnt.PriceFrom, e.PriceFrom);

@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,9 +18,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
+
     public partial class MainPage : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -52,13 +51,20 @@ namespace Desktop
         private void btnEnterInviteString_Click(object sender, RoutedEventArgs e)
         {
             var inviteString = Interaction.InputBox("Indtast venligst den ivitationskode du har modtaget");
-            Event evnt = service.AcceptInviteString(usr, inviteString);
-            if (evnt == null)
+            try
             {
-                MessageBox.Show("Den indtastede invitationskode er ikke korrekt");
-                return;
+                Event evnt = service.AcceptInviteString(usr, inviteString);
+                if (evnt == null)
+                {
+                    MessageBox.Show("Den indtastede invitationskode er ikke korrekt");
+                    return;
+                }
+                new EventWindow(evnt, usr).Show();
             }
-            new EventWindow(evnt, usr).Show();
+            catch (FaultException fe)
+            {
+                MessageBox.Show(fe.Message);
+            }
         }
     }
 }

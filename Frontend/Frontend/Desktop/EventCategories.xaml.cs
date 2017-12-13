@@ -17,9 +17,7 @@ using Microsoft.VisualBasic;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventCategories.xaml
-    /// </summary>
+
     public partial class EventCategories : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -30,9 +28,9 @@ namespace Desktop
         public EventCategories(Event evnt, User usr)
         {
             InitializeComponent();
-            e = evnt;
             u = usr;
             currentItem = null;
+            e = service.FindEventById(evnt.Id);
             UpdateTopComboBox();
         }
 
@@ -97,8 +95,11 @@ namespace Desktop
         private void UpdateSecondComboBox()
         {
             cbLevelTwo.ItemsSource = null;
+            // Først bliver dataen fra første box fundet
             string topCatName = cbTopLevel.SelectedItem.ToString();
+            // Herefter bliver der kigget igennem begivenhedens componenter og den der har navnet på den kategori fra første box bliver gemt i lokal variable
             var topCat = (Category)this.e.Components.Where(c => c.Title == topCatName && c is Category).FirstOrDefault();
+            // Her findes alle de komponenter der har topcat som parent
             var subComponents = service.FindComponentByParentId(topCat.Id);
 
             if (topCat != null)
@@ -140,20 +141,6 @@ namespace Desktop
                 MessageBox.Show("Tilføjelse af kategori anulleret.");
             }
 
-        }
-
-        private void AddCategory()
-        {
-            //TODO Refactor Click-events.
-        }
-
-        private void UpdateComboBoxN(int n)
-        {
-            //TODO CASES
-            //switch (switch_on)
-            //{
-            //    default:
-            //}
         }
 
         private void btnAddItemLevelTwo_Click(object sender, RoutedEventArgs e)
@@ -213,13 +200,16 @@ namespace Desktop
             {
 
                 cbLevelThree.ItemsSource = null;
+                // Første box selection
                 string topCatName = cbTopLevel.SelectedItem.ToString();
+                // Nyeste version hentet op af databasen af top level kategori
                 int topCatId = ((Category)this.e.Components
                     .Where(c => c.Title == topCatName && c is Category).FirstOrDefault()).Id;
-
+                // Anden box selection 
                 string subCatName = cbLevelTwo.SelectedItem.ToString();
-
+                // Finder alle level 2 kategorier med første box's kategori som parent
                 var lvlTwoCats = service.FindComponentByParentId(topCatId);
+                // Finder den kategori der matcher det der er i anden box 
                 var lvlTwoCat = (Category)lvlTwoCats.Where(x => x.Title == subCatName && x is Category).FirstOrDefault();
 
                 if (lvlTwoCat != null)

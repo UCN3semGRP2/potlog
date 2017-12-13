@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,8 @@ namespace DAL
         {
             using (DALContext ctx = new DALContext())
             {
-                // Here be dragons!
-                // user and event objets was created by another ctx so we need to reattach them to this ctx
+                // User and Event objets was created by another ctx so we need to reattach them to this ctx
                 entity.User = ctx.Users.Single(u => u.Id == entity.User.Id);
-                //ctx.Users.Attach(entity.User);
                 entity.Event = ctx.Events.Single(e => e.Id == entity.Event.Id);
 
                 //ctx.Events.Attach(entity.Event);
@@ -30,7 +29,6 @@ namespace DAL
                     try
                     {
                         ctx.Registrations.AddOrUpdate(entity);
-                        //reg = ctx.Registrations.Add(entity);
                         ctx.SaveChanges();
                         ctxTransaction.Commit();
                         return entity;
@@ -38,6 +36,17 @@ namespace DAL
                     catch (Exception err)
                     {
                         ctxTransaction.Rollback();
+
+                        
+                        while (err.InnerException != null)
+                        {
+                            err = err.InnerException;
+                            if (err.Message.Contains("IX_UniqueUserReg"))
+                            {
+                                throw new DuplicateRegistrationException();
+                            }
+                        }
+
                         throw err;
                     }
                 }

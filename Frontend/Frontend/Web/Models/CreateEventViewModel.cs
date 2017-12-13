@@ -26,8 +26,7 @@ namespace Web.Models
         [Display(Name = "Tid")]
         [Required(ErrorMessage = "Tid skal udfyldes.")]
         [DataType(DataType.Time)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")] // 24 hour time picker
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH\\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH\\:mm}")] // 24 hour time picker
         public TimeSpan Time { get; set; }
 
         [Display(Name = "Max Antal Deltagere")]

@@ -110,7 +110,6 @@
 
         @if (Model.InviteString != null)
         {
-            <span>@Model.InviteString</span>
             <tl data-toggle="tooltip" title="Send denne invitationskode til dem du vil inviterer til dette event">
                 <dt>
                     @Html.DisplayNameFor(model => model.InviteString)
@@ -120,6 +119,7 @@
                 </dd>
             </tl>
         }
+
 
         @using (Html.BeginForm("Details", "Event", FormMethod.Post))
         {
@@ -159,6 +159,7 @@
             </dd>
 
         }
+
     </dl>
     <div class="container">
         <div class="row">
@@ -182,7 +183,13 @@
                         @Html.HiddenFor(model => model.Description)
                         @Html.HiddenFor(model => model.PriceFrom)
                         @Html.HiddenFor(model => model.PriceTo)
-                        <input type="submit" value="Tilmeld" class="btn btn-default" />
+
+
+                        if (!Model.IsAlreadyRegistered)
+                        {
+                            <input type="submit" value="Tilmeld" class="btn btn-default" />
+                        }
+
                     }
                 </div>
             </div>

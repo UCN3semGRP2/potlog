@@ -15,6 +15,7 @@ namespace BLL
         private UserCtrl uCtrl = new UserCtrl();
         private ComponentCtrl cCtrl = new ComponentCtrl();
         private IEventDB eDB = new EventDB();
+        private ComponentCtrl cCtrl = new ComponentCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
@@ -83,6 +84,12 @@ namespace BLL
         {
             Event e = FindById(eventId);
             User u = uCtrl.FindByEmail(userEmail);
+
+            if (uCtrl.IsRegisteredToEvent(u, e))
+            {
+                throw new ArgumentException("The user is already registered to the event");
+            }
+
             RegisterToEvent(e, u);
         }
 
@@ -92,25 +99,15 @@ namespace BLL
             {
                 e.Components = new List<Component>();
             }
-            if (c.Parent != null && c.Parent is Category)
-            {
-                // Should be moved to Component/category/item ctrl
-                var p = (Category)c.Parent;
-                if (p.Components == null)
-                {
-                    p.Components = new List<Component>();
-                }
-                p.Components.Add(c);
-                c.Event = p.Event;
-                c.EventId = p.EventId;
-                new ComponentCtrl().Update(c);
-                new ComponentCtrl().Update(p);
-                // ctx.Component.AddOrUpdate(p);
-                // ctx.Component.AddOrUpdate(c);
 
+            if (cCtrl.HasParentCategory(c))
+            {
+                // Add category to the parent Category
+                cCtrl.AttachCategoryToItsParent(c);
             }
             else
             {
+                // Add the category to the Event
                 e.Components.Add(c);
                 c.Event = e;
                 c.EventId = e.Id;
@@ -155,14 +152,13 @@ namespace BLL
 
         public string GetInviteString(Event evnt, User usr)
         {
-           // TODO verify that we are logged in and that usr is indeed admin for event
-           if (evnt.Admin.Id != usr.Id)
-           {
+            // TODO verify that we are logged in and that usr is indeed admin for event
+            if (evnt.Admin.Id != usr.Id)
+            {
                 throw new ArgumentException("the user is not admin for the event");
-           }
+            }
 
-            return evnt.InviteString;
-
+            return eDB.FindByID(evnt.Id).InviteString;
         }
     }
 }

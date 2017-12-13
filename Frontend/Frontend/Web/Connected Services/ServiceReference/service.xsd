@@ -4,10 +4,10 @@
   <xs:element name="CreateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Firstname" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Lastname" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -58,6 +58,25 @@ namespace BLL
         public Item FindItemById(int itemId)
         {
             return catDB.FindItemByID(itemId);
+	}
+	
+	public bool HasParentCategory(Category c)
+        {
+            return c.Parent != null && c.Parent is Category;
+        }
+
+        public void AttachCategoryToItsParent(Category c)
+        {
+            var p = (Category)c.Parent;
+            if (p.Components == null)
+            {
+                p.Components = new List<Component>();
+            }
+            p.Components.Add(c);
+            c.Event = p.Event;
+            c.EventId = p.EventId;
+            this.Update(c);
+            this.Update(p);
         }
     }
 }

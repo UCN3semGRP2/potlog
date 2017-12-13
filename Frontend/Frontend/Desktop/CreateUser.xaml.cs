@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for CreateUser.xaml
-    /// </summary>
+
     public partial class CreateUser : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();

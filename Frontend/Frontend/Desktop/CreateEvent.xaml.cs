@@ -18,9 +18,7 @@ using System.Windows.Shapes;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for CreateEvent.xaml
-    /// </summary>
+
     public partial class CreateEvent : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -30,6 +28,7 @@ namespace Desktop
         {
             InitializeComponent();
             user = ((MainWindow)Application.Current.MainWindow).loggedIn;
+            user = service.UpdateUserInfo(user);
             rbEventPrivate.IsChecked = true;
         }
 

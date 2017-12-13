@@ -13,7 +13,7 @@ namespace PotLogService
     public interface IService
     {
         [OperationContract]
-        void CreateUser(string Firstname, string Lastname, string Email, string Password);
+        void CreateUser(string firstname, string lastname, string pmail, string password);
 
         [OperationContract]
         User LogIn(string email, string clearTextPw);
@@ -32,7 +32,6 @@ namespace PotLogService
 
         [OperationContract]
         Category FindCategoryById(int id);
-
 
         [OperationContract]
         User UpdateUserInfo(User u);

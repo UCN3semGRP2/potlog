@@ -134,7 +134,7 @@ namespace BLLTest
             var ctrl = new BLL.UserCtrl();
             var u1 = CreateTestUser("hunter1");
             u1.LogInSession = new Session();
-            u1.LogInSession.ExpireDate = Convert.ToDateTime("2010-12-25 16:58:00"); //new TimeSpan(5 * 60, 0, 0);  //new DateTime(1850, 1, 1); //DateTime.Parse("1-1-1850"); // expired in the past
+            u1.LogInSession.ExpireDate = Convert.ToDateTime("2010-12-25 16:58:00"); // expired in the past
 
             // ACT
             bool isValidated = ctrl.IsValidated(u1);

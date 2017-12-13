@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotLogServiceTests.ServiceReference;
 using System.Linq;
+using System.ServiceModel;
 
 namespace PotLogServiceTests
 {
@@ -13,7 +14,7 @@ namespace PotLogServiceTests
         public User Admin { get; set; }
         public Event Evnt { get; set; }
         public int EventId { get; set; }
-        
+
 
         [TestInitialize]
         public void TestInitialize()
@@ -23,7 +24,7 @@ namespace PotLogServiceTests
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
             this.Admin = service.LogIn(email, pw);
 
-            this.Evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.Admin);
+            this.Evnt = service.CreateEvent("test event", "test event please ignore", 100, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.Admin);
             this.EventId = Evnt.Id;
 
             service.AddCategoryToEvent(EventId, "Test Category", "Test Category", null);
@@ -57,11 +58,6 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForItemHappyDays()
         {
-            var email = "user@t.t" + Guid.NewGuid();
-            var pw = "hunter1";
-            service.CreateUser("TestCreateEventUser", "Test", email, pw);
-            var User = service.LogIn(email, pw);
-
             service.SignUpForEvent(User.Email, EventId);
 
             User = service.UpdateUserInfo(User);
@@ -72,7 +68,7 @@ namespace PotLogServiceTests
             int itemId = subcomps[0].Id;
 
             service.SignUpForItem(User.Email, itemId);
-            
+
             Evnt = service.FindEventById(EventId);
             bool userIsRegistered = Evnt
                 .Registrations
@@ -89,6 +85,28 @@ namespace PotLogServiceTests
 
             Assert.IsTrue(userIsRegistered, "user is registered on returned event");
             Assert.AreEqual(subcomps[0].Id, i.Id);
+        }
+
+        [TestMethod]
+        public void TestDuplicateSignUpForEvent()
+        {
+            var email = "user@t.t" + Guid.NewGuid();
+            var pw = "hunter1";
+            service.CreateUser("TestCreateEventUser", "Test", email, pw);
+            var User = service.LogIn(email, pw);
+
+            // First time should be OK
+            service.SignUpForEvent(email, EventId);
+
+            // Now we sign up again. This should fail
+            try
+            {
+                service.SignUpForEvent(email, EventId);
+                Assert.Fail();
+            }
+            catch (FaultException)
+            {
+            }
         }
     }
 }

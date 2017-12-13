@@ -54,6 +54,6 @@ namespace Web.Models
 
         [Display(Name="Retter")]
         public ComponentModel ComponentModel { get; set; }
-
+        public bool IsAlreadyRegistered { get; internal set; }
     }
 }

@@ -17,9 +17,7 @@ using Microsoft.VisualBasic;
 
 namespace Desktop
 {
-    /// <summary>
-    /// Interaction logic for EventDetails.xaml
-    /// </summary>
+
     public partial class EventDetails : Page
     {
         ServiceReference.IService service = new ServiceReference.ServiceClient();
@@ -59,16 +57,17 @@ namespace Desktop
                 tbInviteString.Visibility = Visibility.Hidden;
             }
 
-            this.u = u;
-            this.e = e;
+            this.u = service.UpdateUserInfo(u);
+            this.e = service.FindEventById(e.Id);
 
-            populateInfo(e,u);
+            populateInfo(this.e, this.u);
 
         }
 
         private void populateInfo(Event e, User u)
         {
             e = service.FindEventById(e.Id);
+            u = service.UpdateUserInfo(u);
 
             lblEventName.Content = e.Title;
             lblEventLocation.Content = e.Location;
@@ -95,9 +94,6 @@ namespace Desktop
             service.SignUpForEvent(u.Email, this.e.Id);
 
             MessageBox.Show(string.Format("Success registering oprettet"));
-
-            //var nextPage = TODO
-            //this.NavigationService.Navigate(nextPage);
         }
 
         private void btnCategories_Click(object sender, RoutedEventArgs e)
