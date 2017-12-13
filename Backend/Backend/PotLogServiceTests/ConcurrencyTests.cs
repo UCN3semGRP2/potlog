@@ -110,7 +110,36 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForSameItemConcurrent()
         {
-            throw new NotImplementedException();
+            var mainService = new ServiceReference.ServiceClient();
+
+            var adminEmail = "admin@admin.admin" + Guid.NewGuid();
+            var adminPw = "123456";
+            mainService.CreateUser("admin", "Adminson", adminEmail, adminPw);
+            var admin = mainService.LogIn(adminEmail, adminPw);
+
+            var evnt = mainService.CreateEvent("main event", "the event", 1000, 5.5, 100.5, "here", DateTime.Now.AddDays(1), false, admin);
+
+            var inviteString = mainService.GetInviteString(evnt, admin);
+
+            var user1Mail = "user@1." + Guid.NewGuid();
+            var user1Pw = "123456";
+            mainService.CreateUser("user1", "userson", user1Mail, user1Pw);
+
+            var user2Mail = "user@2." + Guid.NewGuid();
+            var user2Pw = "123456";
+            mainService.CreateUser("user2", "userson", user2Mail, user2Pw);
+
+            ServiceReference.IService service1 = new ServiceReference.ServiceClient();
+            var u1 = service1.LogIn(user1Mail, user1Pw);
+            var u1Event = service1.AcceptInviteString(u1, inviteString);
+
+            ServiceReference.IService service2 = new ServiceReference.ServiceClient();
+            var u2 = service2.LogIn(user2Mail, user2Pw);
+            var u2Event = service1.AcceptInviteString(u2, inviteString);
+
+            
+            mainService.AddCategoryToEvent(evnt.Id, "Main cat", "The main cat", null);
+            //mainService.AddItemToCategory(evnt.Id, )
         }
     }
 }
