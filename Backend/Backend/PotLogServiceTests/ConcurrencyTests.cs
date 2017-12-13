@@ -106,5 +106,11 @@ namespace PotLogServiceTests
             }
 
         }
+
+        [TestMethod]
+        public void TestSignUpForSameItemConcurrent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
