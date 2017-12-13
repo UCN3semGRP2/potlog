@@ -157,11 +157,18 @@ namespace BLL
 
         public void RegisterToItem(User usr, Event evnt, Item item)
         {
-            if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+            using (var tx = new Transaction())
             {
-                throw new ArgumentException("The user is not registred to the event.");
+                if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+                {
+                    throw new ArgumentException("The user is not registred to the event.");
+                }
+                if (cCtrl.ItemHasARegisteredUser(item))
+                {
+                    throw new ArgumentException("Someon is already registered to the item");
+                }
+                rCtrl.CreateRegistrationForItem(usr, evnt, item);
             }
-            rCtrl.CreateRegistrationForItem(usr, evnt, item);
         }
 
         public string GetInviteString(Event evnt, User usr)

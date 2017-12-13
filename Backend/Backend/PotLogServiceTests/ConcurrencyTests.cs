@@ -113,9 +113,6 @@ namespace PotLogServiceTests
         {
             for (int i = 0; i < 10; i++)
             {
-
-
-
                 var mainService = new ServiceReference.ServiceClient();
 
                 var adminEmail = "admin@admin.admin" + Guid.NewGuid();
@@ -156,14 +153,17 @@ namespace PotLogServiceTests
                 var t1 = new Thread(() =>
                 {
                     u1Event = service1.FindEventById(u1Event.Id);
-
+                    var itemId = service1.FindComponentByParentId(cat.Id)[0].Id;
+                    service1.SignUpForItem(u1.Email, itemId);
 
                     u1SignedUpForItem = true;
                 });
 
                 var t2 = new Thread(() =>
                 {
-                    u2Event = service1.FindEventById(u2Event.Id);
+                    u2Event = service2.FindEventById(u2Event.Id);
+                    var itemId = service2.FindComponentByParentId(cat.Id)[0].Id;
+                    service2.SignUpForItem(u2.Email, itemId);
 
                     u2SignedUpForItem = true;
                 });
