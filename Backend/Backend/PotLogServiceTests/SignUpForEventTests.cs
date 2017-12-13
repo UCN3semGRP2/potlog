@@ -58,6 +58,11 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForItemHappyDays()
         {
+            var email = "user@t.t" + Guid.NewGuid();
+            var pw = "hunter1";
+            service.CreateUser("TestCreateEventUser", "Test", email, pw);
+            var User = service.LogIn(email, pw);
+
             service.SignUpForEvent(User.Email, EventId);
 
             User = service.UpdateUserInfo(User);
