@@ -30,6 +30,7 @@ namespace Desktop
         public MainPage()
         {
             InitializeComponent();
+            
             usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
             lblCurrentUserName.Content = usr.Firstname + " " + usr.Lastname;
             regs = usr.Registrations.ToList();

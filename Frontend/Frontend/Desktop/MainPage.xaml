@@ -22,7 +22,7 @@
                         </ListView.View>
                     </ListView>
                     <Label x:Name="lblCurrentUser" Content="Bruger :" HorizontalAlignment="Left" Margin="171,14,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lblCurrentUserName" Content="TODO" HorizontalAlignment="Left" Margin="171,45,0,0" VerticalAlignment="Top" Width="106" Height="42"/>
+                    <Label x:Name="lblCurrentUserName" Content="" HorizontalAlignment="Left" Margin="171,45,0,0" VerticalAlignment="Top" Width="106" Height="42"/>
                     <Button x:Name="btnEditUser" Content="Rediger Brugeroplysninger" HorizontalAlignment="Left" Margin="351,20,0,0" VerticalAlignment="Top" Width="150" Click="btnEditUser_Click"/>
                     <Button x:Name="btnCreateNewEvent" Content="Opret Ny Begivenhed" HorizontalAlignment="Left" Margin="351,45,0,0" VerticalAlignment="Top" Width="150" Click="btnCreateNewEvent_Click"/>
                     <Button x:Name="btnEnterInviteString" Content="Indtast invitationskode" Margin="351,69,10.2,203.2" Click="btnEnterInviteString_Click"/>
@@ -31,14 +31,14 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="itPublicEvents" Header="Offentlige Begivenheder">
+            <TabItem x:Name="itPublicEvents" Header="Offentlige Begivenheder" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
-                    <Frame Name="publicEventsFrame" Content="TODO" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
+                    <Frame Name="publicEventsFrame" Content="Denne side kommer snart" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="itCreatedEvents" Header="Operretede Begivenheder">
+            <TabItem x:Name="itCreatedEvents" Header="Operretede Begivenheder" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
-                    <Frame Name="createdEventsFrame" Content="TODO" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
+                    <Frame Name="createdEventsFrame" Content="Denne side kommer snart" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="511"/>
                 </Grid>
             </TabItem>
         </TabControl>
