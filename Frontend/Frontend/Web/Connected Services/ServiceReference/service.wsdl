@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost:8080/PotLogService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/PotLogService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/PotLogService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_CreateUser_InputMessage">
@@ -93,56 +93,56 @@
   </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="CreateUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateUserResponse" message="tns:IService_CreateUser_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/CreateUserResponse" message="tns:IService_CreateUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="LogIn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/LogIn" message="tns:IService_LogIn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/LogInResponse" message="tns:IService_LogIn_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/LogIn" message="tns:IService_LogIn_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/LogInResponse" message="tns:IService_LogIn_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateEvent" message="tns:IService_CreateEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateEventResponse" message="tns:IService_CreateEvent_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/CreateEvent" message="tns:IService_CreateEvent_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/CreateEventResponse" message="tns:IService_CreateEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindEventById">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/FindEventById" message="tns:IService_FindEventById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/FindEventByIdResponse" message="tns:IService_FindEventById_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/FindEventById" message="tns:IService_FindEventById_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/FindEventByIdResponse" message="tns:IService_FindEventById_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignUpForEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/SignUpForEvent" message="tns:IService_SignUpForEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/SignUpForEventResponse" message="tns:IService_SignUpForEvent_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/SignUpForEvent" message="tns:IService_SignUpForEvent_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/SignUpForEventResponse" message="tns:IService_SignUpForEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsRegisteredToEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/IsRegisteredToEvent" message="tns:IService_IsRegisteredToEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/IsRegisteredToEventResponse" message="tns:IService_IsRegisteredToEvent_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/IsRegisteredToEvent" message="tns:IService_IsRegisteredToEvent_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/IsRegisteredToEventResponse" message="tns:IService_IsRegisteredToEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindCategoryById">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/FindCategoryById" message="tns:IService_FindCategoryById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/FindCategoryByIdResponse" message="tns:IService_FindCategoryById_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/FindCategoryById" message="tns:IService_FindCategoryById_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/FindCategoryByIdResponse" message="tns:IService_FindCategoryById_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateUserInfo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateUserInfo" message="tns:IService_UpdateUserInfo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateUserInfoResponse" message="tns:IService_UpdateUserInfo_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/UpdateUserInfo" message="tns:IService_UpdateUserInfo_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/UpdateUserInfoResponse" message="tns:IService_UpdateUserInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddCategoryToEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddCategoryToEvent" message="tns:IService_AddCategoryToEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddCategoryToEventResponse" message="tns:IService_AddCategoryToEvent_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/AddCategoryToEvent" message="tns:IService_AddCategoryToEvent_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/AddCategoryToEventResponse" message="tns:IService_AddCategoryToEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddItemToCategory">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddItemToCategory" message="tns:IService_AddItemToCategory_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddItemToCategoryResponse" message="tns:IService_AddItemToCategory_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/AddItemToCategory" message="tns:IService_AddItemToCategory_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/AddItemToCategoryResponse" message="tns:IService_AddItemToCategory_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindComponentByParentId">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/FindComponentByParentId" message="tns:IService_FindComponentByParentId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/FindComponentByParentIdResponse" message="tns:IService_FindComponentByParentId_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/FindComponentByParentId" message="tns:IService_FindComponentByParentId_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/FindComponentByParentIdResponse" message="tns:IService_FindComponentByParentId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetInviteString">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetInviteString" message="tns:IService_GetInviteString_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetInviteStringResponse" message="tns:IService_GetInviteString_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/GetInviteString" message="tns:IService_GetInviteString_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/GetInviteStringResponse" message="tns:IService_GetInviteString_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AcceptInviteString">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/AcceptInviteString" message="tns:IService_AcceptInviteString_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/AcceptInviteStringResponse" message="tns:IService_AcceptInviteString_OutputMessage" />
+      <wsdl:input wsam:Action="http://tempuri.org/IService/AcceptInviteString" message="tns:IService_AcceptInviteString_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IService/AcceptInviteStringResponse" message="tns:IService_AcceptInviteString_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignUpForItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SignUpForItem" message="tns:IService_SignUpForItem_InputMessage" />
@@ -280,7 +280,7 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="BasicHttpBinding_IService" binding="tns:BasicHttpBinding_IService">
-      <soap:address location="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/" />
+      <soap:address location="http://localhost:8080/PotLogService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

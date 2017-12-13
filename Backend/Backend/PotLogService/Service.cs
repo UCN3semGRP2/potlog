@@ -55,7 +55,9 @@ namespace PotLogService
 
         public User LogIn(string email, string clearTextPw)
         {
+            Console.WriteLine(email + " Tried to log in");
             User u = uCtrl.LogIn(email, clearTextPw);
+            Console.WriteLine("Success");
             return u;
         }
 
