@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d54049dd-377f-40ef-8f79-e236f8865713" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cd46c4d9-6eb8-400f-9cd8-e73220ed0a2a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/potlogService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="fbecae6f-8b73-4798-a6f9-74f1169bd473" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="cb4fc285-81ed-4663-b70d-b2a17e1622d5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6ab21ec6-f725-494f-8cf9-7cb0ef75421d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
-    <MetadataFile FileName="Model1.xsd" MetadataType="Schema" ID="14167b15-8ce4-4407-af68-ee6f71a7b5cc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PotLogService/Service1/mex" />
+    <MetadataFile FileName="PotLogService.xsd" MetadataType="Schema" ID="f9c2e2b1-a8ef-4ad2-838e-e4d077bf18de" SourceId="1" SourceUrl="http://localhost:8080/PotLogService?xsd=xsd1" />
+    <MetadataFile FileName="PotLogService.disco" MetadataType="Disco" ID="d91e0721-c2db-45b5-8230-fb2bceb21ccc" SourceId="1" SourceUrl="http://localhost:8080/PotLogService?disco" />
+    <MetadataFile FileName="PotLogService1.xsd" MetadataType="Schema" ID="17f58dca-282e-4efc-8c75-71dc44e7b10b" SourceId="1" SourceUrl="http://localhost:8080/PotLogService?xsd=xsd0" />
+    <MetadataFile FileName="PotLogService2.xsd" MetadataType="Schema" ID="b34c957c-48cc-4d85-a0a3-e2a3cd14a042" SourceId="1" SourceUrl="http://localhost:8080/PotLogService?xsd=xsd2" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="67a62664-cd00-4cd3-a4ed-aa9be4bb8e96" SourceId="1" SourceUrl="http://localhost:8080/PotLogService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
