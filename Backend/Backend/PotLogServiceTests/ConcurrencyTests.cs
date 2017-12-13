@@ -7,7 +7,6 @@ namespace PotLogServiceTests
     [TestClass]
     public class ConcurrencyTests
     {
-        static readonly object locker = new object();
 
         [TestMethod]
         public void TestTwoUsersSignUpWhenOnlyOneMoreParticipantAvailable()
