@@ -15,7 +15,6 @@ namespace BLL
         private UserCtrl uCtrl = new UserCtrl();
         private ComponentCtrl cCtrl = new ComponentCtrl();
         private IEventDB eDB = new EventDB();
-        private ComponentCtrl cCtrl = new ComponentCtrl();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
