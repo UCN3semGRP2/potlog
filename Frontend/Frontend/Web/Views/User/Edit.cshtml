@@ -13,6 +13,13 @@
     </div>
 }
 
+@if (ViewBag.ErrorMsg != null)
+{
+    <div class="alert alert-danger">
+        <strong>Fejl!</strong> @ViewBag.ErrorMsg
+    </div>
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
