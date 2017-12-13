@@ -24,12 +24,21 @@ namespace Desktop
         ServiceReference.IService service = new ServiceReference.ServiceClient();
 
         private User usr;
+        private List<Registration> regs;
+        private Event evnt42;
 
         public MainPage()
         {
             InitializeComponent();
             usr = service.UpdateUserInfo(((MainWindow)Application.Current.MainWindow).loggedIn);
             lblCurrentUserName.Content = usr.Firstname + " " + usr.Lastname;
+            regs = usr.Registrations.ToList();
+            evnt42 = new Event();
+            foreach (var r in regs)
+            {
+                evnt42 = r.Event;
+                lwSignedUpEvents.Items.Add(evnt42);
+            }
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
@@ -64,6 +73,21 @@ namespace Desktop
             catch (FaultException fe)
             {
                 MessageBox.Show(fe.Message);
+            }
+        }
+
+
+        private void btnSelectedEventInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Event e2 = (Event)lwSignedUpEvents.SelectedItem;
+            if (e2 == null)
+            {
+                MessageBox.Show("Du skal trykke på en begivenhed for at kunne se info om den");
+            }
+            else
+            {
+                var eventWindow = new EventWindow(e2, usr);
+                eventWindow.Show();
             }
         }
     }

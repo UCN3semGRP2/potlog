@@ -16,7 +16,8 @@
                     <ListView x:Name="lwSignedUpEvents"  HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="154">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn/>
+                                <GridViewColumn Header="Begivenhed" DisplayMemberBinding= "{Binding Title}"/>
+                                
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -25,15 +26,9 @@
                     <Button x:Name="btnEditUser" Content="Rediger Brugeroplysninger" HorizontalAlignment="Left" Margin="351,20,0,0" VerticalAlignment="Top" Width="150" Click="btnEditUser_Click"/>
                     <Button x:Name="btnCreateNewEvent" Content="Opret Ny Begivenhed" HorizontalAlignment="Left" Margin="351,45,0,0" VerticalAlignment="Top" Width="150" Click="btnCreateNewEvent_Click"/>
                     <Button x:Name="btnEnterInviteString" Content="Indtast invitationskode" Margin="351,69,10.2,203.2" Click="btnEnterInviteString_Click"/>
-                    <TextBlock x:Name="tbUpcommingEvent" HorizontalAlignment="Left" Margin="171,105,0,0" TextWrapping="Wrap" Text="Næste Forekommende Begivenhed :" VerticalAlignment="Top" Height="33" Width="126"/>
                     <Button x:Name="btnLogOut" Content="Log Ud" HorizontalAlignment="Left" Margin="426,261,0,0" VerticalAlignment="Top" Width="75" Click="btnLogOut_Click"/>
-                    <ListView x:Name="lwUpcommingEvent" HorizontalAlignment="Left" Height="39" Margin="171,143,0,0" VerticalAlignment="Top" Width="126">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Button x:Name="btnSelectedEventInfo" Content="Se info" Margin="171,198,298,73" Click="btnSelectedEventInfo_Click"/>
+
                 </Grid>
             </TabItem>
             <TabItem x:Name="itPublicEvents" Header="Offentlige Begivenheder">
