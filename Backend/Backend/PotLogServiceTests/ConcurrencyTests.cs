@@ -65,6 +65,45 @@ namespace PotLogServiceTests
                 bool atLeastOneSignedUp = u1SignedUp || u2SignedUp;
                 Assert.IsTrue(atLeastOneSignedUp, string.Format("At least one user should be signed up, but they are not after {0} runs", i));
             }
+        }
+
+        [TestMethod]
+        public void TestTwoUsersSignUpWithTheSameMail()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var commonMail = "dup@dup." + Guid.NewGuid();
+
+                var service1 = new ServiceReference.ServiceClient();
+                var service2 = new ServiceReference.ServiceClient();
+
+                var u1Created = false;
+                var u2Created = false;
+
+                var t1 = new Thread(() =>
+                {
+                    service1.CreateUser("Dupuser", "Dupson", commonMail, "123456");
+                    u1Created = true;
+                });
+
+                var t2 = new Thread(() =>
+                {
+                    service1.CreateUser("Dupuser", "Dupson", commonMail, "123456");
+                    u2Created = true;
+                });
+
+                t1.Start();
+                t2.Start();
+
+                t1.Join();
+                t2.Join();
+
+                Assert.AreNotEqual(u1Created, u2Created, string.Format("User1 and User2 have the same created state"));
+
+                bool atleastOneWasCreated = u1Created || u2Created;
+                Assert.IsTrue(atleastOneWasCreated, "Atleast one of the users should have been created");
+
+            }
 
         }
     }
