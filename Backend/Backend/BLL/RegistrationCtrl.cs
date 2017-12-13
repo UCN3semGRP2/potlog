@@ -32,5 +32,25 @@ namespace BLL
                 throw new ArgumentException("The user is already registered to the event");
             }
         }
+
+        public void CreateRegistrationForItem(User usr, Event evnt, Item item)
+        {
+            var reg = usr.Registrations.Where(x => x.Event.Id == evnt.Id).SingleOrDefault();
+            if (reg == null)
+            {
+                throw new ArgumentNullException("The user is not registred to the event.");
+            }
+            if (reg.Items == null)
+            {
+                reg.Items = new List<Item>();
+            }
+
+            item.Registration = reg;
+            item.RegistrationId = reg.Id;
+
+            //item.Registration = reg;
+            reg.Items.Add(item);
+            rDB.Update(reg);
+        }
     }
 }

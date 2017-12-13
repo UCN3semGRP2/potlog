@@ -13,5 +13,10 @@ namespace Model
         [DataMember]
         public int Amount { get; set; }
         public int ComponetId { get; set; }
+
+        [DataMember]
+        public Registration Registration { get; set; }
+        [DataMember]
+        public int? RegistrationId { get; set; }
     }
 }

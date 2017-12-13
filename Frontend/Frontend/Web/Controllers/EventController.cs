@@ -143,7 +143,7 @@ namespace Web.Controllers
             };
 
             ComponentModel cModel = new ComponentModel();
-
+            cModel.EventId = e.Id;
             foreach (var item in e.Components)
             {
                 if (item.Parent == null)
@@ -166,12 +166,33 @@ namespace Web.Controllers
 
                 if (LevelTwoId.HasValue)
                 {
+                    cModel.CurrentLevelTwoItemId = null;
+                    if (levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
+                    {
+                        cModel.CurrentLevelTwoItemId = LevelTwoId;
+                        cModel.CurrentLevelThreeItemId = null;
+                    }
+
                     var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
                     foreach (var item in levelThreeComponents)
                     {
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
+
+                    if (!(levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item))
+                    {
+
+                        if (LevelThreeId.HasValue)
+                        {
+                            if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+                            {
+                                cModel.CurrentLevelThreeItemId = LevelThreeId;
+                                cModel.CurrentLevelTwoItemId = null;
+                            }
+                        }
+                    }
                 }
+
             }
 
             ev.ComponentModel = cModel;
@@ -356,5 +377,80 @@ namespace Web.Controllers
             return RedirectToAction("Details", "Event", new { id = evnt.Id });
         }
 
+        public ActionResult SignUpForItem(ComponentModel model)
+        {
+            var usr = utils.Utils.GetUser(Session);
+            if (usr == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+
+            try
+            {
+                if (model.CurrentLevelTwoItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelTwoItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+                else if (model.CurrentLevelThreeItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelThreeItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e, usr);
+                
+
+                return View("Details", ev);
+            }
+            catch (FaultException fax)
+            {
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e, usr);
+
+                ViewBag.Message = fax.Message;
+                return View("Details", ev);
+            }
+
+
+        }
+        public DetailsEventViewModel CreateDetailsForEvent(Event e, User usr)
+        {
+            ComponentModel cModel = new ComponentModel();
+            cModel.EventId = e.Id;
+            foreach (var item in e.Components)
+            {
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            var isAlreadyRegistered = service.IsRegisteredToEvent(utils.Utils.GetUser(Session), e);
+
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                ComponentModel = cModel,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                Id = e.Id,
+                InviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = e.Datetime.TimeOfDay,
+                Title = e.Title,
+                IsAlreadyRegistered = isAlreadyRegistered
+            };
+
+            return ev;
+        }
     }
 }
