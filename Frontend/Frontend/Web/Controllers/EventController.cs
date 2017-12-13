@@ -367,9 +367,9 @@ namespace Web.Controllers
                     return View();
                 }
             }
-            catch (FaultException fe)
+            catch (FaultException)
             {
-                ViewBag.ErrorMsg = fe.Message;
+                ViewBag.ErrorMsg = "Du er allerede tilmeldt begivenheden";
                 return View();
             }
 
