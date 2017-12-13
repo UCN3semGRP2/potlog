@@ -135,7 +135,7 @@ namespace Web.Controllers
             };
 
             ComponentModel cModel = new ComponentModel();
-
+            cModel.EventId = e.Id;
             foreach (var item in e.Components)
             {
                 if (item.Parent == null)
@@ -158,11 +158,11 @@ namespace Web.Controllers
 
                 if (LevelTwoId.HasValue)
                 {
+                    cModel.CurrentLevelTwoItemId = null;
                     if (levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
                     {
-                        cModel.IsItem = true;
-                        cModel.currentItemId = LevelTwoId;
-                        //TODO: Need to create button in UI for this.
+                        cModel.CurrentLevelTwoItemId = LevelTwoId;
+                        cModel.CurrentLevelThreeItemId = null;
                     }
 
                     var levelThreeComponents = service.FindComponentByParentId((int)LevelTwoId);
@@ -171,13 +171,16 @@ namespace Web.Controllers
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
 
-                    if (LevelThreeId.HasValue)
+                    if (!(levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item))
                     {
-                        if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+
+                        if (LevelThreeId.HasValue)
                         {
-                            cModel.IsItem = true;
-                            cModel.currentItemId = LevelThreeId;
-                            //TODO: Need to create button in UI for this.
+                            if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+                            {
+                                cModel.CurrentLevelThreeItemId = LevelThreeId;
+                                cModel.CurrentLevelTwoItemId = null;
+                            }
                         }
                     }
                 }
@@ -345,5 +348,76 @@ namespace Web.Controllers
             return RedirectToAction("Details", "Event", new { id = evnt.Id });
         }
 
+        public ActionResult SignUpForItem(ComponentModel model)
+        {
+            var usr = (User)Session["User"];
+            if (usr == null)
+            {
+                return RedirectToAction("LogIn", "User");
+            }
+
+            try
+            {
+                if (model.CurrentLevelTwoItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelTwoItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+                else if (model.CurrentLevelThreeItemId != null)
+                {
+                    service.SignUpForItem(usr.Email, (int)model.CurrentLevelThreeItemId);
+                    ViewBag.SuccessMessage = "Registrering er nu opdateret.";
+                }
+
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+                
+
+                return View("Details", ev);
+            }
+            catch (FaultException fax)
+            {
+                Event e = service.FindEventById(model.EventId);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+
+                ViewBag.Message = fax.Message;
+                return View("Details", ev);
+            }
+
+        }
+        public DetailsEventViewModel CreateDetailsForEvent(Event e)
+        {
+            ComponentModel cModel = new ComponentModel();
+            cModel.EventId = e.Id;
+            foreach (var item in e.Components)
+            {
+                if (item.Parent == null)
+                {
+                    cModel.LevelOneList.Add(new SelectListItem
+                    {
+                        Text = item.Title,
+                        Value = item.Id.ToString()
+                    });
+                }
+            }
+
+            DetailsEventViewModel ev = new DetailsEventViewModel
+            {
+                ComponentModel = cModel,
+                Date = e.Datetime.Date,
+                Description = e.Description,
+                Id = e.Id,
+                InviteString = e.InviteString,
+                IsPublic = e.IsPublic,
+                Location = e.Location,
+                NumOfParticipants = e.NumOfParticipants,
+                PriceFrom = e.PriceFrom,
+                PriceTo = e.PriceTo,
+                Time = e.Datetime.TimeOfDay,
+                Title = e.Title
+            };
+
+            return ev;
+        }
     }
 }

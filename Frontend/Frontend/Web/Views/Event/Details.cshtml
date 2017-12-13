@@ -7,6 +7,19 @@
 
 <h2>Detaljer</h2>
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message</div>
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @ViewBag.SuccessMessage
+        Du accepterer nu at medbringe den valgte ret.
+    </div>
+}
+
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -126,6 +139,11 @@
             </dt>
             <dd>
                 @Html.DropDownList("LevelTwoId", Model.ComponentModel.LevelTwoList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelTwoId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+
+                @if (Model.ComponentModel.CurrentLevelTwoItemId != null)
+                {
+                    @Html.ActionLink("Medbring", "SignUpForItem", "Event", this.Model.ComponentModel, new { @class = "btn btn-primary", id = "LevelTwoBtn" })
+                }
             </dd>
 
             <dt>
@@ -133,6 +151,11 @@
             </dt>
             <dd>
                 @Html.DropDownList("LevelThreeId", Model.ComponentModel.LevelThreeList, "Vælg en kategori", new { @class = "dropdown btn btn-secondary dropdown-toggle", id = "LevelThreeId", onchange = "document.forms[0].submit();", disabled = "disabled" })
+
+                @if (Model.ComponentModel.CurrentLevelThreeItemId != null)
+                {
+                    @Html.ActionLink("Medbring", "SignUpForItem", "Event", this.Model.ComponentModel, new { @class = "btn btn-primary", id = "LevelThreeBtn" })
+                }
             </dd>
 
         }
@@ -201,3 +224,6 @@
         }
     });
 </script>
+
+
+

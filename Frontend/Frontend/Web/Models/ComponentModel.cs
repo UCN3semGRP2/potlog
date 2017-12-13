@@ -23,9 +23,9 @@ namespace Web.Models
         public List<SelectListItem> LevelTwoList { get; set; }
         [Display(Name = "Niveau 3:")]
         public List<SelectListItem> LevelThreeList { get; set; }
-
-        public bool IsItem { get; set; }
-        public int? currentItemId { get; set; }
+        
+        public int? CurrentLevelTwoItemId { get; set; }
+        public int? CurrentLevelThreeItemId { get; set; }
 
         public ComponentModel()
         {
