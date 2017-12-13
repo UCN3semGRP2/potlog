@@ -431,6 +431,8 @@ namespace Web.Controllers
                 }
             }
 
+            var isAlreadyRegistered = service.IsRegisteredToEvent(utils.Utils.GetUser(Session), e);
+
             DetailsEventViewModel ev = new DetailsEventViewModel
             {
                 ComponentModel = cModel,
@@ -444,7 +446,8 @@ namespace Web.Controllers
                 PriceFrom = e.PriceFrom,
                 PriceTo = e.PriceTo,
                 Time = e.Datetime.TimeOfDay,
-                Title = e.Title
+                Title = e.Title,
+                IsAlreadyRegistered = isAlreadyRegistered
             };
 
             return ev;
