@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -20,7 +21,10 @@ namespace Model
 
         [DataMember]
         public Event Event { get; set; }
-        [Index("IX_UniqueUserReg", 2, IsUnique = true)]
+	[Index("IX_UniqueUserReg", 2, IsUnique = true)]
         public int? EventId { get; set; }
+
+	[DataMember]
+	public List<Item> Items { get; set; }
     }
 }

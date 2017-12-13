@@ -144,5 +144,10 @@ namespace PotLogService
                 throw new FaultException(arge.Message);
             }
         }
+
+        public void SignUpForItem(string userEmail, int itemId)
+        {
+            eCtrl.SignUpForItem(userEmail, itemId);
+        }
     }
 }

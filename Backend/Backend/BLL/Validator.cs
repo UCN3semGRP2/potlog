@@ -21,7 +21,7 @@ namespace BLL
         {
             try
             {
-                _ = new MailAddress(email);
+                var _ = new MailAddress(email);
                 return true;
             }
             catch (FormatException)

@@ -266,6 +266,9 @@ namespace Web.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.Item[] ItemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Web.ServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -313,6 +316,19 @@ namespace Web.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.Item[] Items {
+            get {
+                return this.ItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ItemsField, value) != true)) {
+                    this.ItemsField = value;
+                    this.RaisePropertyChanged("Items");
                 }
             }
         }
@@ -563,6 +579,61 @@ namespace Web.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class Item : Web.ServiceReference.Component {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Web.ServiceReference.Registration RegistrationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> RegistrationIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Web.ServiceReference.Registration Registration {
+            get {
+                return this.RegistrationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegistrationField, value) != true)) {
+                    this.RegistrationField = value;
+                    this.RaisePropertyChanged("Registration");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> RegistrationId {
+            get {
+                return this.RegistrationIdField;
+            }
+            set {
+                if ((this.RegistrationIdField.Equals(value) != true)) {
+                    this.RegistrationIdField = value;
+                    this.RaisePropertyChanged("RegistrationId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Component", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Web.ServiceReference.Category))]
@@ -711,29 +782,6 @@ namespace Web.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class Item : Web.ServiceReference.Component {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -815,6 +863,12 @@ namespace Web.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
         System.Threading.Tasks.Task<Web.ServiceReference.Event> AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        void SignUpForItem(string userEmail, int itemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -946,6 +1000,14 @@ namespace Web.ServiceReference {
         
         public System.Threading.Tasks.Task<Web.ServiceReference.Event> AcceptInviteStringAsync(Web.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
+        }
+        
+        public void SignUpForItem(string userEmail, int itemId) {
+            base.Channel.SignUpForItem(userEmail, itemId);
+        }
+        
+        public System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId) {
+            return base.Channel.SignUpForItemAsync(userEmail, itemId);
         }
     }
 }

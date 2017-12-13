@@ -266,6 +266,9 @@ namespace Desktop.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Desktop.ServiceReference.Item[] ItemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Desktop.ServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -313,6 +316,19 @@ namespace Desktop.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Desktop.ServiceReference.Item[] Items {
+            get {
+                return this.ItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ItemsField, value) != true)) {
+                    this.ItemsField = value;
+                    this.RaisePropertyChanged("Items");
                 }
             }
         }
@@ -563,6 +579,29 @@ namespace Desktop.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class Item : Desktop.ServiceReference.Component {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AmountField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Component", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Desktop.ServiceReference.Category))]
@@ -711,29 +750,6 @@ namespace Desktop.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/Model", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class Item : Desktop.ServiceReference.Component {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -815,6 +831,12 @@ namespace Desktop.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptInviteString", ReplyAction="http://tempuri.org/IService/AcceptInviteStringResponse")]
         System.Threading.Tasks.Task<Desktop.ServiceReference.Event> AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        void SignUpForItem(string userEmail, int itemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SignUpForItem", ReplyAction="http://tempuri.org/IService/SignUpForItemResponse")]
+        System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -946,6 +968,14 @@ namespace Desktop.ServiceReference {
         
         public System.Threading.Tasks.Task<Desktop.ServiceReference.Event> AcceptInviteStringAsync(Desktop.ServiceReference.User usr, string inviteString) {
             return base.Channel.AcceptInviteStringAsync(usr, inviteString);
+        }
+        
+        public void SignUpForItem(string userEmail, int itemId) {
+            base.Channel.SignUpForItem(userEmail, itemId);
+        }
+        
+        public System.Threading.Tasks.Task SignUpForItemAsync(string userEmail, int itemId) {
+            return base.Channel.SignUpForItemAsync(userEmail, itemId);
         }
     }
 }

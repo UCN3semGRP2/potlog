@@ -13,8 +13,8 @@ namespace BLL
     {
         private RegistrationCtrl rCtrl = new RegistrationCtrl();
         private UserCtrl uCtrl = new UserCtrl();
-        private IEventDB eDB = new EventDB();
         private ComponentCtrl cCtrl = new ComponentCtrl();
+        private IEventDB eDB = new EventDB();
 
         public Event CreateEvent(string title, string description, int numOfParticipants, double priceFrom, double priceTo, string location, DateTime datetime, bool isPublic, User admin)
         {
@@ -139,6 +139,24 @@ namespace BLL
             item.Parent = category;
             item.ComponetId = category.Id;
             eDB.Update(evnt);
+        }
+
+        public void SignUpForItem(string userEmail, int itemId)
+        {
+            User u = uCtrl.FindByEmail(userEmail);
+            Item i = cCtrl.FindItemById(itemId);
+            Event e = FindById((int)i.EventId);
+
+            RegisterToItem(u, e, i);
+        }
+
+        public void RegisterToItem(User usr, Event evnt, Item item)
+        {
+            if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+            {
+                throw new ArgumentException("The user is not registred to the event.");
+            }
+            rCtrl.CreateRegistrationForItem(usr, evnt, item);
         }
 
         public string GetInviteString(Event evnt, User usr)

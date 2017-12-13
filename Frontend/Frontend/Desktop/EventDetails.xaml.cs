@@ -98,7 +98,7 @@ namespace Desktop
 
         private void btnCategories_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new EventCategories(this.e));
+            this.NavigationService.Navigate(new EventCategories(this.e, this.u));
         }
     }
 }

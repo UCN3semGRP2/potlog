@@ -55,7 +55,12 @@ namespace BLL
             catDB.Update(c);
         }
 
-        public bool HasParentCategory(Category c)
+        public Item FindItemById(int itemId)
+        {
+            return catDB.FindItemByID(itemId);
+	}
+	
+	public bool HasParentCategory(Category c)
         {
             return c.Parent != null && c.Parent is Category;
         }
