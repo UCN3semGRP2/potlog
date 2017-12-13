@@ -379,7 +379,7 @@ namespace Web.Controllers
 
         public ActionResult SignUpForItem(ComponentModel model)
         {
-            var usr = (User)Session["User"];
+            var usr = utils.Utils.GetUser(Session);
             if (usr == null)
             {
                 return RedirectToAction("LogIn", "User");
@@ -399,7 +399,7 @@ namespace Web.Controllers
                 }
 
                 Event e = service.FindEventById(model.EventId);
-                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e, usr);
                 
 
                 return View("Details", ev);
@@ -407,14 +407,15 @@ namespace Web.Controllers
             catch (FaultException fax)
             {
                 Event e = service.FindEventById(model.EventId);
-                DetailsEventViewModel ev = CreateDetailsForEvent(e);
+                DetailsEventViewModel ev = CreateDetailsForEvent(e, usr);
 
                 ViewBag.Message = fax.Message;
                 return View("Details", ev);
             }
 
+
         }
-        public DetailsEventViewModel CreateDetailsForEvent(Event e)
+        public DetailsEventViewModel CreateDetailsForEvent(Event e, User usr)
         {
             ComponentModel cModel = new ComponentModel();
             cModel.EventId = e.Id;
@@ -436,7 +437,7 @@ namespace Web.Controllers
                 Date = e.Datetime.Date,
                 Description = e.Description,
                 Id = e.Id,
-                InviteString = e.InviteString,
+                InviteString = (usr.Id == e.Admin.Id) ? service.GetInviteString(e, usr) : null,
                 IsPublic = e.IsPublic,
                 Location = e.Location,
                 NumOfParticipants = e.NumOfParticipants,
