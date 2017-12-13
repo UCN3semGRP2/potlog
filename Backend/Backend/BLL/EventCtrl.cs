@@ -76,7 +76,22 @@ namespace BLL
         /// <param name="user">Note: User is not valid after the method has been called</param>
         public void RegisterToEvent(Event evnt, User user)
         {
-            rCtrl.CreateRegistration(user, evnt);
+            using (var tx = new Transaction())
+            {
+                if (EventIsFull(evnt))
+                {
+                    throw new ArgumentException("Event is full. There can not be created any more registrations");
+                }
+
+                rCtrl.CreateRegistration(user, evnt);
+            }
+        }
+
+        public bool EventIsFull(Event evnt)
+        {
+            evnt = this.FindById(evnt.Id);
+            if (evnt.Registrations == null) return false;
+            return evnt.NumOfParticipants <= evnt.Registrations.Count;
         }
 
         public void SignUpForEvent(string userEmail, int eventId)
@@ -142,11 +157,18 @@ namespace BLL
 
         public void RegisterToItem(User usr, Event evnt, Item item)
         {
-            if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+            using (var tx = new Transaction())
             {
-                throw new ArgumentException("The user is not registred to the event.");
+                if (!uCtrl.IsRegisteredToEvent(usr, evnt))
+                {
+                    throw new ArgumentException("The user is not registred to the event.");
+                }
+                if (cCtrl.ItemHasARegisteredUser(item))
+                {
+                    throw new ArgumentException("Someon is already registered to the item");
+                }
+                rCtrl.CreateRegistrationForItem(usr, evnt, item);
             }
-            rCtrl.CreateRegistrationForItem(usr, evnt, item);
         }
 
         public string GetInviteString(Event evnt, User usr)

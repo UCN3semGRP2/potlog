@@ -78,5 +78,11 @@ namespace BLL
             this.Update(c);
             this.Update(p);
         }
+
+        internal bool ItemHasARegisteredUser(Item item)
+        {
+            item = this.FindItemById(item.Id);
+            return item.Registration != null;
+        }
     }
 }

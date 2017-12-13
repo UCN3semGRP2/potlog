@@ -29,7 +29,7 @@ namespace BLL
             
             if (!Validator.ValidatePassword(Password))
             {
-                throw new ArgumentException(string.Format("Der skal indtastes et password på mindst {} karakterer", Validator.MinPasswordLength));
+                throw new ArgumentException(string.Format("Der skal indtastes et password på mindst {0} karakterer", Validator.MinPasswordLength));
             }
 
             string salt = HashingHelper.GenerateSalt();

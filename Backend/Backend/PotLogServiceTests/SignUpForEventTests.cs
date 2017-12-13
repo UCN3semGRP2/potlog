@@ -16,8 +16,8 @@ namespace PotLogServiceTests
         public int EventId { get; set; }
 
 
-        [TestInitialize]
-        public void TestInitialize()
+        //[TestInitialize]
+        public void TestInit /*TestInitialize*/()
         {
             var email = "t@t.t" + Guid.NewGuid();
             var pw = "hunter1";
@@ -36,6 +36,8 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForEventHappyDays()
         {
+            TestInit();
+
             var email = "user@t.t" + Guid.NewGuid();
             var pw = "hunter1";
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
@@ -58,6 +60,8 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestSignUpForItemHappyDays()
         {
+            TestInit();
+
             var email = "user@t.t" + Guid.NewGuid();
             var pw = "hunter1";
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
@@ -95,6 +99,8 @@ namespace PotLogServiceTests
         [TestMethod]
         public void TestDuplicateSignUpForEvent()
         {
+            TestInit();
+
             var email = "user@t.t" + Guid.NewGuid();
             var pw = "hunter1";
             service.CreateUser("TestCreateEventUser", "Test", email, pw);

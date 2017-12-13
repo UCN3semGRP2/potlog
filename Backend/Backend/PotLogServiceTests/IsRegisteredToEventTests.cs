@@ -22,7 +22,7 @@ namespace PotLogServiceTests
             service.CreateUser("TestCreateEventUser", "Test", email, pw);
             this.User = service.LogIn(email, pw);
 
-            this.Evnt = service.CreateEvent("test event", "test event please ignore", 5, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
+            this.Evnt = service.CreateEvent("test event", "test event please ignore", 50, 10.0, 100.5, "here", DateTime.Now.AddDays(5), false, this.User);
             this.EventId = Evnt.Id;
         }
 
