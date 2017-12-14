@@ -167,7 +167,7 @@ namespace Web.Controllers
                 if (LevelTwoId.HasValue)
                 {
                     cModel.CurrentLevelTwoItemId = null;
-                    if (levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item)
+                    if (levelTwoComponents.SingleOrDefault(i => i.Id == (int)LevelTwoId) is Item)
                     {
                         cModel.CurrentLevelTwoItemId = LevelTwoId;
                         cModel.CurrentLevelThreeItemId = null;
@@ -179,12 +179,12 @@ namespace Web.Controllers
                         cModel.LevelThreeList.Add(new SelectListItem { Text = item.Title, Value = item.Id.ToString() });
                     }
 
-                    if (!(levelTwoComponents.Single(i => i.Id == (int)LevelTwoId) is Item))
+                    if (!(levelTwoComponents.SingleOrDefault(i => i.Id == (int)LevelTwoId) is Item))
                     {
 
                         if (LevelThreeId.HasValue)
                         {
-                            if (levelThreeComponents.Single(i => i.Id == (int)LevelThreeId) is Item)
+                            if (levelThreeComponents.SingleOrDefault(i => i.Id == (int)LevelThreeId) is Item)
                             {
                                 cModel.CurrentLevelThreeItemId = LevelThreeId;
                                 cModel.CurrentLevelTwoItemId = null;
