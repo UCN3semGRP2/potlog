@@ -213,10 +213,11 @@ namespace BLLTest
             eCtrl.AddCategory(evnt, category2);
             var item = cCtrl.CreateItem("Item Name", "Item Desc", 42, category2, evnt);
             eCtrl.AddItem(evnt, category2, item);
+            evnt = eCtrl.FindById(evnt.Id);
 
             // Assert
             var foundCategory = cCtrl.FindCategoryById(category2.Id);
-            var foundItem = ((Item)((Category)evnt.Components[1]).Components[0]);
+            var foundItem = cCtrl.FindComponentByParentId(evnt.Components[1].Id)[0];/*((Item)((Category)evnt.Components[1]).Components[0]);*/
             Assert.IsNotNull(foundItem);
             Assert.IsTrue(foundCategory.Components.Count == 1);
             Assert.IsTrue(foundCategory.Components[0].Id == foundItem.Id);
